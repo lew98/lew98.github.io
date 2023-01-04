@@ -1,8 +1,8 @@
-- R
+- **R**
   - [UK inflation (4th October 2022)](https://lew98.github.io/UK_inflation.html)
   - [UK population (4th October 2022)](https://lew98.github.io/UK_population.html)
 
-- Mathematics
+- **Mathematics**
   - *Principles of Mathematical Analysis*
     - *Chapter 1*
       - [**Q** does not have the least-upper-bound-property (4th January 2023)](https://lew98.github.io/Q_does_not_have_the_least_upper_bound_property.pdf)
