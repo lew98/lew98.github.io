@@ -7,7 +7,7 @@
     - *Chapter 1*
       - [**Q** does not have the least-upper-bound-property (4th January 2023)](https://lew98.github.io/Q_does_not_have_the_least_upper_bound_property.pdf)
       - [Archimedean property of **R** (4th January 2023)](https://lew98.github.io/Archimedean_property_of_R.pdf)
-      - [Existence of *n*th roots (5th January 2023)](https://lew98.github.io/Existence_of_nth_roots.pdf)
+      - [Existence of *n*th roots in **R** (5th January 2023)](https://lew98.github.io/Existence_of_nth_roots_in_R.pdf)
   - *Miscellaneous*
     - [Banach fixed-point theorem (12th October 2022)](https://lew98.github.io/Banach_fixed_point_theorem.pdf)
     - [Riemann integral is continuous (2nd January 2023)](https://lew98.github.io/Riemann_integral_is_continuous.pdf)
