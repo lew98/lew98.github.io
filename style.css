@@ -27,19 +27,6 @@ body {
     border-radius: 6px 6px 0px 0px;
 }
 
-#header-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    white-space: nowrap;
-
-    font-family: "Arial", sans-serif;
-    font-size: 90px;
-    text-shadow: 2px 2px white;
-}
-
 #content-container {
     font-family: "Arial", sans-serif;
     line-height: 150%;
