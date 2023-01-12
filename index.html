@@ -8,7 +8,11 @@
 <body>
     <div id="main-div">
         <div id="header-container">
-            <img id="header-img" src="header-img.jpg">
+            <img id="header-img" src="header-img-1.jpg">
+            <script>
+                var i = Math.floor(Math.random() * 4) + 1;
+                document.getElementById("header-img").src = "header-imgs/header-img-".concat(i.toString(), ".jpg");
+            </script>
         </div>
         <div id="content-container">
             <ul>
