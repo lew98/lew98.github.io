@@ -32,6 +32,31 @@ body {
     line-height: 150%;
 }
 
+#content-container ul ul {
+    margin-left: 0px;
+    padding-left: 24px;
+}
+
+.header-link:link {
+    color: rgb(0, 81, 134);
+    text-decoration: none;
+}
+
+.header-link:visited {
+    color: rgb(0, 81, 134);
+    text-decoration: none;
+}
+
+.header-link:hover {
+    color: rgb(0, 81, 134);
+    text-decoration: underline;
+}
+
+.header-link:active {
+    color: rgb(0, 81, 134);
+    text-decoration: underline;
+}
+
 .content-link:link {
     color: rgb(28, 153, 237);
     text-decoration: none;

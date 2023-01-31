@@ -1,0 +1,74 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{An infinite partition of \texorpdfstring{\(\mathbb{N}\)}{} into infinite sets}
+\rhead{\thepage}
+
+\setlength{\parindent}{0pt}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue
+}
+
+\newcommand{\newp}{\vspace{5mm}}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\newtheorem*{remark}{Remark}
+
+\begin{document}
+
+This is Exercise 1.2.4 from \hyperlink{ua}{[UA]}.
+
+\section{An infinite partition of \texorpdfstring{\(\mathbb{N}\)}{} into infinite sets}
+
+We will construct a countably infinite collection of sets \( \{ A_i : i \in \mathbb{N} \} \) such that the following three properties hold.
+\begin{enumerate}[label = (\arabic*)]
+    \item Each \( A_i \) is countably infinite.
+    \item \( A_i \cap A_j = \varnothing \) for \( i < j \).
+    \item \( \bigcup_{i=1}^{\infty} A_i = \mathbb{N} \).
+\end{enumerate}
+
+Let \( p_i \) be the \(i\)th prime (\( p_1 = 2, p_2 = 3, p_3 = 5 \), and so on), and define
+\begin{align*}
+    A_1 &= \{ n \in \mathbb{N} : n \text{ is divisible by 2} \} \cup \{ 1 \} \\
+    A_2 &= \{ n \in \mathbb{N} : n \text{ is divisible by 3 but not by 2} \} \\
+    A_3 &= \{ n \in \mathbb{N} : n \text{ is divisible by 5 but not by 3 or 2} \} \\
+    \cdots & \\
+    A_i &= \{ n \in \mathbb{N} : n \text{ is divisible by } p_i \text { but not by } p_{i-1}, \ldots, \text{3, or 2} \} \\
+    \cdots &
+\end{align*}
+We claim that these sets satisfy properties (1), (2), and (3).
+\begin{enumerate}[label = (\arabic*)]
+    \item Each \( A_i \) is infinite since \( p_i^k \in A_i \) for each \( k \in \mathbb{N} \), and countably infinite since \( A_i \subseteq \mathbb{N} \).
+    \item For \( i < j \), one has \( n \in A_i \) only if \( p_i \) divides \( n \); but in order to have \( n \in A_j \) it is necessary that \( p_i \) does \textit{not} divide \( n \). It follows that \( n \not\in A_j \), so that \( A_i \cap A_j = \varnothing \).
+    \item It is clear that \( \bigcup_{i=1}^{\infty} A_i \subseteq \mathbb{N} \). For the reverse inclusion, suppose \( n \in \mathbb{N} \). If \( n = 1 \), then \( n \in A_1 \). If \( n > 1 \), then let \( j \) be the index of the smallest prime appearing in the unique prime factorization of \( n \). It follows that \( n \in A_j \), so that \( n \in \bigcup_{i=1}^{\infty} A_i \).
+\end{enumerate}
+Finally, properties (1) and (2) together imply that the \( A_i \)'s are non-empty and distinct, so that the collection \( \{ A_i : i \in \mathbb{N} \} \) is indeed countably infinite.
+
+
+
+\hrulefill
+
+\hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2nd edn.}
+
+\end{document}

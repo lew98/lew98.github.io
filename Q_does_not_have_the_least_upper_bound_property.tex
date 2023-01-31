@@ -1,0 +1,89 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{\texorpdfstring{\( \mathbb{Q} \)}{} does not have the least-upper-bound property}
+\rhead{}
+
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue
+}
+
+\newcommand{\newp}{\vspace{5mm}}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\newtheorem*{remark}{Remark}
+
+\begin{document}
+
+The following is paraphrased from pages 2-4 of \hyperlink{pma}{[PMA]}.
+
+\section{\texorpdfstring{\( \mathbb{Q} \)}{} does not have the least-upper-bound property}
+
+Let \( A \) be the set of positive rational numbers whose square is less than 2 and \( B \) be the set of positive rational numbers whose square is greater than 2, i.e.
+\[ A = \{ p \in \mathbb{Q} : p > 0, \, p^2 < 2 \}, \quad B = \{ p \in \mathbb{Q} : p > 0, \, p^2 > 2 \}. \]
+Note that \( A \) and \( B \) are non-empty.
+
+\begin{lemma}
+
+\( A \) contains no greatest element and \( B \) contains no least element. That is, for any \( p \in A \) there exists a \( q \in A \) with \( q > p \) and for any \( p \in B \) there exists a \( q \in B \) with \( q < p \).
+
+\end{lemma}
+
+\begin{proof}
+
+For a positive rational number \( p \), define
+\[ q = p + \frac{2 - p^2}{p + 2} = \frac{2p + 2}{p + 2}. \]
+Then
+\[ 2 - q^2 = 2 - \frac{(2p + 2)^2}{(p+2)^2} = \frac{2(2 - p^2)}{(p + 2)^2}. \]
+For \( p \in A \) we have \( 2 - p^2 > 0 \), so that \( q > p \) and \( q \in A \); for \( p \in B \) we have \( 2 - p^2 < 0 \), so that \( q < p \) and \( q \in B \).
+\end{proof}
+
+\begin{lemma}
+
+The upper bounds of \( A \) are exactly the elements of \( B \).
+
+\end{lemma}
+
+\begin{proof}
+
+Suppose \( r \in \mathbb{Q} \) is an upper bound for \( A \). Then certainly \( r \) is positive, since \( 1 \in A \). Furthermore, exactly one of the following is true: \( r^2 < 2 \), \( r^2 = 2 \), or \( r^2 > 2 \). If \( r^2 < 2 \), then \( r \in A \); but this implies that \( r \) is the greatest element of \( A \), contradicting Lemma 1. So \( r^2 \geq 2 \) and since \( r^2 = 2 \) is impossible for rational \( r \), we must have \( r^2 > 2 \), i.e. \( r \in B \).
+
+\newp
+
+Now suppose \( r \in B \) and let \( p \) be any element of \( A \). If \( r < p \), then \( r^2 < p^2 < 2 \) since \( r \) is positive. This contradicts \( r \in B \), so in fact we must have \( r \geq p \), so that \( r \) is an upper bound for \( A \).
+\end{proof}
+
+Lemmas 1 and 2 combine to give us the desired result:
+
+\begin{theorem}
+
+The set of rational numbers \( \mathbb{Q} \) does not have the least-upper-bound property.
+
+\end{theorem}
+
+\hrulefill
+
+\hypertarget{pma}{\textcolor{blue}{[PMA]} Rudin, W. (1976) \textit{Principles of Mathematical Analysis.} 3rd edn.}
+
+\end{document}
