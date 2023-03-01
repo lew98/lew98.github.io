@@ -1,8 +1,11 @@
 - **Principles of Mathematical Analysis**
   - *Chapter 1*
-    - [**Q** does not have the least-upper-bound-property (4th January 2023)](https://lew98.github.io/Q_does_not_have_the_least_upper_bound_property.pdf)
-    - [Archimedean property of **R** (4th January 2023)](https://lew98.github.io/Archimedean_property_of_R.pdf)
-    - [Existence of *n*th roots in **R** (5th January 2023)](https://lew98.github.io/Existence_of_nth_roots_in_R.pdf)
+    - [**Q** does not have the least-upper-bound-property (4th January 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/Q_does_not_have_the_least_upper_bound_property.pdf)
+    - [Archimedean property of **R** (4th January 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/Archimedean_property_of_R.pdf)
+    - [Existence of *n*th roots in **R** (5th January 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/Existence_of_nth_roots_in_R.pdf)
+    - [Construction of **R** from **Q** via Dedekind cuts (18th February 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/Construction_of_R_from_Q_via_Dedekind_cuts.pdf)
+    - [Chapter 1 Exercises (1st March 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/PMA_Chapter_1_Exercises.pdf)
 - **Miscellaneous**
-  - [Banach fixed-point theorem (12th October 2022)](https://lew98.github.io/Banach_fixed_point_theorem.pdf)
-  - [Riemann integral is continuous (2nd January 2023)](https://lew98.github.io/Riemann_integral_is_continuous.pdf)
+  - [Banach fixed-point theorem (12th October 2022)](https://lew98.github.io/Mathematics/Miscellaneous/Banach_fixed_point_theorem.pdf)
+  - [Riemann integral is continuous (2nd January 2023)](https://lew98.github.io/Mathematics/Miscellaneous/Riemann_integral_is_continuous.pdf)
+  - [An infinite partition of **N** into infinite sets (31st January 2023)](https://lew98.github.io/Mathematics/Miscellaneous/An_infinite_partition_of_N_into_infinite_sets.pdf)
