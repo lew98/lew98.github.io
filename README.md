@@ -1,4 +1,4 @@
-- **Principles of Mathematical Analysis**
+- [**Principles of Mathematical Analysis (Rudin)**](https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis)
   - *Chapter 1*
     - [**Q** does not have the least-upper-bound-property (4th January 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/Q_does_not_have_the_least_upper_bound_property.pdf)
     - [Archimedean property of **R** (4th January 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/Archimedean_property_of_R.pdf)
@@ -10,3 +10,4 @@
   - [Riemann integral is continuous (2nd January 2023)](https://lew98.github.io/Mathematics/Miscellaneous/Riemann_integral_is_continuous.pdf)
   - [An infinite partition of **N** into infinite sets (31st January 2023)](https://lew98.github.io/Mathematics/Miscellaneous/An_infinite_partition_of_N_into_infinite_sets.pdf)
   - [Suprema, infima, maxima, and minima (WIP) (8th March 2023)](https://lew98.github.io/Mathematics/Miscellaneous/Suprema_infima_maxima_and_minima.pdf)
+  - [Nested interval property (8th March 2023)](https://lew98.github.io/Mathematics/Miscellaneous/Nested_interval_property.pdf)
