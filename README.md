@@ -9,3 +9,4 @@
   - [Banach fixed-point theorem (12th October 2022)](https://lew98.github.io/Mathematics/Miscellaneous/Banach_fixed_point_theorem.pdf)
   - [Riemann integral is continuous (2nd January 2023)](https://lew98.github.io/Mathematics/Miscellaneous/Riemann_integral_is_continuous.pdf)
   - [An infinite partition of **N** into infinite sets (31st January 2023)](https://lew98.github.io/Mathematics/Miscellaneous/An_infinite_partition_of_N_into_infinite_sets.pdf)
+  - [Suprema, infima, maxima, and minima (WIP) (8th March 2023)](https://lew98.github.io/Mathematics/Miscellaneous/Suprema_infima_maxima_and_minima.pdf)
