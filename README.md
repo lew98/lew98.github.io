@@ -5,6 +5,8 @@
     - [Existence of *n*th roots in **R** (5th January 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/Existence_of_nth_roots_in_R.pdf)
     - [Construction of **R** from **Q** via Dedekind cuts (18th February 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/Construction_of_R_from_Q_via_Dedekind_cuts.pdf)
     - [Chapter 1 Exercises (1st March 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/PMA_Chapter_1_Exercises.pdf)
+  - *Chapter 2*
+    - [Cardinality (13th March 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_2/Cardinality.pdf)
 - **Miscellaneous**
   - [Banach fixed-point theorem (12th October 2022)](https://lew98.github.io/Mathematics/Miscellaneous/Banach_fixed_point_theorem.pdf)
   - [Riemann integral is continuous (2nd January 2023)](https://lew98.github.io/Mathematics/Miscellaneous/Riemann_integral_is_continuous.pdf)
