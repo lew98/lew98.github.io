@@ -1,15 +1,14 @@
+- **Analysis**
+  - [**Q** does not have the least-upper-bound property](https://lew98.github.io/Mathematics/Q_does_not_have_the_least_upper_bound_property.pdf)
+  - [Construction of **R** from **Q** via Dedekind cuts](https://lew98.github.io/Mathematics/Construction_of_R_from_Q_via_Dedekind_cuts.pdf)
+  - [Consequences of the least-upper-bound property of **R**](https://lew98.github.io/Mathematics/Consequences_of_the_least_upper_bound_property_of_R.pdf)
+  - [Nested interval property](https://lew98.github.io/Mathematics/Nested_interval_property.pdf)
+  - [Banach fixed-point theorem](https://lew98.github.io/Mathematics/Banach_fixed_point_theorem.pdf)
+  - [Riemann integral is continuous](https://lew98.github.io/Mathematics/Riemann_integral_is_continuous.pdf)
+- **Set Theory**
+  - [Cardinality](https://lew98.github.io/Mathematics/Cardinality.pdf)
+  - [Suprema, infima, maxima, and minima](https://lew98.github.io/Mathematics/Suprema_infima_maxima_and_minima.pdf)
 - [**Principles of Mathematical Analysis (Rudin)**](https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis)
-  - *Chapter 1*
-    - [**Q** does not have the least-upper-bound-property (4th January 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/Q_does_not_have_the_least_upper_bound_property.pdf)
-    - [Archimedean property of **R** (4th January 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/Archimedean_property_of_R.pdf)
-    - [Existence of *n*th roots in **R** (5th January 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/Existence_of_nth_roots_in_R.pdf)
-    - [Construction of **R** from **Q** via Dedekind cuts (18th February 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/Construction_of_R_from_Q_via_Dedekind_cuts.pdf)
-    - [Chapter 1 Exercises (1st March 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_1/PMA_Chapter_1_Exercises.pdf)
-  - *Chapter 2*
-    - [Cardinality (13th March 2023)](https://lew98.github.io/Mathematics/PMA/Chapter_2/Cardinality.pdf)
+  - [Chapter 1 Exercises](https://lew98.github.io/Mathematics/PMA_Chapter_1_Exercises.pdf)
 - **Miscellaneous**
-  - [Banach fixed-point theorem (12th October 2022)](https://lew98.github.io/Mathematics/Miscellaneous/Banach_fixed_point_theorem.pdf)
-  - [Riemann integral is continuous (2nd January 2023)](https://lew98.github.io/Mathematics/Miscellaneous/Riemann_integral_is_continuous.pdf)
-  - [An infinite partition of **N** into infinite sets (31st January 2023)](https://lew98.github.io/Mathematics/Miscellaneous/An_infinite_partition_of_N_into_infinite_sets.pdf)
-  - [Suprema, infima, maxima, and minima (WIP) (8th March 2023)](https://lew98.github.io/Mathematics/Miscellaneous/Suprema_infima_maxima_and_minima.pdf)
-  - [Nested interval property (8th March 2023)](https://lew98.github.io/Mathematics/Miscellaneous/Nested_interval_property.pdf)
+  - [An infinite partition of **N** into infinite sets](https://lew98.github.io/Mathematics/An_infinite_partition_of_N_into_infinite_sets.pdf)

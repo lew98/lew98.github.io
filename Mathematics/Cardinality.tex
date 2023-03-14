@@ -29,7 +29,6 @@ right=60pt
 \chead{Cardinality}
 \rhead{\thepage}
 
-% \setlength{\parindent}{0pt}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -368,7 +367,7 @@ Let us now consider the cardinality of \( \mathbb{R} \). Using the binary repres
         \filldraw[black] (8, 0) circle (2pt) node[anchor=south]{$b_1$};
     \end{tikzpicture}
     \]
-    If \( f(2) \not\in [a_1, m] \), then let \( a_2 = a_1, b_2 = m \), and set \( I_2 = [a_2, b_2] \). If \( f(2) \in [a_1, m] \), then \( f(2) \not\in [M, b_1] \), so let \( a_2 = M, b_2 = b_1 \), and set \( I_2 = [a_2, b_2] \). In either case, \( f(1) \not\in I_1, f(2) \not\in I_2 \), and \( |I_2| = b_2 - a_2 = 3^{-1}(b_1 - a_1) \). Now repeat this argument with \( I_2 \), and then with \( I_3 \), and so on; inductively, we obtain a sequence of shrinking nested intervals \( (I_n)_{n \in \mathbb{N}} \) such that \( f(n) \not\in I_n \) for each \( n \in \mathbb{N} \). By the \href{https://lew98.github.io/Mathematics/Miscellaneous/Nested_interval_property.pdf}{nested interval property} of \( \mathbb{R} \), there exists an \( x \in \mathbb{R} \) such that \( \bigcap_{n=1}^{\infty} I_n = \{ x \} \). It follows that \( x \) does not belong to the image of \( f \), since \( x = f(n) \) implies that \( f(n) \in I_n \). Hence \( f \) is not a surjection.
+    If \( f(2) \not\in [a_1, m] \), then let \( a_2 = a_1, b_2 = m \), and set \( I_2 = [a_2, b_2] \). If \( f(2) \in [a_1, m] \), then \( f(2) \not\in [M, b_1] \), so let \( a_2 = M, b_2 = b_1 \), and set \( I_2 = [a_2, b_2] \). In either case, \( f(1) \not\in I_1, f(2) \not\in I_2 \), and \( |I_2| = b_2 - a_2 = 3^{-1}(b_1 - a_1) \). Now repeat this argument with \( I_2 \), and then with \( I_3 \), and so on; inductively, we obtain a sequence of shrinking nested intervals \( (I_n)_{n \in \mathbb{N}} \) such that \( f(n) \not\in I_n \) for each \( n \in \mathbb{N} \). By the \href{https://lew98.github.io/Mathematics/Nested_interval_property.pdf}{nested interval property} of \( \mathbb{R} \), there exists an \( x \in \mathbb{R} \) such that \( \bigcap_{n=1}^{\infty} I_n = \{ x \} \). It follows that \( x \) does not belong to the image of \( f \), since \( x = f(n) \) implies that \( f(n) \in I_n \). Hence \( f \) is not a surjection.
 \end{proof}
 
 Evidently, \( \mathbb{R} \) is infinite; \Cref{prop:no_surjection_from_N_to_R} then implies that \( \mathbb{R} \) is uncountably infinite. In light of \Cref{cor:union_of_amc_set_and_countable_set_is_countable}, which implies that the union of two countably infinite sets is countably infinite, and \Cref{cor:Q_is_countable}, which says that \( \mathbb{Q} \) is countably infinite, we see that the set of irrational numbers \( \mathbb{R} \setminus \mathbb{Q} \) must be uncountably infinite.
