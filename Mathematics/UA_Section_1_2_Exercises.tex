@@ -1,0 +1,524 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 1.2 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 1.2.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 1.2.#1#3}
+
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+
+\begin{document}
+
+\section{Section 1.2 Exercises}
+
+Exercises with solutions from Section 1.2 of \hyperlink{ua}{[UA]}.
+
+\begin{exercise}
+\label{ex:1}
+    \begin{enumerate}[label = (\alph*)]
+        \item Prove that \( \sqrt{3} \) is irrational. Does the same argument work to show that \( \sqrt{6} \) is irrational?
+
+        \item Where does the proof of Theorem 1.1.1 break down if we try to use it to prove \( \sqrt{4} \) is irrational?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[label = (\alph*), listparindent = \parindent, parsep = 0em]
+        \item Suppose there was a rational number \( p = \tfrac{m}{n} \), which we may assume is in lowest terms, such that \( p^2 = 3 \). Then \( m^2 = 3 n^2 \), so that \( m^2 \) is divisible by 3. Observe that for any \( k \in \mathbf{N} \) we have
+        \[
+            (3k + 1)^2 = 3(3k^2 + 2k) + 1 \quad \text{and} \quad (3k + 2)^2 = 3(3k^2 + 4k + 1) + 1.
+        \]
+        It follows that
+        \[
+            m \text{ is not divisible by 3} \implies m^2 \text{ is not divisible by 3},
+        \]
+        the contrapositive of which is
+        \[
+            m^2 \text{ is divisible by 3} \implies m \text{ is divisible by 3}.
+        \]
+        Hence we may write \( m = 3k \) for some \( k \in \mathbf{N} \) and substitute this into the equation \( m^2 = 3 n^2 \) to obtain the equation \( n^2 = 3 k^2 \), which similarly implies that \( n \) is divisble by 3. This is a contradiction since we assumed that \( m \) and \( n \) had no common factors. We may conclude that there is no rational number whose square is 3.
+
+        The same argument works to show that there is no rational number whose square is 6; the crux of this argument is that
+        \[
+            m^2 \text{ is divisible by 6} \implies m \text{ is divisible by 6}.
+        \]
+
+        \item The argument breaks down when we try to assert that
+        \[
+            m^2 \text{ is divisible by 4} \implies m \text{ is divisible by 4}.
+        \]
+        This is false; for example, \( 2^2 \) = 4 is divisible by 4 but 2 is not divisible by 4.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Show that there is no rational number \( r \) satisfying \( 2^r = 3 \).
+\end{exercise}
+
+\begin{solution}
+    Suppose there was a rational number \( r = \tfrac{m}{n} \), which we may assume is in lowest terms with \( n > 0 \), such that \( 2^r = 3 \). This implies that \( 2^m = 3^n \). Since \( n > 0 \implies 3^n > 3 \) and \( 2^m < 2 \) for \( m \leq 0 \), we see that \( m > 0 \). Then the equation \( 2^m = 3^n \) is absurd, since the left-hand side is a positive even integer whereas the right-hand side is positive odd integer.
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Decide which of the following represent true statements about the nature of sets. For any that are false, provide a specific example where the statement in question does not hold.
+    \begin{enumerate}[label = (\alph*)]
+        \item If \( A_1 \supseteq A_2 \supseteq A_3 \supseteq A_4 \cdots \) are all sets containing an infinite number of elements, then the intersection \( \bigcap_{n=1}^{\infty} A_n \) is infinite as well.
+
+        \item If \( A_1 \supseteq A_2 \supseteq A_3 \supseteq A_4 \cdots \) are all finite, nonempty sets of real numbers, then the intersection \( \bigcap_{n=1}^{\infty} A_n \) is finite and nonempty.
+
+        \item \( A \cap (B \cup C) = (A \cap B) \cup C \).
+
+        \item \( A \cap (B \cap C) = (A \cap B) \cap C \).
+
+        \item \( A \cap (B \cup C) = (A \cap B) \cup (A \cap C) \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[label = (\alph*)]
+        \item This is false in general. Consider \( A_n = [0, 1/n] \) for \( n \in \mathbf{N} \). Then \( A_1 \supseteq A_2 \supseteq A_3 \supseteq A_4 \cdots \), each \( A_n \) contains infinitely many elements, but the intersection \( \bigcap_{n=1}^{\infty} A_n = \{ 0 \} \) is finite.
+
+        \item This is true. The sequence \( A_1, A_2, A_3, A_4, \ldots \) must be eventually constant, i.e.\ there exists an \( N \in \mathbf{N} \) such that \( A_n = A_N \) for all \( n \geq N \). To see this, assume the negation holds; that is, for each \( N \in \mathbf{N} \), there exists an \( n > N \) such that \( A_n \neq A_N \). Then there is an \( n_1 > 1 \) such that \( A_{n_1} \neq A_1 \). Since \( A_{n_1} \subseteq A_1 \), this implies that \( |A_{n_1}| < |A_1| \iff |A_{n_1}| \leq |A_1| - 1 \). There is then an \( n_2 > n_1 \) such that \( |A_{n_2}| < |A_{n_1}| \leq |A_1| - 1 \iff |A_{n_2}| \leq |A_1| - 2 \). Continuing in this fashion, we obtain a positive integer \( m = n_{|A_1|} \) such that \( |A_m| \leq |A_1| - |A_1| = 0 \), which implies that \( A_m = \emptyset \). This is a contradiction since we assumed that the sets \( A_1, A_2, A_3, A_4, \ldots \) were nonempty.
+
+        So we can be sure that there exists an \( N \in \mathbf{N} \) such that \( A_n = A_N \) for all \( n \geq N \). Given this, \( \bigcap_{n=1}^{\infty} A_n = A_N \), which by assumption is finite and nonempty.
+
+        \item This is false in general. Consider \( A = B = \emptyset \) and \( C = \{ 0 \} \). Then \( A \cap (B \cup C) = \emptyset \) but \( (A \cap B) \cup C = \{ 0 \} \).
+
+        \item This is true, since
+        \[
+            x \in A \cap (B \cap C) \iff x \in A \text{ and } x \in (B \cap C) \iff x \in A \text{ and } (x \in B \text{ and } x \in C),
+        \]
+        \[
+            x \in (A \cap B) \cap C \iff x \in (A \cap B) \text{ and } x \in C \iff x \in (A \text{ and } x \in B) \text{ and } x \in C.
+        \]
+        It follows that \( x \in A \cap (B \cap C) \iff x \in (A \cap B) \cap C \) since logical conjunction (``and") is associative.
+
+        \item This is true, since
+        \[
+            x \in A \cap (B \cup C) \iff x \in A \text{ and } x \in (B \cup C) \iff x \in A \text{ and } (x \in B \text{ or } x \in C)
+        \]
+        \[
+            \iff (x \in A \text{ and } x \in B) \text{ or } (x \in A \text{ and } x \in C) \iff x \in (A \cap B) \text{ or } x \in (A \cap C)
+        \]
+        \[
+            \iff x \in (A \cap B) \cup (A \cap C),
+        \]
+        where we have used that logical conjunction distributes over logical disjunction (``or").
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Produce an infinite collection of sets \( A_1, A_2, A_3, \ldots \) with the property that every \( A_i \) has an infinite number of elements, \( A_i \cap A_j = \emptyset \) for all \( i \neq j \), and \( \bigcup_{i=1}^{\infty} A_i = \mathbf{N} \).
+\end{exercise}
+
+\begin{solution}[1]
+    Arrange \( \mathbf{N} \) in a grid like so:
+    \[
+        \begin{matrix}
+            1 & 3 & 6 & 10 & \cdots \\
+            2 & 5 & 9 & 14 & \cdots \\
+            4 & 8 & 13 & 19 & \cdots \\
+            7 & 12 & 18 & 25 & \cdots \\
+            \vdots & \vdots & \vdots & \vdots & \ddots
+        \end{matrix}
+    \]
+    Now take \( A_i \) to be the set of numbers appearing in the \( i \)th column.
+\end{solution}
+
+\begin{solution}[2]
+    Assuming some basic knowledge about prime numbers, we can produce another solution as follows. Let \( p_i \) be the \(i\)th prime number (\( p_1 = 2, p_2 = 3, p_3 = 5 \), and so on), and define
+    \begin{align*}
+        A_1 &= \{ n \in \mathbf{N} : n \text{ is divisible by 2} \} \cup \{ 1 \} \\
+        A_2 &= \{ n \in \mathbf{N} : n \text{ is divisible by 3 but not by 2} \} \\
+        A_3 &= \{ n \in \mathbf{N} : n \text{ is divisible by 5 but not by 3 or 2} \} \\
+        \vdots & \\
+        A_i &= \{ n \in \mathbf{N} : n \text{ is divisible by } p_i \text { but not by } p_{i-1}, \ldots, \text{3, or 2} \} \\
+        \vdots &
+    \end{align*}
+    \begin{itemize}
+        \item Each \( A_i \) is infinite since \( p_i^k \in A_i \) for each \( k \in \mathbf{N} \).
+        \item For \( i < j \), one has \( n \in A_i \) only if \( p_i \) divides \( n \); but in order to have \( n \in A_j \) it is necessary that \( p_i \) does \textit{not} divide \( n \). It follows that \( n \not\in A_j \), so that \( A_i \cap A_j = \emptyset \).
+        \item It is clear that \( \bigcup_{i=1}^{\infty} A_i \subseteq \mathbf{N} \). For the reverse inclusion, suppose \( n \in \mathbf{N} \). If \( n = 1 \), then \( n \in A_1 \). If \( n > 1 \), then let \( j \) be the index of the smallest prime appearing in the unique prime factorization of \( n \). It follows that \( n \in A_j \), so that \( n \in \bigcup_{i=1}^{\infty} A_i \).
+    \end{itemize}
+\end{solution}
+
+\begin{exercise}[De Morgan's Laws]
+\label{ex:5}
+    Let \( A \) and \( B \) be subsets of \( \mathbf{R} \).
+    \begin{enumerate}[label = (\alph*)]
+        \item If \( x \in \setcomp{(A \cap B)} \), explain why \( x \in \setcomp{A} \cup \setcomp{B} \). This shows that \( \setcomp{(A \cap B)} \subseteq \setcomp{A} \cup \setcomp{B} \).
+
+        \item Prove the reverse inclusion \( \setcomp{(A \cap B)} \supseteq \setcomp{A} \cup \setcomp{B} \), and conclude that \( \setcomp{(A \cap B)} = \setcomp{A} \cup \setcomp{B} \).
+
+        \item Show \( \setcomp{(A \cup B)} = \setcomp{A} \cap \setcomp{B} \) by demonstrating inclusion both ways.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[label = (\alph*)]
+        \item and (b). The negation of (\( x \in A \) and \( x \in B \)) is (\( x \not\in A \) or \( x \not\in B \)).
+
+        \item The negation of (\( x \in A \) or \( x \in B \)) is (\( x \not\in A \) and \( x \not\in B \)).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    \begin{enumerate}[label = (\alph*)]
+        \item Verify the triangle inequality in the special case where \( a \) and \( b \) have the same sign.
+
+        \item Find an efficient proof for all the cases at once by first demonstrating \( (a + b)^2 \leq (|a| + |b|)^2 \).
+
+        \item Prove \( |a - b| \leq |a - c| + |c - d| + |d - b| \) for all \( a, b, c, \) and \( d \).
+
+        \item Prove \( ||a| - |b|| \leq |a - b| \). (The unremarkable identity \( a = a - b + b \) may be useful.)
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[label = (\alph*)]
+        \item Suppose that \( a, b \geq 0 \). Then \( a + b \geq 0 \), so
+        \[
+            |a + b| \leq |a| + |b| \iff a + b \leq a + b,
+        \]
+        which is certainly true. Now suppose that \( a, b < 0 \). Then \( a + b < 0 \), so
+        \[
+            |a + b| \leq |a| + |b| \iff -a - b \leq -a - b,
+        \]
+        which is certainly true.
+
+        \item Observe that
+        \[
+            2ab \leq 2|ab| \iff a^2 + 2ab + b^2 \leq |a|^2 + 2|a||b| + |b|^2 \iff (a + b)^2 \leq (|a| + |b|)^2.
+        \]
+        Since \( (a + b)^2 = |a + b|^2 \), we have shown that \( |a + b|^2 \leq (|a| + |b|)^2 \). This implies that \( |a + b| \leq |a| + |b| \), because both \( |a + b| \) and \( |a| + |b| \) are non-negative.
+
+        \item Apply the triangle inequality twice:
+        \[
+            |a - b| \leq |a - c| + |c - b| \leq |a - c| + |c - d| + |d - b|.
+        \]
+
+        \item We have
+        \[
+            |a| = |a - b + b| \leq |a - b| + |b| \iff |a| - |b| \leq |a - b|,
+        \]
+        \[
+            |b| = |b - a + a| \leq |a - b| + |a| \iff |b| - |a| \leq |a - b|.
+        \]
+        Since \( ||a| - |b|| \) equals either \( |a| - |b| \) or \( |b| - |a| \), it follows that \( ||a| - |b|| \leq |a - b| \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Given a function \( f \) and a subset \( A \) of its domain, let \( f(A) \) represent the range of \( f \) over the set \( A \); that is, \( f(A) = \{ f(x) : x \in A \} \).
+    \begin{enumerate}[label = (\alph*)]
+        \item Let \( f(x) = x^2 \). If \( A = [0, 2] \) (the closed interval \( \{ x \in \mathbf{R} : 0 \leq x \leq 2 \} \)) and \( B = [1, 4] \), find \( f(A) \) and \( f(B) \). Does \( f(A \cap B) = f(A) \cap f(B) \) in this case? Does \( f(A \cup B) = f(A) \cup f(B) \)?
+
+        \item Find two sets \( A \) and \( B \) for which \( f(A \cap B) \neq f(A) \cap f(B) \).
+
+        \item Show that, for an arbitrary function \( g : \mathbf{R} \to \mathbf{R} \), it is always true that \( g(A \cap B) \subseteq g(A) \cap g(B) \) for all sets \( A, B \subseteq \mathbf{R} \).
+
+        \item Form and prove a conjecture about the relationship between \( g(A \cup B) \) and \( g(A) \cup g(B) \) for an arbitrary function \( g \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[label = (\alph*)]
+        \item \( f(A) = [0, 4] \) and \( f(B) = [1, 16] \) since
+        \[
+            0 \leq x \leq 2 \iff 0 \leq x^2 \leq 4 \quad \text{and} \quad 1 \leq x \leq 4 \iff 1 \leq x^2 \leq 16.
+        \]
+        Similarly, we have \( f(A \cap B) = f([1, 2]) = [1, 4] \) and \( f(A) \cap f(B) = [0, 4] \cap [1, 16] = [1, 4] \). So in this case we do have \( f(A \cap B) = f(A) \cap f(B) \).
+    
+        \( f(A \cup B) = f([0, 4]) = [0, 16] \) and \( f(A) \cup f(B) = [0, 4] \cup [1, 16] = [0, 16] \), so we also have \( f(A \cup B) = f(A) \cup f(B) \).
+    
+        \item Let \( A = \{ -1 \} \) and \( B = \{ 1 \} \). Then \( f(A \cap B) = f(\emptyset) = \emptyset \) but \( f(A) \cap f(B) = \{ 1 \} \cap \{ 1 \} = \{ 1 \} \neq \emptyset \).
+
+        \item We have
+        \begin{gather*}
+            y \in g(A \cap B) \iff y = f(x) \text{ for some } x \in A \cap B \\
+            \implies (y = f(x_1) \text{ for some } x_1 \in A) \text{ and } (y = f(x_2) \text{ for some } x_2 \in B) \\
+            \iff y \in g(A) \text{ and } y \in g(B) \iff y \in g(A) \cap g(B).
+        \end{gather*}
+        Hence \( y \in g(A \cap B) \implies y \in g(A) \cap g(B) \), i.e.\ \( g(A \cap B) \subseteq g(A) \cap g(B) \).
+
+        \item We always have \( g(A \cup B) = g(A) \cup g(B) \); indeed,
+        \begin{gather*}
+            y \in g(A \cup B) \iff y = f(x) \text{ for some } x \in A \cup B \\
+            \iff y = f(x) \text{ for some } x \text{ such that } (x \in A \text{ or } x \in B) \\
+            \iff (y = f(x_1) \text{ for some } x_1 \in A) \text{ or } (y = f(x_2) \text{ for some } x_2 \in B) \\
+            \iff y \in g(A) \text{ or } y \in g(B) \iff y \in g(A) \cup g(B).
+        \end{gather*}
+        Hence \( y \in g(A \cup B) \iff y \in g(A) \cup g(B) \), i.e.\ \( g(A \cup B) = g(A) \cup g(B) \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Here are two important definitions related to a function \( f : A \to B \). The function \( f \) is \textit{one-to-one} (1-1) if \( a_1 \neq a_2 \) in \( A \) implies that \( f(a_1) \neq f(a_2) \) in \( B \). The function \( f \) is \textit{onto} if, given any \( b \in B \), it is possible to find an element \( a \in A \) for which \( f(a) = b \).
+
+    Give an example of each or state that the request is impossible:
+    \begin{enumerate}[label = (\alph*)]
+        \item \( f : \mathbf{N} \to \mathbf{N} \) that is 1-1 but not onto.
+
+        \item \( f : \mathbf{N} \to \mathbf{N} \) that is onto but not 1-1.
+
+        \item \( f : \mathbf{N} \to \mathbf{Z} \) that is 1-1 and onto.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[label = (\alph*)]
+        \item Let \( f(n) = 2n \). Then \( f \) is 1-1 since \( n = m \iff 2n = 2m \), but not onto since the range of \( f \) contains only even numbers.
+
+        \item Let \( f(1) = 1 \) and \( f(n) = n - 1 \) for \( n \geq 2 \). Then \( f(n + 1) = n \) for \( n \in \mathbf{N} \), so \( f \) is onto, but \( f(1) = f(2) = 1 \), so \( f \) is not 1-1.
+
+        \item Let \( f \) be given by
+        \[
+            f(n) = \begin{cases}
+                \frac{n}{2} & \text{if } n \text{ is even}, \\
+                -\frac{n-1}{2} & \text{if } n \text{ is odd}.
+            \end{cases}
+        \]
+        \[
+            \begin{tikzcd}[column sep = tiny, row sep = small]
+                \mathbf{N} : & 1 \arrow[d, leftrightarrow] & 2 \arrow[d, leftrightarrow] & 3 \arrow[d, leftrightarrow] & 4 \arrow[d, leftrightarrow] & 5 \arrow[d, leftrightarrow] & \cdots \\
+                \mathbf{Z} : & 0 & 1 & -1 & 2 & -2 & \cdots \\
+            \end{tikzcd}
+        \]
+        To see that \( f \) is 1-1, let \( n \neq m \) be given. If \( n \) and \( m \) are both even, then \( f(n) \neq f(m) \) since \( n \neq m \iff \tfrac{n}{2} \neq \tfrac{m}{2} \); if \( n \) and \( m \) are both odd, then \( f(n) \neq f(m) \) since \( n \neq m \iff -\tfrac{n-1}{2} \neq -\tfrac{m-1}{2} \); and if \( n \) and \( m \) have opposite signs, say \( n \) is even and \( m \) is odd, then \( f(n) \neq f(m) \) since \( f(n) > 0 \) and \( f(m) \leq 0 \). To see that \( f \) is onto, let \( k \in \mathbf{Z} \) be given. If \( k > 0 \), then \( f(2k) = k \), and if \( k \leq 0 \) then \( f(-2k + 1) = k \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Given a function \( f : D \to \mathbf{R} \) and a subset \( B \subseteq \mathbf{R} \), let \( f^{-1}(B) \) be the set of all points from the domain \( D \) that get mapped into \( B \); that is, \( f^{-1}(B) = \{ x \in D : f(x) \in B \} \). This set is called the \textit{preimage} of \( B \).
+    \begin{enumerate}[label = (\alph*)]
+        \item Let \( f(x) = x^2 \). If \( A \) is the closed interval \( [0, 4] \) and \( B \) is the closed interval \( [-1, 1] \), find \( f^{-1}(A) \) and \( f^{-1}(B) \). Does \( f^{-1}(A \cap B) = f^{-1}(A) \cap f^{-1}(B) \) in this case? Does \( f^{-1}(A \cup B) = f^{-1}(A) \cup f^{-1}(B) \)?
+
+        \item The good behavior of preimages demonstrated in (a) is completely general. Show that for an arbitrary function \( g : \mathbf{R} \to \mathbf{R} \), it is always true that \( g^{-1}(A \cap B) = g^{-1}(A) \cap g^{-1}(B) \) and \( g^{-1}(A \cup B) = g^{-1}(A) \cup g^{-1}(B) \) for all sets \( A, B \subseteq \mathbf{R} \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[label = (\alph*)]
+        \item We have \( f^{-1}(A) = [-2, 2], f^{-1}(B) = [-1, 1], f^{-1}(A \cap B) = f^{-1}([0, 1]) = [-1, 1], \) and \( f^{-1}(A) \cap f^{-1}(B) = [-1, 1] \). So in this case we do have \( f^{-1}(A \cap B) = f^{-1}(A) \cap f^{-1}(B) \). We also have \( f^{-1}(A \cup B) = f^{-1}([-1, 4]) = [-2, 2] \) and \( f^{-1}(A) \cup f^{-1}(B) = [-2, 2] \), so we also have \( f^{-1}(A \cup B) = f^{-1}(A) \cup f^{-1}(B) \).
+
+        \item Observe that
+        \begin{gather*}
+            x \in g^{-1}(A \cap B) \iff g(x) \in A \cap B \iff (g(x) \in A) \text{ and } (g(x) \in B) \\
+            \iff (x \in g^{-1}(A)) \text{ and } (x \in g^{-1}(B)) \iff x \in g^{-1}(A) \cap g^{-1}(B).
+        \end{gather*}
+        Similarly,
+        \begin{gather*}
+            x \in g^{-1}(A \cup B) \iff g(x) \in A \cup B \iff (g(x) \in A) \text{ or } (g(x) \in B) \\
+            \iff (x \in g^{-1}(A)) \text{ or } (x \in g^{-1}(B)) \iff x \in g^{-1}(A) \cup g^{-1}(B).
+        \end{gather*}
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Decide which of the following are true statements. Provide a short justification for those that are valid and a counterexample for those that are not:
+    \begin{enumerate}[label = (\alph*)]
+        \item Two real numbers satisfy \( a < b \) if and only if \( a < b + \epsilon \) for every \( \epsilon > 0 \).
+
+        \item Two real numbers satisfy \( a < b \) if \( a < b + \epsilon \) for every \( \epsilon > 0 \).
+
+        \item Two real numbers satisfy \( a \leq b \) if and only if \( a < b + \epsilon \) for every \( \epsilon > 0 \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[label = (\alph*)]
+        \item This is false in general; the implication
+        \[
+            a < b + \epsilon \text{ for every } \epsilon > 0 \implies a < b
+        \]
+        does not hold. The problem occurs when we consider the case \( a = b \). In that case, for every \( \epsilon > 0 \) one has \( a + \epsilon > a \) but of course \( a < a \) is absurd.
+
+        \item See part (a).
+
+        \item This is true. First, let us prove the implication
+        \[
+            a \leq b \implies a < b + \epsilon \text{ for every } \epsilon > 0.
+        \]
+        Let \( \epsilon > 0 \) be given. Then \( a \leq b < b + \epsilon \). Now let us prove the reverse implication by considering the contrapositive statement:
+        \[
+            a > b \implies a \geq b + \epsilon \text{ for some } \epsilon > 0.
+        \]
+        Take \( \epsilon = a - b > 0 \). Then \( b + \epsilon = a \leq a \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Form the logical negation of each claim. One trivial way to do this is to simply add ``It is not the case that..." in front of each assertion. To make this interesting, fashion the negation into a positive statement that avoids using the word ``not" altogether. In each case, make an intuitive guess as to whether the claim or its negation is the true statement.
+    \begin{enumerate}[label = (\alph*)]
+        \item For all real numbers satisfying \( a < b \), there exists an \( n \in \mathbf{N} \) such that \( a + 1/n < b \).
+
+        \item There exists a real number \( x > 0 \) such that \( x < 1/n \) for all \( n \in \mathbf{N} \).
+
+        \item Between every two distinct real numbers there is a rational number.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[label = (\alph*)]
+        \item The negated statement is:
+        \begin{center}
+            there exist real numbers satisfying \( a < b \) such that \( a + 1/n \geq b \) for all \( n \in \mathbf{N} \).
+        \end{center}
+        The original statement is true and follows from the \href{https://en.wikipedia.org/wiki/Archimedean_property}{Archimedean property} of \( \mathbf{R} \) (Theorem 1.4.2 of \hyperlink{ua}{[UA]}).
+
+        \item The negated statement is:
+        \begin{center}
+            for all \( x > 0 \), there exists an \( n \in \mathbf{N} \) such that \( x \geq 1/n \).
+        \end{center}
+        The negated statement is true and again follows from the Archimedean property of \( \mathbf{R} \).
+
+        \item The negated statement is:
+        \begin{center}
+            there are two distinct real numbers with no rational number between them.
+        \end{center}
+        The original statement is true; this is the density of \( \mathbf{Q} \) in \( \mathbf{R} \) (Theorem 1.4.3 of \hyperlink{ua}{[UA]}).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:12}
+    Let \( y_1 = 6 \), and for each \( n \in \mathbf{N} \) define \( y_{n+1} = (2y_n - 6)/3 \).
+    \begin{enumerate}[label = (\alph*)]
+        \item Use induction to prove that the sequence satisfies \( y_n > -6 \) for all \( n \in \mathbf{N} \).
+
+        \item Use another induction argument to show the sequence \( (y_1, y_2, y_3, \ldots) \) is decreasing.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[label = (\alph*)]
+        \item For the base case \( n = 1 \), we have \( y_1 = 6 > -6 \). Suppose that for some \( n \in \mathbf{N} \) we have \( y_n > -6 \). Then observe that
+        \[
+            y_{n+1} = \tfrac{2}{3} y_n - 2 > \tfrac{2}{3} (-6) - 2 = -6.
+        \]
+        Hence by induction we have \( y_n > -6 \) for all \( n \in \mathbf{N} \).
+
+        \item We want to show that for all \( n \in \mathbf{N} \) we have \( y_{n+1} \leq y_n \). Since \( y_1 = 6 \) and \( y_2 = 2 \), the statement is true for \( n = 1 \). Suppose that \( y_{n+1} \leq y_n \) for some \( n \in \mathbf{N} \). Then observe that
+        \[
+            y_{n+2} = \tfrac{2}{3} y_{n+1} - 2 \leq \tfrac{2}{3} y_n - 2 = y_{n+1}.
+        \]
+        Hence by induction we have \( y_{n+1} \leq y_n \) for all \( n \in \mathbf{N} \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:13}
+    For this exercise, assume \Cref{ex:5} has been successfully completed.
+    \begin{enumerate}[label = (\alph*)]
+        \item Show how induction can be used to conclude that
+        \[
+            \setcomp{(A_1 \cup A_2 \cup \cdots \cup A_n)} = \setcomp{A_1} \cap \setcomp{A_2} \cap \cdots \cap \setcomp{A_n}
+        \]
+        for any finite \( n \in \mathbf{N} \).
+
+        \item It is tempting to appeal to induction to conclude that
+        \[
+            \setcomp{\left( \bigcup_{i=1}^{\infty} A_i \right)} = \bigcap_{i=1}^{\infty} \setcomp{A_i},
+        \]
+        but induction does not apply here. Induction is used to prove that a particular statement holds for every value of \( n \in \mathbf{N} \), but this does not imply the validity of the infinite case. To illustrate this point, find an example of a collection of sets \( B_1, B_2, B_3, \ldots \) where \( \bigcap_{i=1}^n B_i \neq \emptyset \) is true for every \( n \in \mathbf{N} \), but \( \bigcap_{i=1}^{\infty} B_i \neq \emptyset \) fails.
+
+        \item Nevertheless, the infinite version of De Morgan's Law stated in (b) is a valid statement. Provide a proof that does not use induction.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[label = (\alph*)]
+        \item We want to prove the statement
+        \[
+            P(n) : \quad \setcomp{(A_1 \cup A_2 \cup \cdots \cup A_n)} = \setcomp{A_1} \cap \setcomp{A_2} \cap \cdots \cap \setcomp{A_n}
+        \]
+        for all \( n \in \mathbf{N} \). The truth of \( P(1) \) is clear. Suppose that \( P(n) \) holds for some \( n \in \mathbf{N} \). Then observe that
+        \begin{align*}
+            \setcomp{(A_1 \cup A_2 \cup \cdots \cup A_n \cup A_{n+1})} &= \setcomp{((A_1 \cup A_2 \cup \cdots \cup A_n) \cup (A_{n+1}))} \tag{union associativity} \\
+            &= \setcomp{(A_1 \cup A_2 \cup \cdots \cup A_n)} \cap \setcomp{A_{n+1}} \tag{\Cref{ex:5}} \\
+            &= \setcomp{A_1} \cap \setcomp{A_2} \cap \cdots \cap \setcomp{A_n} \cap \setcomp{A_{n+1}}, \tag{induction hypothesis}
+        \end{align*}
+        which is the statement \( P(n+1) \). Hence by induction \( P(n) \) holds for all \( n \in \mathbf{N} \).
+
+        \item Let \( B_i = (0, 1/i) \). Then \( \bigcap_{i=1}^{n} B_i = (0, 1/n) \), but \( \bigcap_{i=1}^{\infty} B_i = \emptyset \).
+
+        \item We have
+        \begin{gather*}
+            x \in \setcomp{\left( \bigcup_{i=1}^{\infty} A_i \right)} \iff x \not\in \bigcup_{i=1}^{\infty} A_i \iff x \not\in A_i \text{ for every } i \in \mathbf{N} \iff x \in \bigcap_{i=1}^{\infty} \setcomp{A_i}.
+        \end{gather*}
+        Hence the infinite version of De Morgan's Law holds.
+    \end{enumerate}
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2nd edn.}
+
+\end{document}

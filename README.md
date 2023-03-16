@@ -8,7 +8,7 @@
 - **Set Theory**
   - [Cardinality](https://lew98.github.io/Mathematics/Cardinality.pdf)
   - [Suprema, infima, maxima, and minima](https://lew98.github.io/Mathematics/Suprema_infima_maxima_and_minima.pdf)
+- [**Understanding Analysis (Abbott)**](https://link.springer.com/book/10.1007/978-1-4939-2712-8)
+  - [Section 1.2 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_2_Exercises.pdf)
 - [**Principles of Mathematical Analysis (Rudin)**](https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis)
   - [Chapter 1 Exercises](https://lew98.github.io/Mathematics/PMA_Chapter_1_Exercises.pdf)
-- **Miscellaneous**
-  - [An infinite partition of **N** into infinite sets](https://lew98.github.io/Mathematics/An_infinite_partition_of_N_into_infinite_sets.pdf)
