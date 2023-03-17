@@ -1,0 +1,241 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 1.4 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 1.4.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 1.4.#1#3}
+
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 1.4 Exercises}
+
+Exercises with solutions from Section 1.4 of \hyperlink{ua}{[UA]}.
+
+\begin{exercise}
+\label{ex:1}
+    Recall that \( \mathbf{I} \) stands for the set of irrational numbers.
+    \begin{enumerate}
+        \item Show that if \( a, b \in \Q \), then \( ab \) and \( a + b \) are elements of \( \Q \) as well.
+
+        \item Show that if \( a \in \Q \) and \( t \in \mathbf{I} \), then \( a + t \in \mathbf{I} \) and \( at \in \mathbf{I} \) as long as \( a \neq 0 \).
+
+        \item Part (a) can be summarized by saying that \( \Q \) is closed under addition and multiplication. Is \( \mathbf{I} \) closed under addition and multiplication? Given two irrational numbers \( s \) and \( t \), what can we say about \( s + t \) and \( st \)?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Suppose \( a = \tfrac{k}{l} \) and \( b = \tfrac{m}{n} \). Then
+        \[
+            ab = \tfrac{km}{ln} \quad \text{and} \quad a + b = \tfrac{kn + lm}{ln},
+        \]
+        which are rational numbers.
+
+        \item Let \( a \in \Q \) be fixed. We want to prove that
+        \[
+            t \in \mathbf{I} \implies a + t \in \mathbf{I}.
+        \]
+        To do this, we will prove the contrapositive statement
+        \[
+            a + t \in \Q \implies t \in \Q.
+        \]
+        Simply observe that \( t = (a + t) - a \). Then by part (a), \( t \in \Q \).
+
+        Similarly, let \( a \in \Q \) be non-zero. We can show that
+        \[
+            at \in \Q \implies t \in \Q
+        \]
+        by observing that \( t = a^{-1}(at) \) and appealing to part (a) to conclude that \( t \in \Q \).
+
+        \item \( \mathbf{I} \) is not closed under addition or multiplication. For example, \( -\sqrt{2} \) and \( \sqrt{2} \) are irrational numbers, but their sum is the rational number 0 and their product is the rational number \( -2 \). The sum or product of two irrational numbers may be irrational; for example, it can be shown that \( \sqrt{2} + \sqrt{3} \) and \( \sqrt{2} \sqrt{3} \) are irrational. So in general, we cannot say anything about the sum or product of two irrational numbers without more information.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Let \( A \subseteq \R \) be nonempty and bounded above, and let \( s \in \R \) have the property that for all \( n \in \N \), \( s + \tfrac{1}{n} \) is an upper bound for \( A \) and \( s - \tfrac{1}{n} \) is not an upper bound for \( A \). Show \( s = \sup A \).
+\end{exercise}
+
+\begin{solution}
+    First, let us show that \( s \) is an upper bound for \( A \). Seeking a contradiction, suppose this is not the case. Then there must exist some \( x \in A \) such that \( s < x \). By the Archimedean property of \( \R \), there exists a natural number \( n \) such that \( \tfrac{1}{n} < x - s \iff s + \tfrac{1}{n} < x \). This implies that \( s + \tfrac{1}{n} \) is not an upper bound for \( A \), which contradicts our hypotheses. Hence it must be that \( s \) is an upper bound for \( A \).
+
+    Now let \( \epsilon > 0 \) be given and using the Archimedean property, pick a natural number \( n \) such that \( \tfrac{1}{n} < \epsilon \). By assumption, \( s - \tfrac{1}{n} \) is not an upper bound for \( A \), so there must exist some \( x \in A \) such that \( s - \tfrac{1}{n} < x \); this implies that \( s - \epsilon < x \) since \( \tfrac{1}{n} < \epsilon \). Hence by Lemma 1.3.8, \( s = \sup A \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Prove that \( \bigcap_{n=1}^{\infty} (0, 1/n) = \emptyset \). Notice that this demonstrates that the intervals in the Nested Interval Property must be closed for the conclusion of the theorem to hold.
+\end{exercise}
+
+\begin{solution}
+    Suppose there was some \( x \in \bigcap_{n=1}^{\infty} (0, 1/n) \), i.e.\ some \( x \in \R \) such that for all \( n \in \N \), \( 0 < x < 1/n \). This directly contradicts the Archimedean property of \( \R \), which says that there must exist an \( N \in \N \) such that \( 1/N < x \). We may conclude that \( \bigcap_{n=1}^{\infty} (0, 1/n) = \emptyset \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Let \( a < b \) be real numbers and consider the set \( T = \Q \cap [a, b] \). Show \( \sup T = b \).
+\end{exercise}
+
+\begin{solution}
+    It is clear that \( b \) is an upper bound for \( T \). Let \( \epsilon > 0 \) be given. By the density of \( \Q \) in \( \R \), there exists a rational number \( p \) satisfying \( b - \epsilon < p < b \) and a rational number \( q \) satisfying \( a < q < b \). Let \( r = \max \{p , q\} \). Then \( a < r < b \), so that \( r \in T \), and \( b - \epsilon < r \). Hence by Lemma 1.3.8, \( \sup T = b \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Using \Cref{ex:1}, supply a proof for Corollary 1.4.4 by considering the real numbers \( a - \sqrt{2} \) and \( b - \sqrt{2} \).
+\end{exercise}
+
+\begin{solution}
+    By the density of \( \Q \) in \( \R \), there exists a rational number \( p \) satisfying \( a - \sqrt{2} < p < b - \sqrt{2} \), which gives \( a < p + \sqrt{2} < b \). Since \( p + \sqrt{2} \) is irrational by \Cref{ex:1}, the corollary is proved.
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Recall that a set \( B \) is \textit{dense} in \( \R \) if an element of \( B \) can be found between any two real numbers \( a < b \). Which of the following sets are dense in \( \R \)? Take \( p \in \Z \) and \( q \in \N \) in every case.
+    \begin{enumerate}
+        \item The set of all rational numbers \( p/q \) with \( q \leq 10 \).
+
+        \item The set of all rational numbers \( p/q \) with \( q \) a power of 2.
+
+        \item The set of all rational numbers \( p/q \) with \( 10|p| \geq q \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item This set is not dense in \( \R \). Observe that
+        \[
+            q \leq 10 \iff \tfrac{1}{q} \geq \tfrac{1}{10}.
+        \]
+        Then if \( p > 0 \) we have \( p/q \geq 1/10 \), if \( p < 0 \) we have \( p/q \leq -1/10 \), and of course if \( p = 0 \) we have \( p/q = 0 \). So there is no element of this set between the real numbers \( 1/1000 \) and \( 1/100 \), for example.
+
+        \item This set is dense in \( \R \). To see this, let us first prove that for all \( x \in \R \), there exists a \( k \in \N \) such that \( 2^k > x \). Seeking a contradiction, suppose this is not the case. Then the set \( K = \{ 2^k : k \in \N \} \) is non-empty and bounded above, so by the Axiom of Completeness \( \alpha := \sup K \) exists in \( \R \). Since \( 2^1 = 2 \) belongs to \( K \), it must be the case that \( \alpha \) is positive. It follows that \( \tfrac{\alpha}{2} < \alpha \), so that \( \tfrac{\alpha}{2} \) cannot be an upper bound for \( K \). Then there exists some \( k \in \N \) such that \( \tfrac{\alpha}{2} < 2^k \), which implies \( \alpha < 2^{k+1} \); but this contradicts the fact that \( \alpha \) is the supremum of \( K \). Hence it must be the case that for all \( x \in \R \), there exists a \( k \in \N \) such that \( 2^k > x \).
+
+        Let \( a < b \) be real numbers. By the previous paragraph, there exists a \( k \in \N \) such that \( 2^k > \tfrac{1}{b-a} \), which implies that \( \tfrac{1}{2^k} < b - a \). Now let \( p \) be the smallest integer greater than \( 2^k a \), so that \( p - 1 \leq 2^k a < p \). Then observe that
+        \[
+            2^k a < p \leq 1 + 2^k a < 2^k b \implies a < \tfrac{p}{2^k} < b.
+        \]
+
+        \item This set is not dense in \( \R \). If \( p > 0 \) then
+        \[
+            10|p| \geq q \iff 10p \geq q \iff p/q \geq 1/10,
+        \]
+        and if \( p < 0 \) then
+        \[
+            10|p| \geq q \iff -10p \geq q \iff p/q \leq -1/10.
+        \]
+        We cannot have \( p = 0 \) since \( q \) is a positive integer. So as in part (a), there is no element of this set between the real numbers \( 1/1000 \) and \( 1/100 \), for example.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Finish the proof of Theorem 1.4.5 by showing that the assumption \( \alpha^2 > 2 \) leads to a contradiction of the fact that \( \alpha = \sup T \).
+\end{exercise}
+
+\begin{solution}
+    By the Archimedean property of \( \R \), there exists an \( n \in \N \) such that \( \tfrac{2 \alpha}{n} < \alpha^2 - 2 \iff 2 < \alpha^2 - \tfrac{2 \alpha}{n} \). Let \( b = \alpha - \tfrac{1}{n} \). Note that since \( 1 \in T \), we have \( \alpha \geq 1 \) and hence \( b \geq 0 \). So if \( t \in T \) is such that \( t < 0 \) then \( t \leq b \). Now observe that
+    \[
+        b^2 = \left( \alpha - \tfrac{1}{n} \right)^2 = \alpha^2 - \tfrac{2 \alpha}{n} + \tfrac{1}{n^2} > \alpha^2 - \tfrac{2 \alpha}{n} > 2,
+    \]
+    so that for any \( t \in T \) we have \( t^2 < 2 < b^2 \). It follows that if \( t \geq 0 \), we have \( t \leq b \). We have now shown that \( t \leq b \) for all \( t \in T \), i.e.\ \( b \) is an upper bound for \( T \); but this contradicts the fact that \( \alpha \) is the supremum of \( T \) since \( b < \alpha \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Give an example of each or state that the request is impossible. When a request is impossible, provide a compelling argument for why this is the case.
+    \begin{enumerate}
+        \item Two sets \( A \) and \( B \) with \( A \cap B = \emptyset, \sup A = \sup B, \sup A \not\in A \) and \( \sup B \not\in B \).
+
+        \item A sequence of nested open intervals \( J_1 \supseteq J_2 \supseteq J_3 \supseteq \cdots \) with \( \bigcap_{n=1}^{\infty} J_n \) nonempty but containing only a finite number of elements.
+
+        \item A sequence of nested unbounded closed intervals \( L_1 \supseteq L_2 \supseteq L_3 \supseteq \cdots \) with \( \bigcap_{n=1}^{\infty} L_n = \emptyset \). (An unbounded closed interval has the form \( [a, \infty) = \{ x \in \R : x \geq a \} \).)
+
+        \item A sequence of closed bounded (not necessarily nested) intervals \( I_1, I_2, I_3, \ldots \) with the property that \( \bigcap_{n=1}^N I_n \neq \emptyset \) for all \( N \in \N \), but \( \bigcap_{n=1}^{\infty} I_n = \emptyset \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Take \( A = \left\{ -\tfrac{1}{2n} : n \in \N \right\} \) and \( B = \left\{ -\tfrac{1}{2n - 1} : n \in \N \right\} \). Then \( A \cap B = \emptyset, \sup A = \sup B = 0 \) and \( 0 \) belongs to neither \( A \) nor \( B \).
+
+        \item Take \( J_n = (-1/n, 1/n) \). Then \( \bigcap_{n=1}^{\infty} J_n = \{ 0 \} \).
+
+        \item Take \( L_n = [n, \infty) \).
+
+        \item This is impossible. To see this, let \( J_N = \bigcap_{n=1}^N I_n \) for \( N \in \N \) and note that any finite intersection of closed bounded intervals is a (possibly empty) closed bounded interval. So: each \( J_N \) is a closed bounded interval; these intervals are nonempty and nested \( J_1 \supseteq J_2 \supseteq J_3 \supseteq \cdots \); and \( \bigcap_{n=1}^{\infty} I_n = \bigcap_{N=1}^{\infty} J_N \). Then by the Nested Interval Property of \( \R \), we must have that \( \bigcap_{n=1}^{\infty} I_n = \bigcap_{N=1}^{\infty} J_N \) is non-empty.
+    \end{enumerate}
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2nd edn.}
+
+\end{document}
