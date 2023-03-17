@@ -1,0 +1,368 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 1.3 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 1.3.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 1.3.#1#3}
+
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 1.3 Exercises}
+
+Exercises with solutions from Section 1.3 of \hyperlink{ua}{[UA]}.
+
+\begin{exercise}
+\label{ex:1}
+    \begin{enumerate}
+        \item Write a formal definition in the style of Definition 1.3.2 for the \textit{infimum} or \textit{greatest lower bound} of a set.
+
+        \item Now, state and prove a version of Lemma 1.3.8 for greatest lower bounds.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item A real number \( t \) is the \textit{greatest lower bound} for a set \( A \subseteq \R \) if it meets the following two criteria:
+        \begin{enumerate}[label = (\roman*)]
+            \item \( t \) is a lower bound for \( A \);
+
+            \item if \( b \) is any lower bound for \( A \), then \( b \leq t \).
+        \end{enumerate}
+
+        \item Assume \( t \in \R \) is a lower bound for a set \( A \subseteq \R \). Then, \( t = \inf A \) if and only if, for every choice of \( \epsilon > 0 \), there exists an element \( a \in A \) satisfying \( a < t + \epsilon \).
+        \begin{proof}
+            We will prove the forward implication
+            \[
+                t = \inf A \implies \forall \epsilon > 0 \,\, \exists a \in A : a < t + \epsilon
+            \]
+            by considering the contrapositive statement
+            \[
+                \exists \epsilon > 0 : \forall a \in A \quad t + \epsilon \leq a \implies t \neq \inf A.
+            \]
+            Then \( t + \epsilon \) is a lower bound of \( A \) and \( t + \epsilon > t \); it follows that \( t \) is not the greatest lower bound of \( A \), i.e.\ \( t \neq \inf A \).
+
+            For the reverse implication
+            \[
+                \forall \epsilon > 0 \,\, \exists a \in A : a < t + \epsilon \implies t = \inf A,
+            \]
+            suppose \( b \) is a lower bound for \( A \) with \( b > t \). Then taking \( \epsilon = b - t \), there exists an \( a \in A \) such that \( a < t + \epsilon = b \). This contradicts the fact that \( b \) is a lower bound for \( A \), so in fact we must have \( b \leq t \) and we may conclude that \( t = \inf A \).
+        \end{proof}
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Give an example of each of the following, or state that the request is impossible.
+    \begin{enumerate}
+        \item A set \( B \) with \( \inf B \geq \sup B \).
+
+        \item A finite set that contains its infimum but not its supremum.
+
+        \item A bounded subset of \( \Q \) that contains its supremum but not its infimum.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Take \( B = \{ 0 \} \). Then \( \inf B = \sup B = \{ 0 \} \).
+
+        \item This is impossible; any finite subset (of any totally ordered set) contains a minimum and a maximum element.
+
+        \item Consider the set \( E = \{ p \in \Q : 0 < p \leq 1 \} \). Then \( \sup E = 1 \in E \) and \( \inf E = 0 \not\in E \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    \begin{enumerate}
+        \item Let \( A \) be nonempty and bounded below, and define \( B = \{ b \in \R : b \text{ is a lower bound for } A \} \). Show that \( \sup B = \inf A \).
+
+        \item Use (a) to explain why there is no need to assert that greatest lower bounds exist as part of the Axiom of Completeness.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item \( B \) is nonempty since \( A \) is bounded below, and \( B \) is bounded above by any \( x \in A \); there exists at least one such \( x \) since \( A \) is nonempty. It follows from the Axiom of Completeness that \( \sup B \) exists in \( \R \). To see that \( \sup B = \inf A \), we need to show two things.
+
+        \begin{enumerate}[label = (\roman*)]
+            \item \( \sup B \) is a lower bound of \( A \). Seeking a contradiction, suppose this is not the case, i.e.\ suppose there exists \( x \in A \) with \( x < \sup B \). Then \( x \) cannot be an upper bound of \( B \), so there must exist some \( b \in B \) such that \( x < b \); this is a contradiction since \( b \) is a lower bound of \( A \).
+    
+            \item \( \sup B \) is the greatest lower bound of \( A \). Suppose \( y \in \R \) is a lower bound of \( A \). Then \( y \) belongs to \( B \), so \( y \leq \sup B \).
+        \end{enumerate}
+        We may conclude that \( \sup B = \inf A \).
+
+        \item Part (a) shows that the existence of the greatest lower bound for nonempty bounded below subsets of \( \R \) is implied by the Axiom of Completeness.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Let \( A_1, A_2, A_3, \ldots \) be a collection of nonempty sets, each of which is bounded above.
+    \begin{enumerate}
+        \item Find a formula for \( \sup (A_1 \cup A_2) \). Extend this to \( \sup \left( \bigcup_{k=1}^n A_k \right) \).
+
+        \item Consider \( \sup \left( \bigcup_{k=1}^{\infty} A_k \right) \). Does the formula in (a) extend to the infinite case?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( n \in \N \) be given. Then for each \( 1 \leq k \leq n \), the Axiom of Completeness implies that \( \sup A_k \) exists in \( \R \). The finite set \( \{ \sup A_1, \ldots, \sup A_k \} \) has a maximum element, say \( M \); we claim that \( \sup \left( \bigcup_{k=1}^n A_k \right) = M \). First, suppose we have \( x \in \bigcup_{k=1}^n A_k \). Then \( x \in A_j \) for some \( 1 \leq j \leq n \). It follows that \( x \leq \sup A_j \leq M \), and hence that \( M \) is an upper bound for \( \bigcup_{k=1}^n A_k \). Now suppose \( b \in \R \) is an upper bound for \( \bigcup_{k=1}^n A_k \). Then \( b \) must be an upper bound for each \( A_k \); this implies that \( \sup A_k \leq b \) for each \( 1 \leq k \leq n \) and hence that \( M \leq b \). We may conclude that \( \sup \left( \bigcup_{k=1}^n A_k \right) = M \).
+
+        \item The formula does not extend to the infinite case, since in general the set \( \{ \sup A_1, \sup A_2, \ldots \} \) will not have a maximum. Indeed, it may be the case that \( \sup \left( \bigcup_{k=1}^{\infty} A_k \right) \) does not exist. For example, take \( A_k = [0, k] \). Then each \( A_k \) is nonempty and bounded above with \( \sup A_k = k \), but \( \bigcup_{k=1}^{\infty} A_k = [0, \infty) \), which does not have a supremum in \( \R \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    As in Example 1.3.7, let \( A \subseteq \mathbf{R} \) be nonempty and bounded above, and let \( c \in \mathbf{R} \). This time define the set \( cA = \{ ca : a \in A \} \).
+    \begin{enumerate}
+        \item If \( c \geq 0 \), show that \( \sup (cA) = c \sup A \).
+
+        \item Postulate a similar type of statement for \( \sup (cA) \) for the case \( c < 0 \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item If \( c = 0 \) then the result is clear. Suppose therefore that \( c > 0 \). For any \( x \in A \), we have
+        \[
+            x \leq \sup A \iff cx \leq c \sup A,
+        \]
+        so that \( c \sup A \) is an upper bound of \( cA \). Suppose \( b \in \R \) is an upper bound of \( cA \), i.e.\ \( cx \leq b \) for all \( x \in A \). Then \( x \leq c^{-1} b \) for all \( x \in A \), i.e.\ \( c^{-1} b \) is an upper bound of \( A \). It follows that \( \sup A \leq c^{-1} b \iff c \sup A \leq b \) and we may conclude that \( \sup (cA) = c \sup A \).
+
+        \item If \( c < 0 \) and \( \inf A \) exists, then \( \sup (cA) = c \inf A \). The proof is similar to part (a). For any \( x \in A \), we have
+        \[
+            \inf A \leq x \iff cx \leq c \inf A,
+        \]
+        so that \( c \inf A \) is an upper bound of \( cA \). Suppose \( b \in \R \) is an upper bound of \( cA \), i.e.\ \( cx \leq b \) for all \( x \in A \). Then \( c^{-1} b \leq x \) for all \( x \in A \), i.e.\ \( c^{-1} b \) is a lower bound of \( A \). It follows that \( c^{-1} b \leq \inf A \iff c \inf A \leq b \) and we may conclude that \( \sup (cA) = c \inf A \).
+
+        If \( \inf A \) doesn't exist, then \( \sup (cA) \) doesn't exist either, since for a negative \( c \)
+        \[
+            A \text{ bounded below} \iff cA \text{ bounded above}.
+        \]
+        For example, \( A = (-\infty, 0) \) and \( c = -1 \) gives \( cA = (0, \infty) \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Given sets \( A \) and \( B \), define \( A + B = \{ a + b : a \in A \text{ and } b \in B \} \). Follow these steps to prove that if \( A \) and \( B \) are nonempty and bounded above then \( \sup (A + B) = \sup A + \sup B \).
+    \begin{enumerate}
+        \item Let \( s = \sup A \) and \( t = \sup B \). Show \( s + t \) is an upper bound for \( A + B \).
+
+        \item Now let \( u \) be an arbitrary upper bound for \( A + B \), and temporarily fix \( a \in A \). Show \( t \leq u - a \).
+
+        \item Finally, show \( \sup (A + B) = s + t \).
+
+        \item Construct another proof of this same fact using Lemma 1.3.8.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item For any \( a \in A \) and \( b \in B \) we have \( a \leq s \) and \( b \leq t \). It follows that \( a + b \leq s + t \), so that \( s + t \) is an upper bound for \( A + B \).
+
+        \item For any \( b \in B \), we have \( a + b \leq u \iff b \leq u - a \), i.e.\ \( u - a \) is an upper bound for \( B \). It follows that \( t \leq u - a \).
+
+        \item By part (b), for any \( a \in A \) we have \( t \leq u - a \iff a \leq u - t \), i.e.\ \( u - t \) is an upper bound for \( A \). It follows that \( s \leq u - t \iff s + t \leq u \). We may conclude that \( \sup(A + B) = \sup A + \sup B \).
+
+        \item Let \( \epsilon > 0 \) be given. By Lemma 1.3.8, there exist elements \( a \in A \) and \( b \in B \) such that \( s - \tfrac{\epsilon}{2} < a \) and \( t - \tfrac{\epsilon}{2} < b \), which implies that \( s + t - \epsilon < a + b \). We showed in part (a) that \( s + t \) is an upper bound for \( A + B \), so we may invoke Lemma 1.3.8 to conclude that \( \sup(A + B) = \sup A + \sup B \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Prove that if \( a \) is an upper bound for \( A \), and if \( a \) is also an element of \( A \), then it must be that \( a = \sup A \).
+\end{exercise}
+
+\begin{solution}
+    Let \( b \in \R \) be an upper bound of \( A \). Since \( a \in A \), we must have \( a \leq b \); it follows that \( a = \sup A \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Compute, without proofs, the suprema and infima (if they exist) of the following sets:
+    \begin{enumerate}
+        \item \( \{ m/n : m, n \in \mathbf{N} \text{ with } m < n \} \).
+
+        \item \( \{ (-1)^m/n : m, n \in \mathbf{N} \} \).
+
+        \item \( \{ n/(3n+1) : n \in \mathbf{N} \} \).
+
+        \item \( \{ m/(m+n) : m, n \in \mathbf{N} \} \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item The supremum is 1 and the infimum is 0.
+
+        \item The supremum is 1 and the infimum is \( -1 \).
+
+        \item The supremum is \( \tfrac{1}{3} \) and the infimum is \( \tfrac{1}{4} \).
+
+        \item The supremum is 1 and the infimum is 0.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    \begin{enumerate}
+        \item If \( \sup A < \sup B \), show that there exists an element \( b \in B \) that is an upper bound for \( A \).
+
+        \item Give an example to show that this is not always the case if we only assume \( \sup A \leq \sup B \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( \epsilon = \sup B - \sup A > 0 \). Then by Lemma 1.3.8, there exists a \( b \in B \) such that \( \sup B - \epsilon = \sup A < b \). It follows that \( b \) is an upper bound for \( A \).
+
+        \item Take \( A = B = (0, 1) \). Then \( \sup A = \sup B = 1 \), but no element of \( B \) is an upper bound for \( A \) (the interval \( (0, 1) \) has no maximum element).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}[Cut Property]
+\label{ex:10}
+    The \textit{Cut Property} of the real numbers is the following:
+
+    If \( A \) and \( B \) are nonempty, disjoint sets with \( A \cup B = \mathbf{R} \) and \( a < b \) for all \( a \in A \) and \( b \in B \), then there exists \( c \in \mathbf{R} \) such that \( x \leq c \) whenever \( x \in A \) and \( x \geq c \) whenever \( x \in B \).
+    \begin{enumerate}
+        \item Use the Axiom of Completeness to prove the Cut Property.
+
+        \item Show that the implication goes the other way; that is, assume \( \mathbf{R} \) possesses the Cut Property and let \( E \) be a nonempty set that is bounded above. Prove \( \sup E \) exists.
+
+        \item The punchline of parts (a) and (b) is that the Cut Property could be used in place of the Axiom of Completeness as the fundamental axiom that distinguishes the real numbers from the rational numbers. To drive this point home, give a concrete example showing that the Cut Property is not a valid statement when \( \mathbf{R} \) is replaced by \( \mathbf{Q} \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Since \( B \) is nonempty, there exists some \( b \in B \), which satisfies \( a < b \) for all \( a \in A \), i.e.\ \( b \) is an upper bound for \( A \). Since \( A \) is also nonempty, the Axiom of Completeness implies that \( c := \sup A \) exists in \( \R \). Then \( x \leq c \) for all \( x \in A \) and since each element of \( B \) is an upper bound for \( A \), we also have \( x \geq c \) for all \( x \in B \).
+
+        \item Let
+        \[
+            \begin{gathered}
+            B = \{ b \in \mathbf{R} : b \text{ is an upper bound of } E \}, \\
+            A = \setcomp{B} = \{ a \in \mathbf{R} : a \text{ is not an upper bound of } E \}.
+            \end{gathered}
+        \]
+        Then \( B \) is nonempty since \( E \) is bounded above and \( A \) is nonempty since
+        \[
+            E \text{ is nonempty} \iff \exists x \in E \implies x - 1 \in A.
+        \]
+        \( A \) and \( B \) are clearly disjoint and satisfy \( A \cup B = \R \). Let \( a \in A \) and \( b \in B \) be given. Then since \( a \) is not an upper bound of \( E \), there exists some \( x \in E \) such that \( a < x \leq b \). It follows that \( a < b \) for all \( a \in A \) and \( b \in B \). We may now invoke the Cut Property to obtain \( c \in \R \) such that \( x \leq c \) for all \( x \in A \) and \( x \geq c \) for all \( x \in B \).
+
+        We claim that \( c = \sup E \). Since \( A \) and \( B \) partition \( \R \), exactly one of \( c \in A \) or \( c \in B \) holds. Suppose \( c \in A \),  i.e.\ \( c \) is not an upper bound of \( E \). Then there must exist some \( y \in E \) such that \( c < y \). Observe that \( z := \tfrac{c + y}{2} \) satisfies \( c < z < y \), so that \( z \in A \); but this contradicts the fact that \( x \leq c \) for all \( x \in A \). It follows that \( c \in B \), i.e.\ \( c \) is an upper bound of \( E \). The Cut Property says that \( c \leq x \) for all \( x \in B \); in other words, \( c \) is less than all other upper bounds of \( E \). We may conclude that \( c = \sup E \).
+
+        \item Let
+        \[
+            A = \{ p \in \Q : p < 0 \text{ or } p^2 < 2 \} \quad \text{and} \quad B = \{ q \in \Q : q > 0 \text{ and } q^2 > 2 \}.
+        \]
+        Then \( A \) and \( B \) are nonempty and in fact, \( B = \setcomp{A} \) since \( p^2 = 2 \) has no rational solution. It follows that \( A \) and \( B \) partition \( \Q \). Let \( p \in A \) and \( q \in B \) be given. If \( p < 0 \) then certainly \( p < q \) since \( q > 0 \), and if \( p \geq 0 \) then \( p < q \) since
+        \[
+            0 \leq p^2 < 2 < q^2 \implies 0 \leq p < q.
+        \]
+        So the sets \( A \) and \( B \) satisfy the hypotheses of the Cut Property. If the Cut Property held for \( \Q \), then we would be able to obtain a \( c \in \Q \) such that \( p \leq c \) for all \( p \in A \) and \( c \leq q \) for all \( q \in B \). Since \( A \) and \( B \) partition \( \Q \), this implies that \( c \) is either the maximum of \( A \) or the minimum of \( B \). However, it can be shown that \( A \) has no maximum element and \( B \) has no minimum element (see \href{https://lew98.github.io/Mathematics/Q_does_not_have_the_least_upper_bound_property.pdf}{here} for example).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Decide if the following statements about suprema and infima are true or false. Give a short proof for those that are true. For any that are false, supply an example where the claim in question does not appear to hold.
+    \begin{enumerate}
+        \item If \( A \) and \( B \) are nonempty, bounded, and satisfy \( A \subseteq B \), then \( \sup A \leq \sup B \).
+
+        \item If \( \sup A < \inf B \) for sets \( A \) and \( B \), then there exists a \( c \in \mathbf{R} \) satisfying \( a < c < b \) for all \( a \in A \) and \( b \in B \).
+
+        \item If there exists a \( c \in \mathbf{R} \) satisfying \( a < c < b \) for all \( a \in A \) and \( b \in B \), then \( \sup A < \inf B \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item This is true. Since each element of \( A \) is an element of \( B \), any upper bound of \( B \) must be an upper bound of \( A \) also. In particular, \( \sup B \) must be an upper bound of \( A \); it follows that \( \sup A \leq \sup B \).
+
+        \item This is true. Let \( c := \tfrac{\sup A + \inf B}{2} \), so that \( \sup A < c < \inf B\), and let \( a \in A \) and \( b \in B \) be given. Then
+        \[
+            a \leq \sup A < c < \inf B \leq b.
+        \]
+
+        \item This is false. Consider \( A = (-1, 0) \) and \( B = (0, 1) \). Then \( c = 0 \) satisfies \( a < c < b \) for all \( a \in A \) and \( b \in B \), but \( \sup A = \inf B = 0 \).
+    \end{enumerate}
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2nd edn.}
+
+\end{document}
