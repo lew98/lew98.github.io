@@ -199,7 +199,7 @@ right=60pt
 
 \begin{proof}
     \begin{enumerate}[label = (\roman*)]
-        \item Suppose that \( A \) is finite, say \( A = \{ a_1, \ldots, a_k \} \) for some \( k \in \mathbb{N} \). By \Cref{prop:countable_iff_surjection_from_N}, there is a surjection \( f : \mathbb{N} \to B \). Define a function \( g : \mathbb{N} \to A \cup B \) by
+        \item If \( A \) is empty then the result is clear. Suppose that \( A \) is non-empty and finite, say \( A = \{ a_1, \ldots, a_k \} \) for some \( k \in \mathbb{N} \). By \Cref{prop:countable_iff_surjection_from_N}, there is a surjection \( f : \mathbb{N} \to B \). Define a function \( g : \mathbb{N} \to A \cup B \) by
         \[
             g(1) = a_1, \ldots, g(k) = a_k, \text{ and  } g(n) = f(n - k) \text{ for } n > k.
         \]
@@ -376,7 +376,7 @@ Evidently, \( \mathbb{R} \) is infinite; \Cref{prop:no_surjection_from_N_to_R} t
 \label{sec:schroder-bernstein_theorem}
 
 \begin{remark}
-    In what follows, we will write \( A^{\mathsf{C}} \) for the complement of a set \( A \), i.e.\ \( A^{\mathsf{C}} \) is the set of those \( x \) which do not belong to \( A \).
+    In what follows, we will write \( A^{\mathsf{c}} \) for the complement of a set \( A \), i.e.\ \( A^{\mathsf{c}} \) is the set of those \( x \) which do not belong to \( A \).
 \end{remark}
 
 \begin{proposition}[Schröder-Bernstein theorem]
@@ -385,11 +385,11 @@ Evidently, \( \mathbb{R} \) is infinite; \Cref{prop:no_surjection_from_N_to_R} t
 \end{proposition}
 
 \begin{proof}
-    Let \( A_1 = [g(Y)]^{\mathsf{C}}, A_n = g(f(A_{n-1})) \) for \( n \geq 2 \), \( A = \bigcup_{n=1}^{\infty} A_n \), and \( B = \bigcup_{n=1}^{\infty} f(A_n) \). Consider the restriction \( f|_A : A \to B \). From the definitions of \( A \) and \( B \), it is clear that \( f|_A \) indeed maps into \( B \) and in fact is surjective. Since \( f : X \to Y \) is injective, \( f|_A \) is also injective and hence bijective. Now consider the restriction \( g|_{B^{\mathsf{C}}} : B^{\mathsf{C}} \to A^{\mathsf{C}} \). This maps into \( A^{\mathsf{C}} \) since
+    Let \( A_1 = [g(Y)]^{\mathsf{c}}, A_n = g(f(A_{n-1})) \) for \( n \geq 2 \), \( A = \bigcup_{n=1}^{\infty} A_n \), and \( B = \bigcup_{n=1}^{\infty} f(A_n) \). Consider the restriction \( f|_A : A \to B \); we will abuse notation slightly and write this restriction simply as \( f : A \to B \). From the definitions of \( A \) and \( B \), it is clear that \( f \) indeed maps \( A \) into \( B \) and in fact is surjective. Since \( f : X \to Y \) is injective, \( f : A \to B \) is also injective and hence bijective. Now consider the restriction \( g|_{B^{\mathsf{c}}} : B^{\mathsf{c}} \to A^{\mathsf{c}} \); again, we will write \( g : B^{\mathsf{c}} \to A^{\mathsf{c}} \) for this restriction. This maps into \( A^{\mathsf{c}} \) since
     \[
         \arraycolsep=1pt\def\arraystretch{1.3}
         \begin{array}{rcl}
-            b \in B^{\mathsf{C}} & \iff & \forall n \in \mathbb{N},\, b \not\in f(A_n) \\
+            b \in B^{\mathsf{c}} & \iff & \forall n \in \mathbb{N},\, b \not\in f(A_n) \\
             & \iff & \forall n \in \mathbb{N},\, g(b) \not\in g(f(A_n)) \\
             & \iff & \forall n \in \mathbb{N},\, g(b) \not\in A_{n+1} \\
             & \iff & \forall n \geq 2,\, g(b) \not\in A_n. \\
@@ -397,18 +397,18 @@ Evidently, \( \mathbb{R} \) is infinite; \Cref{prop:no_surjection_from_N_to_R} t
     \]
     Since \( A_1 \) is the complement of the image of \( Y \) under \( g \), it follows that \( g(y) \not\in A_1 \) for any \( y \in Y \). Hence
     \[
-        b \in B^{\mathsf{C}} \iff \forall n \in \mathbb{N},\, g(b) \not\in A_n \iff g(b) \in A^{\mathsf{C}}.
+        b \in B^{\mathsf{c}} \iff \forall n \in \mathbb{N},\, g(b) \not\in A_n \iff g(b) \in A^{\mathsf{c}}.
     \]
-    Furthermore, \( g|_{B^{\mathsf{C}}} \) is surjective since for any \( a \in A^{\mathsf{C}} \) we have \( a \not\in A_1 \iff a \in g(Y) \), so that \( a = g(y) \) for some \( y \in Y \). The chain of bi-implications above then shows that \( y \in B^{\mathsf{C}} \). Since \( g : Y \to X \) is injective, \( g|_{B^{\mathsf{C}}} \) is also injective and hence bijective. Given this, the functions \( h_1 : X \to Y \) and \( h_2 : Y \to X \) given by
+    Furthermore, \( g : B^{\mathsf{c}} \to A^{\mathsf{c}} \) is surjective since for any \( a \in A^{\mathsf{c}} \) we have \( a \not\in A_1 \iff a \in g(Y) \), so that \( a = g(y) \) for some \( y \in Y \). The chain of biconditionals above then shows that \( y \in B^{\mathsf{c}} \). Since \( g : Y \to X \) is injective, \( g : B^{\mathsf{c}} \to A^{\mathsf{c}} \) is also injective and hence bijective. Given this, the functions \( h_1 : X \to Y \) and \( h_2 : Y \to X \) given by
     \[
         h_1(x) = \begin{cases}
-            f|_A(x) & \text{ if } x \in A, \\
-            g|_{B^{\mathsf{C}}}^{-1}(x) & \text{ if } x \in A^{\mathsf{C}},
+            f(x) & \text{if } x \in A, \\
+            g^{-1}(x) & \text{if } x \in A^{\mathsf{c}},
         \end{cases}
         \qquad
         h_2(y) = \begin{cases}
-            f|_A^{-1}(y) & \text{ if } y \in B, \\
-            g|_{B^{\mathsf{C}}}(x) & \text{ if } y \in B^{\mathsf{C}}
+            f^{-1}(y) & \text{if } y \in B, \\
+            g(y) & \text{if } y \in B^{\mathsf{c}}
         \end{cases}
     \]
     are well-defined and mutual inverses.
