@@ -13,5 +13,6 @@
   - [Section 1.3 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_3_Exercises.pdf)
   - [Section 1.4 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_4_Exercises.pdf)
   - [Section 1.5 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_5_Exercises.pdf)
+  - [Section 1.6 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_6_Exercises.pdf)
 - [**Principles of Mathematical Analysis (Rudin)**](https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis)
   - [Chapter 1 Exercises](https://lew98.github.io/Mathematics/PMA_Chapter_1_Exercises.pdf)
