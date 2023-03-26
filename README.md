@@ -9,10 +9,11 @@
   - [Cardinality](https://lew98.github.io/Mathematics/Cardinality.pdf)
   - [Suprema, infima, maxima, and minima](https://lew98.github.io/Mathematics/Suprema_infima_maxima_and_minima.pdf)
 - [**Understanding Analysis (Abbott)**](https://link.springer.com/book/10.1007/978-1-4939-2712-8)
-  - [Section 1.2 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_2_Exercises.pdf)
-  - [Section 1.3 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_3_Exercises.pdf)
-  - [Section 1.4 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_4_Exercises.pdf)
-  - [Section 1.5 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_5_Exercises.pdf)
-  - [Section 1.6 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_6_Exercises.pdf)
-- [**Principles of Mathematical Analysis (Rudin)**](https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis)
-  - [Chapter 1 Exercises](https://lew98.github.io/Mathematics/PMA_Chapter_1_Exercises.pdf)
+  - *Section 1*
+    - [Section 1.2 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_2_Exercises.pdf)
+    - [Section 1.3 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_3_Exercises.pdf)
+    - [Section 1.4 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_4_Exercises.pdf)
+    - [Section 1.5 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_5_Exercises.pdf)
+    - [Section 1.6 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_6_Exercises.pdf)
+  - *Section 2*
+    - [Section 2.2 Exercises](https://lew98.github.io/Mathematics/UA_Section_2_2_Exercises.pdf)

@@ -42,50 +42,57 @@ right=60pt
 
 \newtheorem*{remark}{Remark}
 
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
 \begin{document}
 
 \begin{remark}
-    \( \mathbb{N} = \{ 1, 2, 3, \ldots \} \).
+    \( \N = \{ 1, 2, 3, \ldots \} \).
 \end{remark}
 
-\noindent Let \( F \) be an \href{https://en.wikipedia.org/wiki/Ordered_field}{ordered field} (for example, \( \mathbb{Q} \) and \( \mathbb{R} \) are ordered fields). Suppose we have a sequence \( (I_n)_{n \in \mathbb{N}} \) of closed bounded intervals
+\noindent Let \( F \) be an \href{https://en.wikipedia.org/wiki/Ordered_field}{ordered field} (for example, \( \Q \) and \( \R \) are ordered fields). Suppose we have a sequence \( (I_n)_{n \in \N} \) of closed bounded intervals
 \[
     I_n = [a_n, b_n] = \{ x \in F : a_n \leq x \leq b_n \}.
 \]
 Consider the following two properties.
 \begin{enumerate}[label = (\roman*)]
-    \item For all \( n \in \mathbb{N}, I_{n+1} \subseteq I_n \).
+    \item For all \( n \in \N, I_{n+1} \subseteq I_n \).
 
-    \item For all \( \varepsilon > 0 \) there exists an \( N \in \mathbb{N} \) such that \( |I_n| := b_n - a_n < \varepsilon \).
+    \item For all \( \varepsilon > 0 \) there exists an \( N \in \N \) such that \( |I_n| := b_n - a_n < \varepsilon \).
 \end{enumerate}
 
-If \( (I_n)_{n \in \mathbb{N}} \) satisfies property (i), then \( (I_n)_{n \in \mathbb{N}} \) is known as a sequence of \textbf{nested intervals}. If \( (I_n)_{n \in \mathbb{N}} \) satisfies both properties (i) and (ii), then \( (I_n)_{n \in \mathbb{N}} \) is known as a sequence of \textbf{shrinking nested intervals}.
+If \( (I_n)_{n \in \N} \) satisfies property (i), then \( (I_n)_{n \in \N} \) is known as a sequence of \textbf{nested intervals}. If \( (I_n)_{n \in \N} \) satisfies both properties (i) and (ii), then \( (I_n)_{n \in \N} \) is known as a sequence of \textbf{shrinking nested intervals}.
 
-If \( F \) is such that any sequence \( (I_n)_{n \in \mathbb{N}} \) of shrinking nested intervals has a singleton intersection, i.e.\ \( \bigcap_{n=1}^{\infty} I_n = \{ x \} \) for some \( x \in F \), then \( F \) is said to have the \textbf{nested interval property}.
+If \( F \) is such that any sequence \( (I_n)_{n \in \N} \) of shrinking nested intervals has a singleton intersection, i.e.\ \( \bigcap_{n=1}^{\infty} I_n = \{ x \} \) for some \( x \in F \), then \( F \) is said to have the \textbf{nested interval property}.
 
-Let us first show that if \( F \) has the least-upper-bound property, then \( F \) has the nested interval property. Since \( \mathbb{R} \) is the unique ordered field with the least-upper-bound property, the proposition we want to prove is the following.
+Let us first show that if \( F \) has the least-upper-bound property, then \( F \) has the nested interval property. Since \( \R \) is the unique ordered field with the least-upper-bound property, the proposition we want to prove is the following.
 
 \begin{proposition}
 \label{prop:R_has_nip}
-    \( \mathbb{R} \) has the nested interval property.
+    \( \R \) has the nested interval property.
 \end{proposition}
 
 \begin{proof}
-    Let \( (I_n)_{n \in \mathbb{N}} \) be a sequence of shrinking nested intervals, where \( I_n = [a_n, b_n] \), and let \( A \) be the set of left endpoints, i.e.\ \( A = \{ a_n : n \in \mathbb{N} \} \). Note that for any \( m \in \mathbb{N} \), \( b_m \) is an upper bound of \( A \):
+    Let \( (I_n)_{n \in \N} \) be a sequence of shrinking nested intervals, where \( I_n = [a_n, b_n] \), and let \( A \) be the set of left endpoints, i.e.\ \( A = \{ a_n : n \in \N \} \). Note that for any \( m \in \N \), \( b_m \) is an upper bound of \( A \):
     \begin{itemize}
         \item if \( n \leq m\), then \( a_n \leq a_m \leq b_m \);
         \item if \( m < n \), then \( a_n \leq b_n \leq b_m \).
     \end{itemize}
-    (The sequence of left endpoints is non-decreasing and the sequence of right endpoints is non-increasing since the intervals are nested.) Hence \( x := \sup A \) exists in \( \mathbb{R} \) and satisfies \( a_n \leq x \leq b_n \) for each \( n \in \mathbb{N} \), i.e.\ \( x \in \bigcap_{n=1}^{\infty} I_n \). To see that this \( x \) is unique, suppose that \( x_1, x_2 \in \bigcap_{n=1}^{\infty} I_n \) and without loss of generality suppose that \( x_1 \leq x_2 \). Let \( \varepsilon > 0 \) be given. Then there exists an \( N \in \mathbb{N} \) such that \( b_N - a_N < \varepsilon \). Since \( x_1, x_2 \in I_n \) for each \( n \in \mathbb{N} \), we have
+    (The sequence of left endpoints is non-decreasing and the sequence of right endpoints is non-increasing since the intervals are nested.) Hence \( x := \sup A \) exists in \( \R \) and satisfies \( a_n \leq x \leq b_n \) for each \( n \in \N \), i.e.\ \( x \in \bigcap_{n=1}^{\infty} I_n \). To see that this \( x \) is unique, suppose that \( x_1, x_2 \in \bigcap_{n=1}^{\infty} I_n \) and without loss of generality suppose that \( x_1 \leq x_2 \). Let \( \varepsilon > 0 \) be given. Then there exists an \( N \in \N \) such that \( b_N - a_N < \varepsilon \). Since \( x_1, x_2 \in I_n \) for each \( n \in \N \), we have
     \[
         a_N \leq x_1, x_2 \leq b_N \implies x_2 - x_1 \leq b_N - a_N < \varepsilon.
     \]
     Hence \( 0 \leq x_2 - x_1 < \varepsilon \) for any \( \varepsilon > 0 \); it follows that \( x_1 = x_2 \).
 \end{proof}
 
-Note that the proof just given shows that if \( (I_n)_{n \in \mathbb{N}} \) is only a sequence of nested intervals in \( \mathbb{R} \), not necessarily shrinking, then \( \bigcap_{n=1}^{\infty} I_n \) is non-empty.
+Note that the proof just given shows that if \( (I_n)_{n \in \N} \) is only a sequence of nested intervals in \( \R \), not necessarily shrinking, then \( \bigcap_{n=1}^{\infty} I_n \) is non-empty.
 
-Next, let us show that if \( F \) has the nested interval property, then \( F \) has the least-upper-bound property, i.e.\ \( F = \mathbb{R} \).
+Next, let us show that if \( F \) has the nested interval property, then \( F \) has the least-upper-bound property, i.e.\ \( F = \R \).
 
 \begin{proposition}
 \label{prop:nip_implies_lub}
@@ -93,7 +100,7 @@ Next, let us show that if \( F \) has the nested interval property, then \( F \)
 \end{proposition}
 
 \begin{proof}
-    Let \( E \subseteq F \) be non-empty and bounded above by some \( b_1 \in F \). If \( E \) has a maximum \( x \), then \( \sup E = x \) and we are done. Otherwise, we shall use an induction argument to construct a sequence \( (I_n)_{n \in \mathbb{N}} \) of shrinking nested intervals. Pick some \( a_1 \in E \); it must be the case that \( a_1 \) is not an upper bound of \( E \) since \( E \) has no maximum. Let \( I_1 = [a_1, b_1] \). Then:
+    Let \( E \subseteq F \) be non-empty and bounded above by some \( b_1 \in F \). If \( E \) has a maximum \( x \), then \( \sup E = x \) and we are done. Otherwise, we shall use an induction argument to construct a sequence \( (I_n)_{n \in \N} \) of shrinking nested intervals. Pick some \( a_1 \in E \); it must be the case that \( a_1 \) is not an upper bound of \( E \) since \( E \) has no maximum. Let \( I_1 = [a_1, b_1] \). Then:
     \begin{itemize}
         \item \( a_1 \) is not an upper bound of \( E \);
         \item \( b_1 \) is an upper bound of \( E \);
@@ -119,13 +126,13 @@ Next, let us show that if \( F \) has the nested interval property, then \( F \)
         \item \( b_{N+1} \leq \cdots \leq b_1 \) are upper bounds of \( E \);
         \item \( |I_n| = 2^{-(n-1)}(b_1 - a_1) \) for \( 1 \leq n \leq N + 1 \).
     \end{itemize}
-    In this way we obtain a sequence \( (I_n)_{n \in \mathbb{N}} \) of intervals \( I_n = [a_n, b_n] \) such that
+    In this way we obtain a sequence \( (I_n)_{n \in \N} \) of intervals \( I_n = [a_n, b_n] \) such that
     \begin{itemize}
         \item \( a_1 \leq \cdots \leq a_n \leq \cdots \) are not upper bounds of \( E \);
         \item \( \cdots \leq b_n \leq \cdots \leq b_1 \) are upper bounds of \( E \);
-        \item \( |I_n| = 2^{-(n-1)}(b_1 - a_1) \) for all \( n \in \mathbb{N} \).
+        \item \( |I_n| = 2^{-(n-1)}(b_1 - a_1) \) for all \( n \in \N \).
     \end{itemize}
-    Hence \( (I_n)_{n \in \mathbb{N}} \) is a sequence of shrinking nested intervals. By assumption, \( F \) has the nested interval property, so there exists an \( x \in F \) such that \( \bigcap_{n=1}^{\infty} I_n = \{ x \} \). We claim that \( x = \sup E \). For \( y \in E \), suppose \( x < y \). Then there is an \( N \in \mathbb{N} \) such that
+    Hence \( (I_n)_{n \in \N} \) is a sequence of shrinking nested intervals. By assumption, \( F \) has the nested interval property, so there exists an \( x \in F \) such that \( \bigcap_{n=1}^{\infty} I_n = \{ x \} \). We claim that \( x = \sup E \). For \( y \in E \), suppose \( x < y \). Then there is an \( N \in \N \) such that
     \[
         b_N - a_N < y - x \implies x + (b_N - a_N) < y.
     \]
@@ -133,7 +140,7 @@ Next, let us show that if \( F \) has the nested interval property, then \( F \)
     \[
         a_N \leq x \implies 0 \leq x - a_N \implies b_N \leq x + (b_N - a_N) < y.
     \]
-    This is a contradiction since \( b_N \) is an upper bound of \( E \). It follows that \( y \leq x \), so that \( x \)  is an upper bound of \( E \). Suppose that \( z \in F \) is such that \( z < x \). There is an \( N \in \mathbb{N} \) such that
+    This is a contradiction since \( b_N \) is an upper bound of \( E \). It follows that \( y \leq x \), so that \( x \)  is an upper bound of \( E \). Suppose that \( z \in F \) is such that \( z < x \). There is an \( N \in \N \) such that
     \[
         b_N - a_N < x - z \implies z < x - (b_N - a_N).
     \]
@@ -144,6 +151,6 @@ Next, let us show that if \( F \) has the nested interval property, then \( F \)
     It follows that \( z \) is not an upper bound of \( E \) since \( a_N \) is not an upper bound of \( E \). We may conclude that \( x \) is the least upper bound of \( E \), i.e.\ \( x = \sup E \).
 \end{proof}
 
-So for ordered fields, the nested interval property and the least-upper-bound property are equivalent. In light of the fact that \( \mathbb{R} \) is the unique ordered field with the least-upper-bound property, we see that \( \mathbb{R} \) is the unique ordered field with the nested interval property.
+So for ordered fields, the nested interval property and the least-upper-bound property are equivalent. In light of the fact that \( \R \) is the unique ordered field with the least-upper-bound property, we see that \( \R \) is the unique ordered field with the nested interval property.
 
 \end{document}

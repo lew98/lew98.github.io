@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{geometry}
@@ -7,9 +8,11 @@
 \usepackage{mathrsfs}
 \usepackage{bm}
 \usepackage{hyperref}
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{enumitem}
+\usepackage{mathtools}
 \usepackage{changepage}
+\usepackage{lipsum}
 \usepackage{tikz}
 \usetikzlibrary{matrix}
 \usepackage{tikz-cd}
@@ -23,12 +26,12 @@ right=60pt
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{}
-\chead{\texorpdfstring{\( \mathbb{Q} \)}{} does not have the least-upper-bound property}
+\chead{\texorpdfstring{\( \Q \)}{} does not have the least-upper-bound property}
 \rhead{\thepage}
-
 \hypersetup{
     colorlinks=true,
-    linkcolor=blue
+    linkcolor=blue,
+    urlcolor=blue
 }
 
 \theoremstyle{definition}
@@ -38,17 +41,34 @@ right=60pt
 
 \newtheorem*{remark}{Remark}
 
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
 \begin{document}
 
-The following is paraphrased from Chapter 1 of \hyperlink{pma}{[PMA]}.
-
-\section{\texorpdfstring{\( \mathbb{Q} \)}{} does not have the least-upper-bound property}
+\section{\texorpdfstring{\( \Q \)}{} does not have the least-upper-bound property}
 
 Let \( A \) be the set of rational numbers which are either negative or have square less than 2 and let \( B \) be the set of positive rational numbers with square greater than 2, i.e.
 \[
-    A = \{ p \in \mathbb{Q} : p < 0 \text{ or } p^2 < 2 \}, \quad B = \{ p \in \mathbb{Q} : p > 0 \text{ and } p^2 > 2 \}.
+    A = \{ p \in \Q : p < 0 \text{ or } p^2 < 2 \}, \quad B = \{ p \in \Q : p > 0 \text{ and } p^2 > 2 \}.
 \]
-Note that \( A \) and \( B \) partition \( \mathbb{Q} \) since there is no rational number whose square is 2.
+Note that \( A \) and \( B \) partition \( \Q \) since there is no rational number whose square is 2.
 
 \begin{lemma}
 \label{lem:no_greatest/least_element}
@@ -69,27 +89,23 @@ Note that \( A \) and \( B \) partition \( \mathbb{Q} \) since there is no ratio
 \end{lemma}
 
 \begin{proof}
-    Suppose \( r \in \mathbb{Q} \) is an upper bound for \( A \). Then certainly \( r \) is positive, since \( 1 \in A \). Furthermore, exactly one of the following is true: \( r^2 < 2 \), \( r^2 = 2 \), or \( r^2 > 2 \). If \( r^2 < 2 \), then \( r \in A \); but this implies that \( r \) is the greatest element of \( A \), contradicting Lemma 1. So \( r^2 \geq 2 \) and since \( r^2 = 2 \) is impossible for rational \( r \), we must have \( r^2 > 2 \), i.e. \( r \in B \).
+    Suppose \( r \in \Q \) is an upper bound for \( A \). Then certainly \( r \) is positive, since \( 1 \in A \). Furthermore, exactly one of the following is true: \( r^2 < 2 \), \( r^2 = 2 \), or \( r^2 > 2 \). If \( r^2 < 2 \), then \( r \in A \); but this implies that \( r \) is the greatest element of \( A \), contradicting Lemma 1. So \( r^2 \geq 2 \) and since \( r^2 = 2 \) is impossible for rational \( r \), we must have \( r^2 > 2 \), i.e. \( r \in B \).
     
     Now suppose \( r \in B \) and let \( p \) be any element of \( A \). If \( r < p \), then \( r^2 < p^2 < 2 \) since \( r \) is positive. This contradicts \( r \in B \), so in fact we must have \( r \geq p \), so that \( r \) is an upper bound for \( A \).
 \end{proof}
 
-Since \( A \) and \( B \) partition \( \mathbb{Q} \), \Cref{lem:no_greatest/least_element} and \Cref{lem:set_of_upper_bounds_of_A_is_B} give us the following corollary.
+Since \( A \) and \( B \) partition \( \Q \), \Cref{lem:no_greatest/least_element} and \Cref{lem:set_of_upper_bounds_of_A_is_B} give us the following corollary.
 
 \begin{corollary}
     The lower bounds of \( B \) are exactly the elements of \( A \).
 \end{corollary}
 
 \begin{theorem}
-    The set of rational numbers \( \mathbb{Q} \) does not have the least-upper-bound property.
+    The set of rational numbers \( \Q \) does not have the least-upper-bound property.
 \end{theorem}
 
 \begin{proof}
     \( A \) is non-empty and bounded above; the upper bounds of \( A \) are exactly the elements of \( B \). Since \( B \) has no least element, it follows that \( A \) has no least upper bound.
 \end{proof}
-
-\noindent \hrulefill
-
-\noindent \hypertarget{pma}{\textcolor{blue}{[PMA]} Rudin, W. (1976) \textit{Principles of Mathematical Analysis.} 3rd edn.}
 
 \end{document}

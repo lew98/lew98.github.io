@@ -1,5 +1,5 @@
 \documentclass[12pt]{article}
-\title{Consequences of the least-upper-bound property of \texorpdfstring{\( \mathbb{R} \)}{}}
+\title{Consequences of the least-upper-bound property of \texorpdfstring{\( \R \)}{}}
 \author{}
 \date{\vspace{-24mm}}
 \usepackage[utf8]{inputenc}
@@ -26,7 +26,7 @@ right=60pt
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{}
-\chead{Consequences of the least-upper-bound property of \texorpdfstring{\( \mathbb{R} \)}{}}
+\chead{Consequences of the least-upper-bound property of \texorpdfstring{\( \R \)}{}}
 \rhead{\thepage}
 
 \hypersetup{
@@ -42,6 +42,13 @@ right=60pt
 
 \newtheorem*{remark}{Remark}
 
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
 \begin{document}
 
 \maketitle
@@ -50,41 +57,41 @@ right=60pt
 
 \newpage
 
-\noindent The following is mostly paraphrased from Chapter 1 of \hyperlink{pma}{[PMA]}.
+The following is mostly paraphrased from Chapter 1 of \hyperlink{pma}{[PMA]}.
 
 \begin{theorem}
 \label{thm:R_exists}
-    There exists an ordered field \( \mathbb{R} \) which has the least-upper-bound property. Moreover, \( \mathbb{R} \) contains \( \mathbb{Q} \) as a subfield.
+    There exists an ordered field \( \R \) which has the least-upper-bound property. Moreover, \( \R \) contains \( \Q \) as a subfield.
 \end{theorem}
 
 For a proof of \Cref{thm:R_exists}, see \href{https://lew98.github.io/Mathematics/Construction_of_R_from_Q_via_Dedekind_cuts.pdf}{here}. In this document, we shall present some consequences of \Cref{thm:R_exists}.
 
-\section{The Archimedean property of \texorpdfstring{\( \mathbb{R} \)}{}}
+\section{The Archimedean property of \texorpdfstring{\( \R \)}{}}
 \label{sec:archimedean_property_of_R}
 
-\begin{theorem}[Archimedean property of \( \mathbb{R} \)]
+\begin{theorem}[Archimedean property of \( \R \)]
 \label{thm:archimedean_property_of_R}
     Let \( x > 0 \) and \( y \) be real numbers. Then there exists a positive integer \( n \) such that \( nx > y \).
 \end{theorem}
 
 \begin{proof}
-    Suppose to the contrary that for all positive integers \( n \) we have \( nx \leq y \). Then the set \( A = \{ nx : n \in \mathbb{N} \} \) is non-empty and bounded above, so by the least-upper-bound property of \( \mathbb{R} \) the supremum \( \alpha = \sup A \) exists in \( \mathbb{R} \). Since \( x > 0 \), we have \( \alpha - x < \alpha \) so that \( \alpha - x \) is not an upper bound of \( A \). Hence there exists a positive integer \( m \) such that \( \alpha - x < mx \), which gives \( \alpha < (m+1)x \); but this contradicts the fact that \( \alpha \) is the supremum of \( A \).
+    Suppose to the contrary that for all positive integers \( n \) we have \( nx \leq y \). Then the set \( A = \{ nx : n \in \N \} \) is non-empty and bounded above, so by the least-upper-bound property of \( \R \) the supremum \( \alpha = \sup A \) exists in \( \R \). Since \( x > 0 \), we have \( \alpha - x < \alpha \) so that \( \alpha - x \) is not an upper bound of \( A \). Hence there exists a positive integer \( m \) such that \( \alpha - x < mx \), which gives \( \alpha < (m+1)x \); but this contradicts the fact that \( \alpha \) is the supremum of \( A \).
 \end{proof}
 
-\section{Density of \texorpdfstring{\( \mathbb{Q} \)}{} and \texorpdfstring{\( \mathbb{Q}^{\mathsf{C}} \)}{} in \texorpdfstring{\( \mathbb{R} \)}{}}
+\section{Density of \texorpdfstring{\( \Q \)}{} and \texorpdfstring{\( \setcomp{\Q} \)}{} in \texorpdfstring{\( \R \)}{}}
 
 \begin{lemma}
 \label{lem:real_number_lies_between_consecutive_integers}
-    Any real number lies between two consecutive integers. That is, for any \( x \in \mathbb{R} \) there exists an \( m \in \mathbb{Z} \) such that \( m - 1 \leq x < m \).
+    Any real number lies between two consecutive integers. That is, for any \( x \in \R \) there exists an \( m \in \Z \) such that \( m - 1 \leq x < m \).
 \end{lemma}
 
 \begin{proof}
-    By the Archimedean property, there exist positive integers \( m_1, m_2 \) such that \( m_1 > x \) and \( m_2 > - x \), which gives \( -m_2 < x < m_1 \). This implies that the set \( A = \{ n \in \mathbb{Z} : x < n \} \) is non-empty (\( m_1 \in A \)) and bounded below (by \( -m_2 \)). Then by the \href{https://en.wikipedia.org/wiki/Well-ordering_principle}{well-ordering principle}, \( A \) has a least element; call it \( m \). Since this is the least element of \( A \), we must have \( m - 1 \not\in A \) and so \( m - 1 \leq x < m \).
+    By the Archimedean property, there exist positive integers \( m_1, m_2 \) such that \( m_1 > x \) and \( m_2 > - x \), which gives \( -m_2 < x < m_1 \). This implies that the set \( A = \{ n \in \Z : x < n \} \) is non-empty (\( m_1 \in A \)) and bounded below (by \( -m_2 \)). Then by the \href{https://en.wikipedia.org/wiki/Well-ordering_principle}{well-ordering principle}, \( A \) has a least element; call it \( m \). Since this is the least element of \( A \), we must have \( m - 1 \not\in A \) and so \( m - 1 \leq x < m \).
 \end{proof}
 
 \begin{theorem}
 \label{thm:density_of_Q_in_R}
-    Between any two real numbers there exists a rational number. That is, for any \( x, y \in \mathbb{R} \) with \( x < y \) there exists a \( p \in \mathbb{Q} \) such that \( x < p < y \).
+    Between any two real numbers there exists a rational number. That is, for any \( x, y \in \R \) with \( x < y \) there exists a \( p \in \Q \) such that \( x < p < y \).
 \end{theorem}
 
 \begin{proof}
@@ -93,14 +100,14 @@ For a proof of \Cref{thm:R_exists}, see \href{https://lew98.github.io/Mathematic
 
 \begin{corollary}
 \label{cor:density_of_Qc_in_R}
-    Between any two real numbers there exists an irrational number. That is, for any \( x, y \in \mathbb{R} \) with \( x < y \) there exists a \( z \in \mathbb{Q}^{\mathsf{C}} \) such that \( x < z < y \).
+    Between any two real numbers there exists an irrational number. That is, for any \( x, y \in \R \) with \( x < y \) there exists a \( z \in \setcomp{\Q} \) such that \( x < z < y \).
 \end{corollary}
 
 \begin{proof}
     By \Cref{thm:density_of_Q_in_R}, there exists a rational number \( p \) such that \( x - \sqrt{2} < p < y - \sqrt{2} \), which gives \( x < p + \sqrt{2} < y \). So the desired irrational number is \( z = p + \sqrt{2} \).
 \end{proof}
 
-\section{Existence of \textit{n}th roots in \texorpdfstring{\(\mathbb{R}\)}{}}
+\section{Existence of \textit{n}th roots in \texorpdfstring{\(\R\)}{}}
 \label{sec:existence_of_nth_roots_in_R}
 
 First, a useful inequality. Suppose \( n \) is a positive integer and \( a, b \) are real numbers such that \( 0 < a < b \). This implies that \( 0 < b^{n-2}a < b^{n-1} \). Furthermore, we have \( 0 < a^2 < b^2 \), which gives \( 0 < b^{n-3}a^2 < b^{n-1} \), and so on. Combining this with the equality
@@ -120,7 +127,7 @@ gives us the inequality
 \begin{proof}
     Suppose \( y_1 \) and \( y_2 \) are positive real numbers such that \( y_1 \neq y_2 \). Without loss of generality, assume \( 0 < y_1 < y_2 \). Then \( 0 < y_1^n < y_2^n \), so that \( y_1^n \neq y_2^n \). Hence by the contrapositive, \( y_1^n = y_2^n \) implies that \( y_1 = y_2 \). This gives us the uniqueness of any such \( y \) in Theorem 1.
     
-    For existence, let \( E = \{ t \in \mathbb{R} : t > 0, t^n < x \} \). Observe that \( t = \frac{x}{1 + x} \) satisfies \( t < x \) and \( 0 < t < 1 \), which gives \( 0 < t^n < t < x \). Hence \( t \in E \) and so \( E \) is non-empty. Now suppose \( t \geq 1 + x > 1 \), so that \( t^n > t \geq 1 + x > x \). Then by the contrapositive, \( t^n < x \) implies that \( t < 1 + x \), and we see that \( E \) is bounded above by \( 1 + x \). We may now invoke the least-upper-bound property of \( \mathbb{R} \) and set \( y = \sup E \). Note that \( y \) must be positive, since \( \frac{x}{1 + x} \) belongs to \( E \). To show that \( y^n = x \), we will show that both of the assumptions \( y^n < x \) and \( y^n > x \) lead to contradictions.
+    For existence, let \( E = \{ t \in \R : t > 0, t^n < x \} \). Observe that \( t = \frac{x}{1 + x} \) satisfies \( t < x \) and \( 0 < t < 1 \), which gives \( 0 < t^n < t < x \). Hence \( t \in E \) and so \( E \) is non-empty. Now suppose \( t \geq 1 + x > 1 \), so that \( t^n > t \geq 1 + x > x \). Then by the contrapositive, \( t^n < x \) implies that \( t < 1 + x \), and we see that \( E \) is bounded above by \( 1 + x \). We may now invoke the least-upper-bound property of \( \R \) and set \( y = \sup E \). Note that \( y \) must be positive, since \( \frac{x}{1 + x} \) belongs to \( E \). To show that \( y^n = x \), we will show that both of the assumptions \( y^n < x \) and \( y^n > x \) lead to contradictions.
     
     First, assume that \( y^n < x \). Using the Archimedean property, choose \( h \) such that \( 0 < h < 1 \) and \( h < \frac{x - y^n}{n (y+1)^{n-1}} \). Now take \( a = y \) and \( b = y + h \) in inequality (1) to obtain
     \[

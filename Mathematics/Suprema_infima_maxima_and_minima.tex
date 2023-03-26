@@ -41,6 +41,13 @@ right=60pt
 
 \newtheorem*{remark}{Remark}
 
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
 \begin{document}
 
 \maketitle
@@ -52,7 +59,7 @@ right=60pt
 This document contains definitions and various results on suprema, infima, maxima, and minima in partially ordered sets, totally ordered sets, and ordered fields. We will usually only prove results for suprema; the analogous proofs for infima are similar.
 
 \begin{remark}
-    \( \mathbb{N} = \{ 1, 2, 3, \ldots \} \).
+    \( \N = \{ 1, 2, 3, \ldots \} \).
 \end{remark}
 
 \section{Definitions}
@@ -83,9 +90,9 @@ Let \( A \) be a \href{https://en.wikipedia.org/wiki/Partially_ordered_set}{part
 
 In fact, the supremum of a subset \( E \) is unique. If \( y_1 \) and \( y_2 \) both satisfy conditions (i) and (ii) in \Cref{def:sup_inf_max_min}, then by condition (ii) we must have both \( y_1 \leq y_2 \) and \( y_2 \leq y_1 \); it follows that \( y_1 = y_2 \). Similar reasoning shows that the infimum of a subset is also unique. For this reason, we are justified in saying \textit{the} supremum of \( E \) and \textit{the} infimum of \( E \).
 
-It is straightforward to see that if \( E \) has a maximum \( M \), then \( \sup E = M \), and if \( E \) has a minimum \( m \), then \( \inf E = m \). By the previous paragraph, it follows that the maximum and minimum of a set are unique. However, \( E \) may have a supremum without having a maximum, and may have an infimum without having a minimum. For example, if \( A = \mathbb{R} \) and \( E = (0, 1) \), then one can verify that \( \sup E = 1 \) and \( \inf E = 0 \), but \( E \) has no minimum or maximum element.
+It is straightforward to see that if \( E \) has a maximum \( M \), then \( \sup E = M \), and if \( E \) has a minimum \( m \), then \( \inf E = m \). By the previous paragraph, it follows that the maximum and minimum of a set are unique. However, \( E \) may have a supremum without having a maximum, and may have an infimum without having a minimum. For example, if \( A = \R \) and \( E = (0, 1) \), then one can verify that \( \sup E = 1 \) and \( \inf E = 0 \), but \( E \) has no minimum or maximum element.
 
-A subset need not have a supremum or an infimum. For example, if \( A = E = \mathbb{Q} \), then \( E \) does not have a supremum or an infimum; indeed, \( E \) has no upper or lower bounds. Even if \( E \) does have upper and lower bounds, the supremum and infimum of \( E \) need not exist; see \href{https://lew98.github.io/Mathematics/Q_does_not_have_the_least_upper_bound_property.pdf}{here} for a counterexample.
+A subset need not have a supremum or an infimum. For example, if \( A = E = \Q \), then \( E \) does not have a supremum or an infimum; indeed, \( E \) has no upper or lower bounds. Even if \( E \) does have upper and lower bounds, the supremum and infimum of \( E \) need not exist; see \href{https://lew98.github.io/Mathematics/Q_does_not_have_the_least_upper_bound_property.pdf}{here} for a counterexample.
 
 What if we take \( E \) to be the empty set in \Cref{def:sup_inf_max_min}? Note that any \( a \in A \) is an upper bound of the empty set, since the statement
 \[
@@ -171,7 +178,7 @@ Let \( A \) be a \href{https://en.wikipedia.org/wiki/Partially_ordered_set}{part
     \end{enumerate}
 \end{proof}
 
-Even if \( \sup E_i \) exists for each \( i \in I \), it may not be the case that \( \sup \{ \sup E_i : i \in I \} \) exists. For example, if \( A = \mathbb{R}, I = \mathbb{N}, \) and \( E_i = [0, i] \), then \( \sup E_i = i \) but the set \( \{ \sup E_i : i \in I \} = \mathbb{N} \) has no supremum in \( \mathbb{R} \). A similar discussion holds for infima.
+Even if \( \sup E_i \) exists for each \( i \in I \), it may not be the case that \( \sup \{ \sup E_i : i \in I \} \) exists. For example, if \( A = \R, I = \N, \) and \( E_i = [0, i] \), then \( \sup E_i = i \) but the set \( \{ \sup E_i : i \in I \} = \N \) has no supremum in \( \R \). A similar discussion holds for infima.
 
 \section{Totally ordered sets}
 \label{sec:totally_ordered_sets}
@@ -196,16 +203,16 @@ Let \( A \) be a \href{https://en.wikipedia.org/wiki/Total_order}{totally ordere
     These cases are exclusive and exhaustive since the order on \( A \) is total. This completes the induction step and hence the result is true for any positive integer \( n \).
 \end{proof}
 
-If \( E \) is an infinite set, then \( E \) may have a minimum element, a maximum element, both, or neither. For example, consider the set \( \mathbb{Q}' = \mathbb{Q} \cup \{ -\infty, \infty \} \); the rational numbers with the formal symbols \( -\infty \) and \( \infty \) adjoined. We take the usual order on \( \mathbb{Q} \) and declare that \( -\infty \) is strictly less than any other element of \( \mathbb{Q}' \) and that \( \infty \) is strictly greater than any other element of \( \mathbb{Q}' \). One can verify that this defines a total order on \( \mathbb{Q}' \).
+If \( E \) is an infinite set, then \( E \) may have a minimum element, a maximum element, both, or neither. For example, consider the set \( \Q' = \Q \cup \{ -\infty, \infty \} \); the rational numbers with the formal symbols \( -\infty \) and \( \infty \) adjoined. We take the usual order on \( \Q \) and declare that \( -\infty \) is strictly less than any other element of \( \Q' \) and that \( \infty \) is strictly greater than any other element of \( \Q' \). One can verify that this defines a total order on \( \Q' \).
 
 \begin{itemize}
-    \item Consider \( E = \{ -\infty \} \cup \mathbb{Q} \subseteq \mathbb{Q}' \). Then \( \min E = -\infty \) but \( E \) has no maximum element. However, \( \sup E = \infty \).
+    \item Consider \( E = \{ -\infty \} \cup \Q \subseteq \Q' \). Then \( \min E = -\infty \) but \( E \) has no maximum element. However, \( \sup E = \infty \).
 
-    \item Similarly, consider \( E = \mathbb{Q} \cup \{ \infty \} \subseteq \mathbb{Q}' \). Then \( \max E = \infty \) but \( E \) has no minimum element. However, \( \inf E = -\infty \).
+    \item Similarly, consider \( E = \Q \cup \{ \infty \} \subseteq \Q' \). Then \( \max E = \infty \) but \( E \) has no minimum element. However, \( \inf E = -\infty \).
 
-    \item \( \mathbb{Q} \subseteq \mathbb{Q}' \) has no minimum or maximum element, but \( \inf \mathbb{Q} = -\infty \) and \( \sup \mathbb{Q} = \infty \).
+    \item \( \Q \subseteq \Q' \) has no minimum or maximum element, but \( \inf \Q = -\infty \) and \( \sup \Q = \infty \).
 
-    \item \( \mathbb{Q}' \) itself has a minimum and a maximum element: \( \min \mathbb{Q}' = -\infty \) and \( \max \mathbb{Q}' = \infty \).
+    \item \( \Q' \) itself has a minimum and a maximum element: \( \min \Q' = -\infty \) and \( \max \Q' = \infty \).
 \end{itemize}
  
 It is straightforward to combine \Cref{prop:sup_inf_unions_partial_order} and \Cref{prop:finite_set_has_min_max_total_order} to obtain the following proposition.
@@ -266,7 +273,7 @@ Let \( E = \{ a, b \} \) and \( G = \{ c, d \} \). Then \( \sup E = s, \sup G = 
 \section{Ordered fields}
 \label{sec:ordered_fields}
 
-Let \( F \) be an \href{https://en.wikipedia.org/wiki/Ordered_field}{ordered field} (for example, \( \mathbb{Q} \) and \( \mathbb{R} \) are ordered fields).
+Let \( F \) be an \href{https://en.wikipedia.org/wiki/Ordered_field}{ordered field} (for example, \( \Q \) and \( \R \) are ordered fields).
 
 \begin{proposition}[Approximation property for suprema and infima]
 \label{prop:approximation_property}
@@ -343,7 +350,7 @@ Let \( F \) be an \href{https://en.wikipedia.org/wiki/Ordered_field}{ordered fie
     \end{enumerate}
 \end{proof}
 
-Regarding part (v) of this proposition, even if \( \inf E \) exists, it may not be the case that \( \inf (cE) \) exists. For example, if \( F = \mathbb{R} \), \( E = (0, \infty) \), and \( c = -1 \), then \( \inf E = 0 \) but \( cE = (-\infty, 0) \), which does not have an infimum in \( \mathbb{R} \). A similar discussion holds for part (vi) and suprema.
+Regarding part (v) of this proposition, even if \( \inf E \) exists, it may not be the case that \( \inf (cE) \) exists. For example, if \( F = \R \), \( E = (0, \infty) \), and \( c = -1 \), then \( \inf E = 0 \) but \( cE = (-\infty, 0) \), which does not have an infimum in \( \R \). A similar discussion holds for part (vi) and suprema.
 
 \begin{proposition}
 \label{prop:add_sets}
