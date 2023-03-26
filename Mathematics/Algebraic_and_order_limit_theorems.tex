@@ -1,0 +1,168 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Algebraic and order limit theorems}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\roman*)}}
+
+\begin{document}
+
+The following is mostly paraphrased from Section 2.2 of \hyperlink{ua}{[UA]}.
+
+\section{Algebraic limit theorem}
+
+\begin{theorem}
+\label{thm:algebraic_limit_theorem}
+    Suppose \( (a_n) \) and \( (b_n) \) are sequences of complex numbers such that \( \lim a_n = a \) and \( \lim b_n = b \) for some \( a \) and \( b \) in \( \C \).
+    \begin{enumerate}
+        \item For any \( c \in \C \), \( \lim (c a_n) = ca \).
+
+        \item \( \lim (a_n + b_n) = a + b \).
+
+        \item \( \lim (a_n b_n) = ab \).
+
+        \item If \( b \neq 0 \), \( \lim(a_n/b_n) = a/b \).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\hfill
+    \begin{enumerate}
+        \item Let \( \epsilon > 0 \) be given. Then there exists an \( N \in \N \) such that
+        \[
+            n \geq N \implies \abs{a_n - a} < \frac{\epsilon}{1 + \abs{c}}.
+        \]
+        Then provided \( n \geq N \), we have
+        \[
+            \abs{c a_n - c a} = \abs{c} \abs{a_n - a} < \frac{\abs{c} \epsilon}{1 + \abs{c}} < \epsilon.
+        \]
+        It follows that \( \lim (c a_n) = ca \).
+
+        \item Let \( \epsilon > 0 \) be given. Then there are positive integers \( N_1 \) and \( N_2 \) such that
+        \[
+            n \geq N_1 \implies \abs{a_n - a} < \frac{\epsilon}{2} \qquad \text{and} \qquad n \geq N_2 \implies \abs{b_n - b} < \frac{\epsilon}{2}.
+        \]
+        Set \( N = \max \{ N_1, N_2 \} \) and observe that for \( n \geq N \) we have
+        \[
+            \abs{a_n + b_n - a - b} \leq \abs{a_n - a} + \abs{b_n - b} < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+        \]
+        It follows that \( \lim (a_n + b_n) = a + b \).
+
+        \item Since \( (a_n) \) is convergent it is also bounded, say by \( M > 0 \). Let \( \epsilon > 0 \) be given. Then there are positive integers \( N_1 \) and \( N_2 \) such that
+        \[
+            n \geq N_1 \implies \abs{a_n - a} < \frac{\epsilon}{2(1 + \abs{b})} \qquad \text{and} \qquad n \geq N_2 \implies \abs{b_n - b} < \frac{\epsilon}{2M}.
+        \]
+        Set \( N = \max \{ N_1, N_2 \} \) and observe that for \( n \geq N \) we have
+        \begin{multline*}
+            \abs{a_n b_n - ab} = \abs{a_n b_n - a_n b + a_n b - ab} \leq \abs{a_n} \abs{b_n - b} + \abs{b} \abs{a_n - a} \\
+            \leq M \abs{b_n - b} + \abs{b} \abs{a_n - a} < \frac{M \epsilon}{2M} + \frac{\abs{b}\epsilon}{2(1 + \abs{b})} \leq \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+        \end{multline*}
+        It follows that \( \lim (a_n b_n) = ab \).
+
+        \item It will suffice to prove that \( \lim (1/b_n) = 1/b \). The general case will then follow from part (iii). Since \( b \neq 0 \), there exists an \( N_1 \in \N \) such that \( n \geq N_1 \implies \abs{b_n - b} < \tfrac{1}{2} \abs{b} \). Observe that for \( n \geq N_1 \) we have
+        \[
+            0 < \abs{b} \leq \abs{b - b_n} + \abs{b_n} < \tfrac{1}{2} \abs{b} + \abs{b_n} \implies 0 < \tfrac{1}{2} \abs{b} < \abs{b_n} \implies 0 < \frac{1}{\abs{b_n}} < \frac{2}{\abs{b}}.
+        \]
+        Let \( \epsilon > 0 \) be given. Then there exists an \( N_2 \in \N \) such that
+        \[
+            n \geq N_2 \implies \abs{b_n - b} < \frac{\abs{b}^2 \epsilon}{2}.
+        \]
+        Set \( N = \max \{ N_1, N_2 \} \) and observe that for \( n \geq N \) we have
+        \[
+            \abs{\frac{1}{b_n} - \frac{1}{b}} = \abs{\frac{b - b_n}{b \, b_n}} = \frac{\abs{b_n - b}}{\abs{b} \abs{b_n}} < \frac{2 \abs{b_n - b}}{\abs{b}^2} < \epsilon.
+        \]
+        It follows that \( \lim (1/b_n) = 1/b \). \qedhere
+    \end{enumerate}
+\end{proof}
+
+\section{Order limit theorem}
+
+\begin{theorem}
+\label{thm:order_limit_theorem}
+    Suppose \( (a_n) \) and \( (b_n) \) are sequences of real numbers such that \( \lim a_n = a \) and \( \lim b_n = b \) for some \( a \) and \( b \) in \( \R \).
+    \begin{enumerate}
+        \item If \( a_n \geq 0 \) for all \( n \in \N \), then \( a \geq 0 \).
+
+        \item If \( a_n \leq b_n \) for all \( n \in \N \), then \( a \leq b \).
+
+        \item If there exists \( c \in \R \) for which \( c \leq b_n \) for all \( n \in \N \), then \( c \leq b \). Similarly, if \( a_n \leq c \) for all \( n \in \N \), then \( a \leq c \).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\hfill
+    \begin{enumerate}
+        \item Let us prove the contrapositive statement:
+        \begin{center}
+            If \( a < 0 \), then \( a_N < 0 \) for some \( N \in \N \).
+        \end{center}
+        There is an \( N \in \N \) such that \( n \geq N \implies \abs{a_n - a} < -a \). Then observe that
+        \[
+            a_N - a \leq \abs{a_N - a} < -a \implies a_N < 0.
+        \]
+
+        \item The sequence \( (b_n - a_n) \) has limit \( b - a \) by \Cref{thm:algebraic_limit_theorem}. Furthermore, this sequence satisfies \( b_n - a_n \geq 0 \) for all \( n \in \N \); part (i) then implies that \( b - a \geq 0 \), i.e.\ \( a \leq b \).
+
+        \item This follows by taking the constant sequence \( (c, c, c, \ldots) \) in part (ii) for \( (a_n) \) and \( (b_n) \) respectively. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2nd edn.}
+
+\end{document}
