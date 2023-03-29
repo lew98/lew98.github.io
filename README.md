@@ -18,3 +18,4 @@
     - [Section 1.6 Exercises](https://lew98.github.io/Mathematics/UA_Section_1_6_Exercises.pdf)
   - *Section 2*
     - [Section 2.2 Exercises](https://lew98.github.io/Mathematics/UA_Section_2_2_Exercises.pdf)
+    - [Section 2.3 Exercises](https://lew98.github.io/Mathematics/UA_Section_2_3_Exercises.pdf)
