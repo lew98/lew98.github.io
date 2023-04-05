@@ -2,7 +2,6 @@
   - [**Q** does not have the least-upper-bound property](https://lew98.github.io/Mathematics/Q_does_not_have_the_least_upper_bound_property.pdf)
   - [Construction of **R** from **Q** via Dedekind cuts](https://lew98.github.io/Mathematics/Construction_of_R_from_Q_via_Dedekind_cuts.pdf)
   - [Consequences of the least-upper-bound property of **R**](https://lew98.github.io/Mathematics/Consequences_of_the_least_upper_bound_property_of_R.pdf)
-  - [Nested interval property](https://lew98.github.io/Mathematics/Nested_interval_property.pdf)
   - [Algebraic and order limit theorems](https://lew98.github.io/Mathematics/Algebraic_and_order_limit_theorems.pdf)
   - [Banach fixed-point theorem](https://lew98.github.io/Mathematics/Banach_fixed_point_theorem.pdf)
   - [Riemann integral is continuous](https://lew98.github.io/Mathematics/Riemann_integral_is_continuous.pdf)
@@ -20,3 +19,4 @@
     - [Section 2.2 Exercises](https://lew98.github.io/Mathematics/UA_Section_2_2_Exercises.pdf)
     - [Section 2.3 Exercises](https://lew98.github.io/Mathematics/UA_Section_2_3_Exercises.pdf)
     - [Section 2.4 Exercises](https://lew98.github.io/Mathematics/UA_Section_2_4_Exercises.pdf)
+    - [Section 2.5 Exercises](https://lew98.github.io/Mathematics/UA_Section_2_5_Exercises.pdf)
