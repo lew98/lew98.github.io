@@ -1,0 +1,353 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 1.A Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 1.A.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 1.A.#1#3}
+
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 1.A Exercises}
+
+Exercises with solutions from Section 1.A of \hyperlink{ladr}{[LADR]}.
+
+\begin{exercise}
+\label{ex:1}
+    Suppose \( a \) and \( b \) are real numbers, not both 0. Find real numbers \( c \) and \( d \) such that
+    \[
+        1/(a + bi) = c + di.
+    \]
+\end{exercise}
+
+\begin{solution}
+    Observe that
+    \[
+        \frac{1}{a + bi} = \frac{a - bi}{(a + bi)(a - bi)} = \frac{a - bi}{a^2 + b^2}.
+    \]
+    So the desired real numbers are \( c = a/(a^2 + b^2) \) and \( d = -b/(a^2 + b^2) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Show that
+    \[
+        \frac{-1 + \sqrt{3} i}{2}
+    \]
+    is a cube root of 1 (meaning that its cube equals 1).
+\end{exercise}
+
+\begin{solution}
+    Let \( z = \tfrac{-1 + \sqrt{3} i}{2} \), so that \( 2z = -1 + \sqrt{3} i \). Then
+    \begin{align*}
+        & (2z)^2 = 4z^2 = (-1 + \sqrt{3} i)^2 = 1 - 2 \sqrt{3} i - 3 = -2 - 2 \sqrt{3} i \\
+        \implies & (2z)^3 = (4z^2)(2z) = (-2 - 2 \sqrt{3} i)(-1 + \sqrt{3}i) = 2 - 2 \sqrt{3} i + 2 \sqrt{3} i + 6 = 8,
+    \end{align*}
+    i.e.\ \( 8z^3 = 8 \). It follows that \( z^3 = 1 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Find two distinct square roots of \( i \).
+\end{exercise}
+
+\begin{solution}
+    Let \( z_1 = \frac{1 + i}{\sqrt{2}} \) and \( z_2 = -z_1 \) (\( z_1 \) and \( z_2 \) are distinct since \( z_1 \neq 0 \)). Then
+    \[
+    2 z_1^2 = (1 + i)^2 = 2i \implies z_1^2 = i,
+    \]
+    and hence \( z_2^2 = (-z_1)^2 = z_1^2 = i \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Show that \( \alpha + \beta = \beta + \alpha \) for all \( \alpha, \beta \in \C \).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( \alpha = x + yi \) and \( \beta = u + vi \). Then
+    \[
+        \alpha + \beta = (x + u) + (y + v)i = (u + x) + (v + y)i = \beta + \alpha,
+    \]
+    where we have used commutativity of addition in \( \R \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Show that \( (\alpha + \beta) + \lambda = \alpha + (\beta + \lambda) \) for all \( \alpha, \beta, \lambda \in \C \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( \alpha = x + yi, \beta = u + vi \), and \( \lambda = s + ti \). Then
+    \begin{multline*}
+        (\alpha + \beta) + \lambda = ((x + u) + (y + v)i) + \lambda = ((x + u) + s) + ((y + v) + t)i \\ = (x + (u + s)) + (y + (v + t))i = \alpha + ((u + s) + (v + t)i) = \alpha + (\beta + \lambda),
+    \end{multline*}
+    where we have used associativity of addition in \( \R \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Show that \( (\alpha \beta) \lambda = \alpha (\beta \lambda) \) for all \( \alpha, \beta, \lambda \in \C \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( \alpha = x + yi, \beta = u + vi \), and \( \lambda = s + ti \). Then
+    \begin{align*}
+        (\alpha \beta) \lambda &= ((xu - yv) + (xv + yu)i) \lambda \\
+        &= ((xu - yv)s - (xv + yu)t) + ((xu - yv)t + (xv + yu)s)i \\
+        &= ((xu)s - (yv)s - (xv)t - (yu)t) + ((xu)t - (yv)t + (xv)s + (yu)s)i \\
+        &= (x(us) - x(vt) - y(ut) - y(vs)) + (x(ut) + x(vs) + y(us) - y(vt))i \\
+        &= (x(us - vt) - y(ut + vs)) + (x(ut + vs) + y(us - vt))i \\
+        &= \alpha ((us - vt) + (ut + vs)i) \\
+        &= \alpha (\beta \lambda),
+    \end{align*}
+    where we have used several algebraic properties of \( \R \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Show that for every \( \alpha \in \C \), there exists a unique \( \beta \in \C \) such that \( \alpha + \beta = 0 \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( \alpha = x + yi \) and let \( \beta = -x - yi \). Then
+    \[
+        \alpha + \beta = (x - x) + (y - y)i = 0 + 0i = 0.
+    \]
+    To see that \( \beta \) is unique, suppose \( \beta' \) also satisfies \( \alpha + \beta' = 0 \). Then
+    \[
+        \beta = \beta + 0 = \beta + (\alpha + \beta') = (\alpha + \beta) + \beta' = 0 + \beta' = \beta',
+    \]
+    where we have used associativity and commutativity of addition in \( \C \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Show that for every \( \alpha \in \C \) with \( \alpha \neq 0 \), there exists a unique \( \beta \in \C \) such that \( \alpha \beta = 1 \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( \alpha = x + yi \). Since \( \alpha \neq 0 \), it must be the case that \( x \) and \( y \) are not both zero. It follows that \( x^2 + y^2 \neq 0 \), so let \( \beta = \tfrac{x}{x^2 + y^2} - \tfrac{y}{x^2 + y^2} i \). Then
+    \[
+        \alpha \beta = (x + yi)\left( \frac{x}{x^2 + y^2} - \frac{y}{x^2 + y^2} i \right) = \frac{x^2 + y^2}{x^2 + y^2} + \frac{xy - xy}{x^2 + y^2} i = 1 + 0i = 1.
+    \]
+    To see that \( \beta \) is unique, suppose \( \beta' \) also satisfies \( \alpha \beta' = 1 \). Then
+    \[
+        \beta = \beta 1 = \beta (\alpha \beta') = (\alpha \beta) \beta' = 1 \beta' = \beta',
+    \]
+    where we have used associativity and commutativity of multiplication in \( \C \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Show that \( \lambda (\alpha + \beta) = \lambda \alpha + \lambda \beta \) for all \( \lambda, \alpha, \beta \in \C \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( \alpha = x + yi, \beta = u + vi \), and \( \lambda = s + ti \). Then
+    \begin{align*}
+        \lambda (\alpha + \beta) &= (s(x + u) - t(y + v)) + (s(y + v) + t(x + u)) i \\
+        &= (sx + su - ty - tv) + (sy + sv + tx + tu) i \\
+        &= [(sx - ty) + (sy + tx)i] + [(su - tv) + (sv + tu)i] \\
+        &= \lambda \alpha + \lambda \beta,
+    \end{align*}
+    where we have used distributivity in \( \R \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Find \( x \in \R^4 \) such that
+    \[
+        (4, -3, 1, 7) + 2x = (5, 9, -6, 8).
+    \]
+\end{exercise}
+
+\begin{solution}
+    Take \( x = (\tfrac{1}{2}, 6, -\tfrac{7}{2}, \tfrac{1}{2}) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Explain why there does not exist \( \lambda \in \C \) such that
+    \[
+        \lambda (2 - 3i, 5 + 4i, -6 + 7i) = (12 - 5i, 7 + 22i, -32 - 9i).
+    \]
+\end{exercise}
+
+\begin{solution}
+    Suppose there was such a \( \lambda \). Then
+    \[
+        \lambda (2 - 3i) = 12 - 5i \implies \lambda = \frac{12 - 5i}{2 - 3i} = 3 + 2i.
+    \]
+    However,
+    \[
+        (3 + 2i)(-6 + 7i) = -32 + 9i \neq -32 - 9i.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:12}
+    Show that \( (x + y) + z = x + (y + z) \) for all \( x, y, z \in \F^n \).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( x = (x_1, \ldots, x_n), y = (y_1, \ldots, y_n) \), and \( z = (z_1, \ldots, z_n) \). Then
+    \begin{align*}
+        (x + y) + z &= (x_1 + y_1, \ldots, x_n + y_n) + z \\
+        &= ((x_1 + y_1) + z_1, \ldots, (x_n + y_n) + z_n) \\
+        &= (x_1 + (y_1 + z_1), \ldots, x_n + (y_n + z_n)) \\
+        &= x + (y_1 + z_1, \ldots, y_n + z_n) \\
+        &= x + (y + z),
+    \end{align*}
+    where we have used associativity of addition in \( \F \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:13}
+    Show that \( (ab)x = a(bx) \) for all \( x \in \F^n \) and all \( a, b \in \F \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( x = (x_1, \ldots, x_n) \). Then
+    \begin{align*}
+        (ab)x &= ((ab)x_1, \ldots, (ab)x_n) \\
+        &= (a(b x_1), \ldots, a(b x_n)) \\
+        &= a(b x_1, \ldots, b x_n) \\
+        &= a(bx),
+    \end{align*}
+    where we have used associativity of multiplication in \( \F \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:14}
+    Show that \( 1x = x \) for all \( x \in \F^n \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( x = (x_1, \ldots, x_n) \). Then
+    \[
+        1x = (1 x_1, \ldots, 1 x_n) = (x_1, \ldots, x_n) = x,
+    \]
+    where we have used that \( 1 x_j = x_j \) for any \( x_j \in \F \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:15}
+    Show that \( \lambda (x + y) = \lambda x + \lambda y \) for all \( \lambda \in \F \) and all \( x, y \in \F^n \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( x = (x_1, \ldots, x_n) \) and \( y = (y_1, \ldots, y_n) \). Then
+    \begin{align*}
+        \lambda (x + y) &= \lambda (x_1 + y_1, \ldots, x_n + y_n) \\
+        &= (\lambda (x_1 + y_1), \ldots, \lambda (x_n + y_n)) \\
+        &= (\lambda x_1 + \lambda y_1, \ldots, \lambda x_n + \lambda y_n) \\
+        &= (\lambda x_1, \ldots, \lambda x_n) + (\lambda y_1, \ldots, \lambda y_n) \\
+        &= \lambda (x_1, \ldots, x_n) + \lambda (y_1, \ldots, y_n) \\
+        &= \lambda x + \lambda y,
+    \end{align*}
+    where we have used distributivity in \( \F \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:16}
+    Show that \( (a + b)x = ax + bx \) for all \( a, b \in \F \) and all \( x \in \F^n \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( x = (x_1, \ldots, x_n) \). Then
+    \begin{align*}
+        (a + b) x &= (a + b) (x_1, \ldots, x_n) \\
+        &= ((a + b) x_1, \ldots, (a + b) x_n) \\
+        &= (a x_1 + b x_1, \ldots, a x_n + b x_n) \\
+        &= (a x_1, \ldots, a x_n) + (b x_1, \ldots, b x_n) \\
+        &= a (x_1, \ldots x_n) + b (x_1, \ldots, x_n) \\
+        &= ax + bx,
+    \end{align*}
+    where we have used distributivity in \( \F \).
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ladr}{\textcolor{blue}{[LADR]} Axler, S. (2015) \textit{Linear Algebra Done Right.} 3rd edn.}
+
+\end{document}
