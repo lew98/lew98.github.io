@@ -24,3 +24,4 @@
 - [**Linear Algebra Done Right (Axler)**](https://linear.axler.net)
   - *Chapter 1*
     - [Section 1.A Exercises](https://lew98.github.io/Mathematics/LADR_Section_1_A_Exercises.pdf)
+    - [Section 1.B Exercises](https://lew98.github.io/Mathematics/LADR_Section_1_B_Exercises.pdf)

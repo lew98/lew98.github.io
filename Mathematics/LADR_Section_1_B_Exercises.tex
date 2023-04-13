@@ -1,0 +1,182 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 1.B Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 1.B.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 1.B.#1#3}
+
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 1.B Exercises}
+
+Exercises with solutions from Section 1.B of \hyperlink{ladr}{[LADR]}.
+
+\begin{exercise}
+\label{ex:1}
+    Prove that \( -(-v) = v \) for every \( v \in V \).
+\end{exercise}
+
+\begin{solution}
+    Since \( v + (-v) = 0 \) and additive inverses are unique (1.26), it must be the case that \( -(-v) = v \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Suppose \( a \in \F, v \in V \), and \( av = 0 \). Prove that \( a = 0 \) or \( v = 0 \).
+\end{exercise}
+
+\begin{solution}
+    It will suffice to show that if \( av = 0 \) and \( a \neq 0 \), then \( v = 0 \). Since \( a \neq 0 \), \( a^{-1} \) exists. Then
+    \[
+        av = 0 \implies a^{-1}(av) = a^{-1} 0 \implies (a^{-1} a)v = 0 \implies 1v = 0 \implies v = 0.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Suppose \( v, w \in V \). Explain why there exists a unique \( x \in V \) such that \( v + 3x = w \).
+\end{exercise}
+
+\begin{solution}
+    If \( v, w, x \in V \) are such that \( v + 3x = w \), then
+    \[
+        v + 3x = w \implies 3x = w - v \implies x = \tfrac{1}{3}(w - v);
+    \]
+    conversely, it is easily verified that \( x = \tfrac{1}{3}(w - v) \) satisfies the equation \( v + 3x = w \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    The empty set is not a vector space. The empty set fails to satisfy only one of the requirements listed in 1.19. Which one?
+\end{exercise}
+
+\begin{solution}
+    The empty set does not contain an additive identity.
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Show that in the definition of a vector space (1.19), the additive inverse condition can be replaced with the condition that
+    \[
+        0v = 0 \text{ for all } v \in V.
+    \]
+    Here the \( 0 \) on the left side is the number \( 0 \), and the \( 0 \) on the right side is the additive identity of \( V \). (The phrase ``a condition can be replaced'' in a definition means that the collection of objects satisfying the definition is unchanged if the original condition is replaced with the new condition.)
+\end{exercise}
+
+\begin{solution}
+    If \( V \) satisfies all of the conditions in (1.19), then as shown in (1.26) we have \( 0v = 0 \) for all \( v \in V \). Now suppose that \( V \) satisfies all of the conditions in (1.19), except we have replaced the additive inverse condition with the condition that \( 0v = 0 \) for all \( v \in V \). We want to show that for each \( v \in V \), there exists an element \( w \) such that \( v + w = 0 \). Let \( v \in V \) be given and set \( w = (-1)v \). Then
+    \[
+        v + w = 1v + (-1)v = (1 - 1)v = 0v = 0.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Let \( \infty \) and \( -\infty \) denote two distinct objects, neither of which is in \( \R \). Define an addition and scalar multiplication on \( \R \cup \{ \infty \} \cup \{ -\infty \} \) as you could guess from the notation. Specifically, the sum and product of two real numbers is as usual, and for \( t \in \R \) define
+    \begin{gather*}
+        t \, \infty = \begin{cases}
+            -\infty & \text{if } t < 0, \\
+            0 & \text{if } t = 0, \\
+            \infty & \text{if } t > 0,
+        \end{cases}
+        \qquad
+        t (-\infty) = \begin{cases}
+            \infty & \text{if } t < 0, \\
+            0 & \text{if } t = 0, \\
+            -\infty & \text{if } t > 0,
+        \end{cases} \\
+        t + \infty = \infty + t = \infty, \qquad t + (-\infty) = (-\infty) + t = -\infty, \\
+        \infty + \infty = \infty, \quad (-\infty) + (-\infty) = -\infty, \quad \infty + (-\infty) = 0.
+    \end{gather*}
+    Is \( \R \cup \{ \infty \} \cup \{ -\infty \} \) a vector space over \( \R \)? Explain.
+\end{exercise}
+
+\begin{solution}
+    This is not a vector space. By (1.25), the additive identity in a vector space must be unique. However, we have \( \infty + t = \infty \) for all \( t \in \R \).
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ladr}{\textcolor{blue}{[LADR]} Axler, S. (2015) \textit{Linear Algebra Done Right.} 3rd edn.}
+
+\end{document}
