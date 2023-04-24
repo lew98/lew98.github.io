@@ -28,3 +28,5 @@
     - [Section 1.A Exercises](https://lew98.github.io/Mathematics/LADR_Section_1_A_Exercises.pdf)
     - [Section 1.B Exercises](https://lew98.github.io/Mathematics/LADR_Section_1_B_Exercises.pdf)
     - [Section 1.C Exercises](https://lew98.github.io/Mathematics/LADR_Section_1_C_Exercises.pdf)
+  - *Chapter 2*
+    - [Section 2.A Exercises](https://lew98.github.io/Mathematics/LADR_Section_2_A_Exercises.pdf)
