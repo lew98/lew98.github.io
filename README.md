@@ -23,6 +23,8 @@
     - [Section 2.6 Exercises](https://lew98.github.io/Mathematics/UA_Section_2_6_Exercises.pdf)
     - [Section 2.7 Exercises](https://lew98.github.io/Mathematics/UA_Section_2_7_Exercises.pdf)
     - [Section 2.8 Exercises](https://lew98.github.io/Mathematics/UA_Section_2_8_Exercises.pdf)
+  - *Chapter 3*
+    - [Section 3.2 Exercises](https://lew98.github.io/Mathematics/UA_Section_3_2_Exercises.pdf)
 - [**Linear Algebra Done Right (Axler)**](https://linear.axler.net)
   - *Chapter 1*
     - [Section 1.A Exercises](https://lew98.github.io/Mathematics/LADR_Section_1_A_Exercises.pdf)
