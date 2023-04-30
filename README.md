@@ -33,3 +33,4 @@
   - *Chapter 2*
     - [Section 2.A Exercises](https://lew98.github.io/Mathematics/LADR_Section_2_A_Exercises.pdf)
     - [Section 2.B Exercises](https://lew98.github.io/Mathematics/LADR_Section_2_B_Exercises.pdf)
+    - [Section 2.C Exercises](https://lew98.github.io/Mathematics/LADR_Section_2_C_Exercises.pdf)
