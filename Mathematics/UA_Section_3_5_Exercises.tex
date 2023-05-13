@@ -1,0 +1,305 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix, patterns, decorations.pathreplacing, calligraphy}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 3.5 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 3.5.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 3.5.#1#3}
+
+\newcommand{\interior}[1]{%
+  {\kern0pt#1}^{\mathrm{o}}%
+}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 3.5 Exercises}
+
+Exercises with solutions from Section 3.5 of \hyperlink{ua}{[UA]}.
+
+\begin{exercise}
+\label{ex:1}
+    Argue that a set \( A \) is a \( G_{\delta} \) set if and only if its complement is an \( F_{\sigma} \) set.
+\end{exercise}
+
+\begin{solution}
+    This is immediate from De Morgan's Laws (see \href{https://lew98.github.io/Mathematics/UA_Section_3_2_Exercises.pdf}{Exercise 3.2.9}).
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Replace each \rule{1cm}{0.15mm} with the word \textit{finite} or \textit{countable} depending on which is more appropriate.
+    \begin{enumerate}
+        \item The \rule{1cm}{0.15mm} union of \( F_{\sigma} \) sets is an \( F_{\sigma} \) set.
+
+        \item The \rule{1cm}{0.15mm} intersection of \( F_{\sigma} \) sets is an \( F_{\sigma} \) set.
+
+        \item The \rule{1cm}{0.15mm} union of \( G_{\delta} \) sets is a \( G_{\delta} \) set.
+
+        \item The \rule{1cm}{0.15mm} intersection of \( G_{\delta} \) sets is a \( G_{\delta} \) set.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item The countable union of \( F_{\sigma} \) sets is an \( F_{\sigma} \) set. Suppose we have a countable collection \( \{ A_m : m \in \N \} \) of \( F_{\sigma} \) sets, i.e.\ for each \( m \in \N \) there is a countable collection \( \{ B_{m,n} : n \in \N \} \) of closed sets such that \( A_m = \bigcup_{n=1}^{\infty} B_{m,n} \). Then
+        \[
+            \bigcup_{m=1}^{\infty} A_m = \bigcup_{m=1}^{\infty} \bigcup_{n=1}^{\infty} B_{m,n} = \bigcup_{(m, n) \in \N^2} B_{m,n}.
+        \]
+        \( \N^2 \) is countable by Theorem 1.5.8 (ii), so we have expressed \( \bigcup_{m=1}^{\infty} A_m \) as a countable union of closed sets and hence \( \bigcup_{m=1}^{\infty} A_m \) is an \( F_{\sigma} \) set.
+
+        \item The finite intersection of \( F_{\sigma} \) sets is an \( F_{\sigma} \) set. To see this, it will suffice to show that if \( A \) and \( B \) are \( F_{\sigma} \) sets, then \( A \cap B \) is an \( F_{\sigma} \) set; the general case will follow from an induction argument. Suppose therefore that \( A = \bigcup_{m=1}^{\infty} A_m \) and \( B = \bigcup_{n=1}^{\infty} B_n \), where \( \{ A_m : m \in \N \} \) and \( \{ B_n : n \in \N \} \) are countable collections of closed sets. We claim that
+        \[
+            A \cap B = \left( \bigcup_{m=1}^{\infty} A_m \right) \cap \left( \bigcup_{n=1}^{\infty} B_n \right) = \bigcup_{(m, n) \in \N^2} (A_m \cap B_n).
+        \]
+        Indeed,
+        \begin{align*}
+            \textstyle x \in \left( \bigcup_{m=1}^{\infty} A_m \right) \cap \left( \bigcup_{n=1}^{\infty} B_n \right) &\iff \textstyle \left( x \in \bigcup_{m=1}^{\infty} A_m \right) \text{ and } \left( x \in \bigcup_{n=1}^{\infty} B_n \right) \\
+            &\iff (\exists m \in \N : x \in A_m) \text{ and } (\exists n \in \N : x \in B_n) \\
+            &\iff (\exists (m, n) \in \N^2 : x \in A_m \text{ and } x \in B_n) \\
+            &\iff (\exists (m, n) \in \N^2 : x \in A_m \cap B_n) \\
+            &\iff \textstyle x \in \bigcup_{(m, n) \in \N^2} (A_m \cap B_n).
+        \end{align*}
+        For any \( (m, n) \in \N^2 \), the intersection \( A_m \cap B_n \) is closed since both \( A_m \) and \( B_n \) are closed. Thus we have expressed \( A \cap B \) as a countable union of closed sets and hence \( A \cap B \) is an \( F_{\sigma} \) set.
+
+        The countable intersection of \( F_{\sigma} \) sets need not be an \( F_{\sigma} \) set. For a counterexample, let \( \{ r_1, r_2, \ldots \} \) be an enumeration of \( \Q \) and for positive integers \( m \) and \( n \), set
+        \[
+            B_{m, n} := \left( -\infty, r_m - \tfrac{1}{n} \right] \cup \left[ r_m + \tfrac{1}{n}, \infty \right).
+        \]
+        Each \( B_{m, n} \) is a closed set, so if we let \( A_m := \bigcup_{n=1}^{\infty} B_{m, n} \) for each \( m \in \N \), then each \( A_m \) is an \( F_{\sigma} \) set. We claim that \( \bigcap_{m=1}^{\infty} A_m = \I \), the set of irrational numbers. To see this, we will show that \( \setcomp{(\bigcap_{m=1}^{\infty} A_m)} = \Q \). By De Morgan's Laws, we have
+        \begin{align*}
+            \textstyle \setcomp{\left( \bigcap_{m=1}^{\infty} A_m \right)} &= \textstyle \bigcup_{m=1}^{\infty} \setcomp{A_m} \\[2mm]
+            &= \textstyle \bigcup_{m=1}^{\infty} \setcomp{\left( \bigcup_{n=1}^{\infty} B_{m, n} \right)} \\[2mm]
+            &= \textstyle \bigcup_{m=1}^{\infty} \bigcap_{n=1}^{\infty} \setcomp{B_{m, n}} \\[2mm]
+            &= \textstyle \bigcup_{m=1}^{\infty} \bigcap_{n=1}^{\infty} \left( r_m - \tfrac{1}{n}, r_m + \tfrac{1}{n} \right) \\[2mm]
+            &= \textstyle \bigcup_{m=1}^{\infty} \{ r_m \} \\[2mm]
+            &= \Q.
+        \end{align*}
+        Thus \( \bigcap_{m=1}^{\infty} A_m = \I \). As we will show in \Cref{ex:6}, \( \I \) is not an \( F_{\sigma} \) set.
+
+        \item The finite union of \( G_{\delta} \) sets is a \( G_{\delta} \) set, but the countable union of \( G_{\delta} \) sets need not be a \( G_{\delta} \) set; these statements follow from part (b) of this exercise, \Cref{ex:1}, and De Morgan's Laws.
+
+        \item The countable intersection of \( G_{\delta} \) sets is a \( G_{\delta} \) set. Again, this follows from part (a) of this exercise, \Cref{ex:1}, and De Morgan's Laws.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    (This exercise has already appeared as \href{https://lew98.github.io/Mathematics/UA_Section_3_2_Exercises.pdf}{Exercise 3.2.15}.)
+    \begin{enumerate}
+        \item Show that a closed interval \( [a, b] \) is a \( G_{\delta} \) set.
+        
+        \item Show that the half-open interval \( (a, b] \) is both a \( G_{\delta} \) and an \( F_{\sigma} \) set.
+
+        \item Show that \( \Q \) is an \( F_{\sigma} \) set, and the set of irrationals \( \I \) forms a \( G_{\delta} \) set.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    See \href{https://lew98.github.io/Mathematics/UA_Section_3_2_Exercises.pdf}{Exercise 3.2.15}.
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Starting with \( n = 1 \), inductively construct a nested sequence of \textit{closed} intervals \( I_1 \supseteq I_2 \supseteq I_3 \supseteq \cdots \) satisfying \( I_n \subseteq G_n \). Give special attention to the issue of the endpoints of each \( I_n \). Show how this leads to a proof of the theorem.
+\end{exercise}
+
+\begin{solution}
+    Since \( G_1 \) is dense, it must be non-empty, i.e.\ there exists some \( x_1 \in G_1 \). Since \( G_1 \) is open, there exists an \( \epsilon_1 > 0 \) such that \( (x_1 - \epsilon_1, x_1 + \epsilon_1) \subseteq G_1 \). Set
+    \[
+        a_1 := x_1 - \tfrac{\epsilon_1}{2}, \quad b_1 := x_1 + \tfrac{\epsilon_1}{2}, \quand I_1 = [a_1, b_1].
+    \]
+    Then \( I_1 \subseteq (x_1 - \epsilon_1, x_1 + \epsilon_1) \subseteq G_1 \). This handles the base case. Now suppose that after \( n \) steps we have chosen nested, closed intervals \( I_1 = [a_1, b_1] \supseteq \cdots \supseteq I_n = [a_n, b_n] \) such that \( I_1 \subseteq G_1, \ldots, I_n \subseteq G_n \) and \( a_1 < b_1, \ldots, a_n < b_n \). Since \( G_{n+1} \) is dense, there exists some \( x_{n+1} \in G_{n+1} \) such that \( a_n < x_{n+1} < b_n \), and since \( G_{n+1} \) is open, there exists some \( \epsilon_{n+1} > 0 \) such that \( (x_{n+1} - \epsilon_{n+1}, x_{n+1} + \epsilon_{n+1}) \subseteq G_{n+1} \). Let \( \delta = \min \left\{ \tfrac{\epsilon_{n+1}}{2}, x_{n+1} - a_n, b_n - x_{n+1} \right\} \), and set
+    \[
+        a_{n+1} := x_{n+1} - \delta, \quad b_{n+1} := x_{n+1} + \delta, \quand I_{n+1} = [a_{n+1}, b_{n+1}].
+    \]
+    Then \( a_{n+1} < b_{n+1} \), and since \( \delta \leq x_{n+1} - a_n \) and \( \delta \leq b_n - x_{n+1} \), we have \( I_{n+1} \subseteq I_n \). Moreover, because \( \delta \leq \tfrac{\epsilon_{n+1}}{2} \), we also have \( I_{n+1} \subseteq (x_{n+1} - \epsilon_{n+1}, x_{n+1} + \epsilon_{n+1}) \subseteq G_{n+1} \). This completes the induction step.
+
+    Thus we obtain a nested sequence of closed intervals \( (I_n) \) such that \( I_n \subseteq G_n \) for each \( n \in \N \). We may now appeal to the Nested Interval Property to obtain some \( x \in \bigcap_{n=1}^{\infty} I_n \), which must also belong to \( \bigcap_{n=1}^{\infty} G_n \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Show that it is impossible to write
+    \[
+        \R = \bigcup_{n=1}^{\infty} F_n,
+    \]
+    where for each \( n \in \N, F_n \) is a closed set containing no nonempty open intervals.
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( \{ F_n : n \in \N \} \) is a collection of closed sets, each of which contains no non-empty open intervals. Then for each \( n \in \N, \setcomp{F_n} \) is an open set. Furthermore, we claim that \( \setcomp{F_n} \) is dense. To see this, let \( x < z \) be arbitrary real numbers. By assumption, \( (x, z) \not\subseteq F_n \), so there exists some \( y \in (x, z) \cap \setcomp{F_n} \); the claim follows.
+
+    Thus \( \{ \setcomp{F_n} : n \in \N \} \) is a collection of open, dense sets. Theorem 3.5.2 (\Cref{ex:4}) and De Morgan's Laws now imply that
+    \[
+        \bigcap_{n=1}^{\infty} \setcomp{F_n} \neq \emptyset \iff \bigcup_{n=1}^{\infty} F_n \neq \R.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Show how the previous exercise implies that the set \( \I \) of irrationals cannot be an \( F_{\sigma} \) set, and \( \Q \) cannot be a \( G_{\delta} \) set.
+\end{exercise}
+
+\begin{solution}
+    We will argue by contradiction. Suppose that \( \I \) is an \( F_{\sigma} \) set, so that \( \I = \bigcup_{m=1}^{\infty} F_m \), where each \( F_m \) is closed. Note that for any \( m \in \N \), it must be the case that \( F_m \) contains no non-empty open interval; otherwise, \( F_m \) would contain infinitely many rational numbers. Let \( \{ r_1, r_2, \ldots \} \) be an enumeration of \( \Q \), so that \( \Q = \bigcup_{n=1}^{\infty} \{ r_n \} \). For any \( n \in \N \), the singleton \( \{ r_n \} \) is closed and contains no non-empty interval. Observe that
+    \[
+        \R = \I \cup \Q = \left( \bigcup_{m=1}^{\infty} F_m \right) \cup \left( \bigcup_{n=1}^{\infty} \{ r_n \} \right) = \bigcup_{(m, n) \in \N^2} (F_m \cup \{ r_n \}).
+    \]
+    For any \( (m, n) \in \N^2 \), the union \( F_m \cup \{ r_n \} \) is closed and contains no non-empty intervals. However, since \( \N^2 \) is countable, this expression for \( \R \) contradicts \Cref{ex:5}. Hence it must be the case that \( \I \) is not an \( F_{\sigma} \) set, which by \Cref{ex:1} implies that \( \Q \) cannot be a \( G_{\delta} \) set.
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Using \Cref{ex:6} and versions of the statements in \Cref{ex:2}, construct a set that is neither in \( F_{\sigma} \) nor in \( G_{\delta} \).
+\end{exercise}
+
+\begin{solution}
+    Define \( E := (\I \cap (-\infty, 0]) \cup (\Q \cap [0, \infty)) \); we claim that \( E \) is neither an \( F_{\sigma} \) nor a \( G_{\delta} \) set. Seeking a contradiction, suppose that \( E \) is an \( F_{\sigma} \) set. It is not hard to see that any interval is an \( F_{\sigma} \) set (see \Cref{ex:3}), so by \Cref{ex:2} (b) we have that
+    \[
+        E \cap (-\infty, 0) = \I \cap (-\infty, 0)
+    \]
+    is an \( F_{\sigma} \) set, i.e.\ there is a countable collection \( \{ F_m : m \in \N \} \) of closed sets such that
+    \[
+        \I \cap (-\infty, 0) = \bigcup_{m=1}^{\infty} F_m.  
+    \]
+    For \( m \in \N \), let \( -F_m = \{ -x : x \in F_m \} \). Then since \( (x_n) \to x \) implies \( (-x_n) \to -x \), each \( -F_m \) is also closed. Furthermore, we have
+    \[
+        \I \cap (0, \infty) = \bigcup_{m=1}^{\infty} -F_m.
+    \]
+    It follows that \( \I \cap (0, \infty) \) is an \( F_{\sigma} \) set. However, \Cref{ex:2} (a) now implies that
+    \[
+        \I = (\I \cap (-\infty, 0)) \cup (\I \cap (0, \infty))
+    \]
+    is an \( F_{\sigma} \) set, contradicting \Cref{ex:6}. A similar argument with \( \Q \) shows that \( E \) cannot be a \( G_{\delta} \) set either.
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Show that a set \( E \) is nowhere-dense in \( \R \) if and only if the complement of \( \overline{E} \) is dense in \( \R \).
+\end{exercise}
+
+\begin{solution}
+    We will show that \( A \subseteq \R \) contains no non-empty open intervals if and only if \( \setcomp{A} \) is dense in \( \R \). By \( A \) containing no non-empty open intervals, we mean that for all \( x, y \in \R \) such that \( x < y \), we have \( (x, y) \not\subseteq A \). This is equivalent to saying that for all \( x, y \in \R \) such that \( x < y \), there exists some \( t \in \R \) such that \( x < t < y \) and \( t \not\in A \). In other words, \( \setcomp{A} \) is dense in \( \R \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Decide whether the following sets are dense in \( \R \), nowhere-dense in \( \R \), or somewhere in between.
+    \begin{enumerate}
+        \item \( A = \Q \cap [0, 5] \).
+
+        \item \( B = \{ 1/n : n \in \N \} \).
+
+        \item the set of irrationals.
+
+        \item the Cantor set.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item We have \( \overline{A} = [0, 5] \), which is not the entire real line and also contains non-empty open intervals. Thus \( A \) is neither dense nor nowhere-dense.
+
+        \item We have \( \overline{B} = \{ 0 \} \cup B \neq \R \), so that \( B \) is not dense. Note that if \( \overline{B} \) contained a non-empty open interval then \( \overline{B} \) would contain at least one irrational number, but \( \overline{B} \subseteq \Q \). Thus \( \overline{B} \) contains no non-empty open intervals and hence \( B \) is nowhere-dense.
+
+        \item \( \I \) is dense in \( \R \) (see \href{https://lew98.github.io/Mathematics/UA_Section_1_4_Exercises.pdf}{Exercise 1.4.5}) and hence cannot be nowhere-dense (a dense subset \( E \subseteq \R \) certainly cannot be nowhere-dense; \( \overline{E} = \R \) contains every non-empty open interval).
+
+        \item The Cantor set is closed, so \( \overline{C} = C \neq \R \). Thus \( C \) is not dense in \( \R \). \( C \) also does not contain any non-empty open intervals; given any \( x < y \) in \( C \), it is always possible to find some \( t \not\in C \) such that \( x < t < y \) (see \href{https://lew98.github.io/Mathematics/UA_Section_3_4_Exercises.pdf}{Exercise 3.4.8}). Thus \( C \) is nowhere-dense in \( \R \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Finish the proof by finding a contradiction to the results in this section.
+\end{exercise}
+
+\begin{solution}
+    Since \( E_n \subseteq \overline{E_n} \) for each \( n \in \N \), we have \( \R = \bigcup_{n=1}^{\infty} \overline{E_n} \). However, each \( \overline{E_n} \) is closed and by assumption contains no non-empty open intervals, so this contradicts \Cref{ex:5}.
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2\ts{nd} edition.}
+
+\end{document}
