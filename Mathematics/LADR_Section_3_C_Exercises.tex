@@ -1,0 +1,475 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 3.C Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 3.C.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 3.C.#1#3}
+
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\lmap}{\mathcal{L}}
+\newcommand{\mat}{\mathcal{M}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\Span}{\text{span}}
+\newcommand{\Null}{\text{null\,}}
+\newcommand{\Range}{\text{range\,}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 3.C Exercises}
+
+Exercises with solutions from Section 3.C of \hyperlink{ladr}{[LADR]}.
+
+\begin{exercise}
+\label{ex:1}
+    Suppose \( V \) and \( W \) are finite-dimensional and \( T \in \lmap(V, W) \). Show that with respect to each choice of bases of \( V \) and \( W \), the matrix of \( T \) has at least \( \dim \Range T \) nonzero entries.
+\end{exercise}
+
+\begin{solution}
+    Let \( v_1, \ldots, v_n \) be a basis for \( V \) and \( w_1, \ldots, w_m \) be a basis for \( W \), so that the matrix of \( T \) with respect to these bases is the \(m\)-by-\(n\) matrix \( \mat(T) \) whose entries \( A_{j,k} \) are defined by
+    \[
+        T v_k = A_{1,k} w_1 + \cdots + A_{m,k} w_m.
+    \]    
+    Set \( p = \dim \Null T \) and \( q = \dim \Range T \), so that \( p + q = n \). Since the list \( v_1, \ldots, v_n \) is linearly independent, at most \( p \) of these vectors can belong to \( \Null T \). Equivalently, at least \( n - p = q \) of these vectors do not belong to \( \Null T \). Let \( v_k \) be such a vector, i.e.\
+    \[
+        T v_k = A_{1,k} w_1 + \cdots + A_{m,k} w_m \neq 0.
+    \]
+    Since this is non-zero, at least one of the scalars \( A_{j,k} \) must be non-zero; this is true for each of the vectors from the list \( v_1, \ldots, v_n \) which do not belong to \( \Null T \), of which there are at least \( q \). Thus \( \mat(T) \) has at least \( q = \dim \Range T \) non-zero entries.
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Suppose \( D \in \lmap(\poly_3(\R), \poly_2(\R)) \) is the differentiation map defined by \( Dp = p' \). Find a basis of \( \poly_3(\R) \) and a basis of \( \poly_2(\R) \) such that the matrix of \( D \) with respect to these bases is
+    \[
+        \begin{pmatrix}
+            1 & 0 & 0 & 0 \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 1 & 0
+        \end{pmatrix}.
+    \]
+    \noindent [\textit{Compare the exercise above to Example 3.34.}
+    
+    \noindent \textit{The next exercise generalizes the exercise above.}]
+\end{exercise}
+
+\begin{solution}
+    Take \( \tfrac{1}{3} x^3, \tfrac{1}{2} x^2, x, 1 \) as a basis of \( \poly_3(\R) \) and \( x^2, x, 1 \) as a basis of \( \poly_2(\R) \). Then
+    \[
+        D \left( \tfrac{1}{3} x^3 \right) = x^2, \quad D \left( \tfrac{1}{2} x^2 \right) = x, \quad D(x) = 1, \quand D(1) = 0.
+    \]
+    Thus the matrix of \( D \) with respect to these bases is
+    \[
+        \begin{pmatrix}
+            1 & 0 & 0 & 0 \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 1 & 0
+        \end{pmatrix}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Suppose \( V \) and \( W \) are finite-dimensional and \( T \in \lmap(V, W) \). Prove that there exist a basis of \( V \) and a basis of \( W \) such that with respect to these bases, all entries of \( \mat(T) \) are 0 except that the entries in row \( j \), column \( j \), equal 1 for \( 1 \leq j \leq \dim \Range T \).
+\end{exercise}
+
+\begin{solution}
+    As shown in \href{https://lew98.github.io/Mathematics/LADR_Section_3_B_Exercises.pdf}{Exercise 3.B.12}, there is a subspace \( U \) of \( V \) such that \( V = U \oplus \Null T \) and \( \Range T = \{ Tu : u \in U \} \). Let \( u_1, \ldots, u_k \) be a basis of \( U \) and let \( x_1, \ldots, x_n \) be a basis of \( \Null T \); the list \( u_1, \ldots, u_k, x_1, \ldots, x_n \) is a basis of \( V \) since the sum \( V = U \oplus \Null T \) is direct (see \href{https://lew98.github.io/Mathematics/LADR_Section_2_B_Exercises.pdf}{Exercise 2.B.8}). We claim that the list \( Tu_1, \ldots, Tu_k \) is a basis of \( \Range T \). Since \( \Range T = \{ Tu : u \in U \} \), it is clear that this list spans \( \Range T \). Suppose we have scalars \( a_1, \ldots, a_k \) such that
+    \[
+        a_1 Tu_1 + \cdots = a_k Tu_k = T(a_1 u_1 + \cdots + a_k u_k) = 0.
+    \]
+    Then \( a_1 u_1 + \cdots + a_k u_k \) belongs to \( \Null T \) as well as \( U \) and so we must have \( a_1 u_1 + \cdots + a_k u_k = 0 \). The linear independence of the list \( u_1, \ldots, u_k \) implies that \( a_1 = \cdots = a_k = 0 \) and hence the list \( Tu_1, \ldots, Tu_k \) is linearly independent and our claim follows.
+
+    Extend the basis \( Tu_1, \ldots, Tu_k \) to a basis \( Tu_1, \ldots, Tu_k, y_1, \ldots, y_m \) for \( W \). Then:
+    \[
+        Tu_j = 0 Tu_1 + \cdots + 1 Tu_j + \cdots + 0 Tu_k + 0 y_1 + \cdots + 0 y_m \quand Tx_j = 0.
+    \]
+    Thus the matrix of \( T \) with respect to the bases \( u_1, \ldots, u_k, x_1, \ldots, x_n \) and \( Tu_1, \ldots, Tu_k, y_1, \ldots, y_m \) has the desired form.
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Suppose \( v_1, \ldots, v_m \) is a basis of \( V \) and \( W \) is finite-dimensional. Suppose \( T \in \lmap(V, W) \). Prove that there exists a basis \( w_1, \ldots, w_n \) of \( W \) such that all the entries in the first column of \( \mat(T) \) (with respect to the bases \( v_1, \ldots, v_m\) and \( w_1, \ldots, w_n \)) are 0 except for possibly a 1 in the first row, first column.
+
+    \noindent [\textit{In this exercise, unlike Exercise 3, you are given the basis of \( V \) instead of being able to choose a basis of \( V \).}]
+\end{exercise}
+
+\begin{solution}
+    There are two cases.
+    \begin{description}
+        \item[Case 1.] \( Tv_1 = 0 \), i.e.\ \( v_1 \in \Null T \). In this case, let \( w_1, \ldots, w_n \) be any basis of \( W \). By linear independence of this basis, we have
+        \[
+            Tv_1 = 0 = 0 w_1 + \cdots + 0 w_n.  
+        \]
+        Thus the entries in the first column of \( \mat(T) \) are all 0.
+
+        \item[Case 2.] \( Tv_1 \neq 0 \), i.e.\ \( v_1 \not\in \Null T \). In this case, let \( w_1 := Tv_1 \). The  list \( w_1 \) is linearly independent since \( w_1 \neq 0 \) and can hence be extended to a basis \( w_1, \ldots, w_n \) for \( W \). We then have
+        \[
+            Tv_1 = w_1 = 1 w_1 + 0 w_2 + \cdots + 0 w_n.
+        \]
+        Thus the entries in the first column of \( \mat(T) \) are all 0 except for a 1 in the first row.
+    \end{description}
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Suppose \( w_1, \ldots, w_n \) is a basis of \( W \) and \( V \) is finite-dimensional. Suppose \( T \in \lmap(V, W) \). Prove that there exists a basis \( v_1, \ldots, v_m \) of \( V \) such that all the entries in the first row of \( \mat(T) \) (with respect to the bases \( v_1, \ldots, v_m \) and \( w_1, \ldots, w_n \)) are 0 except for possibly a 1 in the first row, first column.
+
+    \noindent [\textit{In this exercise, unlike Exercise 3, you are given the basis of \( W \) instead of being able to choose a basis of \( W \).}]
+\end{exercise}
+
+\begin{solution}
+    Let \( u_1, \ldots, u_m \) be any basis of \( V \) and let \( M_1 \) be the matrix of \( T \) with respect to the bases \( u_1, \ldots, u_m \) and \( w_1, \ldots, w_n \), with entries \( A_{j,k} \), i.e.\
+    \[
+        M_1 = \mat(T, (u_1, \ldots, u_m), (w_1, \ldots, w_n)) = \begin{pmatrix}
+            A_{1,1} & \cdots & A_{1,m} \\
+            \vdots & \ddots & \vdots \\
+            A_{n,1} & \cdots & A_{n,m}
+        \end{pmatrix}.
+    \]
+    If the entries in the first row of \( M_1 \) are all 0, then we are done. Otherwise, there exists some \( 1 \leq i \leq m \) such that \( A_{1,i} \) is non-zero, so that \( \lambda := A_{1,i}^{-1} \) exists. Define
+    \[
+        v_1 := \lambda u_i, \quad v_i := u_1 - \lambda A_{1,1} u_i, \quand v_k := u_k - \lambda A_{1,k} u_i \text{ for } 2 \leq k \leq m, k \neq i.
+    \]
+    We claim that \( v_1, \ldots, v_m \) is a basis for \( V \). Observe that
+    \[
+        u_1 = v_i + A_{1,1} v_1, \quad u_i = A_{1,i} v_1, \quand u_k = v_k + A_{1,k} v_1 \text{ for } 2 \leq k \leq m, k \neq i.
+    \]
+    So each vector from the basis \( u_1, \ldots, u_m \) can be expressed as a linear combination of vectors from the list \( v_1, \ldots, v_m \). Since \( V = \Span(u_1, \ldots, u_m) \), it follows that \( V = \Span(v_1, \ldots, v_m) \). By 2.42, we may now conclude that this list is a basis for \( V \). Observe that
+    \begin{align*}
+        Tv_1 &= \lambda Tu_i = \lambda(A_{1,i} w_1 + \cdots + A_{n,i} w_n) \\
+        &= 1 w_1 + \cdots + \lambda A_{n,i} w_n, \\[2mm]
+        Tv_i &= Tu_1 - A_{1,1} (\lambda Tu_i) \\
+        &= A_{1,1} w_1 + \cdots + A_{n,1} w_n - A_{1,1}(w_1 + \cdots + \lambda A_{n,i} w_n) \\
+        &= 0 w_1 + \cdots + (A_{n,1} - \lambda A_{1,1} A_{n,i}) w_n,
+    \end{align*}
+    and for \( 2 \leq k \leq m, k \neq i \),
+    \begin{align*}
+        Tv_k &= Tu_k - A_{1,k} (\lambda Tu_i) \\
+        &= A_{1,k} w_1 + \cdots + A_{n,k} w_n - A_{1,k}(w_1 + \cdots + \lambda A_{n,i} w_n) \\
+        &= 0 w_1 + \cdots + (A_{n,k} - \lambda A_{1,k} A_{n,i}) w_n.
+    \end{align*}
+    Thus the entries in the first row of the matrix of \( T \) with respect to the bases \( v_1, \ldots, v_m \) and \( w_1, \ldots, w_n \) are 0, except for a 1 in the first column.
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Suppose \( V \) and \( W \) are finite-dimensional and \( T \in \lmap(V, W) \). Prove that \( \dim \Range T = 1 \) if and only if there exist a basis of \( V \) and a basis of \( W \) such that with respect to these bases, all entries of \( \mat(T) \) equal 1.
+\end{exercise}
+
+\begin{solution}
+    Suppose there exists a basis \( v_1, \ldots, v_m \) of \( V \) and a basis \( w_1, \ldots, w_n \) of \( W \) such that with respect to these bases, all entries of \( \mat(T) \) equal 1, i.e.\
+    \[
+        Tv_1 = \cdots = Tv_m = w_1 + \cdots + w_n.
+    \]
+    We claim that \( Tv_1 \) is a basis for \( \Range T \). The linear independence of the basis \( w_1, \ldots, w_n \) implies that \( Tv_1 \neq 0 \), so that the list \( Tv_1 \) is linearly independent. If \( w \in \Range T \), then \( w = Tv \) for some \( v \in V \). There are scalars \( a_1, \ldots, a_m \) such that \( v = a_1 v_1 + \cdots + a_m v_m \), which gives
+    \[
+        w = Tv = a_1 Tv_1 + \cdots + a_m Tv_m = (a_1 + \cdots + a_m) Tv_1.
+    \]
+    Thus the list \( Tv_1 \) spans \( \Range T \) and we may conclude that \( \Range T \) has a basis of length 1, i.e.\ \( \dim \Range T = 1 \).
+
+    To prove the converse statement, let us first prove the following lemmas.
+
+    \vspace{2mm}
+
+    \noindent \textbf{Lemma 1.} Suppose \( U \) is a finite-dimensional vector space with \( \dim U = m \), and suppose \( u \in U \) is non-zero. Then there exists a basis \( u_1, \ldots, u_m \) of \( U \) such that \( u = u_1 + \cdots + u_m \).
+
+    \vspace{2mm}
+
+    \noindent \textit{Proof.} If \( m = 1 \), then take \( u_1 = u \) and we are done. Otherwise, since \( u \neq 0 \), we can extend the list \( u \) to a basis \( u, u_1, \ldots, u_{m-1} \) of \( U \). Define \( u_m := u - u_1 - \cdots - u_{m-1} \) and consider the list \( u_1, \ldots, u_{m-1}, u_m \). Since each vector in the basis \( u, u_1, \ldots, u_{m-1} \) can be expressed as a linear combination of vectors from the list \( u_1, \ldots, u_{m-1}, u_m \), it follows that \( U = \Span(u_1, \ldots, u_{m-1}, u_m) \). 2.42 allows us to conclude that \( u_1, \ldots, u_m \) is a basis of \( U \). From the definition of \( u_m \), it is clear that \( u = u_1 + \cdots + u_m \). \qed
+
+    \vspace{2mm}
+
+    \noindent \textbf{Lemma 2.} Suppose \( V \) is finite-dimensional and \( T \in \lmap(V, W) \). If \( \Null T \neq V \) then there exists a basis \( v_1, \ldots, v_m \) of \( V \) such that \( v_k \not\in \Null T \) for each \( 1 \leq k \leq m \).
+
+    \vspace{2mm}
+    
+    \noindent \textit{Proof.} By 2.34, we may write \( V = U \oplus \Null T \) for some subspace \( U \) of \( V \). Since \( \Null T \neq V \), it must be the case that \( U \) is not the trivial subspace. Thus if we let \( u_1, \ldots, u_{m-l} \) be a basis of \( U \), then this basis contains at least one vector \( u_1 \). Letting \( x_1, \ldots, x_l \) be a basis of \( \Null T \), \href{https://lew98.github.io/Mathematics/LADR_Section_2_B_Exercises.pdf}{Exercise 2.B.8} implies that
+    \[
+        B := u_1, \ldots, u_{m-l}, x_1, \ldots, x_l
+    \]
+    is a basis of \( V \). Consider the list
+    \[
+        B' := u_1, \ldots, u_{m-l}, x_1 + u_1, \ldots, x_l + u_1.
+    \]
+    Since each vector in the basis \( B \) can be expressed as a linear combination of vectors from the list \( B' \), it follows that \( V = \Span\,B' \). 2.42 allows us to conclude that \( B' \) is a basis of \( V \). Since the sum \( V = U \oplus \Null T \) is direct, we have \( U \cap \Null T = \{ 0 \} \); it follows that each \( u_k \) in the list \( u_1, \ldots, u_{m-l} \) satisfies \( u_k \not\in \Null T \). Furthermore, if \( 1 \leq k \leq l \), then
+    \[
+        T(x_k + u_1) = Tx_k + Tu_1 = Tu_1 \neq 0,
+    \]
+    so that \( x_k + u_1 \not\in \Null T \) also. Thus \( B' \) is the desired basis of \( V \). \qed
+
+    \vspace{2mm}
+
+    Now suppose that \( \dim \Range T = 1 \), so that \( \Range T \) has a basis \( w \). By Lemma 1, there is a basis \( w_1, \ldots, w_n \) of \( W \) such that \( w = w_1 + \cdots + w_n \), and by Lemma 2 there is a basis \( u_1, \ldots, u_m \) of \( V \) such that \( Tu_k \neq 0 \) for \( 1 \leq k \leq m \). Then for each \( 1 \leq k \leq m \), we have
+    \[
+        Tu_k = \lambda_k w
+    \]
+    for some non-zero scalar \( \lambda_k \). Set \( v_k = \lambda_k^{-1} u_k \); it is easily verified that \( v_1, \ldots v_m \) is a basis of \( V \) since each \( \lambda_k^{-1} \) is non-zero. Then
+    \[
+        Tv_k = w = w_1 + \cdots + w_n.
+    \]
+    Thus with respect to the bases \( v_1, \ldots, v_m \) and \( w_1, \ldots, w_n \), all entries of \( \mat(T) \) equal 1.
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Verify 3.36.
+\end{exercise}
+
+\begin{solution}
+    Suppose \( S, T \in \lmap(V, W) \). Let \( v_1, \ldots, v_m \) be a basis of \( V \) and let \( w_1, \ldots, w_n \) be a basis of \( W \). We wish to verify that, with respect to these bases, we have \( \mat(S + T) = \mat(S) + \mat(T) \). Suppose \( \mat(S) \) has entries \( A_{j,k} \) and \( \mat(T) \) has entries \( B_{j,k} \), i.e.\
+    \[
+        Sv_k = A_{1,k} w_1 + \cdots + A_{n,k} w_n \quand Tv_k = B_{1,k} w_1 + \cdots + B_{n,k} w_n.
+    \]
+    Then
+    \[
+        (S + T)(v_k) = Sv_k + Tv_k = (A_{1,k} + B_{1,k}) w_1 + \cdots + (A_{n,k} + B_{n,k}) w_n.
+    \]
+    Thus \( \mat(S + T) \) has entries \( A_{j,k} + B_{j,k} \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Verify 3.38.
+\end{exercise}
+
+\begin{solution}
+    Suppose \( \lambda \in \F \) and \( T \in \lmap(V, W) \). Let \( v_1, \ldots, v_m \) be a basis of \( V \) and let \( w_1, \ldots, w_n \) be a basis of \( W \). We wish to verify that, with respect to these bases, we have \( \mat(\lambda T) = \lambda \mat(T) \). Suppose \( \mat(T) \) has entries \( A_{j,k} \), i.e.\
+    \[
+        Tv_k = A_{1,k} w_1 + \cdots + A_{n,k} w_n.
+    \]
+    Then
+    \[
+        (\lambda T)(v_k) = \lambda Tv_k = (\lambda A_{1,k}) w_1 + \cdots + (\lambda A_{n,k}) w_n.
+    \]
+    Thus \( \mat(\lambda T) \) has entries \( \lambda A_{j,k} \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Prove 3.52.
+\end{exercise}
+
+\begin{solution}
+    Suppose \( A \) is an \(m\)-by-\(n\) matrix and \( c = \begin{pmatrix}
+        c_1 \\
+        \vdots \\
+        c_n
+    \end{pmatrix} \) is an \(n\)-by-1 matrix. Then \( Ac \) is an \(m\)-by-1 matrix whose entry in the \(j\)\ts{th} row is
+    \[
+        (Ac)_{j,1} = \sum_{r=1}^n A_{j,r} c_{r} = c_1 A_{j,1} + \cdots + c_n A_{j,n}.
+    \]
+    Thus
+    \[
+        Ac = c_1 A_{\cdot,1} + \cdots + c_n A_{\cdot,n}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Suppose \( A \) is an \(m\)-by-\(n\) matrix and \( C \) is an \(n\)-by-\(p\) matrix. Prove that
+    \[
+        (AC)_{j,\cdot} = A_{j,\cdot} C
+    \]
+    for \( 1 \leq j \leq m \). In other words, show that row \( j \) of \( AC \) equals (row \( j \) of \( A \)) times \( C \).
+\end{exercise}
+
+\begin{solution}
+    \( (AC)_{j,\cdot} \) is a 1-by-\(p\) matrix whose entry in the \(k\)\ts{th} column is
+    \[
+        ((AC)_{j,\cdot})_{1,k} = (AC)_{j,k} = \sum_{r=1}^n A_{j,r} C_{r,k}.
+    \]
+    \( A_{j,\cdot} \) is a 1-by-\(n\) matrix and so \( A_{j,\cdot} C \) is a 1-by-\(p\) matrix whose entry in the \(k\)\ts{th} column is
+    \[
+        (A_{j,\cdot} C)_{1,k} = \sum_{r=1}^n (A_{j,\cdot})_{1,r} C_{r,k} = \sum_{r=1}^n A_{j,r} C_{r,k}.
+    \]
+    Thus \( (AC)_{j,\cdot} = A_{j,\cdot} C \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Suppose \( a = ( a_1 \cdots a_n ) \) is a 1-by-\(n\) matrix and \( C \) is an \(n\)-by-\(p\) matrix. Prove that
+    \[
+        aC = a_1 C_{1,\cdot} + \cdots + a_n C_{n,\cdot}.
+    \]
+    In other words, show that \( aC \) is a linear combination of the rows of \( C \), with the scalars that multiply the rows coming from \( a \).
+\end{exercise}
+
+\begin{solution}
+    \( aC \) is a 1-by-\(p\) matrix whose entry in the \(k\)\ts{th} column is
+    \[
+        (aC)_{1,k} = \sum_{r=1}^n a_r C_{r,k} = a_1 C_{1,k} + \cdots + a_n C_{n,k}.
+    \]
+    Thus
+    \[
+        aC = a_1 C_{1,\cdot} + \cdots + a_n C_{n,\cdot}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:12}
+    Give an example with 2-by-2 matrices to show that matrix multiplication is not commutative. In other words, find 2-by-2 matrices \( A \) and \( C \) such that \( AC \neq CA \).
+\end{exercise}
+
+\begin{solution}
+    Let
+    \[
+        A = \begin{pmatrix}
+            1 & 0 \\
+            0 & 0
+        \end{pmatrix}
+        \quand
+        C = \begin{pmatrix}
+            1 & 1 \\
+            0 & 0
+        \end{pmatrix}.
+    \]
+    Then
+    \[
+        AC = \begin{pmatrix}
+            1 & 1 \\
+            0 & 0
+        \end{pmatrix}
+        \neq
+        \begin{pmatrix}
+            1 & 0 \\
+            0 & 0
+        \end{pmatrix} = CA.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:13}
+    Prove that the distributive property holds for matrix addition and matrix multiplication. In other words, suppose \( A, B, C, D, E, \) and \( F \) are matrices whose sizes are such that \( A(B + C) \) and \( (D + E)F \) make sense. Prove that \( AB + AC \) and \( DF + EF \) both make sense and that \( A(B + C) = AB + AC \) and \( (D + E)F = DF + EF \).
+\end{exercise}
+
+\begin{solution}
+    For \( B + C \) to make sense, \( B \) and \( C \) must have the same sizes; suppose they are both \(n\)-by-\(p\) matrices. Then for \( A(B + C) \) to make sense, \( A \) must be an \(m\)-by-\(n\) matrix. Given this, both \( AB \) and \( AC \) are \(m\)-by-\(p\) matrices and thus \( AB + AC \) makes sense.
+    
+    Similarly, suppose \( D \) and \( E \) are both \(m\)-by-\(n\) matrices. Then for \( (D + E)F \) to make sense, \( F \) must be an \(n\)-by-\(p\) matrix. Given this, both \( DF \) and \( EF \) are \(m\)-by-\(p\) matrices and thus \( DF + EF \) makes sense.
+    
+    In what follows, the matrix of any linear map is understood to be with respect to the relevant standard bases of \( \F^m, \F^n, \) and \( \F^p \). Given an \(m\)-by-\(n\) matrix \( A \) whose entries \( A_{j,k} \) belong to \( \F \), define a linear map \( T_A : \F^n \to \F^m \) by
+    \[
+        T_A e_k = A_{1,k} e_1 + \cdots + A_{m,k} e_m,
+    \]
+    where \( e_k \) is the \(k\)\ts{th} standard basis vector. Evidently, the matrix of this linear map is \( A \). Thus \( A(B + C) = AB + AC \) if and only if \( T_{A(B+C)} = T_{AB + AC} \). By 3.9, 3.36, and 3.43, we have
+    \[
+        T_{A(B+C)} = T_A T_{B+C} = T_A (T_B + T_C) = T_A T_B + T_A T_C = T_{AB} + T_{AC} = T_{AB + AC}.
+    \]
+    Similarly, \( (D + E)F = DF + EF \) if and only if \( T_{(D+E)F} = T_{DF + EF} \). By 3.9, 3.36, and 3.43, we have
+    \[
+        T_{(D+E)F} = T_{D+E} T_F = (T_D + T_E) T_F = T_D T_F + T_E T_F = T_{DF} + T_{EF} = T_{DF + EF}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:14}
+    Prove that matrix multiplication is associative. In other words, suppose \( A, B, \) and \( C \) are matrices whose sizes are such that \( (AB)C \) makes sense. Prove that \( A(BC) \) makes sense and that \( (AB)C = A(BC) \).
+\end{exercise}
+
+\begin{solution}
+    If \( A \) is an \(m\)-by-\(n\) matrix, then for \( AB \) to make sense, \( B \) must be an \(n\)-by-\(p\) matrix, so that \( AB \) is an \(m\)-by-\(p\) matrix. Then for \( (AB)C \) to make sense, \( C \) must be a \(p\)-by-\(q\) matrix. Thus \( BC \) is an \(n\)-by-\(q\) matrix and \( A(BC) \) is an \(m\)-by-\(q\) matrix. For a given matrix \( A \), define the linear map \( T_A \) as in \Cref{ex:13}. Then \( (AB)C = A(BC) \) if and only if \( T_{(AB)C} = T_{A(BC)} \). By 3.9 and 3.43, we have
+    \[
+        T_{(AB)C} = T_{AB} T_C = (T_A T_B) T_C = T_A (T_B T_C) = T_A T_{BC} = T_{A(BC)}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:15}
+    Suppose \( A \) is an \(n\)-by-\(n\) matrix and \( 1 \leq j, k \leq n \). Show that the entry in row \( j \), column \( k \), of \( A^3 \) (which to defined to mean \( AAA \)) is
+    \[
+        \sum_{p=1}^n \sum_{r=1}^n A_{j,p} A_{p,r} A_{r,k}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    By the definition of matrix multiplication, we have
+    \[
+        (A^3)_{j,k} = (A^2 A)_{j,k} = \sum_{r=1}^n (A^2)_{j,r} A_{r,k} = \sum_{r=1}^n \sum_{p=1}^n A_{j,p} A_{p,r} A_{r,k} = \sum_{p=1}^n \sum_{r=1}^n A_{j,p} A_{p,r} A_{r,k}.
+    \]
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ladr}{\textcolor{blue}{[LADR]} Axler, S. (2015) \textit{Linear Algebra Done Right.} 3\ts{rd} edition.}
+
+\end{document}
