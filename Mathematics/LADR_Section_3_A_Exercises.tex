@@ -382,28 +382,15 @@ Exercises with solutions from Section 3.A of \hyperlink{ladr}{[LADR]}.
 \end{exercise}
 
 \begin{solution}
-    By 2.34 there is a subspace \( X \) of \( V \) such that \( V = U \oplus X \). Then for \( v \in V \), we have \( v = u + x \) for unique vectors \( u \in U \) and \( x \in X \). Given this, the map
+    Let \( u_1, \ldots, u_m \) be a basis of \( U \), which we extend to a basis \( u_1, \ldots, u_m, v_1, \ldots, v_n \) of \( V \). By 3.5, we may define a (unique) linear map \( T : V \to W \) by specifying
     \[
-        {
-        \setlength{\arraycolsep}{1mm}
-        \begin{array}{rcccl}
-            T & : & V & \to     & W \\
-              &   & v & \mapsto & Su
-        \end{array}
-        }
+        Tu_j = Su_j \text{ for } 1 \leq j \leq m \quand Tv_j = 0 \text{ for } 1 \leq j \leq n.
     \]
-    is well-defined. For \( u \in U \), it is clear that the unique representation of \( u \) as a sum in \( U \oplus X \) is \( u + 0 \), so that \( Tu = Su \). Thus \( T \) extends \( S \).
-
-    Suppose \( v_1, v_2 \in V \). Then there are unique vectors \( u_1, u_2 \in U \) and \( x_1, x_2 \in X \) such that \( v_1 = u_1 + x_1 \) and \( v_2 = u_2 + x_2 \). Since \( v_1 + v_2 = (u_1 + u_2) + (x_1 + x_2) \), this must be the unique representation of \( v_1 + v_2 \) as a sum in \( U \oplus X \). Then
-    \[
-        T(v_1 + v_2) = S(u_1 + u_2) = Su_1 + Su_2 = T v_1 + T v_2.
-    \]
-    
-    Suppose \( v \in V \) and \( \lambda \in \F \). Then there are unique vectors \( u \in U \) and \( x \in X \) such that \( v = u + x \). Since \( \lambda v = \lambda u + \lambda x \), this must be the unique representation of \( \lambda v \) as a sum in \( U \oplus X \). Then
-    \[
-        T(\lambda v) = S(\lambda u) = \lambda Su = \lambda Tv.
-    \]
-    Thus \( T \) is linear.
+    If \( u \in U \), then there are scalars \( a_1, \ldots, a_m \) such that \( u = a_1 u_1 + \cdots + a_m u_m \). Observe that
+    \begin{multline*}
+        Tu = T(a_1 u_1 + \cdots + a_m u_m) = a_1 Tu_1 + \cdots + a_m Tu_m \\ = a_1 Su_1 + \cdots + a_m Su_m = S(a_1 u_1 + \cdots + a_m u_m) = Su.
+    \end{multline*}
+    Thus \( T \) extends \( S \).
 \end{solution}
 
 \begin{exercise}
