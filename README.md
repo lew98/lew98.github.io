@@ -45,3 +45,4 @@
     - [Section 3.C Exercises](https://lew98.github.io/Mathematics/LADR_Section_3_C_Exercises.pdf)
     - [Section 3.D Exercises](https://lew98.github.io/Mathematics/LADR_Section_3_D_Exercises.pdf)
     - [Section 3.E Exercises](https://lew98.github.io/Mathematics/LADR_Section_3_E_Exercises.pdf)
+    - [Section 3.F Exercises](https://lew98.github.io/Mathematics/LADR_Section_3_F_Exercises.pdf)

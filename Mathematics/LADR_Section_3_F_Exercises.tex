@@ -1,0 +1,839 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 3.F Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 3.F.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 3.F.#1#3}
+
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\lmap}{\mathcal{L}}
+\newcommand{\mat}{\mathcal{M}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\Span}{\text{span}}
+\newcommand{\Null}{\text{null\,}}
+\newcommand{\Range}{\text{range\,}}
+\newcommand{\Rank}{\text{rank\,}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\tpose}[1]{#1^{\text{t}}}
+\newcommand{\upd}{\text{d}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 3.F Exercises}
+
+Exercises with solutions from Section 3.F of \hyperlink{ladr}{[LADR]}.
+
+\begin{exercise}
+\label{ex:1}
+    Explain why every linear functional is either surjective or the zero map.
+\end{exercise}
+
+\begin{solution}
+    Suppose \( \varphi : V \to \F \) is a non-zero linear functional, so that there is a \( v \in V \) such that \( \varphi(v) \neq 0 \). Then for any \( \lambda \in \F \), we have
+    \[
+        \varphi \left( \frac{\lambda}{\varphi(v)} v \right) = \lambda.
+    \]
+    Thus \( \varphi \) is surjective.
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Give three distinct examples of linear functionals on \( \R^{[0,1]} \).
+\end{exercise}
+
+\begin{solution}
+    For \( i = 0, 1, 2 \), define \( \varphi_i : \R^{[0,1]} \to \R \) by \( \varphi_i(f) = f \left( \tfrac{i}{2} \right) \). Then each \( \varphi_i \in \left( \R^{[0,1]} \right)' \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Suppose \( V \) is finite-dimensional and \( v \in V \) with \( v \neq 0 \). Prove that there exists \( \varphi \in V' \) such that \( \varphi(v) = 1 \).
+\end{exercise}
+
+\begin{solution}
+    Set \( v_1 := v \) and extend this to a basis \( v_1, \ldots, v_m \) of \( V \). Take the dual basis \( \varphi_1, \ldots, \varphi_m \) of \( V' \) and note that \( \varphi_1(v_1) = 1 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Suppose \( V \) is finite-dimensional and \( U \) is a subspace of \( V \) such that \( U \neq V \). Prove that there exists \( \varphi \in V' \) such that \( \varphi(u) = 0 \) for every \( u \in U \) but \( \varphi \neq 0 \).
+\end{exercise}
+
+\begin{solution}
+    Let \( u_1, \ldots, u_m \) be a basis of \( U \) and extend this to a basis \( u_1, \ldots, u_m, v_1, \ldots, v_n \) of \( V \). Since \( U \neq V \), there must be at least one \( v_j \), i.e.\ \( n \geq 1 \). Define \( \varphi : V \to \F \) by
+    \[
+        \varphi(u_j) = 0 \quand \varphi(v_j) = 1.
+    \]
+    Then \( \varphi(u) = 0 \) for all \( u \in U \) but \( \varphi \neq 0 \) since \( \varphi(v_1) = 1 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Suppose \( V_1, \ldots, V_m \) are vector spaces. Prove that \( (V_1 \times \cdots \times V_m)' \) and \( V_1' \times \cdots \times V_m' \) are isomorphic vector spaces.
+\end{exercise}
+
+\begin{solution}
+    This follows from \href{https://lew98.github.io/Mathematics/LADR_Section_3_E_Exercises.pdf}{Exercise 3.E.4}.
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Suppose \( V \) is finite-dimensional and \( v_1, \ldots, v_m \in V \). Define a linear map \( \Gamma : V' \to \F^m \) by
+    \[
+        \Gamma(\varphi) = (\varphi(v_1), \ldots, \varphi(v_m)).
+    \]
+    \begin{enumerate}
+        \item Prove that \( v_1, \ldots, v_m \) spans \( V \) if and only if \( \Gamma \) is injective.
+
+        \item Prove that \( v_1, \ldots, v_m \) is linearly independent if and only if \( \Gamma \) is surjective.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    Let \( e_1, \ldots, e_m \) be the standard basis of \( \F^m \) and let \( \psi_1, \ldots, \psi_m \) be the dual basis of \( (\F^m)' \), so that \( \psi_j(x_1, \ldots, x_m) = x_j \). Then the map \( \Phi : \F^m \to (\F^m)' \) given by \( \Phi(e_j) = \psi_j \) is an isomorphism and allows us to identify \( \F^m \) with \( (\F^m)' \). Define \( T : \F^m \to V \) by
+    \[
+        T(x_1, \ldots, x_m) = x_1 v_1 + \cdots + x_m v_m.
+    \]
+    For any \( \varphi \in V' \) and \( (x_1, \ldots, x_m) \in \F^m \), observe that
+    \[
+        [T'(\varphi)](x_1, \ldots, x_m) = \varphi(T(x_1, \ldots, x_m)) = \varphi(x_1 v_1 + \cdots + x_m v_m) = x_1 \varphi(v_1) + \cdots + x_m \varphi(v_m).
+    \]
+    Furthermore,
+    \[
+        (\Phi \circ \Gamma)(\varphi) = \Phi(\varphi(v_1) e_1 + \cdots + \varphi(v_m) e_m) = \varphi(v_1) \psi_1 + \cdots + \varphi(v_m) \psi_m.  
+    \]
+    This implies that
+    \[
+        [(\Phi \circ \Gamma)(\varphi)](x_1, \ldots, x_m) = x_1 \varphi(v_1) + \cdots + x_m \varphi(v_m).
+    \]
+    Thus \( T' = \Phi \circ \Gamma \). Note that since \( \Phi \) is a bijection, the injectivity of \( \Gamma \) is equivalent to the injectivity of \( T' \) and the surjectivity of \( \Gamma \) is equivalent to the surjectivity of \( T' \).
+    \begin{enumerate}
+        \item By \href{https://lew98.github.io/Mathematics/LADR_Section_3_B_Exercises.pdf}{Exercise 3.B.3}, the list \( v_1, \ldots, v_m \) spans \( V \) if and only if \( T \) is surjective. By 3.108, \( T \) is surjective if and only if \( T' \) is injective. By the previous discussion, \( T' \) is injective if and only if \( \Gamma \) is injective.
+
+        \item By \href{https://lew98.github.io/Mathematics/LADR_Section_3_B_Exercises.pdf}{Exercise 3.B.3}, the list \( v_1, \ldots, v_m \) is linearly independent if and only if \( T \) is injective. By 3.110, \( T \) is injective if and only if \( T' \) is surjective. By the previous discussion, \( T' \) is surjective if and only if \( \Gamma \) is surjective.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Suppose \( m \) is a positive integer. Show that the dual basis of the basis \( 1, x, \ldots, x^m \) of \( \poly_m(\R) \) is \( \varphi_0, \varphi_1, \ldots, \varphi_m \), where \( \varphi_j(p) = \tfrac{p^{(j)}(0)}{j!} \). Here \( p^{(j)} \) denotes the \( j \)\ts{th} derivative of \( p \), with the understanding that the 0\ts{th} derivative of \( p \) is \( p \).
+\end{exercise}
+
+\begin{solution}
+    In what follows, \( i \) and \( j \) range over \( \{ 0, 1, \ldots, m \} \). The dual basis is defined by \( \varphi_j(x^i) = \delta^i_j \), where \( \delta^i_j \) is the \href{https://en.wikipedia.org/wiki/Kronecker_delta}{Kronecker delta}. Define \( \psi_j : \poly_m(\R) \to \R \) by \( \psi_j(p) = \tfrac{p^{(j)}(0)}{j!} \); each \( \psi_j \) is a linear functional since differentiation is a linear operation. Note that since
+    \[
+        \frac{\upd^j}{\upd x^j} x^i = \begin{cases}
+            0 & \text{if } i < j, \\
+            \frac{i!}{(i - j)!} x^{i - j} & \text{if } i \geq j,
+        \end{cases}
+    \]
+    we have \( \psi_j(x^i) = \delta^i_j \). The uniqueness part of 3.5 now implies that \( \varphi_j = \psi_j \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Suppose \( m \) is a positive integer.
+    \begin{enumerate}
+        \item Show that \( 1, x - 5, \ldots, (x - 5)^m \) is a basis of \( \poly_m(\R) \).
+
+        \item What is the dual basis of the basis in part (a)?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item If there are scalars \( a_0, \ldots, a_m \) such that
+        \[
+            a_0 + a_1 (x - 5) + \cdots + a_m (x - 5)^m = 0,
+        \]
+        then by considering the degree of each side of this equation we can see that \( a_0 = \cdots = a_m = 0 \). Thus \( 1, x - 5, \ldots, (x - 5)^m \) is a linearly independent list of \( m + 1 \) vectors in an \( (m + 1) \)-dimensional vector space and hence must be a basis.
+
+        \item An analogous argument to the one given in \Cref{ex:7} shows that the dual basis \( \varphi_0, \ldots, \varphi_m \) to the basis in part (a) is given by
+        \[
+            \varphi_j(p) = \frac{p^{(j)}(5)}{j!}.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Suppose \( v_1, \ldots, v_n \) is a basis of \( V \) and \( \varphi_1, \ldots, \varphi_n \) is the corresponding dual basis of \( V' \). Suppose \( \psi \in V' \). Prove that
+    \[
+        \psi = \psi(v_1) \varphi_1 + \cdots + \psi(v_n) \varphi_n.
+    \]
+\end{exercise}
+
+\begin{solution}
+    Let \( v \in V \) be given. There are scalars \( a_1, \ldots, a_n \) such that \( v = \sum_{j=1}^n a_j v_j \). Observe that
+    \begin{align*}
+        \left( \sum_{i=1}^n \psi(v_i) \varphi_i \right)(v) &= \sum_{i=1}^n \psi(v_i) \varphi_i(v) \\
+        &= \sum_{i=1}^n \psi(v_i) \left[ \varphi_i \left( \sum_{j=1}^n a_j v_j \right) \right] \\
+        &= \sum_{i=1}^n \psi(v_i) \sum_{j=1}^n a_j \varphi_i(v_j) \\
+        &= \sum_{i=1}^n a_i \psi(v_i) \\
+        &= \psi \left( \sum_{i=1}^n a_i v_i \right) \\
+        &= \psi(v).
+    \end{align*}
+    Thus \( \psi = \sum_{i=1}^n \psi(v_i) \varphi_i \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Prove the first two bullet points in 3.101.
+\end{exercise}
+
+\begin{solution}
+    The first bullet point says that \( (S + T)' = S' + T' \) for any \( S, T \in \lmap(V, W) \). Indeed, for any \( \psi \in W' \) and \( v \in V \) we have
+    \begin{multline*}
+        [(S + T)'(\psi)](v) = \psi((S + T)(v)) = \psi(Sv + Tv) = \psi(Sv) + \psi(Tv) \\ = [S'(\psi)](v) + [T'(\psi)](v) = [S'(\psi) + T'(\psi)](v) = [(S' + T')(\psi)](v).
+    \end{multline*}
+    The second bullet point says that \( (\lambda T)' = \lambda T' \) for any \( \lambda \in \F \) and \( T \in \lmap(V, W) \). Indeed, for any \( \psi \in W' \) and \( v \in V \) we have
+    \[
+        [(\lambda T)'(\psi)](v) = \psi((\lambda T)(v)) = \psi(\lambda Tv) = \lambda \psi(Tv) = \lambda [T'(\psi)](v) = [\lambda T'(\psi)](v) = [(\lambda T')(\psi)](v).
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Suppose \( A \) is an \(m\)-by-\(n\) matrix with \( A \neq 0 \). Prove that the rank of \( A \) is 1 if and only if there exist \( (c_1, \ldots, c_m) \in \F^m \) and \( (d_1, \ldots, d_n) \in \F^n \) such that \( A_{j,k} = c_j d_k \) for every \( j = 1, \ldots, m \) and every \( k = 1, \ldots, n \).
+\end{exercise}
+
+\begin{solution}
+    Suppose there exist \( (c_1, \ldots, c_m) \in \F^m \) and \( (d_1, \ldots, d_n) \in \F^n \) such that \( A_{j,k} = c_j d_k \) for every \( j = 1, \ldots, m \) and every \( k = 1, \ldots, n \). If we define
+    \[
+        C := \begin{pmatrix}
+            c_1 \\
+            \vdots \\
+            c_m
+        \end{pmatrix} \in \F^{m,1}
+        \quand
+        D:= \begin{pmatrix}
+            d_1 & \cdots & d_n
+        \end{pmatrix} \in \F^{1,n},
+    \]
+    then by assumption we have \( A = CD \). Note that since \( A \neq 0 \), we have \( \Rank A \geq 1 \). Furthermore, we must have \( C, D \neq 0 \), which implies that \( \Rank C = \Rank D = 1 \). \href{https://lew98.github.io/Mathematics/LADR_Section_3_B_Exercises.pdf}{Exercise 3.B.23} and 3.117 then give us
+    \[
+        \Rank A = \Rank CD \leq \min \{ \Rank C, \Rank D \} = 1.
+    \]
+    We may conclude that \( \Rank A = 1 \).
+
+    Now suppose that \( \Rank A = 1 \), i.e.\ the span of the columns of \( A \) has dimension 1, so that there is a column
+    \[
+        c = \begin{pmatrix}
+            c_1 \\
+            \vdots \\
+            c_m
+        \end{pmatrix} \in \F^{m,1}
+    \]
+    of \( A \) such that each column of \( A \) is a scalar multiple of \( c \). In other words, there are scalars \( d_1, \ldots, d_n \) such that
+    \[
+        A_{\cdot,k} = d_k c
+    \]
+    for each \( 1 \leq k \leq n \). It follows that \( A_{j,k} = c_j d_k \) for every \( j = 1, \ldots, m \) and every \( k = 1, \ldots, n \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:12}
+    Show that the dual map of the identity map on \( V \) is the identity map on \( V' \).
+\end{exercise}
+
+\begin{solution}
+    Let \( I : V \to V \) be the identity map. Then \( I' : V' \to V' \) is defined by
+    \[
+        I'(\psi) = \psi \circ I = \psi.
+    \]
+    Thus \( I' \) is the identity on \( V' \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:13}
+    Define \( T : \R^3 \to \R^2 \) by \( T(x, y, z) = (4x + 5y + 6z, 7x + 8y + 9z) \). Suppose \( \varphi_1, \varphi_2 \) denotes the dual basis of the standard basis of \( \R^2 \) and \( \psi_1, \psi_2, \psi_3 \) denotes the dual basis of the standard basis of \( \R^3 \).
+    \begin{enumerate}
+        \item Describe the linear functionals \( T'(\varphi_1) \) and \( T'(\varphi_2) \).
+
+        \item Write \( T'(\varphi_1) \) and \( T'(\varphi_2) \) as linear combinations of \( \psi_1, \psi_2, \psi_3 \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item By the definition of the dual map, we have
+        \begin{gather*}
+            [T'(\varphi_1)](x, y, z) = \varphi_1(T(x, y, z)) = \varphi_1(4x + 5y + 6z, 7x + 8y + 9z) = 4x + 5y + 6z, \\[2mm]
+            [T'(\varphi_2)](x, y, z) = \varphi_2(T(x, y, z)) = \varphi_2(4x + 5y + 6z, 7x + 8y + 9z) = 7x + 8y + 9z.
+        \end{gather*}
+
+        \item Note that
+        \[
+            \psi_1(x, y, z) = x, \quad \psi_2(x, y, z) = y, \quand \psi_3(x, y, z) = z.
+        \]
+        It follows that
+        \[
+            T'(\varphi_1) = 4 \psi_1 + 5 \psi_2 + 6 \psi_3 \quand T'(\varphi_2) = 6 \psi_1 + 7 \psi_2 + 8 \psi_3.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:14}
+    Define \( T : \poly(\R) \to \poly(\R) \) by \( (Tp)(x) = x^2 p(x) + p''(x) \) for \( x \in \R \).
+    \begin{enumerate}
+        \item Suppose \( \varphi \in \poly(\R)' \) is defined by \( \varphi(p) = p'(4) \). Describe the linear functional \( T'(\varphi) \) on \( \poly(\R) \).
+
+        \item Suppose \( \varphi \in \poly(\R)' \) is defined by \( \int_0^1 p(x) dx \). Evaluate \( (T'(\varphi))(x^3) \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item We have
+        \begin{align*}
+            [T'(\varphi)](p) &= \varphi(Tp) \\
+            &= \varphi(x^2 p + p'') \\
+            &= (x^2 p(x) + p''(x))'|_{x=4} \\
+            &= (2x p(x) + x^2 p'(x) + p'''(x))|_{x=4} \\
+            &= 8 p(4) + 16 p'(4) + p'''(4).
+        \end{align*}
+
+        \item We have
+        \[
+            [T'(\varphi)](x^3) = \varphi(Tx^3) = \varphi(x^5 + 6x) = \int_0^1 x^5 + 6x \,\, \upd x = \tfrac{19}{6}.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:15}
+    Suppose \( W \) is finite-dimensional and \( T \in \lmap(V, W) \). Prove that \( T' = 0 \) if and only if \( T = 0 \).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( T = 0 \) and \( \varphi \in W' \). Then
+    \[
+        T'(\varphi) = \varphi \circ T = \varphi \circ 0 = 0.
+    \]
+    Thus \( T' = 0 \).
+
+    Now suppose that \( T' = 0 \). Let \( w_1, \ldots, w_n \) be a basis of \( W \) and let \( \psi_1, \ldots, \psi_n \) be the corresponding dual basis of \( W' \). For any \( v \in V \), there are scalars \( a_1, \ldots, a_n \) such that \( Tv = a_1 w_1 + \cdots + a_n w_n \). For each \( 1 \leq j \leq n \), note that
+    \[
+        0 = [T'(\psi_j)](v) = \psi_j(Tv) = \psi_j(a_1 w_1 + \cdots + a_n w_n) = a_j.
+    \]
+    Thus \( Tv = 0 \) and we see that \( T = 0 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:16}
+    Suppose \( V \) and \( W \) are finite-dimensional. Prove that the map that takes \( T \in \lmap(V, W) \) to \( T' \in \lmap(W', V') \) is an isomorphism of \( \lmap(V, W) \) onto \( \lmap(W', V') \).
+\end{exercise}
+
+\begin{solution}
+    Let \( \Phi \) be the map in question, i.e.\ \( \Phi(T) = T' \). 3.101 shows that \( \Phi \) is linear and \Cref{ex:15} shows that \( \Phi \) is injective. 3.61 and 3.95 give us \( \dim \lmap(V, W) = \dim \lmap(W', V') \) and so 3.69 allows us to conclude that \( \Phi \) is an isomorphism.
+\end{solution}
+
+\begin{exercise}
+\label{ex:17}
+    Suppose \( U \subset V \). Explain why \( U^0 = \{ \varphi \in V' : U \subset \Null \varphi \} \).
+\end{exercise}
+
+\begin{solution}
+    This follows since \( \varphi(u) = 0 \iff u \in \Null \varphi \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:18}
+    Suppose \( V \) is finite-dimensional and \( U \subset V \). Show that \( U = \{ 0 \} \) if and only if \( U^0 = V' \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( U = \{ 0 \} \). Then because each \( \varphi \in V' \) is a linear map, we have \( \varphi(0) = 0 \) and thus \( \varphi \in U^0 \). It follows that \( U^0 = V' \).
+
+    Now suppose that \( U \neq \{ 0 \} \), i.e.\ there exists \( u \in U \) with \( u \neq 0 \). By \Cref{ex:3}, there exists a linear functional \( \varphi \in V' \) such that \( \varphi(u) = 1 \). It follows that \( \varphi \not\in U^0 \), so that \( U^0 \neq V' \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:19}
+    Suppose \( V \) is finite-dimensional and \( U \) is a subspace of \( V \). Show that \( U = V \) if and only if \( U^0 = \{ 0 \} \).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( U = V \). Then if \( \varphi \in U^0 \), we have \( \varphi(v) = 0 \) for all \( v \in V \), i.e. \( \varphi = 0 \), or \( U^0 = \{ 0 \} \).
+
+    Now suppose that \( U \neq V \). By \Cref{ex:4}, there is a linear functional \( \varphi \in V' \) such that \( \varphi(u) = 0 \) for every \( u \in U \), i.e.\ \( \varphi \in U^0 \), but \( \varphi \neq 0 \). Thus \( U^0 \neq \{ 0 \} \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:20}
+    Suppose \( U \) and \( W \) are subsets of \( V \) with \( U \subset W \). Prove that \( W^0 \subset U^0 \).
+\end{exercise}
+
+\begin{solution}
+    If \( \varphi \in W^0 \), then in particular \( \varphi(u) = 0 \) for each \( u \in U \), since \( U \subseteq W \). Thus \( \varphi \in U^0 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:21}
+    Suppose \( V \) is finite-dimensional and \( U \) and \( W \) are subspaces of \( V \) with \( W^0 \subset U^0 \). Prove that \( U \subset W \).
+\end{exercise}
+
+\begin{solution}
+    We will prove the contrapositive statement. Suppose that \( U \not\subseteq W \), i.e.\ there exists \( u \in U \) such that \( u \not\in W \). Let \( w_1, \ldots, w_m \) be a basis of \( W \). Since \( u \not\in W \), the list \( w_1, \ldots, w_m, u \) must be linearly independent and thus we can extend this list to a basis \( w_1, \ldots, w_m, u, v_1, \ldots, v_n \) for \( V \). Define \( \varphi \in V' \) by
+    \[
+        \varphi(w_j) = \varphi(v_j) = 0 \quand \varphi(u) = 1.
+    \]
+    Then \( \varphi \in W^0 \) but \( \varphi \not\in U^0 \), i.e.\ \( W^0 \not\subseteq U^0 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:22}
+    Suppose \( U, W \) are subspaces of \( V \). Show that \( (U + W)^0 = U^0 \cap W^0 \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( \varphi \in (U + W)^0 \). Since \( U \subseteq U + W \) and \( W \subseteq U + W \), we have in particular that \( \varphi(u) = 0 \) and \( \varphi(w) = 0 \) for all \( u \in U \) and \( w \in W \), i.e.\ \( \varphi \in U^0 \cap W^0 \). Thus \( (U + W)^0 \subseteq U^0 \cap W^0 \).
+
+    Now suppose that \( \varphi \in U^0 \cap W^0 \). For any \( u + w \in U + W \), we have
+    \[
+        \varphi(u + w) = \varphi(u) + \varphi(w) = 0 + 0 = 0.
+    \]
+    It follows that \( \varphi \in (U + W)^0 \) and hence that \( U^0 \cap W^0 \subseteq (U + W)^0 \). We may conclude that \( (U + W)^0 = U^0 \cap W^0 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:23}
+    Suppose \( V \) is finite-dimensional and \( U \) and \( W \) are subspaces of \( V \). Prove that \( (U \cap W)^0 = U^0 + W^0 \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( \varphi \in U^0 + W^0 \), so that \( \varphi = \psi_1 + \psi_2 \) for some \( \psi_1 \in U^0 \) and some \( \psi_2 \in W^0 \). If \( v \in U \cap W \), then
+    \[
+        \varphi(v) = \psi_1(v) + \psi_2(v) = 0 + 0 = 0.
+    \]
+    Thus \( \varphi \in (U \cap W)^0 \) and we see that \( U^0 + W^0 \subseteq (U \cap W)^0 \).
+
+    For the reverse inclusion, let \( t_1, \ldots, t_k \) be a basis of \( U \cap W \). We extend this list twice: first to a basis \( t_1, \ldots, t_k, u_1, \ldots, u_l \) of \( U \) and also to a basis \( t_1, \ldots, t_k, w_1, \ldots, w_m \) of \( W \). As the proof of 2.43 shows, the list \( t_1, \ldots, t_k, u_1, \ldots, u_l, w_1, \ldots, w_m \) is a basis of \( U + W \). Finally, extend this to a basis
+    \[
+        t_1, \ldots, t_k, u_1, \ldots, u_l, w_1, \ldots, w_m, x_1, \ldots, x_n
+    \]
+    of \( V \). Let \( \varphi \in (U \cap W)^0 \) be given and define \( \psi_1, \psi_2 \in V' \) by
+    \begin{gather*}
+        \psi_1(t_j) = \psi_1(u_j) = 0, \quad \psi_1(w_j) = \varphi(w_j) \quand \psi_1(x_j) = \tfrac{1}{2} \varphi(x_j), \\
+        \psi_2(t_j) = \psi_2(w_j) = 0, \quad \psi_2(u_j) = \varphi(u_j) \quand \psi_2(x_j) = \tfrac{1}{2} \varphi(x_j).
+    \end{gather*}
+    Since \( \psi_1 \) maps the basis vectors of \( U \) to 0 and \( \psi_2 \) maps the basis vectors of \( W \) to 0, we have \( \psi_1 \in U^0 \) and \( \psi_2 \in W^0 \). We claim that \( \varphi = \psi_1 + \psi_2 \). Let \( v \in V \) be given. Then \( v \) is of the form
+    \[
+        v = \sum a_j t_j + \sum b_j u_j + \sum c_j w_j + \sum d_j x_j.
+    \]
+    Observe that
+    \begin{align*}
+        (\psi_1 + \psi_2)(v) &= \sum a_j (\psi_1 + \psi_2)(t_j) + \sum b_j (\psi_1 + \psi_2)(u_j) \\
+        &+ \sum c_j (\psi_1 + \psi_2)(w_j) + \sum d_j (\psi_1 + \psi_2)(x_j) \\
+        &= \sum a_j \varphi(t_j) + \sum b_j \varphi(u_j) \\
+        &+ \sum c_j \varphi(w_j) + \sum d_j \varphi(x_j) \\
+        &= \varphi(v).
+    \end{align*}
+    Our claim follows, i.e.\ \( \varphi \in U^0 + W^0 \), so that \( (U \cap W)^0 \subseteq U^0 + W^0 \). We may conclude that \( (U \cap W)^0 = U^0 + W^0 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:24}
+    Prove 3.106 using the ideas sketched in the discussion before the statement of 3.106.
+\end{exercise}
+
+\begin{solution}
+    Let \( u_1, \ldots, u_m \) be a basis of \( U \), which we extend to a basis \( u_1, \ldots, u_m, v_1, \ldots, v_n \) of \( V \). Let \( \varphi_1, \ldots, \varphi_m, \psi_1, \ldots, \psi_n \) be the corresponding dual basis of \( V' \). We will show that \( \mathscr{B} := \psi_1, \ldots, \psi_n \) is a basis of \( U^0 \). Certainly, \( \mathscr{B} \) is linearly independent. Furthermore, we claim that \( U^0 = \Span(\mathscr{B}) \). By definition, for each \( 1 \leq j \leq n \) and \( 1 \leq i \leq m \), we have \( \psi_j(u_i) = 0 \), so that \( \psi_j \in U^0 \). Suppose that \( \psi \in U^0 \). There are scalars \( a_1, \ldots, a_m, b_1, \ldots, b_n \) such that
+    \[
+        \psi = a_1 \varphi_1 + \cdots + a_m \varphi_m + b_1 \psi_1 + \cdots + b_n \psi_n.
+    \]
+    In particular, for each \( 1 \leq i \leq n \), we have \( 0 = \psi(u_i) = a_i \). Thus
+    \[
+        \psi = b_1 \psi_1 + \cdots + b_n \psi_n \in \Span(\psi_1, \ldots, \psi_n).
+    \]
+    It follows that \( U^0 = \Span(\mathscr{B}) \), as claimed. We may conclude that \( \mathscr{B} \) is a basis of \( U^0 \), whence
+    \[
+        \dim U + \dim U^0 = \dim V.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:25}
+    Suppose \( V \) is finite-dimensional and \( U \) is a subspace of \( V \). Show that
+    \[
+        U = \{ v \in V : \varphi(v) = 0 \text{ for every } \varphi \in U^0 \}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    Let \( W = \{ v \in V : \varphi(v) = 0 \text{ for every } \varphi \in U^0 \} \). It is clear that \( U \subseteq W \). For the reverse inclusion, let \( u_1, \ldots, u_m \) be a basis of \( U \), which we extend to a basis \( u_1, \ldots, u_m, v_1, \ldots, v_n \) of \( V \). Let \( \varphi_1, \ldots, \varphi_m, \psi_1, \ldots, \psi_n \) be the corresponding dual basis of \( V' \). As we showed in \Cref{ex:24}, \( \psi_1, \ldots, \psi_n \) is a basis of \( U^0 \). Suppose \( v \in W \). There are scalars \( a_1, \ldots, a_m, b_1, \ldots, b_n \) such that
+    \[
+        v = a_1 u_1 + \cdots + a_m u_m + b_1 v_1 + \cdots + b_n v_n.
+    \]
+    Since \( v \in W \), we have \( \psi_j(v) = b_j = 0 \). Thus \( v \) is of the form \( v = a_1 u_1 + \cdots + a_m u_m \in U \), so that \( W \subseteq U \). We may conclude that \( U = W \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:26}
+    Suppose \( V \) is finite-dimensional and \( \Gamma \) is a subspace of \( V' \). Show that
+    \[
+        \Gamma = \{ v \in V : \varphi(v) = 0 \text{ for every } \varphi \in \Gamma \}^0.
+    \]
+\end{exercise}
+
+\begin{solution}
+    Let \( W = \{ v \in V : \varphi(v) = 0 \text{ for every } \varphi \in \Gamma \} \). It is straightforward to verify that \( \Gamma \subseteq W^0 \), i.e.\ \( \Gamma \) is a subspace of \( W^0 \). If we let \( \varphi_1, \ldots, \varphi_m \) be a basis of \( \Gamma \), then \( W = \Null \varphi_1 \cap \cdots \cap \Null \varphi_m \). \Cref{ex:30} now implies that \( \dim W = \dim V - m \), which in turn gives us \( \dim W^0 = m \) by 3.106. So \( \Gamma \) is a subspace of \( W^0 \) such that \( \dim \Gamma = \dim W^0 \); it must be the case that \( \Gamma = W^0 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:27}
+    Suppose \( T \in \lmap(\poly_5(\R), \poly_5(\R)) \) and \( \Null T' = \Span(\varphi) \), where \( \varphi \) is the linear functional on \( \poly_5(\R) \) defined by \( \varphi(p) = p(8) \). Prove that \( \Range T = \{ p \in \poly_5(\R) : p(8) = 0 \} \).
+\end{exercise}
+
+\begin{solution}
+    By 3.107, we have \( \Null T' = (\Range T)^0 = \Span(\varphi) \), and by \Cref{ex:25}, we have
+    \[
+        \Range T = \{ p \in \poly_5(\R) : \psi(p) = 0 \text{ for every } \psi \in (\Range T)^0 \}.
+    \]
+    Since \( (\Range T)^0 = \Span(\varphi) \), we see that
+    \begin{multline*}
+        \Range T = \{ p \in \poly_5(\R) : \psi(p) = 0 \text{ for every } \psi \in \Span(\varphi) \} \\ = \{ p \in \poly_5(\R) : \varphi(p) = 0 \} = \{ p \in \poly_5(\R) : p(8) = 0 \}.
+    \end{multline*}
+\end{solution}
+
+\begin{exercise}
+\label{ex:28}
+    Suppose \( V \) and \( W \) are finite-dimensional, \( T \in \lmap(V, W) \), and there exists \( \varphi \in W' \) such that \( \Null T' = \Span(\varphi) \). Prove that \( \Range T = \Null \varphi \).
+\end{exercise}
+
+\begin{solution}
+    By 3.107, we have \( \Null T' = (\Range T)^0 = \Span(\varphi) \), and by \Cref{ex:25}, we have
+    \[
+        \Range T = \{ w \in W : \psi(w) = 0 \text{ for every } \psi \in (\Range T)^0 \}.
+    \]
+    Since \( (\Range T)^0 = \Span(\varphi) \), we see that
+    \[
+        \Range T = \{ w \in W : \psi(w) = 0 \text{ for every } \psi \in \Span(\varphi) \} = \{ w \in W : \varphi(w) = 0 \} = \Null \varphi.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:29}
+    Suppose \( V \) and \( W \) are finite-dimensional, \( T \in \lmap(V, W) \), and there exists \( \varphi \in V' \) such that \( \Range T' = \Span(\varphi) \). Prove that \( \Null T = \Null \varphi \).
+\end{exercise}
+
+\begin{solution}
+    By 3.109, we have \( \Range T' = (\Null T)^0 = \Span(\varphi) \), and by \Cref{ex:25}, we have
+    \[
+        \Null T = \{ v \in V : \psi(v) = 0 \text{ for every } \psi \in (\Null T)^0 \}.
+    \]
+    Since \( (\Null T)^0 = \Span(\varphi) \), we see that
+    \[
+        \Null T = \{ v \in V : \psi(v) = 0 \text{ for every } \psi \in \Span(\varphi) \} = \{ v \in V : \varphi(v) = 0 \} = \Null \varphi.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:30}
+    Suppose \( V \) is finite-dimensional and \( \varphi_1, \ldots, \varphi_m \) is a linearly independent list in \( V' \). Prove that
+    \[
+        \dim((\Null \varphi_1) \cap \cdots \cap (\Null \varphi_m)) = (\dim V) - m.
+    \]
+\end{exercise}
+
+\begin{solution}
+    First, let us prove the following lemma.
+
+    \vspace{2mm}
+
+    \noindent \textbf{Lemma 1.} Suppose \( V \) is finite-dimensional and \( \varphi \in V' \). Then \( \Span(\varphi) = (\Null \varphi)^0 \).
+
+    \vspace{2mm}
+
+    \noindent \textit{Proof.} It is straightforward to verify that \( \Span(\varphi) \subseteq (\Null \varphi)^0 \). The Fundamental Theorem of Linear Maps (3.22) and 3.106 combine to show that \( \dim \Range \varphi = \dim (\Null \varphi)^0 \), and since \( \varphi = 0 \iff \Span(\varphi) = \{ 0 \} \), \Cref{ex:1} shows that \( \dim \Span(\varphi) = \dim \Range \varphi \). Thus \( \dim \Span(\varphi) = \dim (\Null \varphi)^0 \) and we may conclude that \( \Span(\varphi) = (\Null \varphi)^0 \). \qed
+
+    \vspace{2mm}
+
+    Note that by \Cref{ex:23} and Lemma 1, we have
+    \begin{align*}
+        \dim((\Null \varphi_1 \cap \cdots \cap \Null \varphi_m)^0) &= \dim((\Null \varphi_1)^0 + \cdots + (\Null \varphi_m)^0) \\
+        &= \dim (\Span(\varphi_1) + \cdots + \Span(\varphi_m)) \\
+        &= \dim \Span(\varphi_1, \ldots, \varphi_m) \\
+        &= m,
+    \end{align*}
+    where the last equality follows since the list \( \varphi_1, \ldots, \varphi_m \) is linearly independent. 3.106 now gives us
+    \[
+        \dim(\Null \varphi_1 \cap \cdots \cap \Null \varphi_m) = \dim V - \dim((\Null \varphi_1 \cap \cdots \cap \Null \varphi_m)^0) = \dim V - m.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:31}
+    Suppose \( V \) is finite-dimensional and \( \varphi_1, \ldots, \varphi_n \) is a basis of \( V' \). Show that there exists a basis of \( V \) whose dual basis is \( \varphi_1, \ldots, \varphi_n \).
+\end{exercise}
+
+\begin{solution}
+    For each \( 1 \leq j \leq n \), we have by \Cref{ex:30} that \( \dim \left( \bigcap_{i \neq j} \Null \varphi_i \right) = 1 \) and thus \( \bigcap_{i \neq j} \Null \varphi_i = \Span(u_j) \) for some \( u_j \neq 0 \) in \( V \). Note that \Cref{ex:30} also implies that \( \bigcap_{1 \leq i \leq n} \Null \varphi_i = \{ 0 \} \). Since \( u_j \) is non-zero, it must be the case that \( \varphi_j(u_j) \neq 0 \). Given this, we can define \( v_j := \tfrac{u_j}{\varphi_j(u_j)} \); is straightforward to verify that \( \varphi_i(v_j) = \delta^i_j \). If we have scalars \( a_1, \ldots, a_n \) such that
+    \[
+        a_1 v_1 + \cdots + a_n v_n = 0,
+    \]
+    then applying \( \varphi_j \) to both sides of this equation shows that each \( a_j = 0 \), i.e.\ the list \( v_1, \ldots, v_n \) is linearly independent. By 3.95, we have \( \dim V = n \) and so 2.39 implies that \( v_1, \ldots, v_n \) is a basis of \( V \). Finally, the uniqueness part of 3.5 shows that \( \varphi_1, \ldots, \varphi_n \) is the dual basis to \( v_1, \ldots, v_n \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:32}
+    Suppose \( T \in \lmap(V) \), and \( u_1, \ldots, u_n \) and \( v_1, \ldots, v_n \) are bases of \( V \). Prove that the following are equivalent:
+    \begin{enumerate}
+        \item \( T \) is invertible.
+
+        \item The columns of \( \mat(T) \) are linearly independent in \( \F^{n,1} \).
+
+        \item The columns of \( \mat(T) \) span \( \F^{n,1} \).
+
+        \item The rows of \( \mat(T) \) are linearly independent in \( \F^{1,n} \).
+
+        \item The rows of \( \mat(T) \) span \( \F^{1,n} \).
+    \end{enumerate}
+    Here \( \mat(T) \) means \( \mat(T, (u_1, \ldots, u_n), (v_1, \ldots, v_n)) \).
+\end{exercise}
+
+\begin{solution}
+    In what follows, let \( c_1, \ldots, c_n \) be the columns of \( \mat(T) \) and let \( r_1, \ldots, r_n \) be the rows of \( \mat(T) \).
+
+    Suppose (a) holds, so that \( T \) is surjective. By 3.117, we must have
+    \[
+        \dim \Span(c_1, \ldots, c_n) = \dim \Range T = \dim V = n.
+    \]
+    It follows from 2.42 that \( c_1, \ldots, c_n \) is a basis of \( \Span(c_1, \ldots, c_n) \) and thus is a linearly independent list, i.e.\ (b) holds.
+
+    Suppose (b) holds. Then since \( \F^{n,1} \) is \( n \)-dimensional, 2.39 implies that \( c_1, \ldots, c_n \) is a basis of \( \F^{n,1} \) and thus (c) holds.
+
+    Suppose (c) holds, so that \( \dim \Span(c_1, \ldots, c_n) = \dim \F^{n,1} = n \). By 3.118, we must also have \( \dim \Span(r_1, \ldots, r_n) = n \). It follows from 2.42 that \( r_1, \ldots, r_n \) is a basis of \( \Span(r_1, \ldots, r_n) \) and thus is a linearly independent list, i.e.\ (d) holds.
+
+    Suppose (d) holds. Then since \( \F^{1,n} \) is \( n \)-dimensional, 2.39 implies that \( r_1, \ldots, r_n \) is a basis of \( \F^{1,n} \) and thus (e) holds.
+
+    Suppose (e) holds, so that \( \dim \Span(r_1, \ldots, r_n) = n \). 3.118 and 3.117 then imply that \( \dim \Range T = n \) and we see that \( T \) is surjective. It follows from 3.69 that \( T \) is invertible, i.e.\ (a) holds.
+\end{solution}
+
+\begin{exercise}
+\label{ex:33}
+    Suppose \( m \) and \( n \) are positive integers. Prove that the function that takes \( A \) to \( \tpose{A} \) is a linear map from \( \F^{m,n} \) to \( \F^{n,m} \). Furthermore, prove that this linear map is invertible.
+\end{exercise}
+
+\begin{solution}
+    Let \( \Psi : \F^{m,n} \to \F^{n,m} \) be the map \( \Psi(A) = \tpose{A} \). If \( A, B \) are \(m\)-by-\(n\) matrices and \( \lambda \in \F \), then:
+    \[
+        \tpose{(A + \lambda B)}_{j,k} = (A + \lambda B)_{k,j} = A_{k,j} + \lambda B_{k,j} = \tpose{A}_{j,k} + \lambda \tpose{B}_{j,k}.
+    \]
+    It follows that \( \Psi \) is a linear map. To see that \( \Psi \) is invertible, define \( \Phi : \F^{n,m} \to \F^{m,n} \) by \( \Phi(A) = \tpose{A} \); it is clear that \( \Psi \) and \( \Phi \) are mutual inverses.
+\end{solution}
+
+\begin{exercise}
+\label{ex:34}
+    The \textbf{\textit{double dual space}} of \( V \), denoted \( V'' \), is defined to be the dual space of \( V' \). In other words, \( V'' = (V')' \). Define \( \Lambda : V \to V'' \) by
+    \[
+        (\Lambda v)(\varphi) = \varphi(v)
+    \]
+    for \( v \in V \) and \( \varphi \in V' \).
+    \begin{enumerate}
+        \item Show that \( \Lambda \) is a linear map from \( V \) to \( V'' \).
+
+        \item Show that if \( T \in \lmap(V) \), then \( T'' \circ \Lambda = \Lambda \circ T \), where \( T'' = (T')' \).
+
+        \item Show that if \( V \) is finite-dimensional, then \( \Lambda \) is an isomorphism from \( V \) onto \( V'' \).
+    \end{enumerate}
+
+    \noindent [\textit{Suppose \( V \) is finite-dimensional. Then \( V \) and \( V' \) are isomorphic, but finding an isomorphism from \( V \) onto \( V' \) generally requires choosing a basis of \( V \). In contrast, the isomorphism \( \Lambda \) from \( V \) onto \( V'' \) does not require a choice of basis and thus is considered more natural.}]
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Suppose \( u, v \in V \) and \( \lambda \in \F \). Then for any \( \varphi \in V' \), we have
+        \[
+            (\Lambda(u + \lambda v))(\varphi) = \varphi(u + \lambda v) = \varphi(u) + \lambda \varphi(v) = (\Lambda u)(\varphi) + \lambda (\Lambda v)(\varphi) = (\Lambda u + \lambda \Lambda v)(\varphi).
+        \]
+        It follows that \( \Lambda \) is a linear map.
+
+        \item \( T'' \circ \Lambda \) and \( \Lambda \circ T \) are both maps \( V \to V'' \). Let \( v \in V \) be given. Then \( \Lambda(Tv) \in V'' \) is given by
+        \[
+            (\Lambda(Tv))(\varphi) = \varphi(Tv).
+        \]
+        The dual map \( T'' \) sends \( \Lambda v \in V'' \) to \( (\Lambda v) \circ T' \in V'' \) and hence
+        \[
+            (T''(\Lambda v))(\varphi) = (\Lambda v)(T'(\varphi)) = (\Lambda v)(\varphi \circ T) = \varphi(Tv).
+        \]
+        Thus \( \Lambda \circ T = T'' \circ \Lambda \).
+
+        \item Let \( v_1, \ldots, v_n \) be a basis of \( V \) and \( \varphi_1, \ldots, \varphi_n \) the corresponding dual basis of \( V' \). Suppose \( v = a_1 v_1 + \cdots + a_n v_n \) is such that \( \Lambda v = 0 \), i.e. \( \varphi(v) = 0 \) for every \( \varphi \in V' \). In particular, we have \( \varphi_j(v) = a_j = 0 \) for each \( 1 \leq j \leq n \), so that \( v = 0 \). Hence \( \Null \Lambda = \{ 0 \} \) and we see that \( \Lambda \) is injective. By 3.95 we have \( \dim V = \dim V' = \dim V'' \) and so 3.69 allows us to conclude that \( \Lambda \) is an isomorphism.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:35}
+    Show that \( (\poly(\R))' \) and \( \R^{\infty} \) are isomorphic.
+\end{exercise}
+
+\begin{solution}
+    Define a map \( \Phi : (\poly(\R))' \to \R^{\infty} \) by
+    \[
+        \Phi(\varphi) = (\varphi(1), \varphi(x), \varphi(x^2), \ldots).
+    \]
+    This map is linear. Indeed, if \( \varphi, \psi \in (\poly(\R))' \) and \( \lambda \in \F \), then
+    \begin{multline*}
+        \Phi(\varphi + \lambda \psi) = ((\varphi + \lambda \psi)(1), (\varphi + \lambda \psi)(x), \ldots) = (\varphi(1) + \lambda \psi(1), \varphi(x) + \lambda \psi(x), \ldots) \\ = (\varphi(1), \varphi(x), \ldots) + \lambda (\psi(1), \psi(x), \ldots) = \Phi(\varphi) + \lambda \Phi(\psi).
+    \end{multline*}
+    \( \Phi \) is injective: if \( \varphi \in (\poly(\R))' \) is such that \( \Phi(\varphi) = 0 \), i.e.\ \( \varphi(x^j) = 0 \) for all \( j \geq 0 \), then
+    \[
+        \varphi(p) = \varphi \left( \sum_{j=0}^{\deg p} a_j x^j \right) = \sum_{j=0}^{\deg p} a_j \varphi(x^j) = 0.
+    \]
+    It follows that \( \varphi = 0 \), hence that \( \Null \Phi = \{ 0 \} \), and hence that \( \Phi \) is injective.
+
+    To see that \( \Phi \) is surjective, let \( (y_0, y_1, y_2, \ldots) \in \R^{\infty} \) be given. Define a map \( \varphi : \poly(\R) \to \R \) by
+    \[
+        \varphi(p) = \varphi \left( \sum_{j=0}^{\deg p} a_j x^j \right) = \sum_{j=0}^{\deg p} a_j y_j.
+    \]
+    Let \( p = \sum_{j=0}^{\deg p} a_j x^j \) and \( q = \sum_{j=0}^{\deg q} b_j x^j \) be given and suppose without loss of generality that \( \deg p \leq \deg q \). Then \( p + q = \sum_{j=0}^{\deg p} (a_j + b_j) x^j + \sum_{j=\deg p + 1}^{\deg q} b_j x^j \) (if \( \deg p = \deg q \), we consider this second sum to be zero). Thus
+    \[
+        \varphi(p + q) = \sum_{j=0}^{\deg p} (a_j + b_j) y_j + \sum_{j=\deg p + 1}^{\deg q} b_j y_j = \sum_{j=0}^{\deg p} a_j y_j + \sum_{j=0}^{\deg q} b_j y_j = \varphi(p) + \varphi(q).
+    \]
+    If \( \lambda \in \F \), then
+    \[
+        \varphi(\lambda p) = \sum_{j=0}^{\deg p} \lambda a_j y_j = \lambda \sum_{j=0}^{\deg p} a_j y_j = \lambda \varphi(p).
+    \]
+    Hence \( \varphi \) is a linear functional on \( \poly(\R) \). Since \( \varphi(x^j) = y_j \), we see that \( \Phi(\varphi) = (y_0, y_1, y_2, \ldots) \) and hence that \( \Phi \) is surjective. We may conclude that \( \Phi \) is an isomorphism.
+\end{solution}
+
+\begin{exercise}
+\label{ex:36}
+    Suppose \( U \) is a subspace of \( V \). Let \( i : U \to V \) be the inclusion map defined by \( i(u) = u \). Thus \( i' \in \lmap(V', U') \).
+    \begin{enumerate}
+        \item Show that \( \Null i' = U^0 \).
+
+        \item Prove that if \( V \) is finite-dimensional, then \( \Range i' = U' \).
+
+        \item Prove that if \( V \) is finite-dimensional, then \( \widetilde{i'} \) is an isomorphism from \( V'/U^0 \) onto \( U' \).
+    \end{enumerate}
+
+    \noindent [\textit{The isomorphism in part (c) is natural in that it does not depend on a choice of basis in either vector space.}]
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item For \( \varphi \in V', i' \varphi \) is the map \( \varphi \circ i : U \to \F \), which is simply the restriction of \( \varphi \) to \( U \). Hence
+        \[
+            i' \varphi = 0 \iff \varphi(u) = 0 \text{ for all } u \in U.
+        \]
+        It follows that \( \Null i' = U^0 \).
+
+        \item Let \( \psi \in U' \) be given. By \href{https://lew98.github.io/Mathematics/LADR_Section_3_A_Exercises.pdf}{Exercise 3.A.11}, we can extend \( \psi \) to a linear functional \( \varphi \in V' \) in such a way that \( \varphi|_U = \psi \). It follows that \( i' \varphi = \psi \) and we see that \( i' \) is surjective.
+
+        \item 3.91 shows that \( \widetilde{i'} \) is an isomorphism of \( V'/(\Null i') \) onto \( \Range i' \). Using parts (a) and (b), we see that \( \widetilde{i'} \) is an isomorphism of \( V'/U^0 \) onto \( \Range i' \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:37}
+    Suppose \( U \) is a subspace of \( V \). Let \( \pi : V \to V/U \) be the usual quotient map. Thus \( \pi' \in \lmap((V/U)', V') \).
+    \begin{enumerate}
+        \item Show that \( \pi' \) is injective.
+
+        \item Show that \( \Range \pi' = U^0 \).
+
+        \item Conclude that \( \pi' \) is an isomorphism from \( (V/U)' \) onto \( U^0 \).
+    \end{enumerate}
+
+    \noindent [\textit{The isomorphism in part (c) is natural in that it does not depend on a choice of basis in either vector space. In fact, there is no assumption here that any of these vector spaces are finite-dimensional.}]
+\end{exercise}
+
+\begin{solution}
+    Note that \( \pi' \) is the map \( \Gamma \) from \href{https://lew98.github.io/Mathematics/LADR_Section_3_E_Exercises.pdf}{Exercise 3.E.20}, taking \( W = \F \).
+    \begin{enumerate}
+        \item This follows from part (b) of \href{https://lew98.github.io/Mathematics/LADR_Section_3_E_Exercises.pdf}{Exercise 3.E.20}.
+
+        \item This follows from part (c) of \href{https://lew98.github.io/Mathematics/LADR_Section_3_E_Exercises.pdf}{Exercise 3.E.20}.
+
+        \item This is immediate from parts (a) and (b) of this exercise.
+    \end{enumerate}
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ladr}{\textcolor{blue}{[LADR]} Axler, S. (2015) \textit{Linear Algebra Done Right.} 3\ts{rd} edition.}
+
+\end{document}
