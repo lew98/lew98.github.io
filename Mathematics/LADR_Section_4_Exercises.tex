@@ -1,0 +1,372 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 4 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 4.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 4.#1#3}
+
+\newcommand{\re}{\text{Re}\,}
+\newcommand{\im}{\text{Im}\,}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\lmap}{\mathcal{L}}
+\newcommand{\mat}{\mathcal{M}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\Span}{\text{span}}
+\newcommand{\Null}{\text{null\,}}
+\newcommand{\Range}{\text{range\,}}
+\newcommand{\Rank}{\text{rank\,}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\tpose}[1]{#1^{\text{t}}}
+\newcommand{\upd}{\text{d}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 4 Exercises}
+
+Exercises with solutions from Section 4 of \hyperlink{ladr}{[LADR]}.
+
+\begin{exercise}
+\label{ex:1}
+    Verify all the assertions in 4.5 except the last one.
+\end{exercise}
+
+\begin{solution}
+    Suppose \( w = a + bi \) and \( z = x + yi \) are complex numbers.
+    \begin{enumerate}
+        \item The assertion is that \( z + \overline{z} = 2 \re z \). Indeed,
+        \[
+            z + \overline{z} = (x + yi) + (x - yi) = 2x = 2 \re z.
+        \]
+
+        \item The assertion is that \( z - \overline{z} = 2(\im z)i \). Indeed,
+        \[
+            z - \overline{z} = (x + yi) - (x - yi) = 2yi = 2(\im z)i.
+        \]
+
+        \item The assertion is that \( z \overline{z} = \abs{z}^2 \). Indeed,
+        \[
+            z \overline{z} = (x + yi)(x - yi) = x^2 + y^2 = (\re z)^2 + (\im z)^2 = \abs{z}^2.
+        \]
+
+        \item The assertion is that \( \overline{w + z} = \overline{w} + \overline{z} \) and that \( \overline{wz} = \overline{w} \, \overline{z} \). Indeed,
+        \begin{gather*}
+            \overline{w + z} = (a + x) - (b + y)i = (a - bi) + (x - yi) = \overline{w} + \overline{z}, \\[2mm]
+            \overline{wz} = (ax - by) - (ay + bx)i = (a - bi)(x - yi) = \overline{w} \, \overline{z}.
+        \end{gather*}
+
+        \item The assertion is that \( \overline{\overline{z}} = z \), which is clear.
+
+        \item The assertion is that \( \abs{\re z} \leq \abs{z} \) and that \( \abs{\im z} \leq \abs{z} \). Since each quantity involved is positive, it will suffice to show that \( \abs{\re z}^2 \leq \abs{z}^2 \) and that \( \abs{\im z}^2 \leq \abs{z}^2 \). These two inequalities are clear since \( \abs{z}^2 = \abs{\re z}^2 + \abs{\im z}^2 \).
+
+        \item The assertion is that \( \abs{\overline{z}} = \abs{z} \). This follows since \( (-\im z)^2 = (\im z)^2 \).
+
+        \item The assertion is that \( \abs{wz} = \abs{w} \abs{z} \). Since both sides are positive, it will suffice to show that \( \abs{wz}^2 = \abs{w}^2 \abs{z}^2 \). Then using parts (c) and (d), we have
+        \[
+            \abs{wz}^2 = wz \overline{wz} = w z \overline{w} \, \overline{z} = w \overline{w} z \overline{z} = \abs{w}^2 \abs{z}^2.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Suppose \( m \) is a positive integer. Is the set
+    \[
+        \{ 0 \} \cup \{ p \in \poly(\F) : \deg p = m \}
+    \]
+    a subspace of \( \poly(\F) \)?
+\end{exercise}
+
+\begin{solution}
+    Let \( U \) be the set in question. We have \( x^m, 1 - x^m \in U \), but \( x^m + 1 - x^m = 1 \not\in U \). So \( U \) cannot be a subspace of \( \poly(\F) \) since it is not closed under addition. 
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Is the set
+    \[
+        \{ 0 \} \cup \{ p \in \poly(\F) : \deg p \text{ is even} \}
+    \]
+    a subspace of \( \poly(\F) \)?
+\end{exercise}
+
+\begin{solution}
+    Let \( U \) be the set in question. We have \( x^2, x - x^2 \in U \), but \( x^2 + x - x^2 = x \not\in U \). So \( U \) cannot be a subspace of \( \poly(\F) \) since it is not closed under addition.
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Suppose \( m \) and \( n \) are positive integers with \( m \leq n \), and suppose \( \lambda_1, \ldots, \lambda_m \in \F \). Prove that there exists a polynomial \( p \in \poly(\F) \) with \( \deg p = n \) such that \( 0 = p(\lambda_1) = \cdots = p(\lambda_m) \) and such that \( p \) has no other zeros.
+\end{exercise}
+
+\begin{solution}
+    Let \( p(z) = (z - \lambda_1)(z - \lambda_2) \cdots (z - \lambda_m)^{n - m + 1} \). Then \( \deg p = m - 1 + (n - m + 1) = n \), each \( \lambda_j \) is a root of \( p \), and \( p \) has no other zeros since \( (z - \lambda_1)(z - \lambda_2) \cdots (z - \lambda_m)^{n - m + 1} \) is zero if and only if \( z \in \{ \lambda_1, \ldots, \lambda_m \} \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Suppose \( m \) is a nonnegative integer, \( z_1, \ldots, z_{m+1} \) are distinct elements of \( \F \), and \( w_1, \ldots, w_{m+1} \in \F \). Prove that there exists a unique polynomial \( p \in \poly_m(\F) \) such that
+    \[
+        p(z_j) = w_j
+    \]
+    for \( j = 1, \ldots, m+1 \).
+
+    \noindent [\textit{This result can be proved without using linear algebra. However, try to find the clearer, shorter proof that uses some linear algebra.}]
+\end{exercise}
+
+\begin{solution}
+    Define a map \( T : \poly_m(\F) \to \F^{m+1} \) by
+    \[
+        Tp = (p(z_1), p(z_2), p(z_3), \ldots, p(z_{m+1}));
+    \]
+    it is straightforward to verify that \( T \) is linear. Consider the list \( \mathscr{B} := p_0, p_1, p_2, \ldots, p_m \) in \( \poly_m(\F) \) given by
+    \begin{align*}
+        p_0(z) &= 1, \\
+        p_1(z) &= z - z_1, \\
+        p_2(z) &= (z - z_1)(z - z_2), \\
+        \vdots & \\
+        p_m(z) &= (z - z_1)(z - z_2) \cdots (z - z_m).
+    \end{align*}
+    Since each \( p_j \) satisfies \( \deg p_j = j \), \href{https://lew98.github.io/Mathematics/LADR_Section_2_C_Exercises.pdf}{Exercise 2.C.10} shows that \( \mathscr{B} \) is a basis of \( \poly_m(\F) \). Observe that since the elements \( z_1, \ldots, z_{m+1} \) are distinct we have
+    \begin{align*}
+        Tp_0 &= (1, 1, 1, \ldots, 1, 1), \\
+        Tp_1 &= (0, 1, 1, \ldots, 1, 1), \\
+        Tp_2 &= (0, 0, 1, \ldots, 1, 1), \\
+        \vdots & \\
+        Tp_m &= (0, 0, 0, \ldots, 0, 1).
+    \end{align*}
+    It is easily verified that the list \( Tp_0, \ldots, Tp_m \) is a basis of \( \F^{m+1} \). Since \( T \) maps a basis to a basis, it must be an isomorphism; it follows that there exists a unique \( p \in \poly_m(\F) \) such that
+    \[
+        Tp = (p(z_1), p(z_2), \ldots, p(z_{m+1})) = (w_1, w_2, \ldots, w_{m+1}).
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Suppose \( p \in \poly(\C) \) has degree \( m \). Prove that \( p \) has \( m \) distinct zeros if and only if \( p \) and its derivative \( p' \) have no zeros in common.
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( p \) and \( p' \) have a zero in common, say \( \lambda \in \F \), so that
+    \[
+        p(z) = (z - \lambda) q(z) \quand p'(z) = (z - \lambda) r(z)
+    \]
+    for some \( q, r \in \poly(\C) \) satisfying \( \deg q = m - 1 \) and \( \deg r = m - 2 \). Using the product rule, we have
+    \[
+        p'(z) = q(z) + (z - \lambda) q'(z) = (z - \lambda) r(z).
+    \]
+    Evaluating this at \( z = \lambda \), we see that \( q(\lambda) = 0 \). Thus \( z - \lambda \) is a factor of \( q \); it follows that \( p \) is of the form \( p(z) = (z - \lambda)^2 t(z) \) for some \( t \in \poly(\C) \) satisfying \( \deg t = m - 2 \) and hence that \( p \) has strictly less than \( m \) zeros.
+
+    Now suppose that \( p \) has strictly less than \( m \) zeros. Then it must be the case that \( p \) has a zero \( \lambda \in \F \) such that \( p(z) = (z - \lambda)^k q(z) \) for some positive integer \( k \geq 2 \). It follows that
+    \[
+        p'(z) = k(z - \lambda)^{k-1} q(z) + (z - \lambda)^k q'(z)
+    \]
+    and hence that \( p'(\lambda) = 0 \), since \( k \geq 2 \). Thus \( p \) and \( p' \) have the zero \( \lambda \) in common.
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Prove that every polynomial of odd degree with real coefficients has a real zero.
+\end{exercise}
+
+\begin{solution}
+    Let \( p \in \poly(\R) \) be a polynomial of odd degree. By 4.17, \( p \) is of the form
+    \[
+        p(x) = c(x - \lambda_1) \cdots (x - \lambda_m) (x^2 + b_1 x + c_1) \cdots (x^2 + b_M x + c_M),
+    \]
+    where \( c, \lambda_1, \ldots, \lambda_m, b_1, \ldots, b_M, c_1, \ldots, c_M \in \R \), with \( b_j^2 < 4 c_j \) for each \( j \) (either of \( m \) or \( M \) could be zero). This implies that \( \deg p = m + 2M \). Since \( \deg p \) is given as odd, it must be the case that \( m > 0 \) and hence \( p \) has at least one real zero.
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Define \( T : \poly(\R) \to \R^{\R} \) by
+    \[
+        Tp = \begin{cases}
+            \displaystyle \frac{p - p(3)}{x - 3} & \text{if } x \neq 3, \\
+            p'(3) & \text{if } x = 3.
+        \end{cases}
+    \]
+    Show that \( Tp \in \poly(\R) \) for every polynomial \( p \in \poly(\R) \) and that \( T \) is a linear map.
+\end{exercise}
+
+\begin{solution}
+    Fix \( p \in \poly(\R) \) and notice that \( p(x) - p(3) \) has a zero at \( x = 3 \), so that
+    \[
+        p(x) - p(3) = (x - 3) q(x)
+    \]
+    for some unique \( q \in \poly(\R) \). It follows that for any \( x \neq 3 \) we have
+    \[
+        q(x) = \frac{p(x) - p(3)}{x - 3}.
+    \]
+    Differentiating the equality \( p(x) - p(3) = (x - 3) q(x) \) shows that \( p'(x) = q(x) + (x - 3) q'(x) \), whence \( p'(3) = q(3) \). Thus \( Tp = q \in \poly(\R) \).
+
+    To see that \( T \) is linear, let \( p_1, p_2 \in \poly(\R) \) and \( \lambda \in \F \) be given. There are unique polynomials \( q_1, q_2 \in \poly(\R) \) such that
+    \[
+        p_1(x) - p_1(3) = (x - 3) q_1(x) \quand p_2(x) - p_2(3) = (x - 3) q_2(x).
+    \]
+    As we showed above, we must have \( Tp_1 = q_1 \) and \( Tp_2 = q_2 \). Note that
+    \[
+        (p_1 + \lambda p_2)(x) - (p_1 + \lambda p_2)(3) = (x - 3)(q_1 + \lambda q_2)(x).
+    \]
+    By uniqueness, we must have \( T(p_1 + \lambda p_2) = q_1 + \lambda q_2 = Tp_1 + \lambda Tp_2 \). Thus \( T \) is linear.
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Suppose \( p \in \poly(\C) \). Define \( q : \C \to \C \) by
+    \[
+        q(z) = p(z) \overline{p(\overline{z})}.
+    \]
+    Prove that \( q \) is a polynomial with real coefficients.
+\end{exercise}
+
+\begin{solution}
+    If \( p = 0 \) this is clear, so suppose that \( \deg p = m \geq 0 \). We will prove this by strong induction on \( m \). For the base case \( m = 0 \), suppose that \( p(z) = a_0 \in \C \) with \( a_0 \neq 0 \). Then
+    \[
+        q(z) = a_0 \overline{a_0} = \abs{a_0}^2 \in \R.
+    \]
+    Thus \( q \in \poly(\R) \). Now suppose that the result is true for all \( k \leq m \) and let \( p(z) = a_0 + \cdots + a_{m + 1} z^{m + 1} \) be an arbitrary polynomial in \( \poly_{m+1}(\C) \). Let \( r(z) = a_0 + \cdots + a_m z^m \) and note that
+    \begin{align*}
+        p(z) \overline{p(\overline{z})} &= r(z) \overline{p(\overline{z})} + a_{m+1} z^{m+1} \overline{p(\overline{z})} \\
+        &= r(z) \overline{r(\overline{z})} + r(z) \overline{a_{m+1}} z^{m+1} + a_{m+1} z^{m+1} \overline{r(\overline{z})} + (a_{m+1} z^{m+1})(\overline{a_{m+1}} z^{m+1}) \\
+        &= r(z) \overline{r(\overline{z})} + \left[ r(z) \overline{a_{m+1}} + \overline{r(\overline{z})} a_{m+1} \right] z^{m+1} + \abs{a_{m+1}}^2 z^{2(m+1)}. \tag{1}
+    \end{align*}
+    Observe that
+    \[
+        r(z) \overline{a_{m+1}} + \overline{r(\overline{z})} a_{m+1} = \sum_{j=0}^m a_j \overline{a_{m+1}} z^j + \sum_{j=0}^m \overline{a_j} a_{m+1} z^j = \sum_{j=0}^m 2 \text{Re} \left( a_j \overline{a_{m+1}} \right) z^j \in \poly(\R).
+    \]
+    Our induction hypothesis guarantees that \( r(z) \overline{r(\overline{z})} \) is a polynomial with real coefficients and so the expression for \( q(z) = p(z) \overline{p(\overline{z})} \) in (1) shows that \( q \) is the sum of three polynomials with real coefficients and hence \( q \) is itself a polynomial with real coefficients. This completes the induction step and the proof. 
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Suppose \( m \) is a nonnegative integer and \( p \in \poly_m(\C) \) is such that there exist distinct real numbers \( x_0, x_1, \ldots, x_m \) such that \( p(x_j) \in \R \) for \( j = 0, 1, \ldots, m \). Prove that all the coefficients of \( p \) are real.
+\end{exercise}
+
+\begin{solution}
+    By \Cref{ex:5}, there is a unique polynomial \( q \in \poly_m(\R) \) such that \( q(x_j) = p(x_j) \) for each \( j = 0, 1, \ldots, m \). Consider the polynomial \( p - q \in \poly_m(\C) \). As we just showed, this polynomial has \( m + 1 \) distinct zeros. By 4.12, it must be the case that \( p - q = 0 \), i.e.\ \( p = q \in \poly_m(\R) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Suppose \( p \in \poly(\F) \) with \( p \neq 0 \). Let \( U = \{ pq : q \in \poly(\F) \} \).
+    \begin{enumerate}
+        \item Show that \( \dim \poly(\F) / U = \deg p \).
+
+        \item Find a basis of \( \dim \poly(\F) / U \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item If \( \deg p = 0 \), so that \( p \) is a non-zero constant, then it is not hard to see that \( U = \poly(\F) \). In this case, \( \poly(\F) / U = \{ 0 \} \) and so \( \dim \poly(\F) / U = 0 = \deg p \).
+        
+        Suppose that \( \deg p \geq 1 \) and let \( m + 1 = \deg p \). Consider the quotient map \( \pi : \poly(\F) \to \poly(\F)/U \). If \( s + U \in \poly(\F)/U \), then the Division Algorithm for Polynomials implies that there are unique polynomials \( q, r \in \poly(\F) \) such that \( s = pq + r \) and \( \deg r < \deg p \). By 3.85 we have
+        \[
+            s + U = (pq + r) + U = r + U.
+        \]
+        So every element of \( \poly(\F)/U \) is of the form \( r + U \) with \( \deg r < \deg p \), i.e.\ \( \deg r \leq m \). It follows that the restriction \( \pi : \poly_m(\F) \to \poly(\F)/U \) is surjective (it is a slight abuse of notation to write \( \pi \) for this restriction). We claim that \( \pi \) is also injective. If \( r \in \poly_m(\F) \) is such that \( \pi(r) = r + U = 0 + U \), then it must be the case that \( r \in U \), i.e.\ \( r = pq \) for some \( q \in \poly(\F) \). Since
+        \[
+            q \neq 0 \implies \deg pq = \deg r \geq \deg p = m + 1
+        \]
+        and \( \deg r \leq m \), it must be the case that \( q = 0 \) and hence that \( r = 0 \). Thus \( \pi \) is injective.
+
+        We have now shown that \( \pi \) is an isomorphism. It follows that
+        \[
+            \dim \poly(\F)/U = \dim \poly_m(\F) = m + 1 = \deg p.
+        \]
+
+        \item If \( \deg p = 0 \) then, as shown in part (a), we have \( \poly(\F)/U = \{ 0 \} \) and so the empty list is the only basis of \( \poly(\F)/U \).
+
+        If \( \deg p \geq 1 \), then let \( m + 1 = \deg p \) and take the isomorphism \( \pi : \poly_m(\F) \to \poly(\F)/U \) from part (a). Since \( 1, z, z^2, \ldots, z^m \) is a basis of \( \poly_m(\F) \), it follows that
+        \[
+            \pi(1), \pi(z), \pi(z^2), \ldots, \pi(z^m) = 1 + U, z + U, z^2 + U, \ldots, z^m + U
+        \]
+        is a basis of \( \poly(\F)/U \).
+    \end{enumerate}
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ladr}{\textcolor{blue}{[LADR]} Axler, S. (2015) \textit{Linear Algebra Done Right.} 3\ts{rd} edition.}
+
+\end{document}
