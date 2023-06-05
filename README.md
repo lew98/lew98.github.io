@@ -30,6 +30,7 @@
     - [Section 3.5 Exercises](https://lew98.github.io/Mathematics/UA_Section_3_5_Exercises.pdf)
   - *Chapter 4*
     - [Section 4.2 Exercises](https://lew98.github.io/Mathematics/UA_Section_4_2_Exercises.pdf)
+    - [Section 4.3 Exercises](https://lew98.github.io/Mathematics/UA_Section_4_3_Exercises.pdf)
 - [**Linear Algebra Done Right (Axler)**](https://linear.axler.net)
   - *Chapter 1*
     - [Section 1.A Exercises](https://lew98.github.io/Mathematics/LADR_Section_1_A_Exercises.pdf)
