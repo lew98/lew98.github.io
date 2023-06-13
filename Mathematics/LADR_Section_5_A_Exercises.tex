@@ -1,0 +1,941 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{tabularray}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Chapter 5 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 5.A.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 5.A.#1#3}
+
+\newcommand{\re}{\text{Re}\,}
+\newcommand{\im}{\text{Im}\,}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\lmap}{\mathcal{L}}
+\newcommand{\mat}{\mathcal{M}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\Span}{\text{span}}
+\newcommand{\Null}{\text{null\,}}
+\newcommand{\Range}{\text{range\,}}
+\newcommand{\Rank}{\text{rank\,}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\tpose}[1]{#1^{\text{t}}}
+\newcommand{\upd}{\text{d}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 5.A Exercises}
+
+Exercises with solutions from Section 5.A of \hyperlink{ladr}{[LADR]}.
+
+\begin{exercise}
+\label{ex:1}
+    Suppose \( T \in \lmap(V) \) and \( U \) is a subspace of \( V \).
+    \begin{enumerate}
+        \item Prove that if \( U \subset \Null T \), then \( U \) is invariant under \( T \).
+
+        \item Prove that if \( \Range T \subset U \), then \( U \) is invariant under \( T \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Suppose \( u \in U \subseteq \Null T \). Then \( Tu = 0 \in U \) and thus \( U \) is invariant under \( T \).
+
+        \item Suppose \( u \in U \). Then \( Tu \in \Range T \subseteq U \) and thus \( U \) is invariant under \( T \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Suppose \( S, T \in \lmap(V) \) are such that \( ST = TS \). Prove that \( \Null S \) is invariant under \( T \).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( u \in \Null S \). Then
+    \[
+        S(Tu) = T(Su) = T(0) = 0,
+    \]
+    so that \( Tu \in \Null S \) and thus \( \Null S \) is invariant under \( T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Suppose \( S, T \in \lmap(V) \) are such that \( ST = TS \). Prove that \( \Range S \) is invariant under \( T \).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( Su \in \Range S \) for some \( u \in V \). Then
+    \[
+        T(Su) = S(Tu) \in \Range S
+    \]
+    and thus \( \Range S \) is invariant under \( T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Suppose \( T \in \lmap(V) \) and \( U_1, \ldots, U_m \) are subspaces of \( V \) invariant under \( T \). Prove that \( U_1 + \cdots + U_m \) is invariant under \( T \).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( u_1 + \cdots + u_m \in U_1 + \cdots + U_m \), where each \( u_j \in U_j \). Then
+    \[
+        T(u_1 + \cdots + u_m) = Tu_1 + \cdots + Tu_m,
+    \]
+    which belongs to \( U_1 + \cdots + U_m \) since each \( Tu_j \in U_j \). Thus \( U_1 + \cdots + U_m \) is invariant under \( T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Suppose \( T \in \lmap(V) \). Prove that the intersection of every collection of subspaces of \( V \) invariant under \( T \) is invariant under \( T \).
+\end{exercise}
+
+\begin{solution}
+    Let \( \mathscr{U} \) be a collection of subspaces of \( V \) invariant under \( T \) and let \( W = \bigcap_{U \in \mathscr{U}} U \). Suppose \( w \in W \). For each \( U \in \mathscr{U} \), we have \( w \in U \); since each \( U \) is invariant under \( T \), it follows that \( Tw \) belongs to each \( U \). Thus \( Tw \in W \) and we see that \( W \) is invariant under \( T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Prove or give a counterexample: if \( V \) is finite-dimensional and \( U \) is a subspace of \( V \) that is invariant under every operator on \( V \), then \( U = \{ 0 \} \) or \( U = V \).
+\end{exercise}
+
+\begin{solution}
+    This is true. It will suffice to show that if \( U \neq \{ 0 \} \), then \( U = V \). Suppose therefore that there exists some \( v_1 \in U \) with \( v_1 \neq 0 \). We can then extend this to a basis \( v_1, \ldots, v_m \) of \( V \). For each \( 1 \leq j \leq m \), define an operator \( T_j : V \to V \) by \( T_j v_1 = v_j \) and \( T_j v_i = 0 \) for \( i \neq 1 \). Then by assumption \( U \) is invariant under \( T_j \), so we must have \( T_j v_1 = v_j \in U \). Thus \( U \) contains the basis \( v_1, \ldots, v_m \) of \( V \) and hence \( U = V \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Suppose \( T \in \lmap(\R^2) \) is defined by \( T(x, y) = (-3y, x) \). Find the eigenvalues of \( T \).
+\end{exercise}
+
+\begin{solution}
+    We can observe that \( T \) is a counterclockwise rotation by \( 90^{\circ} \) about the origin followed by a dilation of the \( x \)-axis by a factor of 3. A similar argument to Example 5.8 (a) then shows that \( T \) has no eigenvalues.
+
+    Alternatively, for \( \lambda \in \R \) we can try to solve the equation \( T(x, y) = (-3y, x) = (\lambda x, \lambda y) \). Substituting \( x = \lambda y \) into \( -3y = \lambda x \) gives us \( -3y = \lambda^2 y \). Since \( y = 0 \) implies that \( x = 0 \), and eigenvectors are non-zero, we may assume that \( y \neq 0 \) and thus obtain the equation \( \lambda^2 + 3 = 0 \). Since this has no real solutions, we see that \( T \) has no eigenvalues.
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Define \( T \in \lmap(\F^2) \) by
+    \[
+        T(w, z) = (z, w).
+    \]
+    Find all eigenvalues and eigenvectors of \( T \).
+\end{exercise}
+
+\begin{solution}
+    \( T \) is a reflection in the line \( z = w \). An appeal to our geometric intuition suggests that 1 is an eigenvalue with corresponding eigenvector \( (1, 1) \) and that \( -1 \) is an eigenvalue with corresponding eigenvector \( (-1, 1) \). To see this algebraically, suppose \( \lambda \in \F \) and \( (w, z) \neq (0, 0) \) are such that \( T(w, z) = (z, w) = (\lambda w, \lambda z) \). Substituting \( z = \lambda w \) into \( w = \lambda z \) gives us \( w = \lambda^2 w \). Since \( w = 0 \) implies that \( z = 0 \), and eigenvectors are non-zero, we may assume that \( w \neq 0 \) and thus obtain the equation \( \lambda^2 - 1 = 0 \), which has solutions \( \lambda = \pm 1 \). These are both eigenvalues, since
+    \[
+        T(1, 1) = (1, 1) \quand T(-1, 1) = (1, -1) = -(-1, 1).
+    \]
+    Since \( \dim \F^2 = 2 \), 5.10 implies that there are no other eigenvectors of \( T \) linearly independent from these two. We may conclude that the eigenvalues and eigenvectors of \( T \) are:
+    \begin{center}
+        \begin{tblr}{c|c}
+            eigenvalue & corresponding eigenvectors \\
+            \hline
+            1 & \( (z, z) \) for \( z \in \F \setminus \{ 0 \} \) \\
+            \hline
+            -1 & \( (-z, z) \) for \( z \in \F \setminus \{ 0 \} \) \\
+        \end{tblr}
+    \end{center}
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Define \( T \in \lmap(\F^3) \) by
+    \[
+        T(z_1, z_2, z_3) = (2 z_2, 0, 5 z_3).
+    \]
+    Find all eigenvalues and eigenvectors of \( T \).
+\end{exercise}
+
+\begin{solution}
+    \( T \) can be thought of as the composition of the following transformations:
+    \begin{enumerate}[label=\arabic*.]
+        \item a projection onto the \( z_2 z_3 \)-plane;
+        \item a clockwise rotation of \( 90^{\circ} \) around the \( z_3 \)-axis; after the projection onto the \( z_2 z_3 \)-plane, this is equivalent to a reflection in the plane \( z_1 = z_2 \);
+        \item a dilation of the \( z_1 \)-axis by a factor of 2;
+        \item a dilation of the \( z_3 \)-axis by a factor of 5.
+    \end{enumerate}
+    In other words, \( T \) maps \( (z_1, z_2, z_3) \in \F^3 \) like so:
+    \[
+        (z_1, z_2, z_3) \mapsto (0, z_2, z_3) \mapsto (z_2, 0, z_3) \mapsto (2 z_2, 0, z_3) \mapsto (2 z_2, 0, 5 z_3).
+    \]
+    An appeal to our geometric intuition suggests that 5 is an eigenvalue with corresponding eigenvector \( (0, 0, 1) \) and that 0 is an eigenvector with corresponding eigenvector \( (1, 0, 0) \). To prove this, suppose that \( \lambda \in \F \) and \( (z_1, z_2, z_3) \neq (0, 0, 0) \) are such that
+    \[
+        T(z_1, z_2, z_3) = (2 z_2, 0, 5 z_3) = (\lambda z_1, \lambda z_2, \lambda z_3).
+    \]
+    If \( \lambda \neq 0 \), then the equation \( \lambda z_2 = 0 \) implies that \( z_2 = 0 \) and thus the equation \( 2 z_2 = \lambda z_1 \) implies that \( z_1 = 0 \). Since eigenvectors are non-zero, it must be the case that \( z_3 \neq 0 \) and so the equation \( 5 z_3 = \lambda z_3 \) gives us \( \lambda = 5 \). So the only possible eigenvalues are 0 and 5, which are indeed eigenvalues since
+    \[
+        T(0, 0, 1) = (0, 0, 5) = 5(0, 0, 1) \quand T(1, 0, 0) = (0, 0, 0) = 0(1, 0, 0).
+    \]
+    We claim that there are no other eigenvectors of \( T \) linearly independent from these two. First, we consider the eigenvalue 5. As we just showed, any eigenvector corresponding to this eigenvalue must satisfy \( z_1 = z_2 = 0 \) and thus each such eigenvector is a scalar multiple of \( (0, 0, 1) \). Next, we consider the eigenvalue 0; this is equivalent to considering the nullspace of \( T \). It is straightforward to verify that \( (1, 0, 0) \) is a basis for \( \Null T \) and so we may conclude that the eigenvalues and eigenvectors of \( T \) are:
+    \begin{center}
+        \begin{tblr}{c|c}
+            eigenvalue & corresponding eigenvectors \\
+            \hline
+            5 & \( (0, 0, z) \) for \( z \in \F \setminus \{ 0 \} \) \\
+            \hline
+            0 & \( (z, 0, 0) \) for \( z \in \F \setminus \{ 0 \} \) \\
+        \end{tblr}
+    \end{center}
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Define \( T \in \lmap(\F^n) \) by
+    \[
+        T(x_1, x_2, x_3, \ldots, x_n) = (x_1, 2 x_2, 3 x_3, \ldots, n x_n).
+    \]
+    \begin{enumerate}
+        \item Find all eigenvalues and eigenvectors of \( T \).
+
+        \item Find all invariant subspaces of \( T \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Letting \( e_j \) be the \( j \)\ts{th} standard basis vector of \( \F^n \), we notice that for each \( 1 \leq j \leq n \)
+        \[
+            Te_j = j e_j.
+        \]
+        Thus \( j \) is an eigenvalue of \( T \) with corresponding eigenvector \( e_j \). By 5.10 and 5.13, we can be sure that these are all of the eigenvalues and eigenvectors of \( T \), i.e.\
+        \begin{center}
+            \begin{tblr}{c|c}
+                eigenvalue & corresponding eigenvectors \\
+                \hline
+                1 & \( (z, 0, \ldots, 0) \) for \( z \in \F \setminus \{ 0 \} \) \\
+                \hline
+                2 & \( (0, z, \ldots, 0) \) for \( z \in \F \setminus \{ 0 \} \) \\
+                \hline
+                \( \vdots \) & \( \vdots \) \\
+                \hline
+                \( n \) & \( (0, 0, \ldots, z) \) for \( z \in \F \setminus \{ 0 \} \) \\
+            \end{tblr}
+        \end{center}
+
+        \item First, let us prove some useful results.
+
+        \noindent \textbf{Lemma 1.} Suppose \( T : V \to V \) is a linear operator and \( U \) is a subspace of \( V \) invariant under \( T \). If \( \lambda_1, \ldots, \lambda_k \) are distinct eigenvalues of \( T \) with corresponding eigenvectors \( v_1, \ldots, v_k \), then
+        \[
+            v_1 + \cdots + v_k \in U \iff v_j \in U \text{ for each } 1 \leq j \leq k.
+        \]
+
+        \noindent \textit{Proof.} We will prove this by induction on \( k \). The base case \( k = 1 \) is clear, so suppose the result is true for some \( k \) and suppose we have distinct eigenvalues \( \lambda_1, \ldots, \lambda_{k+1} \) of \( T \) with corresponding eigenvectors \( v_1, \ldots, v_{k+1} \). If \( v_j \in U \) for each \( 1 \leq j \leq k+1 \), then \( v_1 + \cdots + v_{k+1} \in U \) since \( U \) is a subspace of \( V \). Suppose that \( v := v_1 + \cdots + v_{k+1} \in U \). Since \( U \) is invariant under \( T \) we have
+        \[
+            Tv = \lambda_1 v_1 + \cdots + \lambda_{k+1} v_{k+1} \in U.
+        \]
+        This gives us
+        \[
+            Tv - \lambda_{k+1}v = (\lambda_1 - \lambda_{k+1}) v_1 + \cdots + (\lambda_k - \lambda_{k+1}) v_k \in U.
+        \]
+        By assumption, the eigenvalues \( \lambda_1, \ldots, \lambda_{k+1} \) are distinct and so for each \( 1 \leq j \leq k \) we have \( \lambda_j - \lambda_{k+1} \neq 0 \). It follows that each \( (\lambda_j - \lambda_{k+1}) v_j \) is an eigenvector of \( T \) corresponding to the eigenvalue \( \lambda_j \). Our induction hypothesis then guarantees that each \( (\lambda_j - \lambda_{k+1}) v_j \) belongs to the subspace \( U \) and thus each \( v_j \) belongs to \( U \), which gives us
+        \[
+            v_{k+1} = v - (v_1 + \cdots + v_k) \in U.
+        \]
+        This completes the induction step and the proof. \qed
+
+        \noindent \textbf{Lemma 2.} Suppose \( T : V \to V \) is a linear operator with \( \dim V = n \) and \( \lambda_1, \ldots, \lambda_n \) are distinct eigenvalues of \( T \) with corresponding eigenvectors \( v_1, \ldots, v_n \), so that
+        \[
+            V = E_1 \oplus \cdots \oplus E_n,
+        \]
+        where \( E_j = \Span(v_j) \). If \( U \) is a subspace of \( V \) invariant under \( T \), then
+        \[
+            U = (U \cap E_1) \oplus \cdots \oplus (U \cap E_n).
+        \]
+
+        \noindent \textit{Proof.} Since \( V = E_1 \oplus \cdots \oplus E_n \), for any \( u \in U \) we have \( u = e_1 + \cdots + e_n \), where each \( e_j \in E_j \). If any \( e_j = 0 \) then certainly \( e_j \in U \); otherwise, \( e_j \) is an eigenvector of \( T \) corresponding to the eigenvalue \( \lambda_j \) and so Lemma 1 implies that the non-zero \( e_j \)'s belong to \( U \) also. It follows that \( u \in (U \cap E_1) + \cdots + (U \cap E_n) \) and hence that
+        \[
+            U = (U \cap E_1) + \cdots + (U \cap E_n).
+        \]
+        The directness of this sum follows immediately from the directness of the sum \( V = E_1 \oplus \cdots \oplus E_n \). \qed
+
+        \noindent \textbf{Theorem 1.} Suppose \( T : V \to V \) is a linear operator with \( \dim V = n \) and \( \lambda_1, \ldots, \lambda_n \) are distinct eigenvalues of \( T \) with corresponding eigenvectors \( v_1, \ldots, v_n \), so that
+        \[
+            V = E_1 \oplus \cdots \oplus E_n,
+        \]
+        where \( E_j = \Span(v_j) \). Then the subspaces of \( V \) which are invariant under \( T \) are precisely those of the form
+        \[
+            E_{j_1, \ldots, j_k} := E_{j_1} \oplus \cdots \oplus E_{j_k} = \Span(v_{j_1}, \ldots, v_{j_k}),
+        \]
+        where \( 1 \leq j_1 < \cdots < j_k \leq n \) are positive integers and \( 0 \leq k \leq n \); when \( k = 0 \) define \( E_0 := \{ 0 \} \).
+
+        \noindent \textit{Proof.} It is straightforward to verify that each \( E_{j_1, \ldots, j_k} \) is indeed a subspace of \( V \) invariant under \( T \). To see that each such subspace is of this form, let \( U \) be a subspace of \( V \) invariant under \( T \). By Lemma 2, we have
+        \[
+            U = (U \cap E_1) \oplus \cdots \oplus (U \cap E_n).
+        \]
+        For each \( j \), since \( \dim E_j = 1 \), we can either have \( U \cap E_j = \{ 0 \} \) or \( U \cap E_j = E_j \). If each \( U \cap E_j = \{ 0 \} \), then \( U = \{ 0 \} = E_0 \). Otherwise, let \( 1 \leq j_1 < \cdots < j_k \leq n \) be those indices for which \( U \cap E_j = E_j \). Then \( U \) is nothing but \( E_{j_1, \ldots, j_k} \). \qed
+        
+        Now let us return to the exercise. As we showed in part (a), the eigenvalues of \( T \) are \( 1, 2, 3, \ldots, n \) with corresponding eigenvectors \( e_1, e_2, e_3, \ldots, e_n \), where \( e_j \) is the \( j \)\ts{th} standard basis vector of \( \F^n \). We can now appeal to Theorem 1 above to obtain all subspaces of \( \F^n \) invariant under \( T \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Define \( T : \poly(\R) \to \poly(\R) \) by \( Tp = p' \). Find all eigenvalues and eigenvectors of \( T \).
+\end{exercise}
+
+\begin{solution}
+    We notice that for \( p_0(x) = 1 \),
+    \[
+        Tp_0 = 0 = 0p_0.
+    \]
+    Thus 0 is an eigenvalue of \( T \) with corresponding eigenvector \( p_0(x) = 1 \). Moreover, the only polynomials whose derivative is zero are the constant polynomials.
+
+    Suppose \( p \in \poly(\R) \) satisfies \( \deg p \geq 1 \). If \( \lambda \neq 0 \), then \( \deg (\lambda p) = \deg p \), whereas \( \deg p' = \deg p - 1 \). Thus we cannot have \( Tp = p' = \lambda p \) and we may conclude that the eigenvalues and eigenvectors of \( T \) are:
+    \begin{center}
+        \begin{tblr}{c|c}
+            eigenvalue & corresponding eigenvectors \\
+            \hline
+            0 & \( \alpha \in \F \setminus \{ 0 \} \) \\
+        \end{tblr}
+    \end{center}
+\end{solution}
+
+\begin{exercise}
+\label{ex:12}
+    Define \( T \in \lmap(\poly_4(\R)) \) by
+    \[
+        (Tp)(x) = x p'(x)
+    \]
+    for all \( x \in \R \). Find all eigenvalues and eigenvectors of \( T \).
+\end{exercise}
+
+\begin{solution}
+    Letting \( p_j \in \poly_4(\R) \) be given by \( p_j(x) = x^j \) for \( 0 \leq j \leq 4 \), we notice that
+    \[
+        (Tp_j)(x) = j x^j = j p_j(x).
+    \]
+    By 5.10 and 5.13, we may conclude that the eigenvalues and eigenvectors of \( T \) are:
+    \begin{center}
+        \begin{tblr}{c|c}
+            eigenvalue & corresponding eigenvectors \\
+            \hline
+            0 & \( \alpha p_0 \) for \( \alpha \in \F \setminus \{ 0 \} \) \\
+            \hline
+            1 & \( \alpha p_1 \) for \( \alpha \in \F \setminus \{ 0 \} \) \\
+            \hline
+            2 & \( \alpha p_2 \) for \( \alpha \in \F \setminus \{ 0 \} \) \\
+            \hline
+            3 & \( \alpha p_3 \) for \( \alpha \in \F \setminus \{ 0 \} \) \\
+            \hline
+            4 & \( \alpha p_4 \) for \( \alpha \in \F \setminus \{ 0 \} \)
+        \end{tblr}
+    \end{center}
+\end{solution}
+
+\begin{exercise}
+\label{ex:13}
+    Suppose \( V \) is finite-dimensional, \( T \in \lmap(V) \), and \( \lambda \in \F \). Prove that there exists \( \alpha \in \F \) such that \( \abs{\alpha - \lambda} < \tfrac{1}{1000} \) and \( T - \alpha I \) is invertible.
+\end{exercise}
+
+\begin{solution}
+    Seeking a contradiction, suppose that for all \( \alpha \in \F \) such that \( \abs{\alpha - \lambda} < \tfrac{1}{1000} \), the operator \( T - \alpha I \) is not invertible. By 5.6 each such \( \alpha \), of which there are infinitely many, must be an eigenvalue of \( T \); but this contradicts 5.13, which says that since \( V \) is finite-dimensional, \( T \) can have at most \( \dim V \) eigenvalues.
+\end{solution}
+
+\begin{exercise}
+\label{ex:14}
+    Suppose \( V = U \oplus W \), where \( U \) and \( W \) are nonzero subspaces of \( V \). Define \( P \in \lmap(V) \) by \( P(u + w) = u \) for \( u \in U \) and \( w \in W \). Find all eigenvalues and eigenvectors of \( P \).
+\end{exercise}
+
+\begin{solution}
+    We notice that \( Pu = u \) for any \( u \in U \). Since \( U \neq \{ 0 \} \), it follows that 1 is an eigenvalue of \( P \) with corresponding eigenvectors \( u \in U \setminus \{ 0 \} \). Similarly, we notice that \( Pw = 0 \) for any \( w \in W \). Since \( W \neq \{ 0 \} \), it follows that 0 is an eigenvalue of \( P \) with corresponding eigenvectors \( w \in W \setminus \{ 0 \} \).
+
+    We claim that 1 and 0 are the only eigenvalues of \( P \). To see this, suppose \( \lambda \in \F \) and \( u + w \neq 0 \) are such that
+    \[
+        P(u + w) = u = \lambda u + \lambda w \iff (1 - \lambda) u = \lambda w \in U \cap W.
+    \]
+    Since the sum \( V = U \oplus W \) is direct, we have \( U \cap W = \{ 0 \} \). It follows that \( (1 - \lambda) u = \lambda w = 0 \). If \( \lambda \neq 1 \) and \( \lambda \neq 0 \), then this equation can only be satisfied by \( u = w = 0 \); but then \( u + w = 0 \) is not an eigenvector.
+    
+    Now we claim that the only eigenvectors corresponding to the eigenvalue 1 are those of the form \( u \in U \setminus \{ 0 \} \). Indeed, if \( v \neq 0 \) satisfies \( v \not\in U \), then we must have \( v = u + w \) with \( w \neq 0 \). It follows that \( Pv = P(u + w) = u \neq u + w \) since \( w \) is non-zero.
+
+    Similarly, the only eigenvectors corresponding to the eigenvalue 0 are those of the form \( w \in W \setminus \{ 0 \} \).; it is straightforward to verify that the nullspace of \( P \) is exactly \( W \). We may conclude that the eigenvalues and eigenvectors of \( T \) are:
+    \begin{center}
+        \begin{tblr}{c|c}
+            eigenvalue & corresponding eigenvectors \\
+            \hline
+            1 & \( u \in U \setminus \{ 0 \} \) \\
+            \hline
+            0 & \( w \in W \setminus \{ 0 \} \)
+        \end{tblr}
+    \end{center}
+\end{solution}
+
+\begin{exercise}
+\label{ex:15}
+    Suppose \( T \in \lmap(V) \). Suppose \( S \in \lmap(V) \) is invertible.
+    \begin{enumerate}
+        \item Prove that \( T \) and \( S^{-1} T S \) have the same eigenvalues.
+
+        \item What is the relationship between the eigenvectors of \( T \) and the eigenvectors of \( S^{-1} T S \)?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Suppose \( \lambda \in \F \) is an eigenvalue of \( T \) with a corresponding eigenvector \( v \in V \). Since \( S \) is surjective, there is a \( u \in V \) such that \( v = Su \). Since \( v \neq 0 \), it must be the case that \( u \neq 0 \). Furthermore,
+        \[
+            Tv = \lambda v \iff (TS)(u) = \lambda Su \iff (S^{-1}TS)(u) = \lambda u.
+        \]
+        Thus \( \lambda \) is an eigenvalue of \( S^{-1}TS \) with a corresponding eigenvector \( u \).
+
+        Similarly, suppose \( \lambda \in \F \) is an eigenvalue of \( S^{-1}TS \) with a corresponding eigenvector \( u \in V \). Since \( S^{-1} \) is surjective, there is a \( v \in V \) such that \( u = S^{-1}v \). Since \( u \neq 0 \), it must be the case that \( v \neq 0 \). Furthermore,
+        \[
+            (S^{-1}TS)(u) = \lambda u \iff (S^{-1}T)(v) = \lambda S^{-1}v \iff Tv = \lambda v.
+        \]
+        Thus \( \lambda \) is an eigenvalue of \( T \) with a corresponding eigenvector \( v \).
+
+        \item Let \( \lambda \) be an eigenvalue of \( T \); as we showed in part (a), this is the case if and only if \( \lambda \) is an eigenvalue of \( S^{-1}TS \). Define
+        \begin{gather*}
+            E(T ; \lambda) = \{ v \in V : v \neq 0 \text{ and } Tv = \lambda v \}, \\[2mm]
+            E(S^{-1}TS ; \lambda) = \{ u \in V : u \neq 0 \text{ and } (S^{-1}TS)u = \lambda u \}.
+        \end{gather*}
+        Then by part (a), we have
+        \[
+            E(S^{-1}TS ; \lambda) = \{ S^{-1}v : v \in E(T ; \lambda) \} \quand E(T ; \lambda) = \{ Su : u \in E(S^{-1}TS ; \lambda) \}.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:16}
+    Suppose \( V \) is a complex vector space, \( T \in \lmap(V) \), and the matrix of \( T \) with respect to some basis of \( V \) contains only real entries. Show that if \( \lambda \) is an eigenvalue of \( T \), then so is \( \overline{\lambda} \).
+\end{exercise}
+
+\begin{solution}
+    Let \( v_1, \ldots, v_n \) be a basis of \( V \) such that the matrix of \( T \) with respect to this basis contains only real entries, i.e.\ if this matrix has entries \( A_{i,j} \), then each \( A_{i,j} \in \R \). Suppose that \( \lambda \in \C \) is an eigenvalue of \( T \) with a corresponding eigenvector \( x = \sum_{i=1}^n x_i v_i \in V \), so that
+    \[
+        Tx = \sum_{i=1}^n \left( \sum_{j=1}^n x_j A_{i,j} \right) v_i = \sum_{i=1}^n \lambda x_i v_i = \lambda x.
+    \]
+    By unique representation, for each \( 1 \leq i \leq n \) we then have
+    \[
+        \sum_{j=1}^n x_j A_{i,j} = \lambda x_i \iff \overline{\sum_{j=1}^n x_j A_{i,j}} = \overline{\lambda x_i} \iff \sum_{j=1}^n \overline{x_j} A_{i,j} = \overline{\lambda} \overline{x_i},
+    \]
+    where we have used that \( \overline{A_{i,j}} = A_{i,j} \) since each \( A_{i,j} \in \R \). Define \( \overline{x} = \sum_{i=1}^n \overline{x_i} v_i \) and note that \( \overline{x} \neq 0 \) since \( x \neq 0 \). Furthermore,
+    \[
+        T \overline{x} = \sum_{i=1}^n \left( \sum_{j=1}^n \overline{x_j} A_{i,j} \right) v_i = \sum_{i=1}^n \overline{\lambda} \overline{x_i} v_i = \overline{\lambda} \overline{x},
+    \]
+    demonstrating that \( \overline{\lambda} \) is an eigenvector of \( T \) with a corresponding eigenvector \( \overline{x} \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:17}
+    Give an example of an operator \( T \in \lmap(\R^4) \) such that \( T \) has no (real) eigenvalues.
+\end{exercise}
+
+\begin{solution}
+    Define \( T : \R^4 \to \R^4 \) by \( T(x_1, x_2, x_3, x_4) = (x_2, x_3, x_4, -x_1) \) and suppose \( \lambda \) is such that
+    \[
+        T(x_1, x_2, x_3, x_4) = (x_2, x_3, x_4, -x_1) = \lambda(x_1, x_2, x_3, x_4).
+    \]
+    We then have
+    \[
+        -x_1 = \lambda x_4 = \lambda^2 x_3 = \lambda^3 x_2 = \lambda^4 x_1.
+    \]
+    Since
+    \[
+        x_1 = 0 \implies x_2 = 0 \implies x_3 = 0 \implies x_4 = 0
+    \]
+    and we are looking for eigenvectors, we may assume that \( x_1 \neq 0 \) and arrive at the equation \( \lambda^4 + 1 = 0 \), which has no real solutions. It follows that \( T \) has no real eigenvalues.
+\end{solution}
+
+\begin{exercise}
+\label{ex:18}
+    Show that the operator \( T \in \lmap(\C^{\infty}) \) defined by
+    \[
+        T(z_1, z_2, \ldots) = (0, z_1, z_2, \ldots)
+    \]
+    has no eigenvalues.
+\end{exercise}
+
+\begin{solution}
+    We are looking for solutions to the equation
+    \[
+        (0, z_1, z_2, \ldots) = (\lambda z_1, \lambda z_2, \lambda z_3, \ldots).
+    \]
+    where \( (z_1, z_2, \ldots) \neq 0 \) and \( \lambda \in \C \). If \( \lambda = 0 \), then \( z_1 = z_2 = \cdots = 0 \) and so we may assume that \( \lambda \neq 0 \). From the equation \( 0 = \lambda z_1 \) we can then deduce that \( z_1 = 0 \), which in turn gives us the equation \( 0 = \lambda z_2 \), which similarly implies that \( z_2 = 0 \), and so on. Since both assumptions \( \lambda = 0 \) and \( \lambda \neq 0 \) imply that \( (z_1, z_2, \ldots) = 0 \), we may conclude that \( T \) has no eigenvalues.
+\end{solution}
+
+\begin{exercise}
+\label{ex:19}
+    Suppose \( n \) is a positive integer and \( T \in \lmap(\F^n) \) is defined by
+    \[
+        T(x_1, \ldots, x_n) = (x_1 + \cdots + x_n, \ldots, x_1 + \cdots + x_n);
+    \]
+    in other words, \( T \) is the operator whose matrix (with respect to the standard basis) consists of all 1's. Find all eigenvalues and eigenvectors of \( T \).
+\end{exercise}
+
+\begin{solution}
+    If \( n = 1 \) then \( T \) is the identity operator on \( \F \), whose only eigenvalue is 1 with corresponding eigenvectors \( x \in \F \setminus \{ 0 \} \).
+
+    Suppose \( n \geq 2 \) and let \( e_1, \ldots, e_n \) be the standard basis of \( \F^n \). Then
+    \begin{multline*}
+        \Null T = \{ (-(x_2 + \cdots + x_n), x_2, \ldots, x_n) \in \F^n : x_2, \ldots, x_n \in \F \} \\
+        = \Span(e_2 - e_1, e_3 - e_1, \ldots, e_n - e_1),
+    \end{multline*}
+    \[
+        \Range T = \Span(e_1 + \cdots + e_n) = \Span((1, 1, \ldots, 1)).
+    \]
+    Thus 0 is an eigenvalue of \( T \) with corresponding eigenvectors \( x \in \Null T \setminus \{ 0 \} \) and \( n \) is an eigenvalue of \( T \) with corresponding eigenvectors \( x \in \Span(e_1 + \cdots + e_n) \setminus \{ 0 \} \), since
+    \[
+        T(1, 1, \ldots, 1) = (n, n, \ldots, n) = n (1, 1, \ldots, 1).
+    \]
+    We claim that these are the only eigenvalues of \( T \). Indeed, if \( x \neq 0 \) and \( \lambda \neq 0 \) are such that \( Tx = \lambda x \), then since \( \Range T = \Span((1, \ldots, 1)) \), there must exist some \( \alpha \in \F \) such that
+    \[
+        Tx = \lambda x = \alpha (1, \ldots, 1) \implies x = \lambda^{-1} \alpha (1, \ldots, 1).
+    \]
+    Thus the eigenvector \( x \), which corresponds to the eigenvalue \( \lambda \), and the eigenvector \( (1, \ldots, 1) \), which corresponds to the eigenvalue \( n \), are linearly dependent. By the contrapositive of 5.10, it must be the case that \( \lambda = n \).
+    
+    Since \( \dim \Null T + \dim \Range T = \dim V \), 5.10 allows us to conclude that
+    \begin{center}
+        \begin{tblr}{c|c}
+            eigenvalue & corresponding eigenvectors \\
+            \hline
+            0 & \( x \in \Null T \setminus \{ 0 \} \) \\
+            \hline
+            \( n \) & \( \alpha (1, \ldots, 1) \) for \( \alpha \in \F \setminus \{ 0 \} \)
+        \end{tblr}
+    \end{center}
+\end{solution}
+
+\begin{exercise}
+\label{ex:20}
+    Find all eigenvalues and eigenvectors of the backward shift operator \( T \in \lmap(\F^{\infty}) \) defined by
+    \[
+        T(z_1, z_2, z_3, \ldots) = (z_2, z_3, \ldots).
+    \]
+\end{exercise}
+
+\begin{solution}
+    Observe that for any \( \lambda \in \F \), we have \( (1, \lambda, \lambda^2, \lambda^3, \ldots) \neq 0 \) and
+    \[
+        T(1, \lambda, \lambda^2, \lambda^3, \ldots) = (\lambda, \lambda^2, \lambda^3, \lambda^4, \ldots) = \lambda(1, \lambda, \lambda^2, \lambda^3, \ldots).
+    \]
+    It follows that each \( \lambda \in \F \) is an eigenvalue of \( T \) with a corresponding eigenvector \( (1, \lambda, \lambda^2, \lambda^3, \ldots) \).
+
+    Fix \( \lambda \in \F \). We claim that if \( z = (z_1, z_2, z_3, \ldots) \) is an eigenvector of \( T \) corresponding to \( \lambda \), then \( z = \alpha v \), where \( \alpha \in \F \setminus \{ 0 \} \) and \( v = (1, \lambda, \lambda^2, \lambda^3, \ldots) \). Indeed,
+    \[
+        Tz = (z_2, z_3, z_4, \ldots) = (\lambda z_1, \lambda z_2, \lambda z_3, \ldots) = \lambda z
+    \]
+    implies that \( z_2 = \lambda z_1 \), which gives \( z_3 = \lambda z_2 = \lambda^2 z_1 \), and so on. In general, \( z_n = \lambda^{n-1} z_1 \) for each positive integer \( n \), i.e.\
+    \[
+        z = (z_1, \lambda z_1, \lambda^2 z_1, \ldots) = z_1 (1, \lambda, \lambda^2, \ldots) = z_1 v.
+    \]
+    Note that we must have \( z_1 \neq 0 \) since \( z \) is an eigenvector of \( T \). We may conclude that
+    \begin{center}
+        \begin{tblr}{c|c}
+            eigenvalue & corresponding eigenvectors \\
+            \hline
+            \( \lambda \in \F \) & \( \alpha (1, \lambda, \lambda^2, \ldots) \) for \( \alpha \in \F \setminus \{ 0 \} \)
+        \end{tblr}
+    \end{center}
+\end{solution}
+
+\begin{exercise}
+\label{ex:21}
+    Suppose \( T \in \lmap(V) \) is invertible.
+    \begin{enumerate}
+        \item Suppose \( \lambda \in \F \) with \( \lambda \neq 0 \). Prove that \( \lambda \) is an eigenvalue of \( T \) if and only if \( \tfrac{1}{\lambda} \) is an eigenvalue of \( T^{-1} \).
+
+        \item Prove that \( T \) and \( T^{-1} \) have the same eigenvectors.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item For \( \lambda \neq 0 \) and \( v \neq 0 \), we have
+        \[
+            Tv = \lambda v \iff v = \lambda T^{-1} v \iff \lambda^{-1}v = T^{-1}v.
+        \]
+
+        \item See part (a).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:22}
+    Suppose \( T \in \lmap(V) \) and there exist nonzero vectors \( v \) and \( w \) in \( V \) such that
+    \[
+        Tv = 3w \quand Tw = 3v.
+    \]
+    Prove that \( 3 \) or \( -3 \) is an eigenvalue of \( T \).
+\end{exercise}
+
+\begin{solution}
+    Applying \( T \) to both sides of the equation \( Tv = 3w \) shows that \( T^2v = 9v \) or equivalently that \( (T^2 - 9I)(v) = 0 \). Since \( v \neq 0 \), this demonstrates that the operator \( T^2 - 9I = (T - 3I)(T + 3I) \) is not injective. It must then be the case that at least one of the operators \( T - 3I \) and \( T + 3I \) is not injective and thus 3 or -3 is an eigenvalue of \( T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:23}
+    Suppose \( V \) is finite-dimensional and \( S, T \in \lmap(V) \). Prove that \( ST \) and \( TS \) have the same eigenvalues.
+\end{exercise}
+
+\begin{solution}
+    Suppose that 0 is an eigenvalue of \( ST \). It must then be the case that \( ST \) is not invertible (5.6), hence \( TS \) is not invertible (\href{https://lew98.github.io/Mathematics/LADR_Section_3_D_Exercises.pdf}{Exercise 3.D.9}; here we use that \( V \) is finite-dimensional), and hence 0 is an eigenvalue of \( TS \) (5.6 again). By symmetry, we see that 0 is an eigenvalue of \( ST \) if and only if 0 is an eigenvalue of \( TS \).
+
+    Let us now consider non-zero eigenvalues. Suppose that \( \lambda \neq 0 \) and \( v \neq 0 \) are such that \( (ST)(v) = \lambda v \). Note that we must have \( Tv \neq 0 \), otherwise this equation becomes \( 0 = \lambda v \), which cannot be the case if \( \lambda \neq 0 \) and \( v \neq 0 \). Applying \( T \) to both sides of the equation \( (ST)(v) = \lambda v \) gives us \( (TS)(Tv) = \lambda (Tv) \) and thus \( \lambda \) is also an eigenvalue of \( TS \) with a corresponding eigenvector \( Tv \). By symmetry, we see that \( \lambda \neq 0 \) is an eigenvalue of \( ST \) if and only if \( \lambda \) is an eigenvalue of \( TS \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:24}
+    Suppose \( A \) is an \( n \)-by-\( n \) matrix with entries in \( \F \). Define \( T \in \lmap(\F^n) \) by \( Tx = Ax \), where elements of \( \F^n \) are thought of as \( n \)-by-1 column vectors.
+    \begin{enumerate}
+        \item Suppose the sum of the entries in each row of \( A \) equals 1. Prove that 1 is an eigenvalue of \( T \).
+        
+        \item Suppose the sum of the entries in each column of \( A \) equals 1. Prove that 1 is an eigenvalue of \( T \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( A_{i,j} \) be the entries of \( A \); our assumption is that \( \sum_{j=1}^n A_{i,j} = 1 \) for each \( 1 \leq i \leq n \). Observe that
+        \[
+            T(1, \ldots, 1) =
+            \begin{pmatrix}
+                A_{1,1} & \cdots & A_{1,n} \\
+                \vdots & \ddots & \vdots \\
+                A_{n,1} & \cdots & A_{n,n}
+            \end{pmatrix}
+            \begin{pmatrix}
+                1 \\
+                \vdots \\
+                1
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                \sum_{j=1}^n A_{1,j} \\
+                \vdots \\
+                \sum_{j=1}^n A_{n,j}
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                1 \\
+                \vdots \\
+                1
+            \end{pmatrix}.
+        \]
+        Thus 1 is an eigenvalue of \( T \) with a corresponding eigenvector \( (1, \ldots, 1) \).
+
+        \item Let \( e_1, \ldots, e_n \) be the standard basis of \( \F^n \) and let \( \psi : \F^n \to \F \) be the linear functional given by \( \psi(e_j) = 1 \). Clearly, the matrix of \( T \) with respect to the standard basis of \( \F^n \) is \( A \). It follows that
+        \[
+            (\psi(T - I))(e_j) = \psi \left( \left( \sum_{i=1}^n A_{i,j} e_i \right) - e_j \right) = \left( \sum_{i=1}^n A_{i,j} \right) - 1 = 0,
+        \]
+        where we have used our assumption that the sum of the entries in each column of \( A \) equals 1. So \( \psi \circ (T - I) : \F^n \to \F \) is the zero map; if the operator \( T - I \) were invertible then it would have to be the case that \( \psi \) was zero. Since \( \psi \) is non-zero, we see that \( T - I \) is not invertible and hence 1 is an eigenvalue of \( T \) (5.6).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:25}
+    Suppose \( T \in \lmap(V) \) and \( u, v \) are eigenvectors of \( T \) such that \( u + v \) is also an eigenvector of \( T \). Prove that \( u \) and \( v \) are eigenvectors of \( T \) corresponding to the same eigenvalue.
+\end{exercise}
+
+\begin{solution}
+    Suppose \( u, v, \) and \( u + v \) are eigenvectors corresponding to the eigenvalues \( \lambda, \mu, \) and \( \gamma \) respectively. Since the list \( u, v, u + v \) is linearly dependent, the contrapositive of 5.10 shows that the eigenvalues \( \lambda, \mu, \) and \( \gamma \) must not be distinct, i.e.\ at least two of them are equal. In fact, all three must be equal: if \( \lambda = \mu \) then
+    \[
+        \lambda (u + v) = \lambda u + \lambda v = \lambda u + \mu v = Tu + Tv = T(u + v) = \gamma (u + v)    
+    \]
+    and thus \( \lambda = \mu = \gamma \) since \( u + v \neq 0 \); if \( \lambda = \gamma \) then
+    \[
+        \lambda u + \lambda v = \lambda(u + v) = \gamma(u + v) = T(u + v) = Tu + Tv = \lambda u + \mu v \implies \lambda v = \mu v,
+    \]
+    and thus \( \lambda = \mu = \gamma \) since \( v \neq 0 \); similarly, \( \mu = \gamma \) implies \( \lambda = \mu = \gamma \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:26}
+    Suppose \( T \in \lmap(V) \) is such that every nonzero vector in \( V \) is an eigenvector of \( T \). Prove that \( T \) is a scalar multiple of the identity operator.
+\end{exercise}
+
+\begin{solution}
+    The case where \( V = \{ 0 \} \) is easily handled, so assume that \( V \neq \{ 0 \} \). Fix some non-zero \( u \in V \); by assumption we have \( Tu = \lambda u \) for some \( \lambda \in \F \). Suppose \( v \in V \) is non-zero. If \( u + v \neq 0 \), then by assumption \( v \) and \( u + v \) are both eigenvectors of \( T \), so \Cref{ex:25} implies that \( u \) and \( v \) are eigenvectors corresponding the same eigenvalue \( \lambda \), so that \( Tv = \lambda v \). If \( v = -u \), then \( Tv = -Tu = -\lambda u = \lambda v \). Thus we have \( Tv = \lambda v \) for all \( v \in V \), i.e.\ \( T = \lambda I \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:27}
+    Suppose \( V \) is finite-dimensional and \( T \in \lmap(V) \) is such that every subspace of \( V \) with dimension \( \dim V - 1 \) is invariant under \( T \). Prove that \( T \) is a scalar multiple of the identity operator.
+\end{exercise}
+
+\begin{solution}
+    If \( V = \{ 0 \} \), then \( T = 0I \). If \( \dim V = 1 \), then \( V = \Span (v) \) for some \( v \neq 0 \). It follows that \( Tv = \lambda v \) for some \( \lambda \in \F \) and thus \( T = \lambda I \).
+
+    Suppose that \( \dim V = n \geq 2 \). Let \( v_1 \in V \) be non-zero and extend this to a basis \( v_1, v_2, \ldots, v_n \) of \( V \). For each \( 2 \leq j \leq n \), let \( U_j \) be the span of the vectors \( v_1, v_2, \ldots, v_n \) except for \( v_j \), so that
+    \[
+        U_2 = \Span (v_1, v_3, \ldots, v_n), \quad U_3 = \Span(v_1, v_2, v_4, \ldots, v_n), \quad \text{etc.}
+    \]
+    For each \( 2 \leq j \leq n \), the subspace \( U_j \) has dimension \( n - 1 \) and so by assumption is invariant under \( T \). Since \( v_1 \) belongs to \( U_j \), we then have \( Tv_1 \in U_j \). Thus
+    \[
+        Tv_1 = A_{j,1} v_1 + A_{j,2} v_2 + \cdots + A_{j,j-1} v_{j-1} + 0 v_j + A_{j,j+1} v_{j+1} + \cdots + A_{j,n} v_n
+    \]
+    for some scalars \( A_{j,1}, \ldots, A_{j,j-1}, A_{j,j+1}, \ldots, A_{j,n} \). We can put these scalars in a matrix:
+    \[
+        \begin{pmatrix}
+            A_{2,1} & 0 & A_{2,3} & \cdots & A_{2,n-2} & A_{2,n-1} & A_{2,n} \\
+            A_{3,1} & A_{3,2} & 0 & \cdots & A_{3,n-2} & A_{3,n-1} & A_{3,n} \\
+            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\
+            A_{n-1,1} & A_{n-1,2} & A_{n-1,3} & \cdots & A_{n-1,n-2} & 0 & A_{n-1,n} \\
+            A_{n,1} & A_{n,2} & A_{n,3} & \cdots & A_{n,n-2} & A_{n,n-1} & 0
+        \end{pmatrix}.
+    \]
+    Each row of this matrix represents the coefficients with respect to the basis \( v_1, \ldots, v_n \) of the same vector \( Tv_1 \) and thus by unique representation, the entries in a given column must be equal, i.e.\ this matrix is nothing but
+    \[
+        \begin{pmatrix}
+            \lambda & 0 & 0 & \cdots & 0 & 0 & 0 \\
+            \lambda & 0 & 0 & \cdots & 0 & 0 & 0 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\
+            \lambda & 0 & 0 & \cdots & 0 & 0 & 0 \\
+            \lambda & 0 & 0 & \cdots & 0 & 0 & 0
+        \end{pmatrix},
+    \]
+    where \( \lambda = A_{2,1} \). Thus \( Tv_1 = \lambda v_1 \), demonstrating that \( v_1 \) is an eigenvector of \( T \) corresponding to the eigenvalue \( \lambda \). Since \( v_1 \) was arbitrary, we have shown that each non-zero vector in \( V \) is an eigenvector of \( T \) and so \Cref{ex:26} allows us to conclude that \( T \) is a scalar multiple of the identity operator.
+\end{solution}
+
+\begin{exercise}
+\label{ex:28}
+    Suppose \( V \) is finite-dimensional with \( \dim V \geq 3 \) and \( T \in \lmap(V) \) is such that every 2-dimensional subspace of \( V \) is invariant under \( T \). Prove that \( T \) is a scalar multiple of the identity operator.
+\end{exercise}
+
+\begin{solution}
+    The proof is similar to \Cref{ex:27}. Suppose \( \dim V = n \geq 3 \). Let \( v_1 \in V \) be non-zero and extend this to a basis \( v_1, v_2, \ldots, v_n \) of \( V \). For each \( 2 \leq j \leq n \), let \( U_j = \Span(v_1, v_j) \); each \( U_j \) is 2-dimensional and hence by assumption is invariant under \( T \). Since \( v_1 \in U_j \), we then have \( Tv_1 \in U_j \) and thus
+    \[
+        Tv_1 = A_{j,1} v_1 + 0 v_2 + \cdots + 0 v_{j-1} + A_{j,j} v_j + 0 v_{j+1} + \cdots + 0 v_n
+    \]
+    for some scalars \( A_{j,1} \) and \( A_{j,j} \). We can put these scalars in a matrix:
+    \[
+        \begin{pmatrix}
+            A_{2,1} & A_{2,2} & 0 & \cdots & 0 & 0 & 0 \\
+            A_{3,1} & 0 & A_{3,3} & \cdots & 0 & 0 & 0 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\
+            A_{n-1,1} & 0 & 0 & \cdots & 0 & A_{n-1,n-1} & 0 \\
+            A_{n,1} & 0 & 0 & \cdots & 0 & 0 & A_{n,n}
+        \end{pmatrix}.
+    \]
+    (Note that this matrix has at least 2 rows since \( n \geq 3 \).) Each row of this matrix represents the coefficients with respect to the basis \( v_1, \ldots, v_n \) of the same vector \( Tv_1 \) and thus by unique representation, the entries in a given column must be equal, i.e.\ this matrix is nothing but
+    \[
+        \begin{pmatrix}
+            \lambda & 0 & 0 & \cdots & 0 & 0 & 0 \\
+            \lambda & 0 & 0 & \cdots & 0 & 0 & 0 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\
+            \lambda & 0 & 0 & \cdots & 0 & 0 & 0 \\
+            \lambda & 0 & 0 & \cdots & 0 & 0 & 0
+        \end{pmatrix},
+    \]
+    where \( \lambda = A_{2,1} \). Thus \( Tv_1 = \lambda v_1 \), demonstrating that \( v_1 \) is an eigenvector of \( T \) corresponding to the eigenvalue \( \lambda \). Since \( v_1 \) was arbitrary, we have shown that each non-zero vector in \( V \) is an eigenvector of \( T \) and so \Cref{ex:26} allows us to conclude that \( T \) is a scalar multiple of the identity operator.
+\end{solution}
+
+\begin{exercise}
+\label{ex:29}
+    Suppose \( T \in \lmap(V) \) and \( \dim \Range T = k \). Prove that \( T \) has at most \( k + 1 \) distinct eigenvalues.
+\end{exercise}
+
+\begin{solution}
+    Suppose \( T \) has \( n \) distinct eigenvalues \( \lambda_1, \ldots, \lambda_n \) with corresponding eigenvectors \( v_1, \ldots, v_n \), so that
+    \[
+        Tv_1 = \lambda_1 v_1, \ldots, Tv_n = \lambda_n v_n \in \Range T.
+    \]
+    The list \( v_1, \ldots, v_n \) is linearly independent (5.10) and thus the list \( \lambda_1 v_1, \ldots, \lambda_n v_n \) is also linearly independent, provided each eigenvalue \( \lambda_j \) is non-zero; if some eigenvalue \( \lambda_j = 0 \) (since the eigenvalues are distinct there can be at most one such \( \lambda_j \)), we can discard \( \lambda_j v_j \) from the list and be left with a linearly independent list of \( n - 1 \) vectors. In either case, there are at least \( n - 1 \) linearly independent vectors in \( \Range T \) and thus \( \dim \Range T \geq n - 1 \).
+
+    If \( T \) has \( n \geq k + 2 \) distinct eigenvalues, then by the previous discussion we must have \( \dim \Range T \geq k + 1 \). Thus \( \dim \Range T = k \) implies that \( T \) has at most \( k + 1 \) distinct eigenvalues.
+\end{solution}
+
+\begin{exercise}
+\label{ex:30}
+    Suppose \( T \in \lmap(\R^3) \) and \( -4, 5, \) and \( \sqrt{7} \) are eigenvalues of \( T \). Prove that there exists \( x \in \R^3 \) such that \( Tx - 9x = (-4, 5, \sqrt{7}) \).
+\end{exercise}
+
+\begin{solution}
+    \( T \) has \( 3 = \dim \R^3 \) eigenvalues \( -4, 5, \) and \( \sqrt{7} \); it follows that 9 cannot be an eigenvalue of \( T \) (5.13) and hence the operator \( T - 9I \) is invertible (5.6). The desired \( x \in \R^3 \) is then \( (T - 9I)^{-1}(-4, 5, \sqrt{7}) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:31}
+    Suppose \( V \) is finite-dimensional and \( v_1, \ldots, v_m \) is a list of vectors in \( V \). Prove that \( v_1, \ldots, v_m \) is linearly independent if and only if there exists \( T \in \lmap(V) \) such that \( v_1, \ldots, v_m \) are eigenvectors of \( T \) corresponding to distinct eigenvalues.
+\end{exercise}
+
+\begin{solution}
+    Suppose \( v_1, \ldots, v_m \) is linearly independent. Extend this to a basis \( v_1, \ldots, v_m, w_1, \ldots, w_n \) for \( V \) and define a linear operator \( T : V \to V \) by
+    \[
+        Tv_1 = v_1, Tv_2 = 2 v_2, \ldots, Tv_m = m v_m, \text{ and } Tw_1 = \cdots = Tw_n = 0.
+    \]
+    Then \( T \) is such that \( v_1, \ldots, v_m \) are eigenvectors of \( T \) corresponding to distinct eigenvalues.
+
+    The converse implication is the content of 5.10.
+\end{solution}
+
+\begin{exercise}
+\label{ex:32}
+    Suppose \( \lambda_1, \ldots, \lambda_n \) is a list of distinct real numbers. Prove that the list \( e^{\lambda_1 x}, \ldots, e^{\lambda_n x} \) is linearly independent in the vector space of real-valued functions on \( \R \).
+
+    \vspace{2mm}
+
+    \noindent \textit{Hint:} Let \( V = \Span(e^{\lambda_1 x}, \ldots, e^{\lambda_n x}) \), and define an operator \( T \in \lmap(V) \) by \( Tf = f' \). Find eigenvalues and eigenvectors of \( T \).
+\end{exercise}
+
+\begin{solution}
+    Following the hint, let \( V = \Span(e^{\lambda_1 x}, \ldots, e^{\lambda_n x}) \), and define an operator \( T \in \lmap(V) \) by \( Tf = f' \). Then for each \( 1 \leq j \leq n \),
+    \[
+        T \left( e^{\lambda_j x} \right) = \left( e^{\lambda_j x} \right)' = \lambda_j e^{\lambda_j x}.
+    \]
+    This demonstrates two things: that \( T \) really is an operator, i.e.\ \( T \) maps \( V \) into \( V \), and also that \( \lambda_j \) is an eigenvalue of \( T \) with corresponding eigenvector \( e^{\lambda_j x} \). Since the eigenvalues \( \lambda_1, \ldots, \lambda_n \) are given as distinct, the corresponding eigenvectors \( e^{\lambda_1 x}, \ldots, e^{\lambda_n x} \) are linearly independent (5.10).
+\end{solution}
+
+\begin{exercise}
+\label{ex:33}
+    Suppose \( T \in \lmap(V) \). Prove that \( T/(\Range T) = 0 \).
+\end{exercise}
+
+\begin{solution}
+    The operator \( T/\Range T : V/\Range T \to V/\Range T \) is defined by
+    \[
+        (T/\Range T)(v + \Range T) = Tv + \Range T.
+    \]
+    Certainly \( Tv \in \Range T \) for any \( v \in V \), so \( Tv + \Range T = 0 \) by 3.85 and we see that \( T/\Range T \) is the zero map.
+\end{solution}
+
+\begin{exercise}
+\label{ex:34}
+    Suppose \( T \in \lmap(V) \). Prove that \( T/(\Null T) \) is injective if and only if \( (\Null T) \cap (\Range T) = \{ 0 \} \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( \Null T \cap \Range T = \{ 0 \} \) and suppose that \( v \in V \) is such that
+    \[
+        (T/\Null T)(v + \Null T) = Tv + \Null T = 0,
+    \]
+    which is the case if and only if \( Tv \in \Null T \). Hence \( Tv \in \Range T \cap \Null T \) and so by assumption we have \( Tv = 0 \). It follows that \( v \in \Null T \), which gives us \( v + \Null T = 0 \), and we see that \( T/\Null T \) has trivial nullspace and so must be injective.
+
+    Suppose that \( \Null T \cap \Range T \neq \{ 0 \} \), i.e.\ there exists some \( v \in \Null T \cap \Range T \) such that \( v \neq 0 \). Then \( v = Tu \) for some \( u \in V \); it must be the case that \( u \not\in \Null T \) since \( v \neq 0 \). Thus
+    \[
+        (T/\Null T)(u + \Null T) = Tu + \Null T = v + \Null T = 0,
+    \]
+    where we have used that \( v \in \Null T \). Since \( u \not\in \Null T \), we have \( u + \Null T \neq 0 \), hence \( T/\Null T \) has non-trivial nullspace, and hence \( T/\Null T \) is not injective.
+\end{solution}
+
+\begin{exercise}
+\label{ex:35}
+    Suppose \( V \) is finite-dimensional, \( T \in \lmap(V) \), and \( U \) is invariant under \( T \). Prove that each eigenvalue of \( T/U \) is an eigenvalue of \( T \).
+
+    \noindent [\textit{The exercise below asks you to verify that the hypothesis that \( V \) is finite-dimensional is needed for the exercise above.}]
+\end{exercise}
+
+\begin{solution}
+    Suppose \( \lambda \in \F \) is an eigenvalue of \( T/U \), i.e.\ there exists a non-zero \( v + U \in V/U \) such that
+    \[
+        (T/U)(v + U) = Tv + U = \lambda(v + U) = \lambda v + U.
+    \]
+    Note that if \( u \in U \), then since \( U \) is invariant under \( T \) we have \( (T - \lambda I)(u) = Tu + \lambda u \in U \), i.e.\ \( U \) is also invariant under the operator \( T - \lambda I : V \to V \). We can then consider the restriction operator \( (T - \lambda I)|_U : U \to U \). There are two cases.
+    \begin{description}
+        \item[Case 1.] Suppose that \( (T - \lambda I)|_U \) fails to be surjective. By 3.69, it must be the case that \( (T - \lambda I)|_U \) is not injective (here we use that \( V \), and hence \( U \), is finite-dimensional) and thus there exists some \( u \neq 0 \) such that \( (T - \lambda I)|_U(u) = 0 \), or equivalently \( Tu = \lambda u \). Hence \( \lambda \) is an eigenvalue of \( T \).
+
+        \item[Case 2.] Suppose that \( (T - \lambda I)|_U \) is surjective. Since \( Tv + U = \lambda v + U \), we have \( Tv = \lambda v + u \) for some \( u \in U \). The surjectivity of \( (T - \lambda I)|_U \) implies that there exists some \( u' \in U \) satisfying
+        \[
+            (T - \lambda I)|_U(u') = Tu' - \lambda u' = -u.
+        \]
+        Observe that
+        \[
+            T(v + u') = Tv + Tu' = \lambda v + u + Tu' = \lambda v + \lambda u' = \lambda(v + u').
+        \]
+        Furthermore, since \( v + U \) is non-zero we must have \( v \not\in U \) and hence \( v + u' \neq 0 \). Thus \( \lambda \) is an eigenvalue of \( T \).
+    \end{description}
+\end{solution}
+
+\begin{exercise}
+\label{ex:36}
+    Give an example of a vector space \( V \), an operator \( T \in \lmap(V) \), and a subspace \( U \) of \( V \) that is invariant under \( T \) such that \( T/U \) has an eigenvalue that is not an eigenvalue of \( T \).
+\end{exercise}
+
+\begin{solution}
+    Consider the forward-shift operator \( T \in \lmap(\C^{\infty}) \) defined by
+    \[
+        T(z_1, z_2, z_3, \ldots) = (0, z_1, z_2, z_3, \ldots).
+    \]
+    As we showed in \Cref{ex:18}, \( T \) has no eigenvalues. Let
+    \[
+        U = \Range T = \{ (0, z_2, z_3, z_4, \ldots) \in \C^{\infty} : z_j \in \C \}.
+    \]
+    Then \( U \) is invariant under \( T \) and \( T/U = 0 \) by \Cref{ex:33}. Since \( U \neq \C^{\infty} \), the quotient space \( \C^{\infty}/U \) is not the trivial vector space and hence contains some non-zero vector \( z + U \). Since \( T/U = 0 \), it follows that 0 is an eigenvalue of \( T/U \) with corresponding eigenvector \( z + U \).
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ladr}{\textcolor{blue}{[LADR]} Axler, S. (2015) \textit{Linear Algebra Done Right.} 3\ts{rd} edition.}
+
+\end{document}

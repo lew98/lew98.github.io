@@ -50,3 +50,5 @@
     - [Section 3.F Exercises](https://lew98.github.io/Mathematics/LADR_Section_3_F_Exercises.pdf)
   - *Chapter 4*
     - [Chapter 4 Exercises](https://lew98.github.io/Mathematics/LADR_Chapter_4_Exercises.pdf)
+  - *Chapter 5*
+    - [Section 5.A Exercises](https://lew98.github.io/Mathematics/LADR_Section_5_A_Exercises.pdf)
