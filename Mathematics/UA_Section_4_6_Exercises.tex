@@ -1,0 +1,342 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix, patterns, decorations.pathreplacing, calligraphy}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 4.6 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 4.6.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 4.6.#1#3}
+
+\newcommand{\interior}[1]{%
+  {\kern0pt#1}^{\mathrm{o}}%
+}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\set{\{}{\}}
+\makeatletter
+\let\oldset\set
+\def\set{\@ifstar{\oldset}{\oldset*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 4.6 Exercises}
+
+Exercises with solutions from Section 4.6 of \hyperlink{ua}{[UA]}.
+
+\begin{exercise}
+\label{ex:1}
+    Using modifications of these functions, construct a function \( f : \R \to \R \) so that
+    \begin{enumerate}
+        \item \( D_f = \setcomp{\Z} \).
+
+        \item \( D_f = \set{x : 0 < x \leq 1} \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Since \( \setcomp{\Z} \) is an open set, the construction given in \href{https://lew98.github.io/Mathematics/UA_Section_4_3_Exercises.pdf}{Exercise 4.3.14 (b)} will result in an \( f \) such that \( D_f = \setcomp{\Z} \).
+
+        \item By \href{https://lew98.github.io/Mathematics/UA_Section_4_3_Exercises.pdf}{Exercise 4.3.14}, there exist functions \( g, h : \R \to \R \) such that \( D_g = \paren{0, \tfrac{1}{2}} \) and \( D_h = \bkt{\tfrac{1}{2}, 1} \). Define \( f : \R \to \R \) by \( f(x) = g(x) + h(x) \); it follows from Theorem 4.3.4 that \( D_f = (0, 1] \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Given a countable set \( A = \{ a_1, a_2, a_3, \ldots \} \), define \( f(a_n) = 1/n \) and \( f(x) = 0 \) for all \( x \not\in A \). Find \( D_f \).
+\end{exercise}
+
+\begin{solution}
+    Our claim is that \( D_f = A \). First, fix \( c \not\in A \); we will show that \( f \) is continuous at \( c \). Let \( \epsilon > 0 \) be given.
+    \begin{description}
+        \item[Case 1.] If \( \epsilon > 1 \), then note that
+        \[
+            \abs{f(x) - f(c)} = f(x) \leq 1 < \epsilon  
+        \]
+        for any \( x \in \R \). Hence any \( \delta > 0 \) will suffice; say, \( \delta = 1 \).
+
+        \item[Case 2.] If \( 0 < \epsilon \leq 1 \), then let \( N \in \N \) be such that \( \tfrac{1}{N} < \epsilon \) and note that \( N \geq 2 \). Consider the set
+        \[
+            E = \set{ \abs{c - a_n} : 1 \leq n \leq N - 1 }.
+        \]
+        This set is non-empty as \( N \geq 2 \) and clearly finite, so we are justified in letting \( \delta = \min E \). Each element of \( E \) must be strictly positive as \( c \not\in A \) and hence \( \delta \) is also strictly positive. Furthermore, the interval \( (c - \delta, c + \delta) \) has the property that if \( a_n \in (c - \delta, c + \delta) \), then \( n \geq N \). It follows that
+        \[
+            \abs{f(a_n) - f(c)} = \tfrac{1}{n} \leq \tfrac{1}{N} < \epsilon.
+        \]
+        Additionally, if \( x \in (c - \delta, c + \delta) \) and \( x \not\in A \), then \( \abs{f(x) - f(c)} = 0 < \epsilon \).
+    \end{description}
+    We have now shown that for any \( \epsilon > 0 \) there is a \( \delta > 0 \) such that
+    \[
+        x \in (c - \delta, c + \delta) \implies f(x) \in (f(c) - \epsilon, f(c) + \epsilon).
+    \]
+    Hence \( f \) is continuous at each \( c \not\in A \).
+
+    Now fix \( a_n \in A \); we will show that \( f \) is not continuous at \( a_n \). Set \( \epsilon = \tfrac{1}{n} > 0 \) and let \( \delta > 0 \) be given. Since the interval \( (a_n - \delta, a_n + \delta) \) is uncountable and \( A \) is countable, it must be the case that there exists \( x \in (a_n - \delta, a_n + \delta) \) such that \( x \not\in A \). Then
+    \[
+        \abs{f(x) - f(a_n)} = \tfrac{1}{n} = \epsilon.
+    \]
+    Thus \( f \) is not continuous at each element of \( A \) and our claim follows.
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    State a similar definition for the left-hand limit
+    \[
+        \lim_{x \to c^-} f(x) = L.
+    \]
+\end{exercise}
+
+\begin{solution}
+    See \href{https://lew98.github.io/Mathematics/UA_Section_4_2_Exercises.pdf}{Exercise 4.2.10 (a)}.
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Supply a proof for this proposition.
+\end{exercise}
+
+\begin{solution}
+    See \href{https://lew98.github.io/Mathematics/UA_Section_4_2_Exercises.pdf}{Exercise 4.2.10 (b)}.
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Prove that the only type of discontinuity a monotone function can have is a jump discontinuity.
+\end{exercise}
+
+\begin{solution}
+    Suppose \( f : \R \to \R \) is monotone. (For simplicity, we will assume that the domain of \( f \) is all of \( \R \). A more general statement can certainly be made for monotone functions \( A \to \R \) defined on any domain \( A \subseteq \R \), but Abbott's definitions of left- and right-hand limits are slightly awkward here. For example, if \( f : [0, 1] \to \R \) is a function, then Abbott's definition of the left-hand limit of \( f \) at 0 implies that \( \lim_{x \to 0^-} f(x) = L \) for \textit{any} \( L \in \R \); we may choose any \( \delta > 0 \) we like and obtain a statement of the form \( \paren{\forall x \in \emptyset} \), which is always true. It would be better not to talk about \( \lim_{x \to 0^-} f(x) \) at all in such a case.)
+
+    We claim the following. If \( f \) is increasing, then for each \( c \in \R \)
+    \[
+        \lim_{x \to c^-} f(x) = \sup \{ f(x) : x < c \} \quand \lim_{x \to c^+} f(x) = \inf \{ f(x) : c < x \}.
+    \]
+    If \( f \) is decreasing, then the \( \sup \) and \( \inf \) should be swapped.
+
+    \vspace{2mm}
+
+    \noindent \textit{Proof.} We will prove that for an increasing function \( f : \R \to \R \) and some \( c \in \R \), the left-hand limit is given by
+    \[
+        \lim_{x \to c^-} f(x) = \sup \{ f(x) : x < c \}.
+    \]
+    The other cases are handled similarly.
+
+    First, note that the set \( \{ f(x) : x < c \} \) is certainly non-empty. Furthermore, it is bounded above by \( f(c) \) as \( f \) is increasing, so by completeness we are justified in setting \( s := \sup \{ f(x) : x < c \} \).
+
+    Let \( \epsilon > 0 \) be given. There is a \( y < c \) such that \( s - \epsilon < f(y) \leq s \) (Lemma 1.3.8). Since \( f \) is increasing, for each \( x \in (y, c) \) we have \( s - \epsilon < f(y) \leq f(x) \leq s \). In other words, letting \( \delta = c - y \), we have
+    \[
+        c - \delta < x < c \implies \abs{f(x) - s} < \epsilon.
+    \]
+    It follows that \( \lim_{x \to c^-} f(x) = s \), as claimed. \qed
+
+    \vspace{2mm}
+
+    So for a monotone function \( f : \R \to \R \), the left- and right-hand limits at some point \( c \in \R \) always exist. It follows that if \( f \) is discontinuous at \( c \), it must be the case that these left- and right-hand limits are not equal (Theorem 4.6.3/\Cref{ex:4}), i.e.\ \( f \) has a jump discontinuity at \( c \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Construct a bijection between the set of jump discontinuities of a monotone function \( f \) and a subset of \( \Q \). Conclude that \( D_f \) for a monotone function \( f \) must either be finite or countable, but not uncountable.
+\end{exercise}
+
+\begin{solution}
+    Suppose \( f : \R \to \R \) is monotone increasing (the case where \( f \) is decreasing is handled similarly) and let \( D_f \) be the set of jump discontinuities of \( f \) (by \Cref{ex:5}, \( D_f \) is the set of all discontinuities of \( f \)). Fix \( c \in D_f \). As we showed in \Cref{ex:5}, we have
+    \[
+        \lim_{x \to c^-} f(x) = \sup \{ f(x) : x < c \} \quand \lim_{x \to c^+} f(x) = \inf \{ f(x) : c < x \}.
+    \]
+    Let \( l_c = \lim_{x \to c^-} f(x) \) and \( u_c = \lim_{x \to c^+} f(x) \). Since \( f \) is discontinuous at \( c \) and increasing, we must have \( l_c < u_c \) and hence \( (l_c, u_c) \) is a proper open interval. Suppose \( d \in D_f \) is such that \( c < d \). Then \( u_c \leq f \paren{\tfrac{c + d}{2}} \leq l_d \), so that the open intervals \( (l_c, u_c) \) and \( (l_d, u_d) \) are disjoint. It follows that the set
+    \[
+        \{ (l_c, u_c) : c \in D_f \}
+    \]
+    consists of pairwise disjoint open intervals. Given this, for each \( c \in D_f \) we can choose a rational number \( r_c \in (l_c, u_c) \) and be sure that the function \( g : D_f \to \Q \) mapping \( c \mapsto r_c \) is injective. This sets up a bijection between \( D_f \) and \( g(D_f) \subseteq \Q \). It follows that \( D_f \) is finite or countable, but not uncountable.
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    \begin{enumerate}
+        \item Show that in each of the above cases we get an \( F_{\sigma} \) set as the set where the function is discontinuous.
+
+        \item Show that the two sets of discontinuity in \Cref{ex:1} are \( F_{\sigma} \) sets.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item For Dirichlet's function, \( \R \) is a closed set. For the modified Dirichlet function, we have
+        \[
+            \R \setminus \{ 0 \} = \bigcup_{n=1}^{\infty} \left( -\infty, -\tfrac{1}{n} \right] \cup \left[ \tfrac{1}{n}, \infty \right).
+        \]
+        For Thomae's function, we have
+        \[
+            \Q = \bigcup_{q \in \Q} \{ q \}.
+        \]
+
+        \item Observe that
+        \[
+            \setcomp{\Z} = \bigcup_{(m, n) \in \Z \times \N} \bkt{m + \tfrac{1}{n + 1}, m + 1 - \tfrac{1}{n + 1}} \quand (0, 1] = \bigcup_{n=1}^{\infty} \bkt{\tfrac{1}{n}, 1}.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Prove that, for a fixed \( \alpha > 0 \), the set \( D_f^{\alpha} \) is closed.
+\end{exercise}
+
+\begin{solution}
+    First, let us write down the negation of \( \alpha \)-continuity. A function \( f \) is not \( \alpha \)-continuous at a point \( x \in \R \) if for all \( \delta > 0 \) there exist \( y, z \in (x - \delta, x + \delta) \) such that \( \abs{f(y) - f(z)} \geq \alpha \).
+
+    Now, to show that \( D_f^{\alpha} \) is closed, let \( (x_n) \) be a sequence contained in \( D_f^{\alpha} \) such that \( \lim x_n = x \) for some \( x \in \R \). Our aim is to show that \( f \) is not \( \alpha \)-continuous at \( x \). Let \( \delta > 0 \) be given. Since \( \lim x_n = x \), there is an \( N \in \N \) such that \( x_N \in \paren{x - \tfrac{\delta}{2}, x + \tfrac{\delta}{2}} \), and since \( f \) is not \( \alpha \)-continuous at \( x_N \), there exist \( y, z \in \paren{x_N - \tfrac{\delta}{2}, x_N + \tfrac{\delta}{2}} \) such that \( \abs{f(y) - f(z)} \geq \alpha \). In fact, the triangle inequality implies that \( y, z \in (x - \delta, x + \delta) \) and thus \( f \) is not \( \alpha \)-continuous at \( x \).
+
+    It follows that \( D_f^{\alpha} \) contains its limit points and hence that \( D_f^{\alpha} \) is a closed set.
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    If \( \alpha < \alpha' \), show that \( D_f^{\alpha'} \subseteq D_f^{\alpha} \).
+\end{exercise}
+
+\begin{solution}
+    A function \( f \) is not \( \alpha' \)-continuous at a point \( x \in \R \) if for all \( \delta > 0 \) there exist \( y, z \in (x - \delta, x + \delta) \) such that \( \abs{f(y) - f(z)} \geq \alpha' > \alpha \); it follows that \( f \) is also not \( \alpha \)-continuous at \( x \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Let \( \alpha > 0 \) be given. Show that if \( f \) is continuous at \( x \), then it is \( \alpha \)-continuous at \( x \) as well. Explain how it follows that \( D_f^{\alpha} \subseteq D_f \).
+\end{exercise}
+
+\begin{solution}
+    Since \( f \) is continuous at \( x \), there is a \( \delta > 0 \) such that
+    \[
+        y \in (x - \delta, x + \delta) \implies \abs{f(y) - f(x)} < \tfrac{\alpha}{2}.
+    \]
+    If \( y, z \in (x - \delta, x + \delta) \), then
+    \[
+        \abs{f(y) - f(z)} \leq \abs{f(y) - f(x)} + \abs{f(z) - f(x)} < \tfrac{\alpha}{2} + \tfrac{\alpha}{2} = \alpha.
+    \]
+    Thus \( f \) is \( \alpha \)-continuous at \( x \). The contrapositive of this result states that if \( f \) is not \( \alpha \)-continuous at \( x \), then \( f \) is not continuous at \( x \). It follows that \( D_f^{\alpha} \subseteq D_f \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Show that if \( f \) is not continuous at \( x \), then \( f \) is not \( \alpha \)-continuous for some \( \alpha > 0 \). Now explain why this guarantees that
+    \[
+        D_f = \bigcup_{n=1}^{\infty} D_f^{\alpha_n},
+    \]
+    where \( \alpha_n = 1/n \).
+\end{exercise}
+
+\begin{solution}
+    If \( f \) is not continuous at \( x \), then there exists an \( \epsilon > 0 \) such that for all \( \delta > 0 \), there is a \( y \in (x - \delta, x + \delta) \) such that \( \abs{f(y) - f(x)} \geq \epsilon \). It follows that \( f \) is not \( \alpha \)-continuous at \( x \), where we take \( \alpha = \epsilon \).
+
+    Suppose \( x \in D_f \). As we just showed, there exists an \( \alpha > 0 \) such that \( x \in D_f^{\alpha} \). Let \( n \in \N \) be such that \( \tfrac{1}{n} < \alpha \). We then have \( D_f^{\alpha} \subseteq D_f^{\alpha_n} \) (\Cref{ex:9}) and so \( x \in D_f^{\alpha_n} \). It follows that
+    \[
+        D_f \subseteq \bigcup_{n=1}^{\infty} D_f^{\alpha_n}.
+    \]
+    For the reverse inclusion, note that for each \( n \in \N \), we have \( D_f^{\alpha_n} \subseteq D_f \) by \Cref{ex:10}. We may conclude that
+    \[
+        D_f = \bigcup_{n=1}^{\infty} D_f^{\alpha_n}.
+    \]
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2\ts{nd} edition.}
+
+\end{document}
