@@ -1,0 +1,425 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{tabularray}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 5.B Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 5.B.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 5.B.#1#3}
+
+\newcommand{\re}{\text{Re}\,}
+\newcommand{\im}{\text{Im}\,}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\lmap}{\mathcal{L}}
+\newcommand{\mat}{\mathcal{M}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\Span}{\text{span}}
+\newcommand{\Null}{\text{null\,}}
+\newcommand{\Range}{\text{range\,}}
+\newcommand{\Rank}{\text{rank\,}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\tpose}[1]{#1^{\text{t}}}
+\newcommand{\upd}{\text{d}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\set{\{}{\}}
+\makeatletter
+\let\oldset\set
+\def\set{\@ifstar{\oldset}{\oldset*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 5.B Exercises}
+
+Exercises with solutions from Section 5.B of \hyperlink{ladr}{[LADR]}.
+
+\begin{exercise}
+\label{ex:1}
+    Suppose \( T \in \lmap(V) \) and there exists a positive integer \( n \) such that \( T^n = 0 \).
+    \begin{enumerate}
+        \item Prove that \( I - T \) is invertible and that
+        \[
+            (I - T)^{-1} = I + T + \cdots + T^{n-1}.
+        \]
+
+        \item Explain how you would guess the formula above.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item A computation gives
+        \begin{gather*}
+            (I - T)(I + T + \cdots + T^{n-1}) = I + T + \cdots + T^{n-1} - T - T^2 - \cdots - T^n = I - T^n = I, \\[2mm]
+            (I + T + \cdots + T^{n-1})(I - T) = I - T + T - T^2 + \cdots + T^{n-1} - T^n = I - T^n = I.
+        \end{gather*}
+
+        \item We might guess the formula above from the familiar formula
+        \[
+            (1 - x)(1 + x + \cdots + x^{n-1}) = 1 - x^n
+        \]
+        for the partial sum of a geometric series.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Suppose \( T \in \lmap(V) \) and \( (T - 2I)(T - 3I)(T - 4I) = 0 \). Suppose \( \lambda \) is an eigenvalue of \( T \). Prove that \( \lambda = 2 \) or \( \lambda = 3 \) or \( \lambda = 4 \).
+\end{exercise}
+
+\begin{solution}
+    We have \( Tv = \lambda v \) for some \( v \neq 0 \). Observe that
+    \[
+        0 = (T - 2I)(T - 3I)(T - 4I)v = (\lambda - 2)(\lambda - 3)(\lambda - 4)v.
+    \]
+    Since \( v \neq 0 \), it must be the case that \( \lambda = 2 \) or \( \lambda = 3 \) or \( \lambda = 4 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Suppose \( T \in \lmap(V) \) and \( T^2 = I \) and \( -1 \) is not an eigenvalue of \( T \). Prove that \( T = I \).
+\end{exercise}
+
+\begin{solution}
+    Note that \( T^2 = I \) if and only if \( (T + I)(T - I) = 0 \). Let \( v \in V \) be given. If \( Tv - v \neq 0 \), then \( 0 = (T + I)(T - I)v = (T + I)(Tv - v) \), demonstrating that \( -1 \) is an eigenvalue of \( T \) with corresponding eigenvector \( Tv - v \). By assumption \( -1 \) is not an eigenvalue of \( T \), so it must be the case that \( Tv = v \) for every \( v \in V \), i.e.\ \( T = I \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Suppose \( P \in \lmap(V) \) and \( P^2 = P \). Prove that \( V = \Null P \oplus \Range P \).
+\end{exercise}
+
+\begin{solution}
+    Let \( v \in V \) be given. Then \( P^2 v = Pv \), which gives \( P(Pv - v) = 0 \), so that \( Pv - v \in \Null P \); say \( Pv - v = u \) where \( u \in \Null P \). It follows that \( v = -u + Pv \in \Null P + \Range P \) and hence that \( V = \Null P + \Range P \).
+
+    To see that this sum is direct, suppose \( v \in \Null P \) and \( v = Pw \) for some \( w \in V \). Then \( Pv = P^2 w = Pw \), so that \( w - v \in \Null P \). Combining this with \( v \in \Null P \), we see that \( w \in \Null P \) also, giving us \( v = Pw = 0 \). It follows that \( \Null P \cap \Range P = \{ 0 \} \) and hence that the sum \( V = \Null P \oplus \Range P \) is direct.
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Suppose \( S, T \in \lmap(V) \) and \( S \) is invertible. Suppose \( p \in \poly(\F) \) is a polynomial. Prove that
+    \[
+        p(STS^{-1}) = S p(T) S^{-1}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    Note that \( (STS^{-1})^0 = I = S I S^{-1} = S T^0 S^{-1} \), and for \( k \geq 2 \) we have
+    \[
+        (S T S^{-1})^k = S T S^{-1} S T S^{-1} \cdots S T S^{-1} = S T^k S^{-1}.
+    \]
+    Thus for each non-negative integer \( k \) we have \( (S T S^{-1})^k = S T^k S^{-1} \). Suppose \( p = \sum_{k=0}^n a_k x^k \). Then
+    \[
+        p(S T S^{-1}) = \sum_{k=0}^n a_k (S T S^{-1})^k = \sum_{k=0}^n a_k S T^k S^{-1} = S \paren{\sum_{k=0}^n a_k T^k} S^{-1} = S p(T) S^{-1}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Suppose \( T \in \lmap(V) \) and \( U \) is a subspace of \( V \) invariant under \( T \). Prove that \( U \) is invariant under \( p(T) \) for every polynomial \( \poly(\F) \).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( u \in U \). Then \( T^0 u = I u = u \in U \). If \( T^k u \in U \) for some non-negative integer \( k \), then \( T^{k+1} u = T(T^k u) \in U \) since \( U \) is invariant under \( T \). Hence by induction \( T^k u \in U \) for every non-negative integer \( k \).
+
+    Suppose \( p = \sum_{k=0}^n a_k x^k \) and \( u \in U \). Then
+    \[
+        p(T)(u) = \paren{\sum_{k=0}^n a_k T^k}(u) = \sum_{k=0}^n a_k T^k u,
+    \]
+    which belongs to \( U \) since we showed that each \( T^k u \in U \) and \( U \) is closed under linear combinations. Thus \( U \) is invariant under \( p(T) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Suppose \( T \in \lmap(V) \). Prove that 9 is an eigenvalue of \( T^2 \) if and only if 3 or \( -3 \) is an eigenvalue of \( T \).
+\end{exercise}
+
+\begin{solution}
+    The forward implication is proved in the solution to \href{https://lew98.github.io/Mathematics/LADR_Section_5_A_Exercises.pdf}{Exercise 5.A.22}. For the converse implication, suppose that there is a non-zero \( v \in V \) such that \( Tv = \pm 3 v \). Then \( T^2 v = (\pm 3)^2 v = 9v \) and we see that 9 is an eigenvalue of \( T^2 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Give an example of \( T \in \lmap(\R^2) \) such that \( T^4 = -I \) (see \href{https://linear.axler.net/LADRErrataThird.html}{errata}).
+\end{exercise}
+
+\begin{solution}
+    Define \( T : \R^2 \to \R^2 \) by
+    \[
+        T(1, 0) = \paren{ \cos \tfrac{\pi}{4}, \sin \tfrac{\pi}{4} } = \tfrac{1}{\sqrt{2}} (1, 1) \quand T(0, 1) = \paren{ \cos \tfrac{3 \pi}{4}, \sin \tfrac{3 \pi}{4} } = \tfrac{1}{\sqrt{2}} (-1, 1).
+    \]
+    Note that \( T \) is a counterclockwise rotation about the origin by 45 degrees; it follows that \( T^4 \) is a counterclockwise rotation about the origin by 180 degrees, i.e.\
+    \[
+        T^4(1, 0) = \paren{ \cos \pi, \sin \pi } = (-1, 0) \quand T(0, 1) = \paren{ \cos \tfrac{3 \pi}{2}, \sin \tfrac{3 \pi}{2} } = (0, -1).
+    \]
+    Thus \( T^4 = -I \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Suppose \( V \) is finite-dimensional, \( T \in \lmap(V) \), and \( v \in V \) with \( v \neq 0 \). Let \( p \) be a nonzero polynomial of smallest degree such that \( p(T)v = 0 \). Prove that every zero of \( p \) is an eigenvalue of \( T \).
+\end{exercise}
+
+\begin{solution}
+    Note that if \( p \) is a nonzero constant polynomial, then \( p(T)v \neq 0 \), so we may assume that \( \deg p \geq 1 \). Suppose \( \lambda \) is a zero of \( p \). Then \( p(x) = (x - \lambda) q(x) \) for some polynomial \( q \) satisfying \( \deg q = \deg p - 1 \). Since \( p \) is of smallest degree, it must be the case that \( v' := q(T)v \neq 0 \). Thus
+    \[
+        p(T)v = (T - \lambda) q(T) v = (T - \lambda) v' = 0 \iff Tv' = \lambda v',
+    \]
+    demonstrating that \( \lambda \) is an eigenvalue of \( T \) with a corresponding eigenvector \( v' \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Suppose \( T \in \lmap(V) \) and \( v \) is an eigenvector of \( T \) with eigenvalue \( \lambda \). Suppose \( p \in \poly(\F) \). Prove that \( p(T)v = p(\lambda)v \).
+\end{exercise}
+
+\begin{solution}
+    If \( p = 0 \) this is clear, so suppose that \( p(x) = \sum_{k=0}^n a_k x^k \), where \( n = \deg p \geq 0 \). It is straightforward to verify that \( T^k v = \lambda^k v \) for all non-negative integers \( k \). Then
+    \[
+        p(T)v = \paren{\sum_{k=0}^n a_k T^k} v = \sum_{k=0}^n a_k T^k v = \sum_{k=0}^n a_k \lambda^k v = \paren{\sum_{k=0}^n a_k \lambda^k} v = p(\lambda) v.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Suppose \( \F = \C, T \in \lmap(V), p \in \poly(\C) \) is a nonconstant (see \href{https://linear.axler.net/LADRErrataThird.html}{errata}) polynomial, and \( \alpha \in \C \). Prove that \( \alpha \) is an eigenvalue of \( p(T) \) if and only if \( \alpha = p(\lambda) \) for some eigenvalue \( \lambda \) of \( T \).
+\end{exercise}
+
+\begin{solution}
+    If \( \alpha = p(\lambda) \) for some eigenvalue \( \lambda \) of \( T \), then \Cref{ex:10} shows that \( \alpha \) is an eigenvalue of \( p(T) \).
+
+    Suppose that \( \alpha \) is an eigenvalue of \( p(T) \), i.e.\ there exists some \( v \neq 0 \) such that \( p(T)v = \alpha v \). Let \( q \in \poly(\C) \) be given by \( q(z) = p(z) - \alpha \). Since \( q \) is a polynomial over \( \C \), there is a factorization
+    \[
+        q(z) = c (z - \lambda_1) \cdots (z - \lambda_m),
+    \]
+    where \( c, \lambda_1, \ldots, \lambda_m \in \C \). Since \( \deg q = \deg p \geq 1 \), it must be the case that \( c \neq 0 \) and \( m \geq 1 \). We have \( q(T)v = 0 \) since \( p(T)v = \alpha v \), so
+    \[
+        c(T - \lambda_1 I) \cdots (T - \lambda_m I) v = 0.
+    \]
+    It follows that there is a \( k \in \{ 1, \ldots, m \} \) such that \( T - \lambda_k I \) is not injective, or equivalently such that \( \lambda_k \) is an eigenvalue of \( T \). Furthermore, \( p(\lambda_k) = q(\lambda_k) + \alpha = \alpha \) since \( \lambda_k \) is a zero of \( q \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:12}
+    Show that the result in the previous exercise does not hold if \( \C \) is replaced with \( \R \).
+\end{exercise}
+
+\begin{solution}
+    Consider the linear operator \( T : \R^2 \to \R^2 \) given by \( T(x, y) = (-y, x) \), i.e.\ a counterclockwise rotation about the origin by 90 degrees. As shown in Example 5.8 (a), \( T \) has no eigenvalues. However, letting \( p(x) = x^2 \), we have \( p(T) = T^2 = -I \), since \( T^2 \) is a counterclockwise rotation about the origin by 180 degrees. Thus \( p(T) \) has the eigenvalue \( -1 \), but we cannot possibly express \( -1 \) as \( p(\lambda) \) for some eigenvalue \( \lambda \) of \( T \), since \( T \) has no eigenvalues.
+\end{solution}
+
+\begin{exercise}
+\label{ex:13}
+    Suppose \( W \) is a complex vector space and \( T \in \lmap(W) \) has no eigenvalues. Prove that every subspace of \( W \) invariant under \( T \) is either \( \{ 0 \} \) or infinite-dimensional.
+\end{exercise}
+
+\begin{solution}
+    Suppose \( U \) is a non-zero subspace of \( W \) invariant under \( T \) and consider the restriction operator \( T|_U \). If \( U \) is finite-dimensional, then 5.21 implies that \( T|_U \) has an eigenvalue, which must also be an eigenvalue of \( T \). Since \( T \) has no eigenvalues, it must be the case that \( U \) is infinite-dimensional.
+\end{solution}
+
+\begin{exercise}
+\label{ex:14}
+    Give an example of an operator whose matrix with respect to some basis contains only 0's on the diagonal, but the operator is invertible.
+
+    \noindent [\textit{The exercise above and the exercise below show that 5.30 fails without the hypothesis that an upper-triangular matrix is under consideration.}]
+\end{exercise}
+
+\begin{solution}
+    Consider the invertible operator \( T : \R^2 \to \R^2 \) given by \( T(x, y) = (y, x) \), which is its own inverse. The matrix of this operator with respect to the standard basis of \( \R^2 \) is
+    \[
+        \begin{pmatrix}
+            0 & 1 \\
+            1 & 0
+        \end{pmatrix}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:15}
+    Give an example of an operator whose matrix with respect to some basis contains only nonzero numbers on the diagonal, but the operator is not invertible.
+\end{exercise}
+
+\begin{solution}
+    Consider the operator \( T : \R^2 \to \R^2 \) given by \( T(x, y) = (x + y, x + y) \), which is not injective, and hence not invertible, since \( T(1, -1) = (0, 0) \). The matrix of this operator with respect to the standard basis of \( \R^2 \) is
+    \[
+        \begin{pmatrix}
+            1 & 1 \\
+            1 & 1
+        \end{pmatrix}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:16}
+    Rewrite the proof of 5.21 using the linear map that sends \( p \in \poly_n(\C) \) to \( \paren{p(T)}v \in V \) (and use 3.23).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( V \) is a complex vector space with dimension \( n > 0 \) and \( T \in \lmap(V) \). Choose \( v \in V \) with \( v \neq 0 \) and define a map \( \Psi : \poly_n(\C) \to V \) by \( \Psi(p) = p(T)v \). It is straightforward to verify that \( \Psi \) is linear. Since \( \dim \poly_n(\C) = n + 1 > n = \dim V \), it must be the case that \( \Psi \) is not injective (3.23). Thus there exists some non-zero \( p \in \poly_n(\C) \) such that \( \Psi(p) = p(T)v = 0 \). Observe that since \( v \) is non-zero, \( p \) cannot be a non-zero constant polynomial either. Thus \( \deg p \geq 1 \).
+    
+    Since \( p \) is a polynomial over \( \C \), there is a factorization
+    \[
+        p(z) = c(z - \lambda_1) \cdots (z - \lambda_m),
+    \]
+    where \( c, \lambda_1, \ldots, \lambda_m \in \C \). Note that \( c \neq 0 \) and \( m \geq 1 \) since \( \deg p \geq 1 \). Thus
+    \[
+        p(T)v = c(T - \lambda_1 I) \cdots (T - \lambda_m I)v = 0.
+    \]
+    Since \( v \neq 0 \), it follows that there is a \( k \in \{ 1, \ldots, m \} \) such that \( T - \lambda_k I \) is not injective, or equivalently such that \( \lambda_k \) is an eigenvalue of \( T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:17}
+    Rewrite the proof of 5.21 using the linear map that sends \( p \in \poly_{n^2}(\C) \) to \( p(T) \in \lmap(V) \) (and use 3.23).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( V \) is a complex vector space with dimension \( n > 0 \) and \( T \in \lmap(V) \). Choose \( v \in V \) with \( v \neq 0 \) and define a map \( \Psi : \poly_{n^2}(\C) \to \lmap(V) \) by \( \Psi(p) = p(T) \). It is straightforward to verify that \( \Psi \) is linear. Since \( \dim \poly_{n^2}(\C) = n^2 + 1 > n^2 = \dim \lmap(V) \), it must be the case that \( \Psi \) is not injective (3.23). Thus there exists some non-zero \( p \in \poly_{n^2}(\C) \) such that \( \Psi(p) = p(T) = 0 \). Since non-zero scalar multiples of the identity operator are not the zero map (provided \( V \neq \{ 0 \} \), which is the case here), we see that \( \deg p \geq 1 \).
+
+    Since \( p \) is a polynomial over \( \C \), there is a factorization
+    \[
+        p(z) = c(z - \lambda_1) \cdots (z - \lambda_m),
+    \]
+    where \( c, \lambda_1, \ldots, \lambda_m \in \C \). Note that \( c \neq 0 \) and \( m \geq 1 \) since \( \deg p \geq 1 \). Thus
+    \[
+        p(T) = c(T - \lambda_1 I) \cdots (T - \lambda_m I) = 0.
+    \]
+    Since the zero map is not injective, there must exist a \( k \in \{ 1, \ldots, m \} \) such that \( T - \lambda_k I \) is not injective, or equivalently such that \( \lambda_k \) is an eigenvalue of \( T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:18}
+    Suppose \( V \) is a finite-dimensional complex vector space and \( T \in \lmap(V) \). Define a function \( f : \C \to \R \) by
+    \[
+        f(\lambda) = \dim \Range (T - \lambda I).
+    \]
+    Prove that \( f \) is not a continuous function.
+\end{exercise}
+
+\begin{solution}
+    (If \( V = \{ 0 \} \), then \( f \) is the constant function \( \lambda \mapsto 0 \) and hence is continuous.)
+
+    Suppose that \( \dim V = m > 0 \). By 5.21, there exists an eigenvalue \( \mu \in \C \) of \( T \). By 5.6, the operator \( T - \mu I \) must fail to be surjective; equivalently, we have \( f(\mu) < m \). Consider the sequence \( (\lambda_n)_{n \in \N} \) of distinct complex numbers given by \( \lambda_n = \mu + \tfrac{1}{n} \), which satisfies \( \lim_{n \to \infty} \lambda_n = \mu \). By 5.13, \( T \) can have at most \( m \) distinct eigenvalues, and so we may choose a subsequence \( (\lambda_{n_k})_{k \in \N} \) such that each \( \lambda_{n_k} \) is not an eigenvalue of \( T \). By 5.6, each operator \( T - \lambda_{n_k} I \) must be surjective; equivalently, we have \( f \paren{\lambda_{n_k}} = m \). It follows that \( \lim_{k \to \infty} \lambda_{n_k} = \mu \), however
+    \[
+        \lim_{k \to \infty} f \paren{\lambda_{n_k}} = m > f(\mu).
+    \]
+    Thus \( f \) is not continuous at \( \mu \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:19}
+    Suppose \( V \) is finite-dimensional with \( \dim V > 1 \) and \( T \in \lmap(V) \). Prove that
+    \[
+        \{ p(T) : p \in \poly(\F) \} \neq \lmap(V).
+    \]
+\end{exercise}
+
+\begin{solution}
+    If every linear map in \( \lmap(V) \) could be realised as \( p(T) \) for some \( p \in \poly(\F) \), then each pair of linear maps in \( \lmap(V) \) would commute with each other (5.20). However, by \href{https://lew98.github.io/Mathematics/LADR_Section_3_A_Exercises.pdf}{Exercise 3.A.14}, there exist two linear maps in \( \lmap(V) \) which do not commute with each other.
+\end{solution}
+
+\begin{exercise}
+\label{ex:20}
+    Suppose \( V \) is a finite-dimensional complex vector space and \( T \in \lmap(V) \). Prove that \( T \) has an invariant subspace of dimension \( k \) for each \( k = 1, \ldots, \dim V \).
+\end{exercise}
+
+\begin{solution}
+    This is immediate from 5.27 and the equivalence of (a) and (c) in 5.26.
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ladr}{\textcolor{blue}{[LADR]} Axler, S. (2015) \textit{Linear Algebra Done Right.} 3\ts{rd} edition.}
+
+\end{document}
