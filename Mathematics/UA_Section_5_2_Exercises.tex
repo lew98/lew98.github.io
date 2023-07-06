@@ -1,0 +1,695 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix, patterns, decorations.pathreplacing, calligraphy}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 5.2 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 5.2.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 5.2.#1#3}
+
+\newcommand{\interior}[1]{%
+  {\kern0pt#1}^{\mathrm{o}}%
+}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\set{\{}{\}}
+\makeatletter
+\let\oldset\set
+\def\set{\@ifstar{\oldset}{\oldset*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 5.2 Exercises}
+
+Exercises with solutions from Section 5.2 of \hyperlink{ua}{[UA]}.
+
+\begin{exercise}
+\label{ex:1}
+    Supply proofs for parts (i) and (ii) of Theorem 5.2.4.
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[label = (\roman*)]
+        \item Observe that
+        \[
+            \lim_{x \to c} \frac{(f + g)(x) - (f + g)(c)}{x - c} = \lim_{x \to c} \paren{\frac{f(x) - f(c)}{x - c} + \frac{g(x) - g(c)}{x - c}} = f'(c) + g'(c),
+        \]
+        where we have used Corollary 4.2.4 (ii).
+
+        \item Observe that
+        \[
+            \lim_{x \to c} \frac{(kf)(x) - (kf)(c)}{x - c} = \lim_{x \to c} k \paren{\frac{f(x) - f(c)}{x - c}} = k f'(c),
+        \]
+        where we have used Corollary 4.2.4 (i).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Exactly one of the following requests is impossible. Decide which it is, and provide examples for the other three. In each case, let's assume the functions are defined on all of \( \R \).
+    \begin{enumerate}
+        \item Functions \( f \) and \( g \) not differentiable at zero but where \( fg \) is differentiable at zero.
+
+        \item A function \( f \) not differentiable at zero and a function \( g \) differentiable at zero where \( fg \) is differentiable at zero.
+
+        \item A function \( f \) not differentiable at zero and a function \( g \) differentiable at zero where \( f + g \) is differentiable at zero.
+
+        \item A function \( f \) differentiable at zero but not differentiable at any other point.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( f, g : \R \to \R \) be given by
+        \[
+            f(x) = g(x) = \begin{cases}
+                -1 & \text{if } x < 0, \\
+                1 & \text{if } x \geq 0.
+            \end{cases}
+        \]
+        Then \( f \) and \( g \) are not continuous at zero and hence not differentiable at zero (Theorem 5.2.3), however the product \( fg \) is given by \( (fg)(x) = 1 \) for all \( x \in \R \), which is differentiable everywhere.
+
+        \item Let \( f, g : \R \to \R \) be given by
+        \[
+            f(x) = \begin{cases}
+                -1 & \text{if } x < 0, \\
+                1 & \text{if } x \geq 0
+            \end{cases}
+        \]
+        and \( g(x) = 0 \) for all \( x \in \R \). Then \( f \) is not continuous at zero and hence not differentiable at zero (Theorem 5.2.3), however we have \( (fg)(x) = g(x) = 0 \) for all \( x \in \R \), which is differentiable everywhere.
+
+        \item This is impossible. If \( g \) and \( f + g \) are differentiable at zero, then \( f = f + g - g \) must be differentiable at zero by Theorem 5.2.4.
+
+        \item Consider the function \( f : \R \to \R \) given by
+        \[
+            f(x) = \begin{cases}
+                x^2 & \text{if } x \in \Q, \\
+                0 & \text{if } x \in \I.
+            \end{cases}
+        \]
+        This function is only continuous at zero and hence fails to be differentiable at each non-zero point. We claim that \( f'(0) = 0 \), i.e.\ that
+        \[
+            \lim_{x \to 0} \frac{f(x) - f(0)}{x - 0} = \lim_{x \to 0} \frac{f(x)}{x} = 0.
+        \]
+        For any given \( \epsilon > 0 \), set \( \delta = \epsilon \) and suppose that \( x \in \R \) satisfies \( 0 < \abs{x} < \delta \). If \( x \in \I \), then \( \abs{\tfrac{f(x)}{x}} = 0 < \epsilon \), and if \( x \in \Q \), then \( \abs{\tfrac{f(x)}{x}} = \abs{x} < \delta = \epsilon \). Thus \( f'(0) = 0 \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    \begin{enumerate}
+        \item Use Definition 5.2.1 to produce the proper formula for the derivative of \( h(x) = 1/x \).
+
+        \item Combine the result of part (a) with the Chain Rule (Theorem 5.2.5) to supply a proof for part (iv) of Theorem 5.2.4.
+
+        \item Supply a direct proof of Theorem 5.2.4 (iv) by algebraically manipulating the difference quotient for \( (f/g) \) in a style similar to the proof of Theorem 5.2.4 (iii).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Suppose \( x \neq 0 \). Then
+        \[
+            h'(x) = \lim_{t \to x} \frac{h(t) - h(x)}{t - x} = \lim_{t \to x} \paren{\frac{1}{t} - \frac{1}{x}} \frac{1}{t - x} = \lim_{t \to x} \frac{x - t}{tx} \frac{1}{t - x} = \lim_{t \to x} \frac{-1}{tx} = \frac{-1}{x^2},
+        \]
+        where we have used Corollary 4.2.4 (iv).
+
+        \item Keeping the definition of \( h \) from part (a), note that \( \tfrac{f(x)}{g(x)} = f(x) h(g(x)) \) for any \( x \) such that \( g(x) \neq 0 \). It follows from Theorem 5.2.4 (iii) and the Chain Rule that
+        \[
+            (f/g)'(x) = f'(x) h(g(x)) + f(x) h'(g(x)) g'(x).
+        \]
+        We can use the result from part (a) to rewrite this as
+        \[
+            (f/g)'(x) = \frac{f'(x)}{g(x)} - \frac{f(x) g'(x)}{[g(x)]^2} = \frac{f'(x) g(x) - f(x) g'(x)}{[g(x)]^2}.
+        \]
+
+        \item Suppose \( x \in \R \) is such that \( g(x) \neq 0 \). Then for any \( t \neq x \) (and such that \( g(t) \neq 0 \); since \( g(x) \neq 0 \), the continuity of \( g \) at \( x \) (Theorem 5.2.3) implies that there is some neighbourhood of \( x \) such that \( g \) is non-zero on this neighbourhood):
+        \begin{align*}
+            \frac{\frac{f(t)}{g(t)} - \frac{f(x)}{g(x)}}{t - x} &= \frac{f(t)g(x) - f(x)g(t)}{(t - x)[g(t)g(x)]} \\[2mm]
+            &= \frac{f(t)g(x) - f(x)g(x) + f(x)g(x) - f(x)g(t)}{(t - x)[g(t)g(x)]} \\[2mm]
+            &= \frac{f(t) - f(x)}{t - x} \frac{g(x)}{g(t)g(x)} - \frac{g(t) - g(x)}{t - x} \frac{f(x)}{g(t)g(x)}.
+        \end{align*}
+        It follows that
+        \begin{align*}
+            (f/g)'(x) &= \lim_{t \to x} \frac{\frac{f(t)}{g(t)} - \frac{f(x)}{g(x)}}{t - x} \\[2mm]
+            &= \lim_{t \to x} \paren{\frac{f(t) - f(x)}{t - x}} \lim_{t \to x} \paren{\frac{g(x)}{g(t)g(x)}} - \lim_{t \to x} \paren{\frac{g(t) - g(x)}{t - x}} \lim_{t \to x} \paren{\frac{f(x)}{g(t)g(x)}} \\[2mm]
+            &= \frac{f'(x) g(x) - g'(x) f(x)}{[g(x)]^2},
+        \end{align*}
+        where we have used that \( f \) and \( g \) are differentiable at \( x \), the continuity of \( g \) at \( x \) (Theorem 5.2.3), and several algebraic properties of functional limits (Corollary 4.2.4).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Follow these steps to provide a slightly modified proof of the Chain Rule.
+    \begin{enumerate}
+        \item Show that a function \( h : A \to \R \) is differentiable at \( a \in A \) if and only if there exists a function \( l : A \to \R \) which is continuous at \( a \) and satisfies
+        \[
+            h(x) - h(a) = l(x) (x - a) \qquad \text{for all } x \in A.
+        \]
+
+        \item Use this criterion for differentiablilty (in both directions) to prove Theorem 5.2.5.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Suppose there exists such a function \( l : A \to \R \), so that for all \( x \in A \) such that \( x \neq a \) we have
+        \[
+            \frac{h(x) - h(a)}{x - a} = l(x).
+        \]
+        It follows that \( h'(a) = l(a) \) since \( l \) is continuous at \( a \).
+
+        Now suppose that \( h : A \to \R \) is differentiable at \( a \). Define \( l : A \to \R \) by
+        \[
+            l(x) = \begin{cases}
+                \frac{h(x) - h(a)}{x - a} & \text{if } x \neq a, \\
+                h'(a) & \text{if } x = a.
+            \end{cases}
+        \]
+        Then \( l \) satisfies \( h(x) - h(a) = l(x) (x - a) \) for all \( x \in A \), and furthermore \( l \) is continuous at \( a \):
+        \[
+            \lim_{x \to a} l(x) = \lim_{x \to a} \frac{h(x) - h(a)}{x - a} = h'(a) = l(a).
+        \]
+
+        \item Suppose \( f : A \to \R \) and \( g : B \to \R \) are functions such that \( f(A) \subseteq B \), so that the composition \( g \circ f : A \to \R \) is defined. Suppose \( f \) is differentiable at \( c \in A \) and \( g \) is differentiable at \( f(c) \in B \). By part (a), there exist functions \( l : A \to \R \) and \( L : B \to \R \) such that \( l \) is continuous at \( c \), \( L \) is continuous at \( f(c) \), and
+        \begin{gather*}
+            f(x) - f(c) = l(x)(x - a) \qquad \text{for all } x \in A, \\
+            g(y) - g(f(c)) = L(y)(y - f(c)) \qquad \text{for all } y \in B.
+        \end{gather*}
+        In particular, we have for all \( x \in A \):
+        \[
+            g(f(x)) - g(f(c)) = L(f(x))(f(x) - f(c)) = L(f(x))l(x)(x - a).
+        \]
+        Since \( f \) is differentiable at \( c \), it is also continuous at \( c \) (Theorem 5.2.3), and since \( L \) is continuous at \( f(c) \), the composition \( L \circ f \) is continuous at \( c \) (Theorem 4.3.9). Thus the product \( (L \circ f) l \) is continuous at \( c \) (Theorem 4.3.4 (iii)). It follows from part (a) that \( g \circ f \) is differentiable at \( c \) and furthermore that
+        \[
+            (g \circ f)'(c) = L(f(c))l(c) = g'(f(c)) f'(c).
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Let \( f_a(x) = \begin{cases}
+        x^a & \text{if } x > 0 \\
+        0 & \text{if } x \leq 0.
+    \end{cases} \)
+    \begin{enumerate}
+        \item For which values of \( a \) is \( f \) continuous at zero?
+
+        \item For which values of \( a \) is \( f \) differentiable at zero? In this case, is the derivative function continuous?
+
+        \item For which values of \( a \) is \( f \) twice-differentiable?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item For \( a > 0 \), we have \( \lim_{x \to 0} f_a(x) = 0 = f_a(0) \) and thus \( f_a \) is continuous at zero. For \( a = 0 \), we have
+        \[
+            \lim_{x \to 0^+} f_a(x) = 1 \neq 0 = \lim_{x \to 0^-} f_a(x)
+        \]
+        and thus \( f_a \) is not continuous at zero. For \( a < 0 \), we have
+        \[
+            \lim_{x \to 0^+} f_a(x) = +\infty \neq 0 = \lim_{x \to 0^-} f_a(x)
+        \]
+        and thus \( f_a \) is not continuous at zero.
+
+        \item As we showed in part (a), \( f_a \) is not continuous, and hence not differentiable, at zero for \( a \leq 0 \). For \( 0 < a < 1 \), observe that
+        \[
+            \lim_{x \to 0^+} \frac{f_a(x) - f_a(0)}{x - 0} = \lim_{x \to 0^+} x^{a - 1} = +\infty \neq 0 = \lim_{x \to 0^-} \frac{f_a(x) - f_a(0)}{x - 0}.
+        \]
+        Thus \( f_a \) is not differentiable at zero. For \( a = 1 \), we have
+        \[
+            \lim_{x \to 0^+} \frac{f_a(x) - f_a(0)}{x - 0} = 1 \neq 0 = \lim_{x \to 0^-} \frac{f_a(x) - f_a(0)}{x - 0}
+        \]
+        and thus \( f_a \) is not differentiable at zero. For \( a > 1 \), we have
+        \[
+            \lim_{x \to 0^+} \frac{f_a(x) - f_a(0)}{x - 0} = \lim_{x \to 0^+} x^{a - 1} = 0 = \lim_{x \to 0^-} \frac{f_a(x) - f_a(0)}{x - 0}
+        \]
+        and so \( f_a'(0) = 0 \). The derivative function \( f_a' : \R \to \R \) is given by
+        \[
+            f_a'(x) = \begin{cases}
+                a x^{a - 1} & \text{if } x > 0, \\
+                0 & \text{if } x \leq 0,
+            \end{cases}
+        \]
+        which is continuous since \( a > 1 \).
+
+        \item Similarly to part (b), \( f_a \) is twice-differentiable if and only if \( a > 2 \), and the second derivative function \( f_a'' : \R \to \R \) is given by
+        \[
+            f_a''(x) = \begin{cases}
+                a (a - 1) x^{a - 2} & \text{if } x > 0, \\
+                0 & \text{if } x \leq 0.
+            \end{cases}
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Let \( g \) be defined on an interval \( A \), and let \( c \in A \).
+    \begin{enumerate}
+        \item Explain why \( g'(c) \) in Definition 5.2.1 could have been given by
+        \[
+            g'(c) = \lim_{h \to 0} \frac{g(c + h) - g(c)}{h}.
+        \]
+
+        \item Assume \( A \) is open. If \( g \) is differentiable at \( c \in A \), show
+        \[
+            g'(c) = \lim_{h \to 0} \frac{g(c + h) - g(c - h)}{2h}.
+        \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Taking \( x = c + h \) gives
+        \[
+            \lim_{x \to c} \frac{g(x) - g(c)}{x - c} = \lim_{h \to 0} \frac{g(c + h) - g(c)}{h}.
+        \]
+
+        \item Let \( \epsilon \) be given. By part (a), there is a \( \delta > 0 \) such that
+        \[
+            0 < \abs{h} < \delta \implies \abs{\frac{g(c + h) - g(c)}{h} - g'(c)}< \epsilon.
+        \]
+        Note that since \( \abs{-h} = \abs{h} \), we also have
+        \[
+            0 < \abs{h} < \delta \implies \abs{\frac{g(c - h) - g(c)}{-h} - g'(c)}< \epsilon.
+        \]
+        For any \( h \) such that \( 0 < \abs{h} < \delta \), it follows that
+        \begin{align*}
+            \abs{\frac{g(c + h) - g(c - h)}{2h} - g'(c)} &= \abs{\frac{g(c + h) - g(c) + g(c) - g(c - h)}{2h} - \frac{2 g'(c)}{2}} \\[2mm]
+            &\leq \frac{1}{2} \abs{\frac{g(c + h) - g(c)}{h} - g'(c)} + \frac{1}{2} \abs{\frac{g(c - h) - g(c)}{-h} - g'(c)} \\[2mm]
+            &< \frac{\epsilon}{2} + \frac{\epsilon}{2} \\
+            &= \epsilon.
+        \end{align*}
+        Thus
+        \[
+            \lim_{h \to 0} \frac{g(c + h) - g(c - h)}{2h} = g'(c).
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Let
+    \[
+        g_a(x) = \begin{cases}
+            x^a \sin(1/x) & \text{if } x \neq 0 \\
+            0 & \text{if } x = 0.
+        \end{cases}
+    \]
+    Find a particular (potentially noninteger) value for \( a \) so that
+    \begin{enumerate}
+        \item \( g_a \) is differentiable on \( \R \) but such that \( g_a' \) is unbounded on \( [0, 1] \).
+
+        \item \( g_a \) is differentiable on \( \R \) with \( g_a' \) continuous but not differentiable at zero.
+
+        \item \( g_a \) is differentiable on \( \R \) and \( g_a' \) is differentiable on \( \R \), but such that \( g_a'' \) is not continuous at zero.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Take \( a = \tfrac{5}{3} \). For \( x \neq 0 \), we have by the usual rules of differentiation that
+        \[
+            g_a'(x) = \frac{5 x \sin \paren{\tfrac{1}{x}} - 3 \cos \paren{\tfrac{1}{x}}}{3 \sqrt[3]{x}}.
+        \]
+        For \( x = 0 \), we have
+        \[
+            g_a'(0) = \lim_{t \to 0} \frac{g_a(t)}{t} = \lim_{t \to 0} t^{2/3} \sin \paren{\tfrac{1}{t}}. 
+        \]
+        Since \( -t^{2/3} \leq t^{2/3} \sin \paren{\tfrac{1}{t}} \leq t^{2/3} \) for every \( t \in \R \), the Squeeze Theorem implies that \( g_a'(0) = 0 \). Thus the derivative function \( g_a' : \R \to \R \) is given by
+        \[
+            g_a'(x) = \begin{cases}
+                \frac{5 x \sin \paren{\tfrac{1}{x}} - 3 \cos \paren{\tfrac{1}{x}}}{3 \sqrt[3]{x}} & \text{if } x \neq 0, \\
+                0 & \text{if } x = 0.
+            \end{cases}
+        \]
+        Consider the sequence \( (x_n) \) contained in \( [0, 1] \) given by \( x_n = \tfrac{1}{\pi (1 + 2n)} \). Observe that
+        \[
+            g_a'(x_n) = \frac{5 x_n \sin \paren{\pi (1 + 2n)} - 3 \cos \paren{\pi (1 + 2n)}}{3 \sqrt[3]{x_n}} = \frac{1}{\sqrt[3]{x_n}}.
+        \]
+        It follows that \( \lim_{n \to \infty} g_a'(x_n) = +\infty \) since the sequence \( x_n \) is positive and satisfies \( \lim_{n \to \infty} x_n = 0 \). Thus \( g_a' \) is unbounded on \( [0, 1] \).
+
+        \item Take \( a = 3 \). For \( x \neq 0 \), we have by the usual rules of differentiation that
+        \[
+            g_a'(x) = 3 x^2 \sin \paren{\tfrac{1}{x}} - x \cos \paren{\tfrac{1}{x}}.
+        \]
+        For \( x = 0 \), we have
+        \[
+            g_a'(0) = \lim_{t \to 0} \frac{g_a(t)}{t} = \lim_{t \to 0} t^2 \sin \paren{\tfrac{1}{t}} = 0,
+        \]
+        where we have used the Squeeze Theorem as in part (a). Thus the derivative function \( g_a' : \R \to \R \) is given by
+        \[
+            g_a'(x) = \begin{cases}
+                3 x^2 \sin \paren{\tfrac{1}{x}} - x \cos \paren{\tfrac{1}{x}} & \text{if } x \neq 0, \\
+                0 & \text{if } x = 0.
+            \end{cases}
+        \]
+        Note that for \( x \neq 0 \), the function \( g_a' \) is given by various sums, products, and compositions of continuous functions and hence is itself continuous. For \( x = 0 \), two applications of the Squeeze Theorem show that \( \lim_{x \to 0} g_a'(x) = 0 = g_a'(0) \) and thus \( g_a' \) is continuous everywhere.
+
+        To see that \( g_a' \) is not differentiable at zero, observe that
+        \[
+            \lim_{t \to 0} 3 t \sin \paren{\tfrac{1}{t}} = 0 \quand \lim_{t \to 0} \cos \paren{\tfrac{1}{t}} \text{ does not exist}.
+        \]
+        It follows from Corollary 4.2.4 that
+        \[
+            \lim_{t \to 0} \frac{3 t^2 \sin \paren{\tfrac{1}{t}} - t \cos \paren{\tfrac{1}{t}}}{t} = \lim_{t \to 0} \paren{ 3 t \sin \paren{\tfrac{1}{t}} - \cos \paren{\tfrac{1}{t}} }
+        \]
+        does not exist, i.e.\ \( g_a' \) is not differentiable at zero.
+
+        \item Take \( a = 4 \). For \( x \neq 0 \), we have by the usual rules of differentiation that
+        \[
+            g_a'(x) = 4 x^3 \sin \paren{\tfrac{1}{x}} - x^2 \cos \paren{\tfrac{1}{x}}. 
+        \]
+        For \( x = 0 \), we have
+        \[
+            g_a'(0) = \lim_{t \to 0} t^3 \sin \paren{\tfrac{1}{t}} = 0,
+        \]
+        where we have used the Squeeze Theorem as in parts (a) and (b). The derivative function is given by
+        \[
+            g_a'(x) = \begin{cases}
+                4 x^3 \sin \paren{\tfrac{1}{x}} - x^2 \cos \paren{\tfrac{1}{x}} & \text{if } x \neq 0, \\
+                0 & \text{if } x = 0.
+            \end{cases}
+        \]
+        For \( x \neq 0 \), we have by the usual rules of differentiation that
+        \[
+            g_a''(x) = (12 x^2 - 1) \sin \paren{\tfrac{1}{x}} - 6 x \cos \paren{\tfrac{1}{x}}. 
+        \]
+        For \( x = 0 \), we have
+        \[
+            g_a''(0) = \lim_{t \to 0} \paren{4 t^2 \sin \paren{\tfrac{1}{t}} - t \cos \paren{\tfrac{1}{t}}} = 0,
+        \]
+        where we have again used the Squeeze Theorem. Thus the second derivative function is given by
+        \[
+            g_a''(x) = \begin{cases}
+                (12 x^2 - 1) \sin \paren{\tfrac{1}{x}} - 6 x \cos \paren{\tfrac{1}{x}} & \text{if } x \neq 0, \\
+                0 & \text{if } x = 0.
+            \end{cases}
+        \]
+        To see that \( g_a'' \) is not continuous at zero, note that
+        \[
+            \lim_{x \to 0} 12 x^2 \sin \paren{\tfrac{1}{x}} = 0, \quad \lim_{x \to 0} 6 x \cos \paren{\tfrac{1}{x}} \quand \lim_{x \to 0} \sin \paren{\tfrac{1}{x}} \text{ does not exist}.
+        \]
+        It follows from Corollary 4.2.4 that
+        \[
+            \lim_{x \to 0} g_a''(x) = \lim_{x \to 0} \paren{ 12 x^2 \sin \paren{\tfrac{1}{x}} - 6 x \cos \paren{\tfrac{1}{x}} - \sin \paren{\tfrac{1}{x}} }
+        \]
+        does not exist.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Review the definition of uniform continuity (Definition 4.4.4). Given a differentiable function \( f : A \to \R \), let's say that \( f \) is \textit{uniformly differentiable} on \( A \) if, given \( \epsilon > 0 \) there exists a \( \delta > 0 \) such that
+    \[
+        \abs{\frac{f(x) - f(y)}{x - y} - f'(y)} < \epsilon \quad \text{whenever } 0 < \abs{x - y} < \delta. 
+    \]
+    \begin{enumerate}
+        \item Is \( f(x) = x^2 \) uniformly differentiable on \( \R \)? How about \( g(x) = x^3 \)?
+        
+        \item Show that if a function is uniformly differentiable on an interval \( A \), then the derivative must be continuous on \( A \).
+
+        \item Is there a theorem analogous to Theorem 4.4.7 for differentiation? Are functions that are differentiable on a closed interval \( [a, b] \) necessarily uniformly differentiable?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item \( f \) is uniformly differentiable on \( \R \). Let \( \epsilon > 0 \) be given, set \( \delta = \epsilon \), and suppose \( x, y \in \R \) are such that \( 0 < \abs{x - y} < \delta \). Then
+        \[
+            \abs{\frac{f(x) - f(y)}{x - y} - f'(y)} = \abs{\frac{x^2 - y^2}{x - y} - 2y} = \abs{x - y} < \delta = \epsilon.
+        \]
+        However, \( g \) is not uniformly differentiable on \( \R \). To see this, let \( \delta > 0 \) be given. Let \( x = \tfrac{2}{\delta} \) and \( y = x + \tfrac{\delta}{2} \), so that \( 0 < \abs{x - y} < \delta \), and observe that
+        \begin{align*}
+            \abs{\frac{g(x) - g(y)}{x - y} - g'(y)} &= \abs{\frac{x^3 - y^3}{x - y} - 3y^2} \\[2mm]
+            &= \abs{\frac{(x - y)(x^2 + xy + y^2)}{x - y} - 3y^2} \\[2mm]
+            &= \abs{x^2 + xy - 2y^2} \\[2mm]
+            &= \abs{x - y} \abs{x + 2y} \\[2mm]
+            &= \tfrac{\delta}{2} \abs{3x + \delta} \\[2mm]
+            &= \tfrac{\delta}{2} (3x + \delta) \\[2mm]
+            &= \tfrac{3x \delta}{2} + \tfrac{\delta^2}{2} \\[2mm]
+            &> \tfrac{x \delta}{2} \\[2mm]
+            &= 1.
+        \end{align*}
+
+        \item Suppose \( f : A \to \R \) is uniformly differentiable. Fix \( \epsilon > 0 \). Since \( f \) is uniformly differentiable, there exists a \( \delta > 0 \) such that
+        \[
+            \abs{\frac{f(s) - f(t)}{s - t} - f'(t)} < \tfrac{\epsilon}{2} \quad \text{whenever } 0 < \abs{s - t} < \delta.
+        \]
+        Fix \( y \in A \) and suppose \( x \in A \) is such that \( 0 < \abs{x - y} < \delta \). Then
+        \[
+            \abs{f'(x) - f'(y)} \leq \abs{\frac{f(y) - f(x)}{y - x} - f'(x)} + \abs{\frac{f(x) - f(y)}{x - y} - f'(y)} < \tfrac{\epsilon}{2} + \tfrac{\epsilon}{2} = \epsilon.
+        \]
+        Thus \( f' \) is continuous.
+
+        \item There is no analogous theorem. Consider the function
+        \[
+            f(x) = \begin{cases}
+                x^{5/3} \sin \paren{\tfrac{1}{x}} & \text{if } x \neq 0, \\
+                0 & \text{if } x = 0.
+            \end{cases}
+        \]
+        As we showed in \Cref{ex:7} (a), \( f \) is differentiable on \( \R \), and hence on \( [0, 1] \), but \( f' \) is unbounded on \( [0, 1] \). It follows that \( f' \) is not continuous on \( [0, 1] \) (since continuous functions preserve compactness) and hence by part (b) of this exercise, \( f \) cannot be uniformly differentiable on \( [0, 1] \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Decide whether each conjecture is true or false. Provide an argument for those that are true and a counterexample for each one that is false.
+    \begin{enumerate}
+        \item If \( f' \) exists on an interval and is not constant, then \( f' \) must take on some irrational values.
+
+        \item If \( f' \) exists on an open interval and there is some point \( c \) where \( f'(c) > 0 \), then there exists a \( \delta \)-neighborhood \( V_{\delta}(c) \) around \( c \) in which \( f'(x) > 0 \) for all \( x \in V_{\delta}(c) \).
+
+        \item If \( f \) is differentiable on an interval containing zero and if \( \lim_{x \to 0} f'(x) = L \), then it must be that \( L = f'(0) \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item This is true. If \( f : I \to \R \) is differentiable and not constant, where \( I \) is an interval, then there exist distinct \( x, y \in I \) such that \( f'(x) \neq f'(y) \); we may assume that \( f'(x) < f'(y) \). Darboux's Theorem (Theorem 5.2.7) implies that \( [f'(x), f'(y)] \subseteq f'(I) \), from which it follows that \( f' \) takes on at least one (indeed, infinitely many) irrational values in the proper interval \( [f'(x), f'(y)] \).
+
+        \item This is false. Consider the function \( f : \R \to \R \) given by
+        \[
+            f(x) = \begin{cases}
+                \tfrac{x}{2} + x^2 \sin \paren{\tfrac{1}{x}} & \text{if } x \neq 0, \\
+                0 & \text{if } x = 0.
+            \end{cases}
+        \]
+        By the usual rules of differentiation and the Squeeze Theorem, the derivative \( f' : \R \to \R \) is given by
+        \[
+            f'(x) = \begin{cases}
+                \tfrac{1}{2} + 2 x \sin \paren{\tfrac{1}{x}} - \cos \paren{\tfrac{1}{x}} & \text{if } x \neq 0, \\
+                \tfrac{1}{2} & \text{if } x = 0.
+            \end{cases}
+        \]
+        Let \( (x_n) \) be the sequence given by \( x_n = \tfrac{1}{2 \pi n} \). Then \( \lim_{n \to \infty} x_n = 0 \) and
+        \[
+            f'(x_n) = - \tfrac{1}{2} < 0.
+        \]
+        It follows that for every \( \delta \)-neighborhood \( V_{\delta}(0) \) we can find some \( x_n \in V_{\delta}(0) \) such that \( f(x_n) < 0 \).
+
+        \item This is true and we will argue it by contradiction. Suppose that \( L > f'(0) \); the case where \( L < f'(0) \) is handled similarly. Let \( \epsilon = L - f'(0) > 0 \). Since \( \lim_{x \to 0} f'(x) = L \), there is a \( \delta > 0 \) such that
+        \[
+            x \in (-\delta, \delta) \text{ and } x \neq 0 \implies f'(x) \in \paren{L - \tfrac{\epsilon}{2}, L + \tfrac{\epsilon}{2}}. \tag{1}
+        \]
+        In particular, we have \( f' \paren{\tfrac{\delta}{2}} \in \paren{L - \tfrac{\epsilon}{2}, L + \tfrac{\epsilon}{2}} \). Since
+        \[
+            f'(0) < L - \tfrac{3 \epsilon}{4} < L - \tfrac{\epsilon}{2} < f' \paren{\tfrac{\delta}{2}},    
+        \]
+        Darboux's Theorem (Theorem 5.2.7) implies that there is a \( y \in \paren{0, \tfrac{\delta}{2}} \) such that \( f'(y) = L - \tfrac{3 \epsilon}{4} \). This contradicts (1).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Recall that a function \( f : (a, b) \to \R \) is \textit{increasing} on \( (a, b) \) if \( f(x) \leq f(y) \) whenever \( x < y \) in \( (a, b) \). A familiar mantra from calculus is that a differentiable function is increasing if its derivative is positive, but this statement requires some sharpening in order to be completely accurate.
+
+    Show that the function
+    \[
+        g(x) = \begin{cases}
+            x/2 + x^2 \sin (1/x) & \text{if } x \neq 0, \\
+            0 & \text{if } x = 0
+        \end{cases}
+    \]
+    is differentiable on \( \R \) and satisfies \( g'(0) > 0 \). Now, prove that \( g \) is \textit{not} increasing over any open interval containing 0.
+
+    In the next section we will see that \( f \) is indeed increasing on \( (a, b) \) if and only if \( f'(x) \geq 0 \) for all \( x \in (a, b) \).
+\end{exercise}
+
+\begin{solution}
+    As we showed in \Cref{ex:9} (b), the function \( g \) is differentiable on \( \R \) and satisfies \( g'(0) = \tfrac{1}{2} > 0 \). For \( n \in \N \) let
+    \[
+        x_n := \frac{1}{\tfrac{\pi}{2} + 2 \pi n} \quand y_n := \frac{1}{-\tfrac{\pi}{2} + 2 \pi n}.
+    \]
+    Suppose \( (a, b) \) is some open interval containing 0 and let \( N \) be such that \( y_N < b \), so that \( 0 < x_N < y_N < b \). Observe that
+    \[
+        g(x_N) = \frac{1}{\pi + 4 \pi N} + \frac{1}{\paren{ \tfrac{\pi}{2} + 2 \pi N }^2} \quand g(y_N) = \frac{1}{-\pi + 4 \pi N} + \frac{1}{\paren{ -\tfrac{\pi}{2} + 2 \pi N }^2}.
+    \]
+    Some algebraic manipulation reveals that
+    \[
+        g(x_N) - g(y_N) = \frac{2(16(4 - \pi) N^2 + \pi + 4)}{\pi^2 (4N - 1)^2 (4N + 1)^2}.
+    \]
+    The numerator and denominator of this fraction are both positive and so \( g(x_N) - g(y_N) \) is also positive. Thus \( g \) is not increasing on \( (a, b) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Assume that \( g \) is differentiable on \( [a, b] \) and satisfies \( g'(a) < 0 < g'(b) \).
+    \begin{enumerate}
+        \item Show that there exists a point \( x \in (a, b) \) where \( g(a) > g(x) \), and a point \( y \in (a, b) \) where \( g(y) < g(b) \).
+
+        \item Now complete the proof of Darboux's Theorem started earlier.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item We will prove the contrapositive statement. Suppose that for all \( x \in (a, b) \) we have \( g(a) \leq g(x) \). Let \( (x_n) \) be the sequence given by \( x_n = a + \tfrac{b - a}{2n} \), so that \( x_n \in (a, b) \) for all \( n \in \N \) and \( \lim_{n \to \infty} x_n = a \). It follows that
+        \[
+            \lim_{n \to \infty} \frac{g(x_n) - g(a)}{x_n - a} = g'(a).
+        \]
+        The denominator of \( \tfrac{g(x_n) - g(a)}{x_n - a} \) is positive for each \( n \in \N \) and our assumption that \( g(a) \leq g(x) \) for all \( x \in (a, b) \) implies that the numerator is non-negative for each \( n \in \N \). The Order Limit Theorem allows us to conclude that \( g'(a) \geq 0 \).
+
+        The existence of a point \( y \in (a, b) \) where \( g(y) < g(b) \) can be proved analogously.
+
+        \item The function \( g \) is differentiable and hence continuous on \( [a, b] \) (Theorem 5.2.3) and thus achieves a minimum value at some \( c \in [a, b] \) by the Extreme Value Theorem (Theorem 4.4.2). By part (a), we actually have \( c \in (a, b) \) and thus \( g'(c) = 0 \) by the Interior Extremum Theorem (Theorem 5.2.6).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}[Inverse functions]
+\label{ex:12}
+    If \( f : [a, b] \to \R \) is one-to-one, then there exists an inverse function \( f^{-1} \) defined on the range of \( f \) given by \( f^{-1}(y) = x \) where \( y = f(x) \). In \href{https://lew98.github.io/Mathematics/UA_Section_4_5_Exercises.pdf}{Exercise 4.5.8} we saw that if \( f \) is continuous on \( [a, b] \), then \( f^{-1} \) is continuous on its domain. Let's add the assumption that \( f \) is differentiable on \( [a, b] \) with \( f'(x) \neq 0 \) for all \( x \in [a, b] \). Show \( f^{-1} \) is differentiable with
+    \[
+        \paren{f^{-1}}'(y) = \frac{1}{f'(x)} \quad \text{where } y = f(x).
+    \]
+\end{exercise}
+
+\begin{solution}
+    Since \( f'(x) \neq 0 \), we have
+    \[
+        \lim_{s \to x} \frac{s - x}{f(s) - f(x)} = \frac{1}{f'(x)}
+    \]
+    by Corollary 4.2.4 (iv). Let \( \epsilon > 0 \) be given. There is a \( \delta_1 > 0 \) such that
+    \[
+        0 < \abs{s - x} < \delta_1 \implies \abs{\frac{s - x}{f(s) - f(x)} - \frac{1}{f'(x)}} < \epsilon. \tag{1}
+    \]
+    Since \( f^{-1} \) is continuous on its domain, we have \( \lim_{t \to y} f^{-1}(t) = f^{-1}(y) = x \). Thus there exists a \( \delta_2 > 0 \) such that
+    \[
+        0 < \abs{t - y} < \delta_2 \implies 0 < \abs{f^{-1}(t) - f^{-1}(y)} = \abs{f^{-1}(t) - x} < \delta_1.
+    \]
+    (The fact that \( f^{-1}(t) \neq x \) follows since \( t \neq y \) and \( f^{-1} \) is injective.) We may now take \( s = f^{-1}(t) \) in (1) to see that
+    \[
+        0 < \abs{t - y} < \delta_2 \implies \abs{\frac{f^{-1}(t) - x}{f(f^{-1}(t)) - f(x)} - \frac{1}{f'(x)}} = \abs{\frac{f^{-1}(t) - f^{-1}(y)}{t - y} - \frac{1}{f'(x)}} < \epsilon.
+    \]
+    Thus
+    \[
+        \paren{f^{-1}}'(y) = \lim_{t \to y} \frac{f^{-1}(t) - f^{-1}(y)}{t - y} = \frac{1}{f'(x)}.
+    \]
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2\ts{nd} edition.}
+
+\end{document}
