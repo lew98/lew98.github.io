@@ -1,0 +1,544 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{tabularray}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 5.C Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 5.C.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 5.C.#1#3}
+
+\newcommand{\re}{\text{Re}\,}
+\newcommand{\im}{\text{Im}\,}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\lmap}{\mathcal{L}}
+\newcommand{\mat}{\mathcal{M}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\Span}{\text{span}}
+\newcommand{\Null}{\text{null\,}}
+\newcommand{\Range}{\text{range\,}}
+\newcommand{\Rank}{\text{rank\,}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\tpose}[1]{#1^{\text{t}}}
+\newcommand{\upd}{\text{d}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\set{\{}{\}}
+\makeatletter
+\let\oldset\set
+\def\set{\@ifstar{\oldset}{\oldset*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 5.C Exercises}
+
+Exercises with solutions from Section 5.C of \hyperlink{ladr}{[LADR]}.
+
+\begin{exercise}
+\label{ex:1}
+    Suppose \( T \in \lmap(V) \) is diagonalizable. Prove that \( V = \Null T \oplus \Range T \).
+\end{exercise}
+
+\begin{solution}
+    By 1.45 and 3.22, it will suffice to show that \( \Null T \cap \Range T = \{ 0 \} \).
+
+    Since \( T \) is diagonalizable, there is a basis \( v_1, \ldots, v_n \) of \( V \) such that, for each \( j \), \( Tv_j = \lambda_j v_j \) for some eigenvalue \( \lambda_j \). Suppose \( v = a_1 v_1 + \cdots + a_n v_n \in \Null T \cap \Range T \). Then
+    \[
+        0 = Tv = a_1 \lambda_1 v_1 + \cdots + a_n \lambda_n v_n,
+    \]
+    whence \( a_j \lambda_j = 0 \) for each \( j \) by the linear independence of the basis \( v_1, \ldots, v_n \). Furthermore, since \( 0 = v - Tw \) for some \( w = b_1 v_1 + \cdots + b_n v_n \), we also have
+    \[
+        0 = (a_1 - b_1 \lambda_1) v_1 + \cdots + (a_n - b_n \lambda_n) v_n,
+    \]
+    which implies that \( a_j = b_j \lambda_j \) for each \( j \), again by the linear independence of the basis \( v_1, \ldots, v_n \). Combining this with the relation \( a_j \lambda_j = 0 \), we see that \( b_j \lambda_j^2 = 0 \), which shows that either \( b_j = 0 \), \( \lambda_j = 0 \), or both are zero. In any case, since \( a_j = b_j \lambda_j \), we have that each \( a_j = 0 \) and hence that \( v = 0 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Prove the converse of the statement in the exercise above or give a counterexample to the converse.
+\end{exercise}
+
+\begin{solution}
+    The converse does not hold. For a counterexample, consider the operator \( T : \R^2 \to \R^2 \) given by \( T(x, y) = (x + y, y) \). With respect to the standard basis of \( \R^2 \), this operator has the upper-triangular matrix
+    \[
+        \begin{pmatrix}
+            1 & 1 \\
+            0 & 1
+        \end{pmatrix}.
+    \]
+    Thus the only eigenvalue of \( T \) is 1 (5.32). It is straightforward to verify that \( E(1, T) = \Span((1, 0)) \), which is one-dimensional and so cannot possibly equal \( \R^2 \). Hence \( T \) is not diagonalizable (5.41).
+
+    However, \( T \) is injective, i.e.\ \( \Null T = \{ 0 \} \). It follows from 1.45 and 3.22 that \( \R^2 = \Null T \oplus \Range T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Suppose \( V \) is finite-dimensional and \( T \in \lmap(V) \). Prove that the following are equivalent:
+    \begin{enumerate}
+        \item \( V = \Null T \oplus \Range T \).
+
+        \item \( V = \Null T + \Range T \).
+
+        \item \( \Null T \cap \Range T = \{ 0 \} \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    That (a) implies (b) is clear.
+    
+    Suppose that (b) holds. We have
+    \[
+        \dim (\Null T \cap \Range T) = \dim \Null T + \dim \Range T - \dim (\Null T + \Range T)
+    \]
+    by 2.43. By assumption we have \( \dim (\Null T + \Range T) = \dim V \) and by 3.22 we also have \( \dim \Null T + \dim \Range T = \dim V \). Thus \( \dim (\Null T \cap \Range T) = 0 \), which is the case if and only if \( \Null T \cap \Range T = \{ 0 \} \). Hence (c) holds.
+
+    Suppose that (c) holds. Then the sum \( \Null T \oplus \Range T \) is direct by 1.45 and furthermore we have
+    \[
+        \dim (\Null T + \dim \Range T) = \dim \Null T + \dim \Range T = \dim V
+    \]
+    by 2.43 and 3.22. It follows that \( V = \Null T \oplus \Range T \) by \href{https://lew98.github.io/Mathematics/LADR_Section_2_C_Exercises.pdf}{Exercise 2.C.1} and hence (a) holds.
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Give an example to show that the exercise above is false without the hypothesis that \( V \) is finite-dimensional.
+\end{exercise}
+
+\begin{solution}
+    Consider the forward-shift operator \( T : \C^{\infty} \to \C^{\infty} \) given by
+    \[
+        T(z_1, z_2, z_3, \ldots) = (0, z_1, z_2, z_3, \ldots).
+    \]
+    Then
+    \[
+        \Null T = \{ 0 \} \quand \Range T = \{ (0, z_2, z_3, \ldots) : z_j \in \C \}.
+    \]
+    Thus \( \Null T \cap \Range T = \{ 0 \} \), however \( \C^{\infty} \neq \Null T + \Range T = \Range T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Suppose \( V \) is a finite-dimensional complex vector space and \( T \in \lmap(V) \). Prove that \( T \) is diagonalizable if and only if
+    \[
+        V = \Null (T - \lambda I) \oplus \Range (T - \lambda I)
+    \]
+    for every \( \lambda \in \C \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( T \) is diagonalizable, so that there is some basis such that the matrix of \( T \) with respect to this basis is diagonal:
+    \[
+        \begin{pmatrix}
+            \lambda_1 & & 0 \\
+            & \ddots & \\
+            0 & & \lambda_n
+        \end{pmatrix}.
+    \]
+    For any \( \lambda \in \C \), the matrix of the operator \( T - \lambda I \) with respect to this same basis is also diagonal:
+    \[
+        \begin{pmatrix}
+            \lambda_1 - \lambda & & 0 \\
+            & \ddots & \\
+            0 & & \lambda_n - \lambda
+        \end{pmatrix}.
+    \]
+    So \( T - \lambda I \) is also diagonalizable and thus by \Cref{ex:1} we have
+    \[
+        V = \Null (T - \lambda I) \oplus \Range (T - \lambda I).
+    \]
+
+    We will prove the converse statement by strong induction on the dimension of \( V \). For a non-negative integer \( n \), let \( P(n) \) be the following statement: if \( V \) is an \( n \)-dimensional complex vector space and \( T \in \lmap(V) \) is such that \( V = \Null(T - \lambda I) \oplus \Range(T - \lambda I) \) for all \( \lambda \in \C \), then \( T \) is diagonalizable. The truth of \( P(0) \) is clear. Suppose that \( P(0), \ldots, P(n) \) all hold for some non-negative integer \( n \), let \( V \) be an \( (n + 1) \)-dimensional complex vector space, and let \( T \in \lmap(V) \) be such that \( V = \Null(T - \lambda I) \oplus \Range(T - \lambda I) \) for all \( \lambda \in \C \). Our aim is to show that \( T \) is diagonalizable.
+    
+    Since \( V \) is a complex vector space, there is some eigenvalue \( \lambda_0 \) of \( T \) (5.21). Set
+    \[
+        U := \Null(T - \lambda_0 I) = E(\lambda_0, T) \quand W := \Range(T - \lambda_0 I).
+    \]
+    It is straightforward to verify that \( W \) is invariant under \( T \) (see the first proof of 5.21). We may then consider the restriction operator \( S := T|_W : W \to W \). Let \( \lambda \in \C \) be given. Since \( S \) is a restriction of \( T \), we have
+    \[
+        \Null(S - \lambda I) \subseteq \Null(T - \lambda I) \quand \Range(S - \lambda I) \subseteq \Range(T - \lambda I),
+    \]
+    which implies that
+    \[
+        \Null(S - \lambda I) \cap \Range(S - \lambda I) \subseteq \Null(T - \lambda I) \cap \Range(T - \lambda I). \tag{1}
+    \]
+    By assumption we have \( V = \Null(T - \lambda I) \oplus \Range(T - \lambda I) \); the equivalence of (a) and (c) in \Cref{ex:3} thus shows that \( \Null(T - \lambda I) \cap \Range(T - \lambda I) = \{ 0 \} \). It follows from (1) that \( \Null(S - \lambda I) \cap \Range(S - \lambda I) = \{ 0 \} \) and another application of \Cref{ex:3} allows us to conclude that \( W = \Null(S - \lambda I) \oplus \Range(S - \lambda I) \).
+
+    By assumption we have \( V = U \oplus W \); since \( \lambda_0 \) is an eigenvalue of \( T \) we must have \( \dim U \geq 1 \) and thus \( k := \dim W \leq n \). We may now invoke the induction hypothesis \( P(k) \) to see that \( S \) is diagonalizable and hence obtain a basis \( w_1, \ldots, w_k \) for \( W \) consisting of eigenvectors of \( S \) (5.41), which must also be eigenvectors of \( T \). Let \( u_1, \ldots, u_m \) be a basis of \( U \); evidently these are eigenvectors of \( T \) corresponding to the eigenvalue \( \lambda_0 \). Since \( V = U \oplus W \), it follows from \href{https://lew98.github.io/Mathematics/LADR_Section_2_B_Exercises.pdf}{Exercise 2.B.8} that the list \( u_1, \ldots, u_m, w_1, \ldots, w_k \) is a basis for \( V \) consisting of eigenvectors of \( T \) and thus \( T \) is diagonalizable (5.41).
+
+    This completes the induction step and we may conclude that \( P(n) \) holds for all non-negative integers \( n \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Suppose \( V \) is finite-dimensional, \( T \in \lmap(V) \) has \( \dim V \) distinct eigenvalues, and \( S \in \lmap(V) \) has the same eigenvectors as \( T \) (not necessarily with the same eigenvalues). Prove that \( ST = TS \).
+\end{exercise}
+
+\begin{solution}
+    \( T \) is diagonalizable (5.44), so there is a basis \( v_1, \ldots, v_n \) of \( V \) such that, for each \( j \), \( Tv_j = \lambda_j v_j \) for some eigenvalue \( \lambda_j \). By assumption each eigenvector of \( T \) is also an eigenvector of \( S \), so for each \( j \) we also have \( Sv_j = \mu_j v_j \) for some eigenvalue \( \mu_j \). Let \( v = a_1 v_1 + \cdots + a_n v_n \) be given. Then
+    \begin{multline*}
+        (ST)v = a_1 (ST) v_1 + \cdots + a_n (ST) v_n = a_1 \lambda_1 \mu_1 v_1 + \cdots + a_n \lambda_n \mu_n v_n \\ = a_1 \mu_1 \lambda_1 v_1 + \cdots + a_n \mu_n \lambda_n v_n = a_1 (TS) v_1 + \cdots + a_n (TS) v_n = (TS)v.
+    \end{multline*}
+    Thus \( ST = TS \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Suppose \( T \in \lmap(V) \) has a diagonal matrix \( A \) with respect to some basis of \( V \) and that \( \lambda \in \F \). Prove that \( \lambda \) appears on the diagonal of \( A \) precisely \( \dim E(\lambda, T) \) times.
+\end{exercise}
+
+\begin{solution}
+    Let \( v_1, \ldots, v_n \) be the basis of \( V \) in question, so that, for each \( j \), \( Tv_j = \lambda_j v_j \) for some eigenvalue \( \lambda_j \). Let \( k := \abs{ \{ 1 \leq j \leq n : \lambda_j = \lambda \} } \); our aim is to show that \( k = \dim E(\lambda, T) \). Note that, since each \( v_j \neq 0 \), we have \( \lambda_j = \lambda \) if and only if \( v_j \in E(\lambda, T) \). It follows that
+    \[
+        k = \abs{ \{ 1 \leq j \leq n : v_j \in E(\lambda, T) \} }.  
+    \]
+    Since the list \( v_1, \ldots, v_n \) is linearly independent, it is immediate that \( k \leq \dim E(\lambda, T) \). For simplicity (and without loss of generality), let's assume that those vectors from the basis \( v_1, \ldots, v_n \) which belong to \( E(\lambda, T) \) are the first \( k \) vectors, i.e.\ \( v_1, \ldots, v_k \) all belong to \( E(\lambda, T) \) and \( v_{k+1}, \ldots, v_n \) do not (note that either of the lists \( v_1, \ldots, v_k \) and \( v_{k+1}, \ldots, v_n \) could be empty; if one is empty, the other is not, provided \( n \geq 1 \)).
+    
+    Suppose that \( v = a_1 v_1 + \cdots + a_k v_k + a_{k+1} v_{k+1} + \cdots + a_n v_n \) belongs to \( E(\lambda, T) \). Then
+    \begin{multline*}
+        Tv = a_1 \lambda v_1 + \cdots + a_k \lambda v_k + a_{k+1} \lambda_{k+1} v_{k+1} + \cdots + a_n \lambda_n v_n \\ = a_1 \lambda v_1 + \cdots + a_k \lambda v_k + a_{k+1} \lambda v_{k+1} + \cdots + a_n \lambda v_n = \lambda v,
+    \end{multline*}
+    which implies that
+    \[
+        a_{k+1} (\lambda_{k+1} - \lambda) v_{k+1} + \cdots + a_n (\lambda_n - \lambda) v_n = 0.
+    \]
+    Since each vector \( v_j \) in the list \( v_{k+1}, \ldots, v_n \) does not belong to \( E(\lambda, T) \), which we noted earlier is the case if and only if \( \lambda_j \neq \lambda \), the linear independence of this list implies that \( a_{k+1} = \cdots = a_n = 0 \) and thus
+    \[
+        v = a_1 v_1 + \cdots + a_k v_k,
+    \]
+    demonstrating that the list \( v_1, \ldots, v_k \) spans \( E(\lambda, T) \). It follows that \( k \geq \dim E(\lambda, T) \) and we may conclude that \( k = \dim E(\lambda, T) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Suppose \( T \in \lmap(\F^5) \) and \( \dim E(8, T) = 4 \). Prove that \( T - 2I \) or \( T - 6I \) is invertible.
+\end{exercise}
+
+\begin{solution}
+    We will prove the contrapositive statement; suppose that neither \( T - 2I \) nor \( T - 6I \) is invertible. Then 2 and 6 are eigenvalues of \( T \) (5.6), so
+    \[
+        \dim E(2, T) \geq 1 \quand \dim E(6, T) \geq 1.
+    \]
+    By 5.38, we have
+    \begin{multline*}
+        \dim E(8, T) + \dim E(2, T) + \dim E(6, T) \leq \dim \F^5 = 5 \\ \implies \dim E(8, T) \leq 5 - \dim E(2, T) - \dim E(6, T) \leq 3 < 4.
+    \end{multline*}
+    Thus \( \dim E(8, T) \neq 4 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Suppose \( T \in \lmap(V) \) is invertible. Prove that \( E(\lambda, T) = E \paren{ \tfrac{1}{\lambda}, T^{-1} } \) for every \( \lambda \in \F \) with \( \lambda \neq 0 \).
+\end{exercise}
+
+\begin{solution}
+    This is immediate from the fact that, for \( \lambda \neq 0 \) and \( v \neq 0 \), one has
+    \[
+        Tv = \lambda v \iff T^{-1} v = \lambda^{-1} v.
+    \]
+    (See \href{https://lew98.github.io/Mathematics/LADR_Section_5_A_Exercises.pdf}{Exercise 5.A.21}.)
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Suppose that \( V \) is finite-dimensional and \( T \in \lmap(V) \). Let \( \lambda_1, \ldots, \lambda_m \) denote the distinct nonzero eigenvalues of \( T \). Prove that
+    \[
+        \dim E(\lambda_1, T) + \cdots + \dim E(\lambda_m, T) \leq \dim \Range(T).
+    \]
+\end{exercise}
+
+\begin{solution}
+    Note that
+    \[
+        \dim E(0, T) + \dim E(\lambda_1, T) + \cdots + \dim E(\lambda_m, T) \leq \dim V
+    \]
+    follows from 5.38 (if 0 is an eigenvalue of \( T \), the inequality is the second part of 5.38; if 0 is not an eigenvalue of \( T \) then \( \dim E(0, T) = 0 \) and thus we can add \( \dim E(0, T) \) to the left-hand side of the inequality in 5.38). By 3.22 we have
+    \[
+        \dim V = \dim \Null T + \dim \Range T = \dim E(0, T) + \dim \Range T
+    \]
+    and thus
+    \[
+        \dim E(\lambda_1, T) + \cdots + \dim E(\lambda_m, T) \leq \dim \Range(T).
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Verify the assertion in Example 5.40.
+\end{exercise}
+
+\begin{solution}
+    Define \( T \in \lmap(\R^2) \) by
+    \[
+        T(x, y) = (41x + 7y, -20x + 74y).
+    \]
+    The claim is that with respect to the basis \( (1, 4), (7, 5) \) the matrix of \( T \) is
+    \[
+        \begin{pmatrix}
+            69 & 0 \\
+            0 & 46
+        \end{pmatrix}.
+    \]
+    Indeed,
+    \[
+        T(1, 4) = (69, 276) = 69 (1, 4) + 0 (7, 5) \quand T(7, 5) = (322, 230) = 0 (1, 4) + 46 (7, 5).
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:12}
+    Suppose \( R, T \in \lmap(\F^3) \) each have 2, 6, 7 as eigenvalues. Prove that there exists an invertible operator \( S \in \lmap(\F^3) \) such that \( R = S^{-1} T S \).
+\end{exercise}
+
+\begin{solution}
+    Since \( R \) and \( T \) both have \( 3 = \dim \F^3 \) distinct eigenvalues, they are both diagonalizable, i.e.\ there exists a basis \( u_1, u_2, u_3 \) and a basis \( v_1, v_2, v_3 \) of \( V \) such that
+    \[
+        Ru_1 = 2u_1, \,\, Ru_2 = 6u_2, \,\, Ru_3 = 7u_3, \,\, Tv_1 = 2v_1, \,\, Tv_2 = 6v_2, \text{ and } Tv_3 = 7v_3.
+    \]
+    Define \( S \in \lmap(\F^3) \) by \( Su_j = v_j \); \( S \) is invertible since it maps a basis to a basis. Furthermore,
+    \[
+        S^{-1}TS u_1 = S^{-1}T v_1 = 2 S^{-1} v_1 = 2 u_1 = R u_1.
+    \]
+    Similarly, we have \( S^{-1}TS u_2 = R u_2 \) and \( S^{-1}TS u_3 = R u_3 \). Since \( S^{-1}TS \) and \( R \) agree on each basis vector \( u_1, u_2, u_3 \), we must have \( S^{-1}TS = R \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:13}
+    Find \( R, T \in \lmap(\F^4) \) such that \( R \) and \( T \) each have 2, 6, 7 as eigenvalues, \( R \) and \( T \) have no other eigenvalues, and there does not exist an invertible operator \( S \in \lmap(\F^4) \) such that \( R = S^{-1}TS \).
+\end{exercise}
+
+\begin{solution}
+    Let \( R \) and \( T \) be the operators which have the matrices
+    \[
+        \mat(R) = \begin{pmatrix}
+            2 & 0 & 0 & 0 \\
+            0 & 2 & 0 & 0 \\
+            0 & 0 & 6 & 0 \\
+            0 & 0 & 0 & 7 \\
+        \end{pmatrix}
+        \quand
+        \mat(T) = \begin{pmatrix}
+            2 & 1 & 0 & 0 \\
+            0 & 2 & 0 & 0 \\
+            0 & 0 & 6 & 0 \\
+            0 & 0 & 0 & 7 \\
+        \end{pmatrix}
+    \]
+    with respect to the standard basis \( e_1, e_2, e_3, e_4 \) of \( \F^4 \). Since these matrices are upper-triangular, the eigenvalues of \( R \) and \( T \) are precisely 2, 6, 7 (5.32). To disprove the existence of an invertible operator \( S \in \lmap(\F^4) \) such that \( R = S^{-1}TS \), let \( S \in \lmap(\F^4) \) be any invertible operator. By \href{https://lew98.github.io/Mathematics/LADR_Section_5_A_Exercises.pdf}{Exercise 5.A.15}, the operator \( S^{-1}TS \) also has 2 as an eigenvalue. Furthermore, the eigenspace \( E(2, T) \) is the image under \( S \) of the eigenspace \( E(2, S^{-1}TS) \). A restriction of the operator \( S \) thus provides us with an isomorphism between \( E(2, T) \) and \( E(2, S^{-1}TS) \); in particular, these eigenspaces must have the same dimension. However, note that
+    \[
+        \dim E(2, T) = \dim \Span(e_1) = 1 \neq 2 = \dim \Span(e_1, e_2) = \dim E(2, R).
+    \]
+    Thus there cannot exist an invertible operator \( S \in \lmap(\F^4) \) such that \( R = S^{-1}TS \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:14}
+    Find \( T \in \lmap(\C^3) \) such that 6 and 7 are eigenvalues of \( T \) and such that \( T \) does not have a diagonal matrix with respect to any basis of \( \C^3 \).
+\end{exercise}
+
+\begin{solution}
+    Let \( T \) be the operator which has the matrix
+    \[
+        \mat(T) = \begin{pmatrix}
+            6 & 1 & 0 \\
+            0 & 6 & 0 \\
+            0 & 0 & 7
+        \end{pmatrix}
+    \]
+    with respect to the standard basis \( e_1, e_2, e_3 \) of \( \C^3 \). Since this matrix is upper-triangular, the eigenvalues of \( T \) are precisely 6 and 7 (5.32). It is straightforward to verify that
+    \[
+        E(6, T) = \Span(e_1) \quand E(7, T) = \Span(e_3),
+    \]
+    so that
+    \[
+        \dim E(6, T) + \dim E(7, T) = 2 \neq 3 = \dim \C^3.
+    \]
+    It follows from the equivalence of (a) and (e) in 5.41 that \( T \) is not diagonalizable.
+\end{solution}
+
+\begin{exercise}
+\label{ex:15}
+    Suppose \( T \in \lmap(\C^3) \) is such that 6 and 7 are eigenvalues of \( T \). Furthermore, suppose \( T \) does not have a diagonal matrix with respect to any basis of \( \C^3 \). Prove that there exists \( (x, y, z) \in \C^3 \) (see \href{https://linear.axler.net/LADRErrataThird.html}{errata}) such that \( T(x, y, z) = (17 + 8x, \sqrt{5} + 8y, 2 \pi + 8z) \).
+\end{exercise}
+
+\begin{solution}
+    Since \( \dim \C^3 = 3 \), it must be the case that 6 and 7 are the only eigenvalues of \( T \); if \( T \) had another distinct eigenvalue then \( T \) would be diagonalizable (5.44). It follows that the operator \( T - 8I \) is surjective (5.6) and thus there exists \( (x, y, z) \in \C^3 \) such that \( (T - 8I)(x, y, z) = (17, \sqrt{5}, 2 \pi) \), or equivalently such that \( T(x, y, z) = (17 + 8x, \sqrt{5} + 8y, 2 \pi + 8z) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:16}
+    The \textit{\textbf{Fibonacci sequence}} \( F_1, F_2, \ldots \) is defined by
+    \[
+        F_1 = 1, \, F_2 = 1, \quand F_n = F_{n-2} + F_{n-1} \text{ for } n \geq 3.
+    \]
+    Define \( T \in \lmap(\R^2) \) by \( T(x, y) = (y, x + y) \).
+    \begin{enumerate}
+        \item Show that \( T^n(0, 1) = (F_n, F_{n+1}) \) for each positive integer \( n \).
+
+        \item Find the eigenvalues of \( T \).
+
+        \item Find a basis of \( \R^2 \) consisting of eigenvectors of \( T \).
+
+        \item Use the solution to part (c) to compute \( T^n(0, 1) \). Conclude that
+        \[
+            F_n = \frac{1}{\sqrt{5}} \bkt{ \paren{ \frac{1 + \sqrt{5}}{2} }^n - \paren{ \frac{1 - \sqrt{5}}{2} }^n }
+        \]
+        for each positive integer \( n \).
+
+        \item Use part (d) to conclude that for each positive integer \( n \), the Fibonacci number \( F_n \) is the integer that is closest to
+        \[
+            \frac{1}{\sqrt{5}} \paren{ \frac{1 + \sqrt{5}}{2} }^n.
+        \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item We will proceed by induction. The base case \( n = 1 \) is clear, so suppose that \( T^n(0, 1) = (F_n, F_{n+1}) \) for some positive integer \( n \). Then
+        \[
+            T^{n+1}(0, 1) = T(T^n(0, 1)) = T(F_n, F_{n+1}) = (F_{n+1}, F_n + F_{n+1}) = (F_{n+1}, F_{n+2}).
+        \]
+        This completes the induction step and the proof.
+
+        \item We are looking for solutions \( (x, y) \neq (0, 0) \) and \( \lambda \in \R \) of the equation
+        \[
+            T(x, y) = (y, x + y) = (\lambda x, \lambda y).
+        \]
+        From the equation \( y = \lambda x \) we see that \( x = 0 \) if and only if \( y = 0 \), so we may assume that both of \( x \) and \( y \) are non-zero. Substituting \( y = \lambda x \) into the equation \( x + y = \lambda y \) and cancelling \( x \) gives us the equation \( \lambda^2 - \lambda - 1 = 0 \), which has two distinct real solutions:
+        \[
+            \lambda_1 = \frac{1 + \sqrt{5}}{2} \quand \lambda_2 = \frac{1 - \sqrt{5}}{2}.
+        \]
+        These are indeed eigenvalues, since
+        \[
+            T(1, \lambda_1) = (\lambda_1, \lambda_1 + 1) = (\lambda_1, \lambda_1^2) = \lambda_1 (1, \lambda_1),
+        \]
+        where we have used that \( \lambda_1 \) satisfies the equation \( \lambda_1^2 - \lambda_1 - 1 = 0 \). Similarly,
+        \[
+            T(1, \lambda_2) = \lambda_2 (1, \lambda_2).
+        \]
+        Since \( \dim \R^2 = 2 \), we may conclude that the eigenvalues of \( T \) are precisely \( \lambda_1 \) and \( \lambda_2 \).
+
+        \item Since \( \lambda_1 \neq \lambda_2 \), the eigenvectors \( v_1 := (1, \lambda_1) \) and \( v_2 := (1, \lambda_2) \) found in part (b) are linearly independent and thus form a basis of the 2-dimensional vector space \( \R^2 \).
+
+        \item Observe that
+        \[
+            v_1 - v_2 = (0, \lambda_1 - \lambda_2) = \paren{ 0, \sqrt{5} }.
+        \]
+        Thus \( (0, 1) = \tfrac{1}{\sqrt{5}} (v_1 - v_2) \). Let \( n \) be a positive integer. We then have
+        \[
+            T^n(0, 1) = \frac{1}{\sqrt{5}} (T^n v_1 - T^n v_2) = \frac{1}{\sqrt{5}} (\lambda_1^n v_1 - \lambda_2^n v_2) = \frac{1}{\sqrt{5}} (\lambda_1^n - \lambda_2^n, \lambda_1^{n+1} - \lambda_2^{n+1}).
+        \]
+        Given the result of part (a), we may conclude that
+        \[
+            F_n = \frac{1}{\sqrt{5}} (\lambda_1^n - \lambda_2^n) = \frac{1}{\sqrt{5}} \bkt{ \paren{ \frac{1 + \sqrt{5}}{2} }^n - \paren{ \frac{1 - \sqrt{5}}{2} }^n }.
+        \]
+
+        \item For any positive integer \( n \), observe that
+        \begin{align*}
+            2 < \sqrt{5} < 3 &\implies -1 < \frac{1 - \sqrt{5}}{2} < -\frac{1}{2} \\
+            &\implies -1 < \paren{ \frac{1 - \sqrt{5}}{2} }^n < 1 \\
+            &\implies -\frac{1}{\sqrt{5}} < -\frac{1}{\sqrt{5}} \paren{ \frac{1 - \sqrt{5}}{2} }^n < \frac{1}{\sqrt{5}} \\
+            &\implies -\frac{1}{2} < -\frac{1}{\sqrt{5}} \paren{ \frac{1 - \sqrt{5}}{2} }^n < \frac{1}{2}.
+        \end{align*}
+        It then follows from part (d) that
+        \[
+            \frac{1}{\sqrt{5}} \lambda_1^n - \frac{1}{2} < F_n < \frac{1}{\sqrt{5}} \lambda_1^n + \frac{1}{2},
+        \]
+        i.e.\ \( F_n \) is the sole integer belonging to the open interval \( \paren{ \tfrac{1}{\sqrt{5}} \lambda_1^n - \tfrac{1}{2}, \tfrac{1}{\sqrt{5}} \lambda_1^n + \tfrac{1}{2} } \), which has length 1. We may conclude that \( F_n \) is the integer closest to \( \frac{1}{\sqrt{5}} \lambda_1^n \).
+    \end{enumerate}
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ladr}{\textcolor{blue}{[LADR]} Axler, S. (2015) \textit{Linear Algebra Done Right.} 3\ts{rd} edition.}
+
+\end{document}

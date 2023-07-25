@@ -59,3 +59,4 @@
   - *Chapter 5*
     - [Section 5.A Exercises](https://lew98.github.io/Mathematics/LADR_Section_5_A_Exercises.pdf)
     - [Section 5.B Exercises](https://lew98.github.io/Mathematics/LADR_Section_5_B_Exercises.pdf)
+    - [Section 5.C Exercises](https://lew98.github.io/Mathematics/LADR_Section_5_C_Exercises.pdf)
