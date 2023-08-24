@@ -896,7 +896,9 @@ Exercises with solutions from Section 5.A of \hyperlink{ladr}{[LADR]}.
     \noindent [\textit{The exercise below asks you to verify that the hypothesis that \( V \) is finite-dimensional is needed for the exercise above.}]
 \end{exercise}
 
-\begin{solution}
+\noindent (I will provide two solutions; note that in each of these solutions, we only require that \( U \) is finite-dimensional.)
+
+\begin{solution}[1]
     Suppose \( \lambda \in \F \) is an eigenvalue of \( T/U \), i.e.\ there exists a non-zero \( v + U \in V/U \) such that
     \[
         (T/U)(v + U) = Tv + U = \lambda(v + U) = \lambda v + U.
@@ -915,6 +917,22 @@ Exercises with solutions from Section 5.A of \hyperlink{ladr}{[LADR]}.
         \]
         Furthermore, since \( v + U \) is non-zero we must have \( v \not\in U \) and hence \( v + u' \neq 0 \). Thus \( \lambda \) is an eigenvalue of \( T \).
     \end{description}
+\end{solution}
+
+\begin{solution}[2]
+    Suppose \( \lambda \in \F \) is an eigenvalue of \( T/U \), i.e.\ there exists a non-zero \( v + U \in V/U \) such that
+    \[
+        (T/U)(v + U) = Tv + U = \lambda(v + U) = \lambda v + U \quad \iff \quad (T - \lambda I)v \in U.
+    \]
+    Let \( u_1, \ldots, u_n \) be a basis of \( U \). As in Solution 1, \( U \) is invariant under the operator \( T - \lambda I \); it follows that the list
+    \[
+        (T - \lambda I)v, (T - \lambda I)u_1, \ldots, (T - \lambda I)u_n
+    \]
+    is contained in \( U \). This is a list of \( n + 1 \) vectors in an \( n \)-dimensional space and hence must be linearly dependent, i.e.\ there are scalars \( a_0, a_1 \ldots, a_n \), not all zero, such that \( w := a_0 v + a_1 u_1 + \cdots + a_n u_n \) satisfies
+    \[
+        (T - \lambda I)w = 0.
+    \]
+    Note that \( w \) must be non-zero. Indeed, suppose that \( w = 0 \). If \( a_0 \neq 0 \) then \( v \in U \), contradicting \( v + U \neq 0 \); and if \( a_0 = 0 \) then \( a_1 u_1 + \cdots + a_n u_n = 0 \) is a non-trivial linear combination, contradicting the linear independence of the basis \( u_1, \ldots, u_n \). We may conclude that \( \lambda \) is an eigenvalue of \( T \) with a corresponding eigenvector \( w \).
 \end{solution}
 
 \begin{exercise}
