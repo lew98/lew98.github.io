@@ -66,3 +66,4 @@
   - *Chapter 6*
     - [Section 6.A Exercises](https://lew98.github.io/Mathematics/LADR_Section_6_A_Exercises.pdf)
     - [Section 6.B Exercises](https://lew98.github.io/Mathematics/LADR_Section_6_B_Exercises.pdf)
+    - [Section 6.C Exercises](https://lew98.github.io/Mathematics/LADR_Section_6_C_Exercises.pdf)

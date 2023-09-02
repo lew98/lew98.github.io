@@ -1,0 +1,432 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{tabularray}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 6.C Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 6.C.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 6.C.#1#3}
+
+\newcommand{\upd}{\,\text{d}}
+\newcommand{\re}{\text{Re}\,}
+\newcommand{\im}{\text{Im}\,}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\lmap}{\mathcal{L}}
+\newcommand{\mat}{\mathcal{M}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\Span}{\text{span}}
+\newcommand{\Null}{\text{null\,}}
+\newcommand{\Range}{\text{range\,}}
+\newcommand{\Rank}{\text{rank\,}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\ipanon}{\langle \cdot, \cdot \rangle}
+\newcommand{\normanon}{\lVert \, \cdot \, \rVert}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\tpose}[1]{#1^{\text{t}}}
+\newcommand{\ocomp}[1]{#1^{\perp}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\makeatletter
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\Set{\{}{\}}
+\makeatletter
+\let\oldSet\Set
+\def\Set{\@ifstar{\oldSet}{\oldSet*}}
+\makeatother
+
+\DeclarePairedDelimiter\ip{\langle}{\rangle}
+\makeatletter
+\let\oldip\ip
+\def\set{\@ifstar{\oldip}{\oldip*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 6.C Exercises}
+
+Exercises with solutions from Section 6.C of \hyperlink{ladr}{[LADR]}.
+
+\begin{exercise}
+\label{ex:1}
+    Suppose \( v_1, \ldots, v_m \in V \). Prove that
+    \[
+        \ocomp{\{ v_1, \ldots, v_m \}} = \ocomp{(\Span(v_1, \ldots, v_m))}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    Suppose \( v \in \ocomp{(\Span(v_1, \ldots, v_m))} \). Since each \( v_j \in \Span(v_1, \ldots, v_m) \), this implies that \( \ip{v, v_j} = 0 \) for each \( 1 \leq j \leq m \). It follows that \( v \in \ocomp{\{ v_1, \ldots, v_m \}} \) and hence that \( \ocomp{(\Span(v_1, \ldots, v_m))} \subseteq \ocomp{\{ v_1, \ldots, v_m \}} \).
+
+    Now suppose that \( v \in \ocomp{\{ v_1, \ldots, v_m \}} \) and let \( a_1 v_1 + \cdots + a_m v_m \in \Span(v_1, \ldots, v_m) \) be given. We then have
+    \[
+        \ip{v, a_1 v_1 + \cdots + a_m v_m} = \overline{a_1} \ip{v, v_1} + \cdots + \overline{a_m} \ip{v, v_m} = 0.
+    \]
+    It follows that \( v \in \ocomp{(\Span(v_1, \ldots, v_m))} \) and hence that \( \ocomp{\{ v_1, \ldots, v_m \}} \subseteq \ocomp{(\Span(v_1, \ldots, v_m))} \). We may conclude that
+    \[
+        \ocomp{\{ v_1, \ldots, v_m \}} = \ocomp{(\Span(v_1, \ldots, v_m))}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Suppose \( U \) is a finite-dimensional subspace of \( V \). Prove that \( \ocomp{U} = \{ 0 \} \) if and only if \( U = V \).
+
+    \noindent [\textit{Exercise 14(a) shows that the result above is not true without the hypothesis that \( U \) is finite-dimensional.}]
+\end{exercise}
+
+\begin{solution}
+    The implication \( U = V \implies \ocomp{U} = \{ 0 \} \) is the content of 6.46 (c).
+    
+    For the converse implication, we will prove the contrapositive statement. Suppose therefore that \( U \neq V \) and let \( u_1, \ldots, u_m \) be a basis of \( U \). Since \( U \neq V \), there must exist some \( v \in V \setminus U \) such that the list \( u_1, \ldots, u_m, v \) is linearly independent. Perform the Gram-Schmidt procedure (6.31) on this list to obtain an orthonormal list \( e_1, \ldots, e_m, e_{m+1} \) such that
+    \[
+        \Span(e_1, \ldots, e_m) = \Span(u_1, \ldots, u_m) = U
+    \]
+    and such that \( e_{m+1} \) is orthogonal to each vector in the list \( e_1, \ldots, e_m \), i.e.\ \( e_{m+1} \in \ocomp{\{ e_1, \ldots, e_m \}} \). By \Cref{ex:1}, this is equivalent to saying that \( e_{m+1} \in \ocomp{(\Span(e_1, \ldots, e_m))} = \ocomp{U} \). Since \( e_{m+1} \neq 0 \), we see that \( \ocomp{U} \neq \{ 0 \} \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Suppose \( U \) is a subspace of \( V \) with basis \( u_1, \ldots, u_m \) and
+    \[
+        u_1, \ldots, u_m, w_1, \ldots, w_n
+    \]
+    is a basis of \( V \). Prove that if the Gram-Schmidt Procedure is applied to the basis of \( V \) above, producing a list \( e_1, \ldots, e_m, f_1, \ldots, f_n \), then \( e_1, \ldots, e_m \) is an orthonormal basis of \( U \) and \( f_1, \ldots, f_n \) is an orthonormal basis of \( \ocomp{U} \).
+\end{exercise}
+
+\begin{solution}
+    The Gram-Schmidt procedure guarantees that
+    \[
+        \Span(e_1, \ldots, e_m) = \Span(u_1, \ldots, u_m) = U.
+    \]
+    Any orthonormal list is linearly independent, so we have a linearly independent list \( e_1, \ldots, e_m \) of length \( m \) contained inside a subspace of dimension \( m \); it follows that \( e_1, \ldots, e_m \) is an orthonormal basis of \( U \).
+
+    The Gram-Schmidt procedure also guarantees that for any \( 1 \leq j \leq n \) the vector \( f_j \) is orthogonal to each vector in the list \( e_1, \ldots, e_n \). By \Cref{ex:1}, this implies that
+    \[
+        f_j \in \ocomp{(\Span(e_1, \ldots, e_m))} = \ocomp{U}.
+    \]
+    As before, the list \( f_1, \ldots f_n \) is orthonormal and hence linearly independent. Consequently, we have a linearly independent list \( f_1, \ldots, f_n \) of length \( n \) contained inside a subspace of dimension \( n \) (6.50); it follows that \( f_1, \ldots, f_n \) is an orthonormal basis of \( \ocomp{U} \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Suppose \( U \) is the subspace of \( \R^4 \) defined by
+    \[
+        U = \Span((1, 2, 3, -4), (-5, 4, 3, 2)).
+    \]
+    Find an orthonormal basis of \( U \) and an orthonormal basis of \( \ocomp{U} \).
+\end{exercise}
+
+\begin{solution}
+    It is straightforward to verify that
+    \[
+        u_1 = (1, 2, 3, -4), \quad u_2 = (-5, 4, 3, 2), \quad v_1 = (1, 0, 0, 0), \quad v_2 = (0, 1, 0, 0)
+    \]
+    is a basis of \( \R^4 \); clearly \( u_1, u_2 \) is a basis of \( U \). Performing the Gram-Schmidt procedure on this list yields the orthonormal list
+    \begin{multline*}
+        e_1 = \frac{1}{\sqrt{30}} (1, 2, 3, -4), \quad e_2 = \frac{1}{\sqrt{12030}} (-77, 56, 39, 38), \\[2mm]
+        f_1 = \frac{1}{\sqrt{76190}} (190, 117, 60, 151), \quad f_2 = \frac{1}{9 \sqrt{190}} (0, 81, -90, 27).
+    \end{multline*}
+    As we showed in \Cref{ex:3}, \( e_1, e_2 \) must be an orthonormal basis of \( U \) and \( f_1, f_2 \) must be an orthonormal basis of \( \ocomp{U} \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Suppose \( V \) is finite-dimensional and \( U \) is a subspace of \( V \). Show that \( P_{\ocomp{U}} = I - P_U \), where \( I \) is the identity operator on \( V \).
+\end{exercise}
+
+\begin{solution}
+    For \( v \in V \), we can write \( v = w + u \) for unique vectors \( w \in \ocomp{U} \) and \( u \in \ocomp{(\ocomp{U})} = U \) (6.47 and 6.51). Note that \( P_{\ocomp{U}}v = w \) and \( P_Uv = u \). It follows that
+    \[
+        P_{\ocomp{U}}v = w = v - u = Iv - P_Uv = (I - P_U)v
+    \]
+    and hence that \( P_{\ocomp{U}} = I - P_U \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Suppose \( U \) and \( W \) are finite-dimensional subspaces of \( V \). Prove that \( P_U P_W = 0 \) if and only if \( \ip{u, w} = 0 \) for all \( u \in U \) and \( w \in W \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( \ip{u, w} = 0 \) for all \( u \in U \) and \( w \in W \). For \( v \in V \), write \( v = w + y \), where \( w \in W \) and \( y \in \ocomp{W} \), so that \( P_W v = w \). Our hypothesis ensures that \( w \in \ocomp{U} \) and thus \( P_U P_W v = P_U w = 0 \) by 6.55 (c).
+
+    For the converse implication, suppose that \( P_U P_W = 0 \) and let \( u \in U \) and \( w \in W \) be given. On one hand, we have \( P_U P_W w = 0 \) by assumption; on the other hand we have \( P_U P_W w = P_U w \) by 6.55 (b). Thus \( P_U w = 0 \), so that \( w \in \Null P_U \). By 6.55 (e), this is equivalent to \( w \in \ocomp{U} \), whence \( \ip{u, w} = 0 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Suppose \( V \) is finite-dimensional and \( P \in \lmap(V) \) is such that \( P^2 = P \) and every vector in \( \Null P \) is orthogonal to every vector in \( \Range P \). Prove that there exists a subspace \( U \) of \( V \) such that \( P = P_U \).
+\end{exercise}
+
+\begin{solution}
+    By \href{https://lew98.github.io/Mathematics/LADR_Section_5_B_Exercises.pdf}{Exercise 5.B.4} and 6.47 we have the decompositions
+    \[
+        V = \Range P \oplus \Null P = \Range P \oplus \ocomp{(\Range P)},
+    \]
+    which implies that \( \dim \Null P = \dim \ocomp{(\Range P)} \). Combining this with the hypothesis \( \Null P \subseteq \ocomp{(\Range P)} \) we see that \( \Null P = \ocomp{(\Range P)} \). Let \( U = \Range P \); we claim that \( P = P_U \). To see this, let \( v = Px + w \) be given, where \( Px \in \Range P \) and \( w \in \ocomp{(\Range P)} = \Null P \) are unique. Then
+    \[
+        P_U v = Px = P(Px + w) = Pv,
+    \]
+    where we have used \( P^2 = P \) and \( w \in \Null P \) for the third equality.
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Suppose \( V \) is finite-dimensional and \( P \in \lmap(V) \) is such that \( P^2 = P \) and
+    \[
+        \norm{Pv} \leq \norm{v}
+    \]
+    for every \( v \in V \). Prove that there exists a subspace \( U \) of \( V \) such that \( P = P_U \).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( w \in \Null P \) and \( Px \in \Range P \). Our hypothesis implies the inequality
+    \[
+        \norm{Px} = \norm{P(Px + \lambda w)} \leq \norm{Px + \lambda w}
+    \]
+    for any \( \lambda \in \F \). It follows from \href{https://lew98.github.io/Mathematics/LADR_Section_6_A_Exercises.pdf}{Exercise 6.A.6} that \( \ip{w, Px} = 0 \) and hence that \( \Null P \subseteq \ocomp{(\Range P)} \). We can now set \( U = \Range P \) and proceed as in \Cref{ex:7} to see that \( P = P_U \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Suppose \( T \in \lmap(V) \) and \( U \) is a finite-dimensional subspace of \( V \). Prove that \( U \) is invariant under \( T \) if and only if \( P_U T P_U = T P_U \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( U \) is invariant under \( T \) and let \( v \in V \) be given. Then
+    \[
+        P_U v \in U \quad \implies \quad T P_U v \in U \quad \implies \quad P_U T P_U v = T P_U v
+    \]
+    where the last implication follows from 6.55 (b). Now suppose that \( U \) is not invariant under \( T \), i.e.\ there is some \( u \in U \) such that \( Tu \not\in U \). Then
+    \[
+        T P_U u = Tu \not\in U \quand P_U T P_U u \in U,
+    \]
+    where we have used 6.55 (b) and (d). It follows that \( P_U T P_U u \neq T P_U u \) and hence that \( P_U T P_U \neq P_U T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Suppose \( V \) is finite-dimensional, \( T \in \lmap(V) \), and \( U \) is a subspace of \( V \). Prove that \( U \) and \( \ocomp{U} \) are both invariant under \( T \) if and only if \( P_U T = T P_U \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( U \) and \( \ocomp{U} \) are both invariant under \( T \) and let \( v = u + w \in V \) be given, where \( u \in U \) and \( w \in \ocomp{U} \) are unique. By assumption we have \( Tu \in U \) and \( Tw \in \ocomp{U} \); it follows that
+    \[
+        P_U T v = P_U (Tu + Tw) = Tu = T P_U v.
+    \]
+    Now suppose that \( U \) is not invariant under \( T \), i.e.\ there is some \( u \in U \) such that \( Tu \not\in U \). As in \Cref{ex:9}, we have
+    \[
+        T P_U u = Tu \not\in U \quand P_U T u \in U,
+    \]
+    so that \( T P_U \neq P_U T \). Similarly, suppose that \( \ocomp{U} \) is not invariant under \( T \), i.e.\ there is some \( w \in \ocomp{U} \) such that \( Tw \not\in \ocomp{U} \). Then
+    \[
+        T P_U w = T(0) = 0 \quand P_U T w \neq 0,
+    \]
+    where we have used 6.55 (e). It follows that \( T P_U \neq P_U T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    In \( \R^4 \), let
+    \[
+        U = \Span((1, 1, 0, 0), (1, 1, 1, 2)).
+    \]
+    Find \( u \in U \) such that \( \norm{u - (1, 2, 3, 4)} \) is as small as possible.
+\end{exercise}
+
+\begin{solution}
+    Let \( u_1 = (1, 1, 0, 0) \) and \( u_2 = (1, 1, 1, 2) \), so that \( U = \Span(u_1, u_2) \). Performing the Gram-Schmidt procedure on the list \( u_1, u_2 \) yields the orthonormal basis
+    \[
+        e_1 = \frac{1}{\sqrt{2}} (1, 1, 0, 0), \quad e_2 = \frac{1}{\sqrt{5}} (0, 0, 1, 2)
+    \]
+    for \( U \). Let \( v = (1, 2, 3, 4) \). According to 6.56, to minimize \( \norm{u - v} \) we should take \( u = P_U v \). This can be calculated using 6.55 (i):
+    \[
+        P_U v = \ip{v, e_1} e_1 + \ip{v, e_2} e_2 = \paren{ \frac{3}{2}, \frac{3}{2}, \frac{11}{5}, \frac{22}{5} }.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:12}
+    Find \( p \in \poly_3(\R) \) such that \( p(0) = 0, p'(0) = 0 \), and
+    \[
+        \int_0^1 \abs{2 + 3x - p(x)}^2 \upd x
+    \]
+    is as small as possible.
+\end{exercise}
+
+\begin{solution}
+    Equip \( \poly_3(\R) \) with the inner product
+    \[
+        \ip{p, q} = \int_0^1 p(x) q(x) \upd x
+    \]
+    and let
+    \[
+        U = \{ p \in \poly_3(\R) : p(0) = p'(0) = 0 \}.
+    \]
+    It is straightforward to verify that \( U \) is a subspace of \( \poly_3(\R) \) and that \( x^2, x^3 \) is a basis of \( U \). Performing the Gram-Schmidt procedure on this basis yields the orthonormal basis
+    \[
+        e_1(x) = \sqrt{5} x^2, \quad e_2(x) = 6 \sqrt{7} \paren{x^3 - \tfrac{5}{6} x^2}
+    \]
+    for \( U \). Let \( q(x) = 2 + 3x \). According to 6.56, to minimize \( \norm{q - p}^2 = \int_0^1 \abs{2 + 3x - p(x)}^2 \upd x \) we should take \( p = P_U q \). This can be calculated using 6.55 (i):
+    \[
+        P_U q = \ip{q, e_1} e_1 + \ip{q, e_2} e_2 = 24 x^2 - \frac{203}{10} x^3.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:13}
+    Find \( p \in \poly_5(\R) \) that makes
+    \[
+        \int_{-\pi}^{\pi} \abs{\sin x - p(x)}^2 \upd x
+    \]
+    as small as possible.
+
+    \noindent [\textit{The polynomial 6.60 is an excellent approximation to the answer to this exercise, but here you are asked to find the exact solution, which involves powers of \( \pi \). A computer that can perform symbolic integration will be useful.}]
+\end{exercise}
+
+\begin{solution}
+    Equip \( C_{\R}([-\pi, \pi]) \) with the inner product
+    \[
+        \ip{p, q} = \int_{-\pi}^{\pi} p(x) q(x) \upd x
+    \]
+    and let \( U = \poly_5(\R) \). Performing the Gram-Schmidt procedure on the basis \( 1, x, x^2, x^3, x^4, x^5 \) of \( U \) yields the orthonormal basis
+    \begin{gather*}
+        e_1(x) = \frac{1}{\sqrt{2 \pi}}, \quad e_2(x) = \sqrt{\frac{3}{2 \pi^3}} x, \quad e_3(x) = -\frac{1}{2} \sqrt{\frac{5}{2 \pi^5}} (\pi^2 - 3 x^2), \\[2mm]
+        e_4(x) = -\frac{1}{2} \sqrt{\frac{7}{2 \pi^7}} (3 \pi^2 x - 5 x^3), \quad e_5(x) = \frac{3}{8 \sqrt{2 \pi^9}} (3 \pi^4 - 30 \pi^2 x^2 + 35 x^4), \\[2mm]
+        e_6(x) = -\frac{1}{8} \sqrt{\frac{11}{2 \pi^{11}}} (15 \pi^4 x - 70 \pi^2 x^3 + 63 x^5).
+    \end{gather*}
+    According to 6.56, to minimize \( \norm{\sin x - p}^2 = \int_{-\pi}^{\pi} \abs{\sin x - p(x)}^2 \upd x \) we should take \( p = P_U(\sin x) \). This can be calculated using 6.55 (i):
+    \begin{multline*}
+        P_U(\sin x) = \frac{105(1465 - 153 \pi^2 + \pi^4)}{8 \pi^6} x - \frac{315(1155 - 125 \pi^2 + \pi^4)}{4 \pi^8} x^3 \\[2mm]
+        + \frac{693(945 - 105 \pi^2 + \pi^4)}{8 \pi^{10}} x^5.
+    \end{multline*}
+\end{solution}
+
+\begin{exercise}
+\label{ex:14}
+    Suppose \( C_{\R}([-1, 1]) \) is the vector space of continuous real-valued functions on the interval \( [-1, 1] \) with inner product given by
+    \[
+        \ip{f, g} = \int_{-1}^1 f(x) g(x) \upd x
+    \]
+    for \( f, g \in C_{\R}([-1, 1]) \). Let \( U \) be the subspace of \( C_{\R}([-1, 1]) \) defined by
+    \[
+        U = \{ f \in C_{\R}([-1, 1]) : f(0) = 0 \}.
+    \]
+    \begin{enumerate}
+        \item Show that \( \ocomp{U} = \{ 0 \} \).
+
+        \item Show that 6.47 and 6.51 do not hold without the finite-dimensional hypothesis.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item It is clear that \( 0 \in \ocomp{U} \). For the reverse inclusion, suppose that \( g \in \ocomp{U} \), let \( f : [-1, 1] \to \R \) be given by \( f(x) = x^2 g(x) \), and note that \( f \in U \). It follows that
+        \[
+            0 = \ip{f, g} = \int_{-1}^1 [x g(x)]^2 \upd x.
+        \]
+        Since the integrand \( [x g(x)]^2 \) is continuous and non-negative, we must have \( x g(x) = 0 \) for all \( x \in [-1, 1] \), which implies that \( g(x) = 0 \) for all non-zero \( x \in [-1, 1] \). The continuity of \( g \) implies that \( g \) must in fact be identically zero on \( [-1, 1] \), i.e.\ \( g = 0 \). We may conclude that \( \ocomp{U} = \{ 0 \} \).
+
+        \item From part (a), we have \( U \oplus \ocomp{U} = U \neq C_{\R}([-1, 1]) \), so that 6.47 does not hold. Part (a) and 6.46 (b) gives
+        \[
+            \ocomp{(\ocomp{U})} = \ocomp{\{ 0 \}} = C_{\R}([-1, 1]) \neq U,
+        \]
+        so that 6.51 does not hold.
+    \end{enumerate}
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ladr}{\textcolor{blue}{[LADR]} Axler, S. (2015) \textit{Linear Algebra Done Right.} 3\ts{rd} edition.}
+
+\end{document}
