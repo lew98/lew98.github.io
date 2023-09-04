@@ -1,0 +1,462 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix, patterns, decorations.pathreplacing, calligraphy}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 6.4 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 6.4.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 6.4.#1#3}
+
+\newcommand{\interior}[1]{%
+  {\kern0pt#1}^{\mathrm{o}}%
+}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\quimplies}{\quad \implies \quad}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\set{\{}{\}}
+\makeatletter
+\let\oldset\set
+\def\set{\@ifstar{\oldset}{\oldset*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 6.4 Exercises}
+
+Exercises with solutions from Section 6.4 of \hyperlink{ua}{[UA]}.
+
+\begin{exercise}
+\label{ex:1}
+    Supply the details for the proof of the Weierstrass M-Test (Corollary 6.4.5).
+\end{exercise}
+
+\begin{solution}
+    Let \( \epsilon > 0 \) be given. Since the series \( \sum_{n=1}^{\infty} M_n \) is convergent, its sequence of partial sums is a Cauchy sequence. Consequently, there exists an \( N \in \N \) such that
+    \[
+        n > m \geq N \quad \implies \quad M_{m+1} + \cdots + M_n < \epsilon.
+    \]
+    Suppose \( x \in A \) and \( n > m \geq N \). Then
+    \[
+        \abs{f_{m+1}(x) + \cdots + f_n(x)} \leq \abs{f_{m+1}(x)} + \cdots + \abs{f_n(x)} \leq M_{m+1} + \cdots + M_n < \epsilon.
+    \]
+    It follows from Theorem 6.4.4 that the series \( \sum_{n=1}^{\infty} f_n \) converges uniformly on \( A \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Decide whether each proposition is true or false, providing a short justification or counterexample as appropriate.
+    \begin{enumerate}
+        \item If \( \sum_{n=1}^{\infty} g_n \) converges uniformly, then \( (g_n) \) converges uniformly to zero.
+
+        \item If \( 0 \leq f_n(x) \leq g_n(x) \) and \( \sum_{n=1}^{\infty} g_n \) converges uniformly, then \( \sum_{n=1}^{\infty} f_n \) converges uniformly.
+
+        \item If \( \sum_{n=1}^{\infty} f_n \) converges uniformly on \( A \), then there exist constants \( M_n \) such that \( \abs{f_n(x)} \leq M_n \) for all \( x \in A \) and \( \sum_{n=1}^{\infty} M_n \) converges.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item This is true. Suppose that each \( g_n \) is defined on some domain \( A \subseteq \R \). Note that Theorem 6.4.4 implies in particular that for any \( \epsilon > 0 \) there is an \( N \in N \) such that
+        \[
+            x \in A \text{ and } n \geq N \quad \implies \quad \abs{g_n(x)} \leq \epsilon.
+        \]
+        Thus \( g_n \) converges uniformly to the zero function.
+
+        \item This is true. Suppose that each \( f_n \) and each \( g_n \) is defined on some domain \( A \subseteq \R \). Theorem 6.4.4 implies that for any \( \epsilon > 0 \) there is an \( N \in \N \) such that
+        \[
+            x \in A \text{ and } n > m \geq N \quad \implies \quad g_{m+1}(x) + \cdots + g_n(x) < \epsilon;
+        \]
+        note that we have used the non-negativity of each \( g_n \) here. Suppose \( x \in A \) and \( n > m \geq N \). By hypothesis we have
+        \[
+            f_{m+1}(x) + \cdots + f_n(x) \leq g_{m+1}(x) + \cdots + g_n(x) < \epsilon.
+        \]
+        Combining the above inequality with the non-negativity of each \( f_n \) and Theorem 6.4.4, we see that the series \( \sum_{n=1}^{\infty} f_n \) converges uniformly on \( A \).
+
+        \item This is false. For each \( n \in \N \) define a function \( f_n : \R \to \R \) by
+        \[
+            f_n(x) = \begin{cases}
+                \tfrac{1}{x} & \text{if } x = n, \\
+                0 & \text{otherwise},
+            \end{cases}
+        \]
+        and let \( f : \R \to \R \) be given by
+        \[
+            f(x) = \begin{cases}
+                \tfrac{1}{x} & \text{if } x \in \N, \\
+                0 & \text{otherwise}.
+            \end{cases}
+        \]
+        We claim that \( \sum_{n=1}^{\infty} f_n \) converges to \( f \) uniformly on \( \R \). Observe that the partial sum function is
+        \[
+            s_n(x) = f_1(x) + \cdots + f_n(x) = \begin{cases}
+                \tfrac{1}{x} & \text{if } x = 1, \ldots, n, \\
+                0 & \text{otherwise}.
+            \end{cases}
+        \]
+        It follows that for any \( x \in \R \)
+        \[
+            \abs{s_n(x) - f(x)} \leq \tfrac{1}{n + 1};
+        \]
+        since this bound converges to zero and does not depend on \( x \) our claim follows.
+        
+        Clearly, \( \sup_{x \in \R} \abs{f_n(x)} = \tfrac{1}{n} \). Since the harmonic series diverges, we see that the converse of the Weierstrass M-Test does not hold.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    \begin{enumerate}
+        \item Show that
+        \[
+            g(x) = \sum_{n=0}^{\infty} \frac{\cos (2^n x)}{2^n}
+        \]
+        is continuous on all of \( \R \).
+
+        \item The function \( g \) was cited in Section 5.4 as an example of a continuous nowhere differentiable function. What happens if we try to use Theorem 6.4.3 to explore whether \( g \) is differentiable?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Observe that
+        \[
+            \abs{\frac{\cos (2^n x)}{2^n}} \leq \frac{1}{2^n}
+        \]
+        for every \( x \in \R \). Since the series \( \sum_{n=0}^{\infty} 2^{-n} \) is convergent, the Weierstrass M-Test implies that \( g(x) = \sum_{n=0}^{\infty} 2^{-n} \cos(2^n x) \) converges uniformly on \( \R \). Each \( 2^{-n} \cos(2^n x) \) is continuous on \( \R \), so Theorem 6.4.2 implies that \( g \) is continuous on \( \R \).
+
+        \item To use Theorem 6.4.3, we should show that the series
+        \[
+            \sum_{n=0}^{\infty} \paren{\frac{\cos (2^n x)}{2^n}}' = -\sum_{n=0}^{\infty} \sin(2^n x). 
+        \]
+        converges uniformly on \( \R \). However, this series does not even converge pointwise on \( \R \). For example, consider the series of real numbers
+        \[
+            \sum_{n=0}^{\infty} \sin(2^n).
+        \]
+        To show that this series is divergent, we will show that the sequence \( (\sin(2^n)) \) does not converge to zero. To see this, consider the following two cases.
+        \begin{description}
+            \item[Case 1.] If there exists an \( N \in \N \) such that \( \abs{\sin(2^{n+1})} > \abs{\sin(2^n)} \) for all \( n \geq N \), then it must be the case that \( \sin(2^n) \not\to 0 \).
+
+            \item[Case 2.] If there does not exist such an \( N \), then there must be infinitely many natural numbers \( n \) such that \( \abs{\sin{(2^{n+1})}} \leq \abs{\sin(2^n)} \). Consider such an \( n \). Using the identity
+            \[
+                \sin(2^{n+1}) = 2 \sin(2^n) \cos(2^n)
+            \]
+            and the fact that \( \sin(2^n) \neq 0 \) for any \( n \in \N \), we see that \( \abs{\cos(2^n)} \leq \tfrac{1}{2} \). The Pythagorean identity then implies that \( \abs{\sin(2^n)} \geq \tfrac{\sqrt{3}}{2} \). So in this case, the sequence \( (\sin(2^n)) \) satisfies \( \abs{\sin(2^n)} \geq \tfrac{\sqrt{3}}{2} \) infinitely often and hence \( \sin(2^n) \not\to 0 \).
+        \end{description}
+        So Theorem 6.4.3 does not allow us to conclude anything about the differentiability of \( g \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Define
+    \[
+        g(x) = \sum_{n=0}^{\infty} \frac{x^{2n}}{(1 + x^{2n})}.
+    \]
+    Find the values of \( x \) where the series converges and show that we get a continuous function on this set.
+\end{exercise}
+
+\begin{solution}
+    For \( \abs{x} = 1 \) we have \( g(x) = \sum_{n=0}^{\infty} \frac{1}{2} \), which diverges. For \( \abs{x} > 1 \) we have
+    \[
+        \frac{x^{2n}}{1 + x^{2n}} = \frac{1}{x^{-2n} + 1} \to 1 \text{ as } n \to \infty
+    \]
+    and thus \( g(x) \) diverges.
+
+    Now suppose that \( r > 0 \) is such that \( 0 \leq r^2 < 1 \). Observe that for all \( x \in [-r, r] \) we have
+    \[
+        0 \leq \frac{x^{2n}}{1 + x^{2n}} \leq x^{2n} \leq r^{2n}.
+    \]
+    Since \( \sum_{n=0}^{\infty} r^{2n} \) is a convergent geometric series, the Weierstrass M-Test implies that \( g \) converges uniformly on \( [-r, r] \). Since any \( x \in (-1, 1) \) is contained inside an interval of this form, we may conclude that \( g \) converges and is continuous at each \( x \in (-1, 1) \) (Theorem 6.4.2). Combining this with our previous discussion, we see that \( g \) converges pointwise precisely on the open interval \( (-1, 1) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    \begin{enumerate}
+        \item Prove that
+        \[
+            h(x) = \sum_{n=1}^{\infty} \frac{x^n}{n^2} = x + \frac{x^2}{4} + \frac{x^3}{9} + \frac{x^4}{16} + \cdots
+        \]
+        is continuous on \( [-1, 1] \).
+
+        \item The series
+        \[
+            f(x) = \sum_{n=1}^{\infty} \frac{x^n}{n} = x + \frac{x^2}{2} + \frac{x^3}{3} + \frac{x^4}{4} + \cdots
+        \]
+        converges for every \( x \) in the half-open interval \( [-1, 1) \) but does not converge when \( x = 1 \). For a fixed \( x_0 \in (-1, 1) \), explain how we can still use the Weierstrass M-Test to prove that \( f \) is continuous at \( x_0 \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item For any \( x \in [-1, 1] \) we have
+        \[
+            \abs{\frac{x^n}{n^2}} \leq \frac{1}{n^2}.
+        \]
+        Since the series \( \sum_{n=1}^{\infty} \tfrac{1}{n^2} \) is convergent, the Weierstrass M-Test allows us to conclude that \( h \) converges uniformly on \( [-1, 1] \) and Theorem 6.4.2 then implies that \( h \) is continuous on \( [-1, 1] \), since each \( \tfrac{x^n}{n^2} \) is continuous here.
+
+        \item Observe that
+        \[
+            \abs{\frac{x^n}{n}} \leq \abs{x_0}^n
+        \]
+        for every \( x \in [-x_0, x_0] \). Since \( \sum_{n=1}^{\infty} \abs{x_0}^n \) is a convergent geometric series, the Weierstrass M-Test implies that \( f \) converges uniformly on \( [-x_0, x_0] \). Theorem 6.4.2 allows us to conclude that \( f \) is continuous on \( [-x_0, x_0] \), since each \( \tfrac{x^n}{n} \) is continuous here.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Let
+    \[
+        f(x) = \frac{1}{x} - \frac{1}{x + 1} + \frac{1}{x + 2} - \frac{1}{x + 3} + \frac{1}{x + 4} - \cdots \, .
+    \]
+    Show \( f \) is defined for all \( x > 0 \). Is \( f \) continuous on \( (0, \infty) \)? How about differentiable?
+\end{exercise}
+
+\begin{solution}
+    Observe that
+    \[
+        f(x) = \sum_{n=0}^{\infty} \frac{(-1)^n}{x + n}.
+    \]
+    The term-by-term differentiated series is
+    \[
+        -\frac{1}{x^2} + \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{(x + n)^2}.
+    \]
+    Note that
+    \[
+        \abs{\frac{(-1)^{n+1}}{(x + n)^2}} \leq \frac{1}{n^2}
+    \]
+    for any \( x \in (0, \infty) \) and \( n \in \N \). Since the series \( \sum_{n=1}^{\infty} \frac{1}{n^2} \) is convergent, the Weierstrass M-Test implies that the series \( \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{(x + n)^2} \) converges uniformly on \( (0, \infty) \). It follows that the term-by-term differentiated series converges uniformly on \( (0, \infty) \) and hence we may invoke Theorem 6.4.3 to see that the series \( \sum_{n=0}^{\infty} \frac{(-1)^n}{x + n} \) converges uniformly on \( (0, \infty) \) to a differentiable function \( f \); this also implies that \( f \) is defined and continuous on \( (0, \infty) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Let
+    \[
+        f(x) = \sum_{k=1}^{\infty} \frac{\sin(kx)}{k^3}.
+    \]
+    \begin{enumerate}
+        \item Show that \( f(x) \) is differentiable and that the derivative \( f'(x) \) is continuous.
+
+        \item Can we determine if \( f \) is twice-differentiable?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( f_k : \R \to \R \) be given by \( f_k(x) = \tfrac{\sin(kx)}{k^3} \). Observe that
+        \[
+            \abs{f_k'(x)} = \abs{\frac{\cos(kx)}{k^2}} \leq \frac{1}{k^2}
+        \]
+        for all \( x \in \R \). The Weierstrass M-Test then implies that the series
+        \[
+            \sum_{k=1}^{\infty} f_k'(x) = \sum_{k=1}^{\infty} \frac{\cos(kx)}{k^2}
+        \]
+        converges uniformly on \( \R \); since each \( f_k' \) is continuous on \( \R \), Theorem 6.4.2 implies that \( \sum_{k=1}^{\infty} f_k'(x) \) is also continuous on \( \R \). Combining our previous discussion with Theorem 6.4.3 and the fact that \( f(0) = 0 \), we see that \( \sum_{k=1}^{\infty} \frac{\sin(kx)}{k^3} \) converges uniformly on \( \R \) to a differentiable function \( f \), that
+        \[
+            f'(x) = \sum_{k=1}^{\infty} f_k'(x) = \sum_{k=1}^{\infty} \frac{\cos(kx)}{k^2},
+        \]
+        and that \( f' \) is continuous on \( \R \).
+
+        \item We will show that Theorem 6.4.3 cannot be used to determine if \( f \) is twice-differentiable on \( \R \), by showing that the series of second derivatives
+        \[
+            \sum_{k=1}^{\infty} f_k''(x) = - \sum_{k=1}^{\infty} \frac{\sin(kx)}{k}
+        \]
+        does not converge uniformly on \( \R \). To see this, we will use the negation of Theorem 6.4.4. Let \( N \in \N \) be given and set \( x = \tfrac{\pi}{4N} \). For any \( N + 1 \leq k \leq 2N \), we then have \( \tfrac{\pi}{4} \leq kx \leq \tfrac{\pi}{2} \) and hence \( \sin(kx) \geq \tfrac{1}{\sqrt{2}} \). Now observe that
+        \[
+            \abs{\sum_{k=N+1}^{2N} \frac{\sin(kx)}{k}} \geq \frac{1}{\sqrt{2}} \sum_{k=N+1}^{2N} \frac{1}{k} \geq \frac{1}{\sqrt{2}} \sum_{k=N+1}^{2N} \frac{1}{2N} = \frac{1}{2 \sqrt{2}}.
+        \]
+        It follows from Theorem 6.4.4 that the convergence of the series \( \sum_{k=1}^{\infty} \tfrac{\sin(kx)}{k} \) is not uniform on \( \R \). Consequently, we may not use Theorem 6.4.3 to conclude anything about the twice-differentiability of \( f \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Consider the function
+    \[
+        f(x) = \sum_{k=1}^{\infty} \frac{\sin(x/k)}{k}.
+    \]
+    Where is \( f \) defined? Continuous? Differentiable? Twice-differentiable?
+\end{exercise}
+
+\begin{solution}
+    Let \( f_k : \R \to \R \) be given by \( f_k(x) = \frac{\sin(x/k)}{k} \), so that \( f(x) = \sum_{k=1}^{\infty} f_k(x) \). Observe that
+    \[
+        f_k'(x) = \frac{\cos \paren{\tfrac{x}{k}}}{k^2} \quand f_k''(x) = -\frac{\sin \paren{\tfrac{x}{k}}}{k^3}.
+    \]
+    The bound \( \abs{f_k''(x)} \leq \tfrac{1}{k^3} \) for all \( x \in \R \) combined with the Weierstrass M-Test shows that the series \( \sum_{k=1}^{\infty} f_k''(x) \) converges uniformly on \( \R \). Since
+    \[
+        f(0) = 0 \quand \sum_{k=1}^{\infty} f_k'(0) = \sum_{k=1}^{\infty} \frac{1}{k^2}
+    \]
+    are both convergent, two applications of Theorem 6.4.3 show that \( \sum_{k=1}^{\infty} f_k'(x) \) and \( \sum_{k=1}^{\infty} f_k(x) \) converge uniformly on \( \R \). Furthermore,
+    \[
+        f'(x) = \sum_{k=1}^{\infty} f_k'(x) \quand f''(x) = \sum_{k=1}^{\infty} f_k''(x).
+    \]
+    In particular, \( f \) is defined and continuous on \( \R \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Let
+    \[
+        h(x) = \sum_{n=1}^{\infty} \frac{1}{x^2 + n^2}.
+    \]
+    \begin{enumerate}
+        \item Show that \( h \) is a continuous function defined on all of \( \R \).
+
+        \item Is \( h \) differentiable? If so, is the derivative function \( h' \) continuous?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item We have the bound
+        \[
+            \frac{1}{x^2 + n^2} \leq \frac{1}{n^2}
+        \]
+        for all \( x \in \R \); the Weierstrass M-Test now implies that the series \( \sum_{n=1}^{\infty} \tfrac{1}{x^2 + n^2} \) converges uniformly on \( \R \). Since each \( \tfrac{1}{x^2 + n^2} \) is continuous on \( \R \), Theorem 6.4.2 allows us to conclude that \( h \) is also continuous on \( \R \).
+
+        \item The term-by-term differentiated series is
+        \[
+            - \sum_{n=1}^{\infty} \frac{2x}{(x^2 + n^2)^2}.
+        \]
+        Note that
+        \[
+            \abs{x} \leq 1 \text{ and } n \geq 2 \quimplies \abs{\frac{2x}{(x^2 + n^2)^2}} \leq \frac{2}{n^4} \leq \frac{1}{n^2}
+        \]
+        and that
+        \[
+            \abs{x} > 1 \quimplies \abs{\frac{2x}{(x^2 + n^2)^2}} = \frac{2 \abs{x}}{x^4 + 2 x^2 n^2 + n^4} \leq \frac{1}{\abs{x} n^2} \leq \frac{1}{n^2}.
+        \]
+        Since the series \( \sum_{n=1}^{\infty} \tfrac{1}{n^2} \) is convergent and each summand \( \tfrac{2x}{(x^2 + n^2)^2} \) is continuous on \( \R \), the Weierstrass M-Test and Theorem 6.4.2 imply that the series \( \sum_{n=1}^{\infty} \tfrac{2x}{(x^2 + n^2)^2} \) converges uniformly on \( \R \) to a continuous function. We showed in part (a) that \( h \) converges uniformly on \( \R \) and thus by Theorem 6.4.3 we have
+        \[
+            h'(x) = - \sum_{n=1}^{\infty} \frac{2x}{(x^2 + n^2)^2}.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Let \( \{ r_1, r_2, r_3, \ldots \} \) be an enumeration of the set of rational numbers. For each \( r_n \in \Q \), define
+    \[
+        u_n(x) = \begin{cases}
+            1/2^n & \text{for } x > r_n \\
+            0 & \text{for } x \leq r_n.
+        \end{cases}
+    \]
+    Now, let \( h(x) = \sum_{n=1}^{\infty} u_n(x) \). Prove that \( h \) is a monotone function defined on all of \( \R \) that is continuous at every irrational point.
+\end{exercise}
+
+\begin{solution}
+    Observe that \( \abs{u_n(x)} \leq 2^{-n} \) for all \( x \in \R \). Since \( \sum_{n=1}^{\infty} 2^{-n} \) is a convergent geometric series, the Weierstrass M-Test implies that \( h \) converges uniformly on \( \R \). To see that \( h \) is strictly increasing, let \( x < y \) be given real numbers. There are a countable infinity of rational numbers contained in \( (x, y] \), which we can enumerate as a subsequence \( \{ r_{n_1}, r_{n_2}, r_{n_3}, \ldots \} \) of the sequence \( \{ r_1, r_2, r_3, \ldots \} \). It follows that
+    \[
+        h(y) = h(x) + \sum_{k=1}^{\infty} 2^{-n_k} > h(x).
+    \]
+    To see that \( h \) is continuous at every irrational point, let us first show that each \( u_n \) is continuous at every irrational point. Fix \( n \in \N, y \in \I \) (recall that \( \I \) is the set of irrational numbers), and set \( \delta := \abs{y - r_n} \); \( \delta \) must be positive since \( y \) is not rational. There are two cases:
+    \begin{description}
+        \item[Case 1.] If \( y < r_n \), then \( u_n(x) = 0 \) for all \( x \in (y - \delta, y + \delta) \) and hence \( u_n \) is continuous at \( y \).
+
+        \item[Case 2.] If \( y > r_n \), then \( u_n(x) = 2^{-n} \) for all \( x \in (y - \delta, y + \delta) \) and hence \( u_n \) is continuous at \( y \).
+    \end{description}
+    So each summand \( u_n \) is continuous on \( \I \), and we showed earlier that \( h \) converges uniformly on \( \R \) and so in particular uniformly on \( \I \); Theorem 6.4.2 allows us to conclude that \( h \) is also continuous on \( \I \).
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2\ts{nd} edition.}
+
+\end{document}
