@@ -3,15 +3,36 @@
 <head>
     <title>lew98.github.io</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="style.css">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link rel="stylesheet" media="screen and (max-width: 640px)" href="style-mobile.css" />
+    <link rel="stylesheet" media="screen and (min-width: 641px)" href="style-desktop.css" />
 </head>
+<script>
+    function UA_dropdown() {
+        var x = document.getElementById("UA-list");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+    function LADR_dropdown() {
+        var x = document.getElementById("LADR-list");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
 <body>
     <div id="main-div">
         <div id="content-container">
             <ul>
                 <li>
-                    <a class="header-link" href="https://link.springer.com/book/10.1007/978-1-4939-2712-8"><b>Understanding Analysis (Abbott)</b></a>
-                    <ul>
+                    <a class="header-link" href="" onclick="UA_dropdown(); return false;"><b>Understanding Analysis (Abbott)</b></a>
+                    <ul id="UA-list" style="display: none;">
                         <li>
                             <i>Chapter 1</i>
                             <ul>
@@ -126,8 +147,8 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="header-link" href="https://linear.axler.net"><b>Linear Algebra Done Right (Axler)</b></a>
-                    <ul>
+                    <a class="header-link" href="" onclick="LADR_dropdown(); return false;"><b>Linear Algebra Done Right (Axler)</b></a>
+                    <ul id="LADR-list" style="display: none;">
                         <li>
                             <i>Chapter 1</i>
                             <ul>
