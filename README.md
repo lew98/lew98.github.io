@@ -71,3 +71,4 @@
     - [Section 6.C Exercises](https://lew98.github.io/Mathematics/LADR_Section_6_C_Exercises.pdf)
   - *Chapter 7*
     - [Section 7.A Exercises](https://lew98.github.io/Mathematics/LADR_Section_7_A_Exercises.pdf)
+    - [Section 7.B Exercises](https://lew98.github.io/Mathematics/LADR_Section_7_B_Exercises.pdf)

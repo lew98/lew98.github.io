@@ -1,0 +1,450 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{tabularray}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 7.B Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 7.B.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 7.B.#1#3}
+
+\newcommand{\upd}{\,\text{d}}
+\newcommand{\re}{\text{Re}\,}
+\newcommand{\im}{\text{Im}\,}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\lmap}{\mathcal{L}}
+\newcommand{\mat}{\mathcal{M}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\Span}{\text{span}}
+\newcommand{\Null}{\text{null\,}}
+\newcommand{\Range}{\text{range\,}}
+\newcommand{\Rank}{\text{rank\,}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\quimplies}{\quad \implies \quad}
+\newcommand{\quiff}{\quad \iff \quad}
+\newcommand{\ipanon}{\langle \cdot, \cdot \rangle}
+\newcommand{\normanon}{\lVert \, \cdot \, \rVert}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\tpose}[1]{#1^{\text{t}}}
+\newcommand{\ocomp}[1]{#1^{\perp}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\makeatletter
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\Set{\{}{\}}
+\makeatletter
+\let\oldSet\Set
+\def\Set{\@ifstar{\oldSet}{\oldSet*}}
+\makeatother
+
+\DeclarePairedDelimiter\ip{\langle}{\rangle}
+\makeatletter
+\let\oldip\ip
+\def\set{\@ifstar{\oldip}{\oldip*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 7.B Exercises}
+
+Exercises with solutions from Section 7.B of \hyperlink{ladr}{[LADR]}.
+
+\begin{exercise}
+\label{ex:1}
+    True or false (and give a proof of your answer): There exists \( T \in \lmap(\R^3) \) such that \( T \) is not self-adjoint (with respect to the usual inner product) and such that there is a basis of \( \R^3 \) consisting of eigenvectors of \( T \).
+\end{exercise}
+
+\begin{solution}
+    This is true and there are many such operators. For example, consider the basis \( v_1 = (1, 0, 0), v_2 = (0, 1, 0), v_3 = (1, 1, 1) \) of \( \R^3 \) (notice that this is \textit{not} an orthonormal basis) and the operator \( T \in \lmap(\R^3) \) defined by
+    \[
+        Tv_1 = v_1, \quad Tv_2 = v_2, \quand Tv_3 = 2 v_3.
+    \]
+    Then \( v_1, v_2, v_3 \) is a basis of \( \R^3 \) consisting of eigenvectors of \( T \), however \( T \) is not self-adjoint:
+    \[
+        \ip{Tv_1, v_3} = 1 \neq 2 = \ip{v_1, Tv_3}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Suppose that \( T \) is a self-adjoint operator on a finite-dimensional inner product space and that 2 and 3 are the only eigenvalues of \( T \). Prove that \( T^2 - 5T + 6I = 0 \).
+\end{exercise}
+
+\begin{solution}
+    Since \( T \in \lmap(V) \) is self-adjoint, the Real Spectral Theorem (7.29) implies that there is an orthonormal basis \( e_1, \ldots, e_n \) of \( V \) consisting of eigenvectors of \( T \), i.e.\ \( Te_j = \lambda_j e_j \), where \( \lambda_j = 2 \) or \( \lambda_j = 3 \). Observe that for each \( j \) we have
+    \[
+        (T^2 - 5T + 6I) e_j = (\lambda_j^2 - 5 \lambda_j + 6) e_j = 0;
+    \]
+    here we are using that 2 and 3 are roots of the polynomial \( x^2 - 5x + 6 = (x - 2)(x - 3) \). Thus \( T^2 - 5T + 6I \) is the zero operator since it vanishes on each basis vector.
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Give an example of an operator \( T \in \lmap(\C^3) \) such that 2 and 3 are the only eigenvalues of \( T \) and \( T^2 - 5T + 6I \neq 0 \).
+\end{exercise}
+
+\begin{solution}
+    Let \( e_1, e_2, e_3 \) be the standard basis of \( \C^3 \) and define \( T \in \lmap(\C^3) \) by
+    \[
+        T e_1 = 2 e_1, \quad T e_2 = e_1 + 2 e_2, \quand T e_3 = 3 e_3,
+    \]
+    so that the matrix of \( T \) with respect to the standard basis is
+    \[
+        \begin{pmatrix}
+            2 & 1 & 0 \\
+            0 & 2 & 0 \\
+            0 & 0 & 3
+        \end{pmatrix}.
+    \]
+    Since this matrix is upper-triangular, 2 and 3 are the only eigenvalues of \( T \). However, note that
+    \[
+        (T^2 - 5T + 6I) e_2 = -e_1 \neq 0.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Suppose \( \F = \C \) and \( T \in \lmap(V) \). Prove that \( T \) is normal if and only if all pairs of eigenvectors corresponding to distinct eigenvalues of \( T \) are orthogonal and
+    \[
+        V = E(\lambda_1, T) \oplus \cdots \oplus E(\lambda_m, T),
+    \]
+    where \( \lambda_1, \ldots, \lambda_m \) denote the distinct eigenvalues of \( T \).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( T \) is normal. It follows from 7.22 that all pairs of eigenvectors corresponding to distinct eigenvalues are orthogonal. Furthermore, the Complex Spectral Theorem (7.24) implies that \( T \) is diagonalizable, which by 5.41 is equivalent to
+    \[
+        V = E(\lambda_1, T) \oplus \cdots \oplus E(\lambda_m, T),
+    \]
+    where \( \lambda_1, \ldots, \lambda_m \) denote the distinct eigenvalues of \( T \).
+
+    Now suppose that all pairs of eigenvectors corresponding to distinct eigenvalues of \( T \) are orthogonal and
+    \[
+        V = E(\lambda_1, T) \oplus \cdots \oplus E(\lambda_m, T),
+    \]
+    where \( \lambda_1, \ldots, \lambda_m \) denote the distinct eigenvalues of \( T \). For each \( 1 \leq j \leq m \), choose an orthonormal basis \( B_j \) of \( E(\lambda_j, T) \). Our hypotheses ensure that the union
+    \[
+        B_1 \cup \cdots \cup B_m
+    \]
+    is an orthonormal basis of \( V \) consisting of eigenvectors of \( T \); it follows from 7.24 that \( T \) is normal.
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Suppose \( \F = \R \) and \( T \in \lmap(V) \). Prove that \( T \) is self-adjoint if and only if all pairs of eigenvectors corresponding to distinct eigenvalues of \( T \) are orthogonal and
+    \[
+        V = E(\lambda_1, T) \oplus \cdots \oplus E(\lambda_m, T),
+    \]
+    where \( \lambda_1, \ldots, \lambda_m \) denote the distinct eigenvalues of \( T \).
+\end{exercise}
+
+\begin{solution}
+    The solution here is almost identical to \Cref{ex:4}, except we use the Real Spectral Theorem (7.29) instead of the Complex Spectral Theorem (7.24) and we note that a self-adjoint operator is necessarily a normal operator.
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Prove that a normal operator on a complex inner product space is self-adjoint if and only if all its eigenvalues are real.
+
+    \noindent [\textit{The exercise above strengthens the analogy (for normal operators) between self-adjoint operators and real numbers.}]
+\end{exercise}
+
+\begin{solution}
+    Let \( V \) be a complex inner product space and let \( T \in \lmap(V) \) be a normal operator. That the eigenvalues of \( T \) are real if \( T \) is self-adjoint follows from 7.13.
+
+    Suppose that all the eigenvalues of \( T \) are real. The Complex Spectral Theorem (7.24) implies that there is an orthonormal basis of \( V \) such that the matrix of \( T \) with respect to this basis is diagonal:
+    \[
+        \begin{pmatrix}
+            \lambda_1 & \cdots & 0 \\
+            \vdots & \ddots & \vdots \\
+            0 & \cdots & \lambda_n
+        \end{pmatrix},
+    \]
+    where \( \lambda_1, \ldots, \lambda_n \) are the eigenvalues of \( T \). By assumption these eigenvalues are all real and thus the matrix of \( T \) equals its own conjugate transpose; it follows that \( T \) is self-adjoint.
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Suppose \( V \) is a complex inner product space and \( T \in \lmap(V) \) is a normal operator such that \( T^9 = T^8 \). Prove that \( T \) is self-adjoint and \( T^2 = T \).
+\end{exercise}
+
+\begin{solution}
+    The Complex Spectral Theorem (7.24) implies that there is an orthonormal basis \( e_1, \ldots, e_n \) of \( V \) consisting of eigenvectors of \( T \), so that \( T e_j = \lambda_j e_j \) for each \( j \), where \( \lambda_1, \ldots, \lambda_n \) are the eigenvalues of \( T \). By assumption we have
+    \[
+        T^9 e_j = T^8 e_j \quiff \lambda_j^9 e_j = \lambda_j^8 e_j \quiff \lambda_j^9 = \lambda_j^8;
+    \]
+    the last equivalence follows since \( e_j \neq 0 \). The equation \( \lambda_j^9 = \lambda_j^8\) implies that \( \lambda_j = 0 \) or \( \lambda_j = 1 \) and thus each eigenvalue of \( T \) is real. It follows from \Cref{ex:6} that \( T \) is self-adjoint. Furthermore,
+    \[
+        T^2 e_j = T e_j = e_j \text{ if } \lambda_j = 1 \quand T^2 e_j = T e_j = 0 \text{ if } \lambda_j = 0,
+    \]
+    so that \( T^2 = T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Give an example of an operator \( T \) on a complex vector space such that \( T^9 = T^8 \) but \( T^2 \neq T \).
+\end{exercise}
+
+\begin{solution}
+    Let \( T \) be the operator on \( \C^2 \) whose matrix with respect to the standard basis is
+    \[
+        \begin{pmatrix}
+            0 & 1 \\
+            0 & 0
+        \end{pmatrix}.
+    \]
+    Then \( T^9 = T^8 = T^2 = 0 \) but \( T \neq 0 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Suppose \( V \) is a complex inner product space. Prove that every normal operator on \( V \) has a square root. (An operator \( S \in \lmap(V) \) is called a \textit{\textbf{square root}} of \( T \in \lmap(V) \) if \( S^2 = T \).)
+\end{exercise}
+
+\begin{solution}
+    Let \( T \in \lmap(V) \) be a normal operator. The Complex Spectral Theorem (7.24) implies that there is an orthonormal basis \( e_1, \ldots, e_n \) of \( V \) consisting of eigenvectors of \( T \), so that \( T e_j = \lambda_j e_j \) for each \( j \), where \( \lambda_1, \ldots, \lambda_n \) are the eigenvalues of \( T \). Because any complex number has a square root, for each \( j \) there exists a \( \mu_j \in \C \) such that \( \mu_j^2 = \lambda_j \). Define \( S \in \lmap(V) \) by \( S e_j = \mu_j e_j \); it follows that \( S^2 e_j = \mu_j^2 e_j = \lambda_j e_j = T e_j \) and thus \( S^2 = T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Give an example of a real inner product space \( V \) and \( T \in \lmap(V) \) and real numbers \( b, c \) with \( b^2 < 4c \) such that \( T^2 + bT + cI \) is not invertible.
+
+    \noindent [\textit{The exercise above shows that the hypothesis that \( T \) is self-adjoint is needed in 7.26, even for real vector spaces.}]
+\end{exercise}
+
+\begin{solution}
+    Let \( V = \R^2 \) and let \( T \in \lmap(\R^2) \) be a counterclockwise rotation by 90 degrees, so that the matrix of \( T \) with respect to the standard basis is
+    \[
+        \begin{pmatrix}
+            0 & -1 \\
+            1 & 0
+        \end{pmatrix}.
+    \]
+    Then the operator \( T^2 + I \) (i.e.\ taking \( b = 0 \) and \( c = 1 \)) is zero.
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Prove or give a counterexample: every self-adjoint operator on \( V \) has a cube root. (An operator \( S \in \lmap(V) \) is called a \textit{\textbf{cube root}} of \( T \in \lmap(V) \) if \( S^3 = T \).)
+\end{exercise}
+
+\begin{solution}
+    Suppose \( V \) is an inner product space over \( \F \) and let \( T \in \lmap(V) \) be a self-adjoint operator. The relevant Spectral Theorem (7.24 or 7.29) implies that there is an orthonormal basis \( e_1, \ldots, e_n \) of \( V \) consisting of eigenvectors of \( T \), so that \( T e_j = \lambda_j e_j \) for each \( j \), where \( \lambda_1, \ldots, \lambda_n \in \F \) are the  eigenvalues of \( T \). In fact, since \( T \) is self-adjoint each eigenvalue \( \lambda_j \) must be real (7.13). Because any real number has a cube root, for each \( j \) there exists a \( \mu_j \in \R \) such that \( \mu_j^3 = \lambda_j \). Define \( S \in \lmap(V) \) by \( S e_j = \mu_j e_j \); it follows that \( S^3 e_j = \mu_j^3 e_j = \lambda_j e_j = T e_j \) and thus \( S^3 = T \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:12}
+    Suppose \( T \in \lmap(V) \) is self-adjoint, \( \lambda \in \F \), and \( \epsilon > 0 \). Suppose there exists \( v \in V \) such that \( \norm{v} = 1 \) and
+    \[
+        \norm{Tv - \lambda v} < \epsilon.
+    \]
+    Prove that \( T \) has an eigenvalue \( \lambda' \) such that \( \abs{\lambda - \lambda'} < \epsilon \).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( V \) is an inner product space over \( \F \). The relevant Spectral Theorem (7.24 or 7.29) implies that there is an orthonormal basis \( e_1, \ldots, e_n \) of \( V \) consisting of eigenvectors of \( T \), so that \( T e_j = \lambda_j e_j \) for each \( j \), where \( \lambda_1, \ldots, \lambda_n \in \F \) are the  eigenvalues of \( T \). We then have by 6.30
+    \[
+        Tv - \lambda v = (\lambda_1 - \lambda) \ip{v, e_1} e_1 + \cdots + (\lambda_n - \lambda) \ip{v, e_n} e_n,
+    \]
+    which gives us
+    \[
+        \norm{Tv - \lambda v}^2 = \abs{\lambda_1 - \lambda}^2 \abs{\ip{v, e_1}}^2 + \cdots + \abs{\lambda_n - \lambda}^2 \abs{\ip{v, e_n}}^2.
+    \]
+    Let \( \lambda' \) be the eigenvalue amongst \( \lambda_1, \ldots, \lambda_n \) which minimizes the quantity \( \abs{\lambda_j - \lambda} \). It follows that
+    \begin{align*}
+        \abs{\lambda' - \lambda}^2 &= \abs{\lambda' - \lambda}^2 \norm{v}^2 \\[2mm]
+        &= \abs{\lambda' - \lambda}^2 \abs{\ip{v, e_1}}^2 + \cdots + \abs{\lambda' - \lambda}^2 \abs{\ip{v, e_n}}^2 \\[2mm]
+        &\leq \abs{\lambda_1 - \lambda}^2 \abs{\ip{v, e_1}}^2 + \cdots + \abs{\lambda_n - \lambda}^2 \abs{\ip{v, e_n}}^2 \\[2mm]
+        &= \norm{Tv - \lambda v}^2 \\[2mm]
+        &< \epsilon^2,
+    \end{align*}
+    which gives us \( \abs{\lambda' - \lambda} < \epsilon \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:13}
+    Give an alternative proof of the Complex Spectral Theorem that avoids Schur's Theorem and instead follows the pattern of the proof of the Real Spectral Theorem.
+\end{exercise}
+
+\begin{solution}
+    The equivalence of (b) and (c) in the Complex Spectral Theorem follows from 5.41 and the implication (c) \( \implies \) (a) follows as in the textbook, which gives us (b) \( \implies \) (a).
+
+    To prove that (a) implies (b), we will use induction on the dimension of \( V \). The base case \( \dim V = 0 \) is clear. For our induction hypothesis, suppose that if \( n \) is a non-negative integer, \( V \) is a complex inner product space of dimension \( n \), and \( T \) is a normal operator on \( V \), then there is an orthonormal basis of \( V \) consisting of eigenvectors of \( T \).
+    
+    Now suppose that \( V \) is a complex inner product space of dimension \( n + 1 \) and let \( T \) be a normal operator on \( V \). By 5.21 there exists an eigenvector \( u \) of \( T \), which we may assume satisfies \( \norm{u} = 1 \). Let \( U = \Span(u) \) and note that \( U \) is invariant under \( T \); it follows from \href{https://lew98.github.io/Mathematics/LADR_Section_7_A_Exercises.pdf}{Exercise 7.A.3} that \( \ocomp{U} \) is invariant under \( T^* \). Since \( \dim \ocomp{U} = n \) (6.50) and \( T \) normal implies \( T^* \) normal, we may invoke our induction hypothesis to obtain an orthonormal basis \( e_1, \ldots, e_n \) of \( \ocomp{U} \) consisting of eigenvectors of \( T^* \). By 7.21 each \( e_j \) is also an eigenvector of \( T \). It follows that the list \( e_1, \ldots, e_n, u \) is an orthonormal basis of \( V \) consisting of eigenvectors of \( T \); this completes the induction step and the proof.
+\end{solution}
+
+\begin{exercise}
+\label{ex:14}
+    Suppose \( U \) is a finite-dimensional real vector space and \( T \in \lmap(U) \). Prove that \( U \) has a basis consisting of eigenvectors of \( T \) if and only if there is an inner product on \( U \) that makes \( T \) into a self-adjoint operator.
+\end{exercise}
+
+\begin{solution}
+    We would like to show the equivalence of the following two statements.
+    \begin{enumerate}[label=(\roman*)]
+        \item \( U \) has a basis consisting of eigenvectors of \( T \).
+
+        \item There is an inner product on \( U \) that makes \( T \) into a self-adjoint operator.
+    \end{enumerate}
+    The implication (ii) \( \implies \) (i) is the implication (a) \( \implies \) (b) in the Real Spectral Theorem (7.29). For the converse implication, suppose that (i) holds, so that there is a basis \( e_1, \ldots, e_n \) of \( U \) consisting of eigenvectors of \( T \), say \( Te_j = \lambda_j e_j \) for some eigenvalues \( \lambda_j \in \R \). For \( u = a_1 e_1 + \cdots + a_n e_n \) and \( v = b_1 e_1 + \cdots + b_n e_n \), define a map \( \ipanon : U \times U \to \R \) by
+    \[
+        \ip{u, v} = a_1 b_1 + \cdots a_n b_n;
+    \]
+    it is straightforward to verify that this map is an inner product on \( U \) (it is the Euclidean inner product with respect to the basis \( e_1, \ldots, e_n \)). Now observe that
+    \begin{align*}
+        \ip{Tu, v} &= \ip{T(a_1 e_1 + \cdots + a_n e_n), b_1 e_1 + \cdots + b_n e_n} \\[2mm]
+        &= \ip{\lambda_1 a_1 e_1 + \cdots + \lambda_n a_n e_n, b_1 e_1 + \cdots + b_n e_n} \\[2mm]
+        &= \lambda_1 a_1 b_1 + \cdots + \lambda_n a_n e_n \\[2mm]
+        &= \ip{a_1 e_1 + \cdots + a_n e_n, \lambda_1 b_1 e_1 + \cdots + \lambda_n b_n e_n} \\[2mm]
+        &= \ip{a_1 e_1 + \cdots + a_n e_n, T(b_1 e_1 + \cdots + b_n e_n)} \\[2mm]
+        &= \ip{u, Tv}.
+    \end{align*}
+    Thus \( T \) is self-adjoint with respect to this inner product.
+\end{solution}
+
+\begin{exercise}
+\label{ex:15}
+    Find the matrix entry below that is covered up.
+\end{exercise}
+
+\begin{solution}
+    We are looking for \( x \in \C \) such that the matrix
+    \[
+        A = \begin{pmatrix}
+            1 & 1 & 0 \\
+            0 & 1 & 1 \\
+            1 & 0 & x
+        \end{pmatrix}
+    \]
+    is normal, i.e.\ commutes with its own conjugate transpose. Observe that
+    \begin{gather*}
+        A A^* = \begin{pmatrix}
+            1 & 1 & 0 \\
+            0 & 1 & 1 \\
+            1 & 0 & x
+        \end{pmatrix}
+        \begin{pmatrix}
+            1 & 0 & 1 \\
+            1 & 1 & 0 \\
+            0 & 1 & \overline{x}
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            2 & 1 & 1 \\
+            1 & 2 & \overline{x} \\
+            1 & x & 1 + \abs{x}^2
+        \end{pmatrix}, \\[2mm]
+        A^* A =\begin{pmatrix}
+            1 & 0 & 1 \\
+            1 & 1 & 0 \\
+            0 & 1 & \overline{x}
+        \end{pmatrix}
+        \begin{pmatrix}
+            1 & 1 & 0 \\
+            0 & 1 & 1 \\
+            1 & 0 & x
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            2 & 1 & x \\
+            1 & 2 & 1 \\
+            \overline{x} & 1 & 1 + \abs{x}^2
+        \end{pmatrix}.
+    \end{gather*}
+    Thus we should take \( x = 1 \).
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ladr}{\textcolor{blue}{[LADR]} Axler, S. (2015) \textit{Linear Algebra Done Right.} 3\ts{rd} edition.}
+
+\end{document}
