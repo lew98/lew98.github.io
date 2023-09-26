@@ -1,0 +1,635 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix, patterns, decorations.pathreplacing, calligraphy}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 6.6 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 6.6.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 6.6.#1#3}
+
+\newcommand{\interior}[1]{%
+  {\kern0pt#1}^{\mathrm{o}}%
+}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\quimplies}{\quad \implies \quad}
+\newcommand{\quiff}{\quad \iff \quad}
+\newcommand{\upd}{\,\text{d}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\set{\{}{\}}
+\makeatletter
+\let\oldset\set
+\def\set{\@ifstar{\oldset}{\oldset*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 6.6 Exercises}
+
+Exercises with solutions from Section 6.6 of \hyperlink{ua}{[UA]}.
+
+\begin{exercise}
+\label{ex:1}
+    The derivation in Example 6.6.1 shows the Taylor series for \( \arctan(x) \) is valid for all \( x \in (-1, 1) \). Notice, however, that the series also converges when \( x = 1 \). Assuming that \( \arctan(x) \) is continuous, explain why the value of the series at \( x = 1 \) must necessarily be \( \arctan(1) \). What interesting identity do we get in this case?
+\end{exercise}
+
+\begin{solution}
+    The power series
+    \[
+        x - \frac{1}{3} x^3 + \frac{1}{5} x^5 - \frac{1}{7} x^7 + \cdots
+    \]
+    converges on \( (-1, 1] \); it follows from Theorem 6.5.7 that the power series is continuous on this interval. Given that \( \arctan \) is also continuous at \( x = 1 \), it follows that the function \( f : (-1, 1] \to \R \) given by
+    \[
+        f(x) = \arctan(x) - \paren{ x - \frac{1}{3} x^3 + \frac{1}{5} x^5 - \frac{1}{7} x^7 + \cdots }
+    \]
+    is continuous at \( x = 1 \) and satisfies \( f(x) = 0 \) for all \( x \in (-1, 1) \). The continuity at \( x = 1 \) then implies that \( f(1) = 0 \) also, which gives us the identity
+    \[
+        \frac{\pi}{4} = \arctan(1) = 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \cdots \,.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Starting from one of the previously generated series in this section, use manipulations similar to those in Example 6.6.1 to find Taylor series representations for each of the following functions. For precisely what values of \( x \) is each series representation valid?
+    \begin{enumerate}
+        \item \( x \cos \paren{ x^2 } \)
+
+        \item \( x / \paren{ 1 + 4 x^2 }^2 \)
+
+        \item \( \log \paren{ 1 + x^2 } \)
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Starting from the power series
+        \[
+            \sin(x) = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots,
+        \]
+        which converges for any \( x \in \R \), Theorem 6.5.6 implies that the differentiated series
+        \[
+            \cos(x) = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots
+        \]
+        also converges for any \( x \in \R \). From this we obtain
+        \[
+            x \cos \paren{ x^2 } = \sum_{n=0}^{\infty} \frac{(-1)^n x^{4n+1}}{(2n)!} = x - \frac{x^5}{2!} + \frac{x^9}{4!} - \frac{x^{13}}{6!} + \cdots,
+        \]
+        valid for all \( x \in \R \).
+
+        \item Starting from the power series
+        \[
+            \frac{1}{(1 - x)^2} = 1 + 2x + 3x^2 + 4x^3 + 5x^4 + \cdots,
+        \]
+        derived in Example 6.6.1 and valid for all \( \abs{x} < 1 \), we obtain
+        \[
+            \frac{1}{(1 + x)^2} = 1 - 2x + 3x^2 - 4x^3 + 5x^4 - \cdots,
+        \]
+        valid for all \( \abs{x} < 1 \). Substituting \( 4x^2 \) for \( x \) gives us
+        \[
+            \frac{1}{(1 + 4x^2)^2} = 1 - 2 \cdot 4 x^2 + 3 \cdot 4^2 x^4 - 4 \cdot 4^3 x^6 + 5 \cdot 4^4 x^8 - \cdots,
+        \]
+        valid for all \( \abs{4x^2} < 1 \), i.e.\ all \( \abs{x} < \tfrac{1}{2} \). From this we obtain
+        \[
+            \frac{x}{(1 + 4x^2)^2} = \sum_{n=0}^{\infty} (-1)^n (n + 1) 4^n x^{2n+1} = x - 2 \cdot 4 x^3 + 3 \cdot 4^2 x^5 - 4 \cdot 4^3 x^7 + 5 \cdot 4^4 x^9 - \cdots,
+        \]
+        valid for all \( \abs{x} < \tfrac{1}{2} \). Note that for \( x = \tfrac{1}{2} \) the power series becomes
+        \[
+            \frac{1}{2} \sum_{n=0}^{\infty} (-1)^n (n + 1),
+        \]
+        which is divergent. Similarly, \( x = -\tfrac{1}{2} \) gives us the divergent series
+        \[
+            -\frac{1}{2} \sum_{n=0}^{\infty} (-1)^n (n + 1).
+        \]
+        Thus the power series representation
+        \[
+            \frac{x}{(1 + 4x^2)^2} = \sum_{n=0}^{\infty} (-1)^n (n + 1) 4^n x^{2n+1} = x - 2 \cdot 4 x^3 + 3 \cdot 4^2 x^5 - 4 \cdot 4^3 x^7 + 5 \cdot 4^4 x^9 - \cdots
+        \]
+        is valid precisely on the open interval \( \paren{ -\tfrac{1}{2}, \tfrac{1}{2} } \).
+
+        \item Starting from the power series
+        \[
+            \frac{1}{1 + x} = 1 - x + x^2 - x^3 + x^4 - x^5 + \cdots, 
+        \]
+        valid on \( (-1, 1) \), we may use \href{https://lew98.github.io/Mathematics/UA_Section_6_5_Exercises.pdf}{Exercise 6.5.4} to take term-by-term antiderivatives:
+        \[
+            \log(1 + x) + C = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \frac{x^5}{5} - \frac{x^6}{6} + \cdots = \sum_{n=1}^{\infty} \frac{(-1)^{n+1} x^n}{n};
+        \]
+        this is valid for \( x \in (-1, 1) \). Taking \( x = 0 \) shows that \( C = 0 \). Note that the power series \( \sum_{n=1}^{\infty} \frac{(-1)^{n+1} x^n}{n} \) is convergent at \( x = 1 \), divergent at \( x = -1 \), and divergent for any \( \abs{x} > 1 \), i.e.\ the power series has interval of convergence \( (-1, 1] \). It follows from Abel's Theorem (Theorem 6.5.4) and the continuity of \( \log(1 + x) \) at \( x = 1 \) that the power series representation
+        \[
+            \log(1 + x) = \sum_{n=1}^{\infty} \frac{(-1)^{n+1} x^n}{n}
+        \]
+        is valid on the half-open interval \( (-1, 1] \). Since \( x \in [-1, 1] \implies x^2 \in [0, 1] \subseteq (-1, 1] \), we see that the representation
+        \[
+            \log(1 + x^2) = \sum_{n=1}^{\infty} \frac{(-1)^{n+1} x^{2n}}{n} = x^2 - \frac{x^4}{2} + \frac{x^6}{3} - \frac{x^8}{4} + \frac{x^{10}}{5} - \frac{x^{12}}{6} + \cdots
+        \]
+        is valid on \( [-1, 1] \). Note that this yields the identity
+        \[
+            1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \cdots = \log(2);
+        \]
+        an alternative method for obtaining this identity using Lagrange's Remainder Theorem is given in \Cref{ex:4}.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Derive the formula for the Taylor coefficients given in Theorem 6.6.2.
+\end{exercise}
+
+\begin{solution}
+    Suppose \( f : (-R, R) \to \R \), for some \( R > 0 \), is infinitely differentiable and has a power series representation
+    \[
+        f(x) = a_0 + a_1 x + a_2 x^2 + a_3 x^3 \cdots \, .
+    \]
+    Theorem 6.5.7 implies that on the interval \( (-R, R) \) we have
+    \[
+        f^{(n)}(x) = \sum_{k=0}^{\infty} (k+1) \cdots (k+n) a_{k+n} x^k,
+    \]
+    from which it is immediate that
+    \[
+        f^{(n)}(0) = n! a_n.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Explain how Lagrange's Remainder Theorem can be modified to prove
+    \[
+        1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \cdots = \log(2).
+    \]
+\end{exercise}
+
+\begin{solution}
+    Let \( f : (0, \infty) \to \R \) be given by \( f(x) = \log(x) \); note that \( f \) is infinitely differentiable and satisfies
+    \[
+        f^{(n)}(x) = \frac{(-1)^{n-1} (n-1)!}{x^n}
+    \]
+    for \( n \geq 1 \). Consider the Taylor series of \( f \) centred at \( a = 1 \):
+    \[
+        f(1) + \sum_{n=1}^{\infty} \frac{f^{(n)}(1)}{n!} (x - 1)^n = \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n} (x - 1)^n.
+    \]
+    As noted in the textbook (p. 202), Lagrange's Remainder Theorem in this case implies that for each \( N \in \N \) there exists some \( c_N \in (1, 2) \) such that
+    \[
+        E_N(2) = \log(2) - \sum_{n=1}^N \frac{(-1)^{n-1}}{n} = \frac{f^{(N+1)}(c_N)}{(N + 1)!} = \frac{(-1)^N}{(N + 1) c_N^{N+1}}.
+    \]
+    This implies that
+    \[
+        \abs{E_N(2)} \leq \frac{1}{N + 1},
+    \]
+    from which it follows that \( \lim_{N \to \infty} E_N(2) = 0 \), i.e.\
+    \[
+        \log(2) = \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \cdots \, .
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    \begin{enumerate}
+        \item Generate the Taylor coefficients for the exponential function \( f(x) = e^x \), and then prove that the corresponding Taylor series converges uniformly to \( e^x \) on any interval of the form \( [-R, R] \).
+
+        \item Verify the formula \( f'(x) = e^x \).
+
+        \item Use a substitution to generate the series for \( e^{-x} \), and then informally calculate \( e^x \cdot e^{-x} \) by multiplying together the two series and collecting common powers of \( x \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Since \( f^{(n)}(x) = e^x \) for any \( n \geq 0 \), the Taylor coefficients are
+        \[
+            \frac{f^{(n)}(0)}{n!} = \frac{1}{n!}.
+        \]
+        Let \( R > 0 \) be given and suppose \( x \in [-R, R] \). For \( N \in \N \), Lagrange's Remainder Theorem implies that there is some \( c_N \) satisfying \( \abs{c_N} < \abs{x} \leq R \) and
+        \[
+            \abs{E_N(x)} = \abs{\frac{f^{(N+1)}(c_N)}{(N + 1)!} x^{N+1}} = \frac{e^{c_N}}{(N + 1)!} \abs{x}^{N+1} \leq \frac{e^R R^{N+1}}{(N + 1)!}
+        \]
+        Since \( \lim_{N \to \infty} \frac{e^R R^{N+1}}{(N + 1)!} = 0 \), we see that the Taylor series converges uniformly to \( e^x \) on \( [-R, R] \).
+
+        \item Differentiating the Taylor series
+        \[
+            f(x) = \sum_{n=0}^{\infty} \frac{x^n}{n!}
+        \]
+        term-by-term gives us
+        \[
+            f'(x) = \sum_{n=1}^{\infty} \frac{n x^{n-1}}{n!} = \sum_{n=1}^{\infty} \frac{x^{n-1}}{(n-1)!} = \sum_{n=0}^{\infty} \frac{x^n}{n!} = f(x) = e^x.
+        \]
+
+        \item Informally, we have
+        \begin{align*}
+            e^x \cdot e^{-x} &= \paren{1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots} \paren{1 - x + \frac{x^2}{2!} - \frac{x^3}{3!} + \frac{x^4}{4!} - \cdots} \\[2mm]
+            &= 1 + (1 - 1)x + \paren{\frac{1}{2!} + \frac{1}{2!} - 1} x^2 + \paren{\frac{1}{3!} - \frac{1}{3!} + \frac{1}{2!} - \frac{1}{2!}} x^3 \\[2mm]
+            &+ \paren{\frac{1}{4!} + \frac{1}{4!} - \frac{1}{3!} - \frac{1}{3!} + \frac{1}{(2!)^2}} x^4 + \cdots \\[2mm]
+            &= 1.
+        \end{align*}
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Review the proof that \( g'(0) = 0 \) for the function
+    \[
+        g(x) = \begin{cases}
+            e^{-1/x^2} & \text{for } x \neq 0, \\
+            0 & \text{for } x = 0.
+        \end{cases}
+    \]
+    introduced at the end of this section.
+    \begin{enumerate}
+        \item Compute \( g'(x) \) for \( x \neq 0 \). Then use the definition of the derivative to find \( g''(0) \).
+
+        \item Compute \( g''(x) \) and \( g'''(x) \) for \( x \neq 0 \). Use these observations and invent whatever notation is needed to give a general description for the \( n \)th derivative \( g^{(n)}(x) \) at points different from zero.
+
+        \item Construct a general argument for why \( g^{(n)}(0) = 0 \) for all \( n \in \N \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item For \( x \neq 0 \) we have
+        \[
+            g'(x) = \paren{ e^{-x^{-2}} }' = 2 x^{-3} e^{-x^{-2}}. 
+        \]
+        This gives us
+        \[
+            g''(0) = \lim_{x \to 0} \frac{g'(x) - g'(0)}{x - 0} = 2 \lim_{x \to 0} \frac{x^{-4}}{e^{x^{-2}}}.
+        \]
+        Note that
+        \[
+            \lim_{x \to 0} \frac{ \paren{ x^{-4} }' }{ \paren{ e^{x^{-2}} }' } = \lim_{x \to 0} \frac{-4 x^{-5}}{-2 x^{-3} e^{x^{-2}}} = 2 \lim_{x \to 0} \frac{x^{-2}}{e^{x^{-2}}}.
+        \]
+        Note further that
+        \[
+            \lim_{x \to 0} \frac{ \paren{ x^{-2} }' }{ \paren{ e^{x^{-2}} }' } = \lim_{x \to 0} \frac{-2 x^{-3}}{-2 x^{-3} e^{x^{-2}}} = \lim_{x \to 0} e^{-x^{-2}} = 0.
+        \]
+        It follows from two applications of the \( \infty / \infty \) case of L'Hospital's Rule (Theorem 5.3.8) that \( g''(0) = 0 \).
+
+        \item For \( x \neq 0 \) we have
+        \[
+            g''(x) = 4 x^{-6} e^{-x^{-2}} - 6 x^{-4} e^{-x^{-2}} \quand g'''(x) = 8 x^{-9} e^{-x^{-2}} - 36 x^{-7} e^{-x^{-2}} + 24 x^{-5} e^{-x^{-2}}.
+        \]
+        We conjecture that for \( x \neq 0 \) the \( n \)\ts{th} derivative of \( g \) is given by the formula
+        \[
+            g^{(n)}(x) = e^{-x^{-2}} \sum_{j=0}^{n-1} c_{n,j} x^{-3n + 2j} ,
+        \]
+        where \( c_{n,0}, \ldots, c_{n,n-1} \) are real numbers depending only on \( n \). We will prove this by induction. The base case \( n = 1 \) was handled in part (a). Suppose the result is true for some \( n \in \N \). Then for \( x \neq 0 \) the usual rules of differentiation give us
+        \begin{align*}
+            g^{(n+1)}(x) &= -2 x^{-3} e^{-x^{-2}} \sum_{j=0}^{n-1} c_{n,j} x^{-3n + 2j} + e^{-x^{-2}} \sum_{n=0}^{n-1} (-3n + 2j) c_{n,j} x^{-3n + 2j - 1} \\[2mm]
+            &= e^{-x^{-2}} \bkt{ \sum_{j=0}^{n-1} -2 c_{n,j} x^{-3(n+1) + 2j} + \sum_{j=0}^{n-1} (-3n + 2j) c_{n,j} x^{-3n + 2j - 1} } \\[2mm]
+            &= e^{-x^{-2}} \bkt{ \sum_{j=0}^{n-1} -2 c_{n,j} x^{-3(n+1) + 2j} + \sum_{j=1}^{n} (-3n + 2j - 2) c_{n,j-1} x^{-3(n+1) + 2j} } \\[2mm]
+            &= e^{-x^{-2}} \sum_{j=0}^n c_{n+1,j} x^{-3(n+1) + 2j},
+        \end{align*}
+        where
+        \[
+            c_{n+1,j} = \begin{cases}
+                -2 c_{n,0} & \text{if } j = 0, \\
+                -2 c_{n,j} + (-3n + 2j - 2) c_{n,j-1} & \text{if } 1 \leq j \leq n - 1, \\
+                (-n - 2) c_{n,n-1} & \text{if } j = n.
+            \end{cases}
+        \]
+        This completes the induction step and the proof.
+
+        \item Let us first prove the following lemma.
+
+        \noindent \textbf{Lemma 1.} Suppose \( k \) is a positive integer. Then
+        \[
+            \lim_{x \to 0} x^{-k} e^{-x^{-2}} = 0.
+        \]
+
+        \noindent \textit{Proof.} It is a straightforward calculation to show that for a positive integer \( m \) we have
+        \[
+            \frac{\frac{\upd^m}{\upd x^m} \paren{ x^{-k} } }{\frac{\upd^m}{\upd x^m} \paren{ e^{x^{-2}} } } = \frac{k(k - 2) \cdots (k - 2m + 2) x^{-k + 2m}}{2^m e^{x^{-2}}}.
+        \]
+        If \( k \) is an even integer, say \( k = 2m \), then since
+        \[
+            \lim_{x \to 0} \frac{\frac{\upd^m}{\upd x^m} \paren{ x^{-2m} } }{\frac{\upd^m}{\upd x^m} \paren{ e^{x^{-2}} } } = \frac{2m(2m - 2) \cdots (2)}{2^m e^{x^{-2}}} = 0,
+        \]
+        applying the \( \infty / \infty \) case of L'Hospital's Rule (Theorem 5.3.8) \( m \) times shows that
+        \[
+            \lim_{x \to 0} x^{-k} e^{-x^{-2}} = 0.
+        \]
+        Similarly, if \( k \) is an odd integer, say \( k = 2m - 1 \), then since
+        \[
+            \lim_{x \to 0} \frac{\frac{\upd^m}{\upd x^m} \paren{ x^{-2m + 1} } }{\frac{\upd^m}{\upd x^m} \paren{ e^{x^{-2}} } } = \frac{(2m - 1)(2m - 3) \cdots (1) x}{2^m e^{x^{-2}}} = 0,
+        \]
+        applying the \( \infty / \infty \) case of L'Hospital's Rule (Theorem 5.3.8) \( m \) times shows that
+        \[
+            \lim_{x \to 0} x^{-k} e^{-x^{-2}} = 0. \qed
+        \]
+        
+        Now we will prove that \( g^{(n)}(0) = 0 \) for all \( n \in \N \) by induction. The base case \( n = 1 \) was handled in the textbook, so suppose that the result is true for some \( n \in \N \). Then
+        \[
+            g^{(n+1)}(0) = \lim_{x \to 0} \frac{g^{(n)}(x) - g^{(n)}(0)}{x - 0} = \lim_{x \to 0} \frac{g^{(n)}(x)}{x}.
+        \]
+        It follows from part (b) that
+        \[
+            g^{(n+1)}(0) = \lim_{x \to 0} \paren{ e^{-x^{-2}} \sum_{j=0}^{n-1} c_{n,j} x^{-3n + 2j - 1} }.
+        \]
+        We may now invoke the Algebraic Limit Theorem (2.3.3) and Lemma 1 to see that
+        \[
+            g^{(n+1)}(0) = \sum_{j=0}^{n-1} c_{n,j} \lim_{x \to 0} \paren{ x^{-3n + 2j - 1} e^{-x^{-2}} } = 0.
+        \]
+        This completes the induction step and the proof.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Find an example of each of the following or explain why no such function exists.
+    \begin{enumerate}
+        \item An infinitely differentiable function \( g(x) \) on all of \( \R \) with a Taylor series that converges to \( g(x) \) only for \( x \in (-1, 1) \).
+
+        \item An infinitely differentiable function \( h(x) \) with the same Taylor series as \( \sin(x) \) but such that \( h(x) \neq \sin(x) \) for all \( x \neq 0 \).
+
+        \item An infinitely differentiable function \( f(x) \) on all of \( \R \) with a Taylor series that converges to \( f(x) \) if and only if \( x \leq 0 \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Consider \( g : \R \to \R \) given by \( g(x) = \tfrac{1}{1 + x^2} \), which satisfies
+        \[
+            g^{(n)}(x) = \frac{p_n(x)}{(1 + x^2)^{2n}}
+        \]
+        for \( n \in \N \) and some polynomial \( p_n \). As shown in Example 6.6.1, the Taylor series of \( g \) is
+        \[
+            1 - x^2 + x^4 - x^6 + \cdots,
+        \]
+        which converges if and only if \( \abs{x} < 1 \).
+
+        \item As shown in the textbook and \Cref{ex:6}, the function \( g : \R \to \R \) given by
+        \[
+            g(x) = \begin{cases}
+                e^{-x^{-2}} & \text{if } x \neq 0, \\
+                0 & \text{if } x = 0
+            \end{cases}
+        \]
+        has the same Taylor series as the zero function and yet satisfies \( g(x) \neq 0 \) for all \( x \neq 0 \). It follows that the function \( h : \R \to \R \) given by
+        \[
+            h(x) = \begin{cases}
+                e^{-x^{-2}} + \sin(x) & \text{if } x \neq 0, \\
+                0 & \text{if } x = 0 
+            \end{cases}
+        \]
+        has the same Taylor series as \( \sin \) and yet satisfies \( h(x) \neq \sin(x) \) for all \( x \neq 0 \).
+
+        \item Consider the function \( f : \R \to \R \) given by
+        \[
+            f(x) = \begin{cases}
+                e^{-x^{-2}} & \text{if } x > 0, \\
+                0 & \text{if } x \leq 0.
+            \end{cases}
+        \]
+        Slight modifications to the arguments given in the textbook and \Cref{ex:6} show that \( f \) is infinitely differentiable and satisfies \( f^{(n)}(0) = 0 \) for all \( n \in \N \), so that each Taylor coefficient of \( f \) is zero, i.e.\ the Taylor series of \( f \) is zero. Since \( f(x) = 0 \) if and only if \( x \leq 0 \), we see that the Taylor series of \( f \) converges to \( f \) if and only if \( x \leq 0 \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Here is a weaker form of Lagrange's Remainder Theorem whose proof is arguably more illuminating than the one for the stronger result.
+    \begin{enumerate}
+        \item First establish a lemma: If \( g \) and \( h \) are differentiable on \( [0, x] \) with \( g(0) = h(0) \) and \( g'(t) \leq h'(t) \) for all \( t \in [0, x] \), then \( g(t) \leq h(t) \) for all \( t \in [0, x] \).
+
+        \item Let \( f, S_N \), and \( E_N \) be as Theorem 6.6.3, and take \( 0 < x < R \). If \( \abs{f^{(N+1)}(t)} \leq M \) for all \( t \in [0, x] \), show
+        \[
+            \abs{E_N(x)} \leq \frac{M x^{N+1}}{(N + 1)!}.
+        \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item It will suffice to show that if \( f \) is differentiable on \( [0, x] \) with \( f(0) = 0 \) and \( f'(t) \geq 0 \) for all \( t \in [0, x] \), then \( f(t) \geq 0 \) for all \( t \in [0, x] \); we may then consider \( f = h - g \). Suppose therefore that \( t \in [0, x] \) is given. Applying the Mean Value Theorem (Theorem 5.3.2) to the interval \( [0, t] \) yields some \( c \in (0, t) \) such that
+        \[
+            f(t) - f(0) = f'(c) (t - 0) \quimplies  f(t) = f'(c) t \geq 0.
+        \]
+
+        \item Take \( g(t) = f^{(N)}(t) - f^{(N)}(0) \) and \( h(t) = Mt \) in the lemma of part (a) to see that
+        \[
+            f^{(N)}(t) - f^{(N)}(0) \leq Mt
+        \]
+        for all \( t \in [0, x] \). Now take \( g(t) = f^{(N-1)}(t) - \paren{f^{(N-1)}(0) + f^{(N)}(0) t}  \) and \( h(t) = \tfrac{Mt^2}{2} \) in the lemma of part (a) to see that
+        \[
+            f^{(N-1)}(t) - \paren{f^{(N-1)}(0) + f^{(N)}(0) t} \leq \frac{Mt^2}{2}
+        \]
+        for all \( t \in [0, x] \). If we continue in this manner, we arrive at
+        \[
+            f(t) - \paren{ f(0) + f'(0) t + \frac{f''(0)}{2} t + \cdots + \frac{f^{(N)}(0)}{N!} t^N } = E_N(t) \leq \frac{M t^{N+1}}{(N + 1)!} \tag{1}
+        \]
+        for all \( t \in [0, x] \). Repeating this process, starting with \( g(t) = -Mt \) and \( h(t) = f^{(N)}(t) - f^{(N)}(0) \), we obtain
+        \[
+            -\frac{M t^{N+1}}{(N + 1)!} \leq E_N(t) \tag{2}
+        \]
+        for all \( t \in [0, x] \). Taking \( t = x \) in (1) and (2) gives us
+        \[
+            \abs{E_N(x)} \leq \frac{M x^{N+1}}{(N + 1)!}.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}[Cauchy's Remainder Theorem]
+\label{ex:9}
+    Let \( f \) be differentiable \( N + 1 \) times on \( (-R, R) \). For each \( a \in (-R, R) \), let \( S_N(x, a) \) be the partial sum of the Taylor series for \( f \) centered at \( a \); in other words, define
+    \[
+        S_N(x, a) = \sum_{n=0}^N c_n (x - a)^n \quad \text{where} \quad c_n = \frac{f^{(n)}(a)}{n!}.
+    \]
+    Let \( E_N(x, a) = f(x) - S_N(x, a) \). Now fix \( x \neq 0 \) in \( (-R, R) \) and consider \( E_N(x, a) \) as a function of \( a \).
+    \begin{enumerate}
+        \item Find \( E_N(x, x) \).
+
+        \item Explain why \( E_N(x, a) \) is differentiable with respect to \( a \), and show
+        \[
+            E_N'(x, a) = \frac{-f^{(N + 1)}(a)}{N!} (x - a)^N.
+        \]
+
+        \item Show
+        \[
+            E_N(x) = E_N(x, 0) = \frac{f^{(N + 1)}(c)}{N!} (x - c)^N x
+        \]
+        for some \( c \) between 0 and \( x \). This is Cauchy's form of the remainder for Taylor series centered at the origin.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item We have
+        \[
+            E_N(x, x) = f(x) - S_N(x, x) = f(x) - c_0 = f(x) - f(x) = 0.
+        \]
+
+        \item We are given that \( f \) is \( N + 1 \) times differentiable on \( (-R, R) \) and hence the usual rules of differentiation give
+        \begin{align*}
+            E_N'(x, a) &= \frac{\upd}{\upd a} \bkt{ f(x) - f(a) - \sum_{n=1}^N \frac{f^{(n)}(a)}{n!} (x - a)^n } \\[2mm]
+            &= -f'(a) - \sum_{n=1}^N \frac{1}{n!} \frac{\upd}{\upd a} \bkt{ f^{(n)}(a) (x - a)^n } \\[2mm]
+            &= -f'(a) - \sum_{n=1}^N \frac{1}{n!} \bkt{ f^{(n+1)}(a) (x - a)^n - n f^{(n)}(a) (x - a)^{n-1} } \\[2mm]
+            &= -f'(a) - \sum_{n=1}^N \frac{f^{(n+1)}(a)}{n!} (x - a)^n + \sum_{n=1}^N \frac{f^{(n)}(a)}{(n-1)!} (x - a)^{n-1} \\[2mm]
+            &= -f'(a) - \frac{f^{(N+1)}(a)}{N!} (x - a)^N - \sum_{n=1}^{N-1} \frac{f^{(n+1)}(a)}{n!} (x - a)^n + \sum_{n=0}^{N-1} \frac{f^{(n+1)}(a)}{n!} (x - a)^n \\[2mm]
+            &= \frac{-f^{(N+1)}(a)}{N!} (x - a)^N - \sum_{n=1}^{N-1} \frac{f^{(n+1)}(a)}{n!} (x - a)^n + \sum_{n=1}^{N-1} \frac{f^{(n+1)}(a)}{n!} (x - a)^n \\[2mm]
+            &= \frac{-f^{(N+1)}(a)}{N!} (x - a)^N.
+        \end{align*}
+
+        \item Using the Mean Value Theorem (Theorem 5.3.8) on \( E_N(x, a) \), as a function of \( a \), on the interval \( [0, x] \) yields some \( c \in (0, x) \) such that
+        \[
+            E_N(x, x) - E_N(x, 0) = E_N'(x, c) x.
+        \]
+        By parts (a) and (b) this expression becomes
+        \[
+            E_N(x, 0) = \frac{f^{(N + 1)}(c)}{N!} (x - c)^N x.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Consider \( f(x) = 1 / \sqrt{1 - x} \).
+    \begin{enumerate}
+        \item Generate the Taylor series for \( f \) centered at zero, and use Lagrange's Remainder Theorem to show the series converges to \( f \) on \( [0, 1/2] \). (The case \( x < 1/2 \) is more straightforward while \( x = 1/2 \) requires some extra care.) What happens when we attempt this with \( x > 1/2 \)?
+
+        \item Use Cauchy's Remainder Theorem proved in \Cref{ex:9} to show the series representation for \( f \) holds on \( [0, 1) \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item It is a straightforward calculation to see that
+        \[
+            f^{(n)}(x) = \frac{(2n - 1)(2n - 3) \cdots (3)(1)}{2^n} (1 - x)^{-n - 1/2},
+        \]
+        which gives us
+        \[
+            f^{(n)}(0) = \frac{(2n - 1)(2n - 3) \cdots (3)(1)}{2^n}.
+        \]
+        Thus the Taylor series for \( f \) centered at zero is
+        \begin{multline*}
+            1 + \sum_{n=1}^{\infty} \frac{(2n - 1)(2n - 3) \cdots (3)(1)}{(2^n) (n!)} x^n = 1 + \sum_{n=1}^{\infty} \frac{(2n - 1)(2n - 3) \cdots (3)(1)}{(2n)(2n - 2) \cdots (2)(1)} x^n \\[2mm]
+            = 1 + \sum_{n=1}^{\infty} \paren{ \prod_{j=1}^n \frac{2j - 1}{2j} } x^n.
+        \end{multline*}
+        For \( 0 < x \leq \tfrac{1}{2} \) and \( n \geq 2 \), Lagrange's Remainder Theorem states that there is some \( c_n \) such that \( 0 < c_n < x \) and
+        \[
+            E_{n-1}(x) = \frac{f^{(n)}(c_n)}{n!} x^n = \paren{ \prod_{j=1}^n \frac{2j - 1}{2j} } \paren{ \frac{x}{1 - c_n} }^n \paren{ \frac{1}{\sqrt{1 - c_n}} }.
+        \]
+        Note that \( 0 < x \leq \tfrac{1}{2} \) implies that
+        \[
+            \frac{1}{2} < 1 - c_n < 1 \quimplies 1 < \frac{1}{1 - c_n} < 2 \quimplies 0 < \frac{x}{1 - c_n} < 1
+        \]
+        and thus \( 0 < \paren{ \frac{x}{1 - c_n} }^n \paren{ \frac{1}{\sqrt{1 - c_n}} } < \sqrt{2} \), which gives us
+        \[
+            0 < E_{n-1}(x) < \sqrt{2} \paren{ \prod_{j=1}^n \frac{2j - 1}{2j} }. 
+        \]
+        We showed in \href{https://lew98.github.io/Mathematics/UA_Section_2_7_Exercises.pdf}{Exercise 2.7.10 (b)} that \( \lim_{n \to \infty} \prod_{j=1}^n \frac{2j - 1}{2j} = 0 \). It now follows from the Squeeze Theorem that \( \lim_{n \to \infty} E_{n-1}(x) = 0 \). Note that this argument breaks down when \( x > \tfrac{1}{2} \), since in that case we can no longer conclude that the sequence \( \paren{ \frac{x}{1 - c_n} }^n \paren{ \frac{1}{\sqrt{1 - c_n}} } \) is bounded.
+
+        \item For \( x \in (0, 1) \) and \( n \in \N \), Cauchy's Remainder Theorem (see \Cref{ex:9}) states that there exists some \( c_n \) such that \( 0 < c_n < x \) and
+        \begin{multline*}
+            E_n(x) = \frac{f^{(n+1)}(c_n)}{n!} (x - c_n)^n x = \frac{(2n + 1)(2n - 1) \cdots (3)(1)}{2^{n+1} n!} (1 - c_n)^{-n - 3/2} (x - c_n)^n x \\[2mm]
+            = \frac{x}{(1 - c_n)^{3/2}} \paren{ \prod_{j=1}^n \frac{2j - 1}{2j} } (n + 1) \paren{ \frac{x - c_n}{1 - c_n} }^n.
+        \end{multline*}
+        Note that the inequalities \( 0 < c_n < x < 1 \) imply that
+        \[
+            \frac{x}{(1 - c_n)^{3/2}} < \frac{x}{(1 - x)^{3/2}} \quand \frac{x - c_n}{1 - c_n} < x.
+        \]
+        Note further that since \( 0 < \frac{2j - 1}{2j} = 1 - \frac{1}{2j} < 1 \) for each \( 1 \leq j \leq n \), the product \( \prod_{j=1}^n \frac{2j - 1}{2j} \) is strictly less than 1. It follows that
+        \[
+            0 \leq E_n(x) < \frac{x}{(1 - x)^{3/2}} (n + 1) x^n.
+        \]
+        Since \( \lim_{n \to \infty} (n + 1) x^n = 0 \) (which can be seen using, for example, L'Hospital's Rule), the Squeeze Theorem implies that \( \lim_{n \to \infty} E_n(x) = 0 \).
+    \end{enumerate}
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2\ts{nd} edition.}
+
+\end{document}
