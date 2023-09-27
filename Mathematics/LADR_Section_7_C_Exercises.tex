@@ -1,0 +1,454 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{tabularray}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 7.C Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 7.C.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 7.C.#1#3}
+
+\newcommand{\upd}{\,\text{d}}
+\newcommand{\re}{\text{Re}\,}
+\newcommand{\im}{\text{Im}\,}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\lmap}{\mathcal{L}}
+\newcommand{\mat}{\mathcal{M}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\Span}{\text{span}}
+\newcommand{\Null}{\text{null\,}}
+\newcommand{\Range}{\text{range\,}}
+\newcommand{\Rank}{\text{rank\,}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\quimplies}{\quad \implies \quad}
+\newcommand{\quiff}{\quad \iff \quad}
+\newcommand{\ipanon}{\langle \cdot, \cdot \rangle}
+\newcommand{\normanon}{\lVert \, \cdot \, \rVert}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\tpose}[1]{#1^{\text{t}}}
+\newcommand{\ocomp}[1]{#1^{\perp}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\makeatletter
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\Set{\{}{\}}
+\makeatletter
+\let\oldSet\Set
+\def\Set{\@ifstar{\oldSet}{\oldSet*}}
+\makeatother
+
+\DeclarePairedDelimiter\ip{\langle}{\rangle}
+\makeatletter
+\let\oldip\ip
+\def\set{\@ifstar{\oldip}{\oldip*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 7.C Exercises}
+
+Exercises with solutions from Section 7.C of \hyperlink{ladr}{[LADR]}.
+
+\begin{exercise}
+\label{ex:1}
+    Prove or give a counterexample: If \( T \in \lmap(V) \) is self-adjoint and there exists an orthonormal basis \( e_1, \ldots, e_n \) of \( V \) such that \( \ip{T e_j, e_j} \geq 0 \) for each \( j \), then \( T \) is a positive operator.
+\end{exercise}
+
+\begin{solution}
+    This is false. For a counterexample, consider the operator \( T : \R^2 \to \R^2 \) given by \( T(x, y) = (-x, y) \). The matrix of \( T \) with respect to the standard orthonormal basis of \( \R^2 \) is
+    \[
+        \begin{pmatrix}
+            -1 & 0 \\
+            0 & 1
+        \end{pmatrix},
+    \]
+    from which we see that \( T \) is self-adjoint and that -1 is an eigenvalue of \( T \). It follows from the equivalence of (a) and (b) in 7.35 that \( T \) is not a positive operator. However, consider the orthonormal basis
+    \[
+        e_1 = \paren{ \cos \frac{\pi}{4}, \sin \frac{\pi}{4} } = \paren{ \frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}} }, \quad e_2 = \paren{ -\sin \frac{\pi}{4}, \cos \frac{\pi}{4} } = \paren{ -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}} }
+    \]
+    of \( \R^2 \). We then have \( T e_1 = e_2 \) and \( T e_2 = e_1 \), so that
+    \[
+        \ip{T e_1, e_1} = \ip{T e_2, e_2} = 0.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Suppose \( T \) is a positive operator on \( V \). Suppose \( v, w \in V \) are such that
+    \[
+        Tv = w \quand Tw = v.
+    \]
+    Prove that \( v = w \).
+\end{exercise}
+
+\begin{solution}
+    Note that
+    \[
+        \ip{v - w, v - w} = \ip{Tw - Tv, v - w} = -\ip{T(v - w), v - w} \leq 0,
+    \]
+    where we have used that \( T \) is a positive operator. It follows that \( \ip{v - w, v - w} = 0 \), which is the case if and only if \( v = w \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Suppose \( T \) is a positive operator on \( V \) and \( U \) is a subspace of \( V \) invariant under \( T \). Prove that \( T|_U \in \lmap(U) \) is a positive operator on \( U \).
+\end{exercise}
+
+\begin{solution}
+    For \( u \in U \) we have
+    \[
+        \ip{T|_U (u), u} = \ip{Tu, u} \geq 0,
+    \]
+    where we have used that \( T \) is a positive operator.
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Suppose \( T \in \lmap(V, W) \). Prove that \( T^* T \) is a positive operator on \( V \) and \( T T^* \) is a positive operator on \( W \).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( v \in V \). Then
+    \[
+        \ip{T^* T v, v} = \ip{Tv, Tv} \geq 0.
+    \]
+    Thus \( T^* T \) is a positive operator on \( V \). Similarly, suppose \( w \in W \). Then
+    \[
+        \ip{T T^* w, w} = \ip{T^* w, T^* w} \geq 0;
+    \]
+    we are using here that \( T = (T^*)^* \) (7.6 (c)). Thus \( T T^* \) is a positive operator on \( W \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Prove that the sum of two positive operators on \( V \) is positive.
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( S, T \in \lmap(V) \) are positive operators and let \( v \in V \) be given. Then
+    \[
+        \ip{(S + T)v, v} = \ip{Sv + Tv, v} = \ip{Sv, v} + \ip{Tv, v} \geq 0.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Suppose \( T \) is a positive operator on \( V \). Prove that \( T^k \) is positive for every positive integer \( k \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( k \) is a positive even integer, say \( k = 2m \), and let \( v \in V \) be given. Then
+    \[
+        \ip{T^k v, v} = \ip{T^{2m} v, v} = \ip{T^{2m - 1} v, T v} = \cdots = \ip{T^m v, T^m v} \geq 0,
+    \]
+    where we have repeatedly used that \( T \) is self-adjoint (note that this did not require \( T \) to be positive; this is analagous to the fact that any real number raised to an even integer power is non-negative). Now suppose that \( k \) is a positive odd integer, say \( k = 2m + 1 \), and let \( v \in V \) be given. Then
+    \[
+        \ip{T^k v, v} = \ip{T^{2m + 1} v, v} = \ip{T^{2m} v, T v} = \cdots = \ip{T^{m + 1} v, T^m v} = \ip{T (T^m v), T^m v} \geq 0,
+    \]
+    where we have again repeatedly used that \( T \) is self-adjoint and also that \( T \) is a positive operator.
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Suppose \( T \) is a positive operator on \( V \). Prove that \( T \) is invertible if and only if
+    \[
+        \ip{Tv, v} > 0
+    \]
+    for every \( v \in V \) with \( v \neq 0 \).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( T \) is invertible. By the equivalence of (a) and (d) in 7.35, there exists a self-adjoint operator \( R \in \lmap(V) \) such that \( T = R^2 \). Note that
+    \[
+        T \text{ invertible} \quiff R \text{ invertible} \quiff R \text{ injective};
+    \]
+    the first equivalence follows from \href{https://lew98.github.io/Mathematics/LADR_Section_3_D_Exercises.pdf}{Exercise 3.D.9} and the second equivalence follows from 3.69. Let \( v \in V \) be non-zero. Then \( Rv \) is non-zero since \( R \) is injective and it follows that
+    \[
+        \ip{Tv, v} = \ip{R^2 v, v} = \ip{Rv, Rv} > 0,
+    \]
+    where we have used that \( R \) is self-adjoint for the second equality.
+
+    Now suppose that \( \ip{Tv, v} > 0 \) for every \( v \in V \) with \( v \neq 0 \). Since \( T \) is self-adjoint (we do not actually require that \( T \) is positive for the implication in this direction), the relevant Spectral Theorem (7.24 or 7.29) implies that there is an orthonormal basis \( e_1, \ldots, e_n \) of \( V \) such that \( T e_j = \lambda_j e_j \). By assumption, we have
+    \[
+        \ip{T e_j, e_j} > 0 \quiff \ip{\lambda_j e_j, e_j} > 0 \quiff \lambda_j > 0.
+    \]
+    Thus 0 is not an eigenvalue of \( T \), i.e.\ \( \Null T = \{ 0 \} \), i.e.\ \( T \) is invertible (3.69).
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Suppose \( T \in \lmap(V) \). For \( u, v \in V \), define \( \ip{u, v}_T \) by
+    \[
+        \ip{u, v}_T = \ip{Tu, v}.
+    \]
+    Prove that \( \ipanon_T \) is an inner product on \( V \) if and only if \( T \) is an invertible positive operator (with respect to the original inner product \( \ipanon \)).
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( T \) is an invertible positive operator.
+    \begin{description}
+        \item[Positivity.] Let \( v \in V \) be given. Then \( \ip{v, v}_T = \ip{Tv, v} \geq 0 \) since \( T \) is a positive operator.
+
+        \item[Definiteness.] We have \( \ip{0, 0}_T = \ip{T(0), 0} = 0 \) and the fact that \( \ip{v, v}_T = \ip{Tv, v} \neq 0 \) for \( v \neq 0 \) follows from \Cref{ex:7}.
+
+        \item[Additivity in first slot.] For \( u, v, w \in V \) we have
+        \[
+            \ip{u + v, w}_T = \ip{T(u + v), w} = \ip{Tu + Tv, w} = \ip{Tu, w} + \ip{Tv, w} = \ip{u, w}_T + \ip{v, w}_T.
+        \]
+
+        \item[Homogeneity in first slot.] For \( u, v \in V \) and \( \lambda \in \F \) we have
+        \[
+            \ip{\lambda u, v}_T = \ip{T(\lambda u), v} = \ip{\lambda Tu, v} = \lambda \ip{Tu, v} = \lambda \ip{u, v}_T.
+        \]
+
+        \item[Conjugate symmetry.] For \( u, v \in V \) we have
+        \[
+            \ip{u, v}_T = \ip{Tu, v} = \overline{\ip{v, Tu}} = \overline{\ip{Tv, u}} = \overline{\ip{v, u}_T},
+        \]
+        where we have used that \( T \) is self-adjoint for the third equality.
+    \end{description}
+    Thus \( \ipanon_T \) is an inner product on \( V \).
+
+    Now suppose that \( \ipanon_T \) is an inner product on \( V \) and let \( u, v \in V \) be given. Then
+    \[
+        \ip{Tu, v} = \ip{u, v}_T = \overline{\ip{v, u}_T} = \overline{\ip{Tv, u}} = \ip{u, Tv}
+    \]
+    and thus \( T \) is a self-adjoint operator. Furthermore, for \( v \in V \) we have
+    \[
+        \ip{Tv, v} = \ip{v, v}_T \geq 0 
+    \]
+    and thus \( T \) is a positive operator. Finally, if \( v \neq 0 \) then
+    \[
+        \ip{Tv, v} = \ip{v, v}_T > 0
+    \]
+    and it follows from \Cref{ex:7} that \( T \) is invertible.
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Prove or disprove: the identity operator on \( \F^2 \) has infinitely many self-adjoint square roots.
+\end{exercise}
+
+\begin{solution}
+    This is true. For a given \( t \in (0, 1) \), let \( R \) be the operator on \( \F^2 \) whose matrix with respect to the standard orthonormal basis of \( \F^2 \) is
+    \[
+        A = \begin{pmatrix}
+            \sqrt{1 - t^2} & t \\
+            t & -\sqrt{1 - t^2}
+        \end{pmatrix}.
+    \]
+    Then \( R \) is self-adjoint since \( A = A^* \) and the matrix of \( R^2 \) is
+    \[
+        A^2 = \begin{pmatrix}
+            \sqrt{1 - t^2} & t \\
+            t & -\sqrt{1 - t^2}
+        \end{pmatrix}^2
+        =
+        \begin{pmatrix}
+            1 & 0 \\
+            0 & 1
+        \end{pmatrix}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Suppose \( S \in \lmap(V) \). Prove that the following are equivalent:
+    \begin{enumerate}
+        \item \( S \) is an isometry;
+
+        \item \( \ip{S^* u, S^* v} = \ip{u, v} \) for all \( u, v \in V \);
+
+        \item \( S^* e_1, \ldots, S^* e_m \) is an orthonormal list for every orthonormal list of vectors \( e_1, \ldots, e_m \) in \( V \);
+
+        \item \( S^* e_1, \ldots, S^* e_n \) is an orthonormal basis for some orthonormal basis \( e_1, \ldots, e_n \) of \( V \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    We will prove the following chain of implications:
+    \[
+        \text{(a)} \implies \text{(b)} \implies \text{(c)} \implies \text{(d)} \implies \text{(a)}.
+    \]
+    Suppose that (a) holds. It follows from the equivalence of 7.42 (a), 7.42 (b), and 7.42 (g) that (b) holds. Suppose that (b) holds. It follows from the equivalence of 7.42 (b) and 7.42 (c) that (c) holds. Clearly (c) implies (d). Suppose that (d) holds. It follows from the equivalence of 7.42 (d) and 7.42 (a) that (a) holds.
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Suppose \( T_1, T_2 \) are normal operators on \( \lmap(\F^3) \) and both operators have 2, 5, 7 as eigenvalues. Prove that there exists an isometry \( S \in \lmap(\F^3) \) such that \( T_1 = S^* T_2 S \).
+\end{exercise}
+
+\begin{solution}
+    The relevant Spectral Theorem (7.24 or 7.29) implies that there are orthonormal bases \( e_1, e_2, e_3 \) and \( f_1, f_2, f_3 \) of \( \F^3 \) such that
+    \[
+        T_1 e_1 = 2 e_1, \quad T_1 e_2 = 5 e_2, \quad T_1 e_3 = 7 e_3, \quad T_2 f_1 = 2 f_1, \quad T_2 f_2 = 5 f_2, \quad T_2 f_3 = 7 f_3.
+    \]
+    Define an operator \( S \in \lmap(\F^3) \) by \( S e_j = f_j \). Since \( S \) maps an orthonormal basis to an orthonormal basis, it must be an isometry (7.42). Note that
+    \[
+        S^* T_2 S e_1 = S^* T_2 f_1 = 2 S^* f_1 = 2 e_1 = T_1 e_1;
+    \]
+    here we have used that \( S^* = S^{-1} \) for isometries (7.42). Similarly, we can show that \( S^* T_2 S e_j = T_1 e_j \) for \( j = 1, 2 \) and thus \( S^* T_2 S = T_1 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:12}
+    Give an example of two self-adjoint operators \( T_1, T_2 \in \lmap(\F^4) \) such that the eigenvalues of both operators are 2, 5, 7 but there does not exist an isometry \( S \in \lmap(\F^4) \) such that \( T_1 = S^* T_2 S \). Be sure to explain why there is no isometry with the required property.
+\end{exercise}
+
+\begin{solution}
+    Let \( T_1 \) and \( T_2 \) be the operators on \( \F^4 \) whose matrices with respect to the standard orthonormal basis of \( \F^4 \) are
+    \[
+        A_1 = \begin{pmatrix}
+            2 & 0 & 0 & 0 \\
+            0 & 2 & 0 & 0 \\
+            0 & 0 & 5 & 0 \\
+            0 & 0 & 0 & 7
+        \end{pmatrix}
+        \quand
+        A_2 = \begin{pmatrix}
+            2 & 0 & 0 & 0 \\
+            0 & 5 & 0 & 0 \\
+            0 & 0 & 5 & 0 \\
+            0 & 0 & 0 & 7
+        \end{pmatrix},
+    \]
+    respectively. Since these matrices are diagonal, we see that \( T_1 \) and \( T_2 \) are self-adjoint and that their eigenvalues are precisely 2, 5, 7. Note that if there was an isometry \( S \in \lmap(\F^4) \) such that \( T_1 = S^* T_2 S \), then since \( S^* S = I \) (7.42), we would have
+    \[
+        T_1 - 2I = S^* T_2 S - 2I = S^* T_2 S - S^* (2I) S = S^* (T_2 - 2I) S
+    \]
+    and it would follow from \href{https://lew98.github.io/Mathematics/LADR_Section_3_D_Exercises.pdf}{Exercise 3.D.6} that \( \dim \Null (T_1 - 2I) = \dim \Null (T_2 - 2I) \). However, for the operators \( T_1 \) and \( T_2 \) defined above, we have
+    \[
+        \dim \Null (T_1 - 2I) = 2 \neq 1 = \dim \Null (T_2 - 2I).
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:13}
+    Prove or give a counterexample: if \( S \in \lmap(V) \) and there exists an orthonormal basis \( e_1, \ldots, e_n \) of \( V \) such that \( \norm{S e_j} = 1 \) for each \( e_j \), then \( S \) is an isometry.
+\end{exercise}
+
+\begin{solution}
+    This is false. Let \( e_1, e_2 \) be the standard orthonormal basis of \( \R^2 \) and let \( S \in \lmap(\R^2) \) be the operator on \( \R^2 \) defined by \( S e_1 = S e_2 = e_1 \). Then \( \norm{S e_1} = \norm{S e_2} = \norm{e_1} = 1 \), however \( S \) is evidently not injective, hence not invertible, hence not an isometry (7.42).
+\end{solution}
+
+\begin{exercise}
+\label{ex:14}
+    Let \( T \) be the second derivative operator in \href{https://lew98.github.io/Mathematics/LADR_Section_7_A_Exercises.pdf}{Exercise 21 in Section 7.A}. Show that \( -T \) is a positive operator.
+\end{exercise}
+
+\begin{solution}
+    As in \href{https://lew98.github.io/Mathematics/LADR_Section_7_A_Exercises.pdf}{Exercise 21}, let
+    \[
+        v = \frac{1}{\sqrt{2 \pi}}, \quad e_j = \frac{\cos jx}{\sqrt{\pi}}, \quand f_j = \frac{\sin jx}{\sqrt{\pi}}
+    \]
+    for each \( 1 \leq j \leq n \), and let \( B := v, e_1, \ldots, e_n, f_1, \ldots, f_n \), so that \( B \) is an orthonormal basis of \( V \) (\href{https://lew98.github.io/Mathematics/LADR_Section_6_B_Exercises.pdf}{Exercise 6.B.4}). As we showed in \href{https://lew98.github.io/Mathematics/LADR_Section_7_A_Exercises.pdf}{Exercise 21}, the matrix of \( T \) with respect to \( B \) is then
+    \[
+        \begin{pmatrix}
+            0 & 0 & 0 & \cdots & 0 & 0 & 0 & \cdots & 0 \\
+            0 & -1 & 0 & \cdots & 0 & 0 & 0 & \cdots & 0 \\
+            0 & 0 & -4 & \cdots & 0 & 0 & 0 & \cdots & 0 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & 0 & \cdots & -n^2 & 0 & 0 & \cdots & 0 \\
+            0 & 0 & 0 & \cdots & 0 & -1 & 0 & \cdots & 0 \\
+            0 & 0 & 0 & \cdots & 0 & 0 & -4 & \cdots & 0 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & 0 & \cdots & 0 & 0 & 0 & \cdots & -n^2 \\
+        \end{pmatrix},
+    \]
+    from which we see that the operator \( -T \) is diagonal, hence self-adjoint, and has only non-negative eigenvalues. It follows from the equivalence of (a) and (b) in 7.35 that \( -T \) is a positive operator.
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ladr}{\textcolor{blue}{[LADR]} Axler, S. (2015) \textit{Linear Algebra Done Right.} 3\ts{rd} edition.}
+
+\end{document}
