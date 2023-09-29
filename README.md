@@ -44,6 +44,7 @@
     - [Section 6.4 Exercises](https://lew98.github.io/Mathematics/UA_Section_6_4_Exercises.pdf)
     - [Section 6.5 Exercises](https://lew98.github.io/Mathematics/UA_Section_6_5_Exercises.pdf)
     - [Section 6.6 Exercises](https://lew98.github.io/Mathematics/UA_Section_6_6_Exercises.pdf)
+    - [Section 6.7 Exercises](https://lew98.github.io/Mathematics/UA_Section_6_7_Exercises.pdf)
 - [**Linear Algebra Done Right (Axler)**](https://linear.axler.net)
   - *Chapter 1*
     - [Section 1.A Exercises](https://lew98.github.io/Mathematics/LADR_Section_1_A_Exercises.pdf)
