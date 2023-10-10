@@ -1,0 +1,364 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{graphicx}
+\usepackage{systeme}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix, patterns, decorations.pathreplacing, calligraphy}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 7.2 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 7.2.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 7.2.#1#3}
+
+\newcommand{\interior}[1]{%
+  {\kern0pt#1}^{\mathrm{o}}%
+}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\quimplies}{\quad \implies \quad}
+\newcommand{\quiff}{\quad \iff \quad}
+\newcommand{\upd}{\,\text{d}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\set{\{}{\}}
+\makeatletter
+\let\oldset\set
+\def\set{\@ifstar{\oldset}{\oldset*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 7.2 Exercises}
+
+Exercises with solutions from Section 7.2 of \hyperlink{ua}{[UA]}.
+
+\begin{exercise}
+\label{ex:1}
+    Let \( f \) be a bounded function on \( [a, b] \), and let \( P \) be an arbitrary partition of \( [a, b] \). First, explain why \( U(f) \geq L(f, P) \). Now, prove Lemma 7.2.6.
+\end{exercise}
+
+\begin{solution}
+    Lemma 7.2.4 implies that \( L(f, P) \) is a lower bound of the set \( \{ U(f, Q) : Q \in \poly \} \) and thus \( U(f) \geq L(f, P) \). Since \( P \) was an arbitrary partition of \( [a, b] \), we have now shown that \( U(f) \) is an upper bound of the set \( \{ L(f, P) : P \in \poly \} \) and thus \( U(f) \geq L(f) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Consider \( f(x) = 1/x \) over the interval \( [1, 4] \). Let \( P \) be the partition consisting of the points \( \{ 1, 3/2, 2, 4 \} \).
+    \begin{enumerate}
+        \item Compute \( L(f, P), U(f, P), \) and \( U(f, P) - L(f, P) \).
+
+        \item What happens to the value of \( U(f, P) - L(f, P) \) when we add the point 3 to the partition?
+
+        \item Find a partition \( P' \) of \( [1, 4] \) for which \( U(f, P') - L(f, P') < 2/5 \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Since \( f \) is strictly decreasing over \( [1, 4] \), we have:
+        \begin{gather*}
+            m_1 = \inf \set{ f(x) : x \in \bkt{ 1, \tfrac{3}{2} } } = f \paren{ \tfrac{3}{2} } = \tfrac{2}{3}, \quad M_1 = \sup \set{ f(x) : x \in \bkt{ 1, \tfrac{3}{2} } } = f \paren{ 1 } = 1, \\[2mm]
+            m_2 = \inf \set{ f(x) : x \in \bkt{ \tfrac{3}{2}, 2 } } = f \paren{ 2 } = \tfrac{1}{2}, \quad M_2 = \sup \set{ f(x) : x \in \bkt{ \tfrac{3}{2}, 2 } } = f \paren{ \tfrac{3}{2} } = \tfrac{2}{3}, \\[2mm]
+            m_3 = \inf \set{ f(x) : x \in \bkt{ 2, 4 } } = f \paren{ 4 } = \tfrac{1}{4}, \quad M_3 = \sup \set{ f(x) : x \in \bkt{ 2, 4 } } = f \paren{ 2 } = \tfrac{1}{2},
+        \end{gather*}
+        and thus
+        \begin{multline*}
+            L(f, P) = m_1 (x_1 - x_0) + m_2 (x_2 - x_1) + m_3 (x_3 - x_2) \\[2mm]
+            = \tfrac{2}{3} \paren{ \tfrac{3}{2} - 1 } + \tfrac{1}{2} \paren{ 2 - \tfrac{3}{2} } + \tfrac{1}{4} \paren{ 4 - 2 } = \tfrac{13}{12},
+        \end{multline*}
+        \begin{multline*}
+            U(f, P) = M_1 (x_1 - x_0) + M_2 (x_2 - x_1) + M_3 (x_3 - x_2) \\[2mm]
+            = \paren{ \tfrac{3}{2} - 1 } + \tfrac{2}{3} \paren{ 2 - \tfrac{3}{2} } + \tfrac{1}{2} \paren{ 4 - 2 } = \tfrac{11}{6},
+        \end{multline*}
+        \[
+            U(f, P) - L(f, P) = \tfrac{11}{6} - \tfrac{13}{12} = \tfrac{3}{4}.
+        \]
+
+        \item Letting \( P = \set{ 1, \tfrac{3}{2}, 2, 3, 4 } \), a similar calculation to part (a) shows that \( U(f, P) - L(f, P) = \tfrac{1}{2} \).
+
+        \item Letting \( P' = \set{ 1, \tfrac{5}{4}, \tfrac{3}{2}, \tfrac{7}{4}, 2, 3, 4 } \), a straightforward calculation shows that
+        \[
+            U(f, P') - L(f, P') = \tfrac{3}{8} < \tfrac{2}{5}.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}[Sequential Criterion for Integrability]
+\label{ex:3}
+    \begin{enumerate}
+        \item Prove that a bounded function \( f \) is integrable on \( [a, b] \) if and only if there exists a sequence of partitions \( (P_n)_{n=1}^{\infty} \) satisfying
+        \[
+            \lim_{n \to \infty} [U(f, P_n) - L(f, P_n)] = 0,
+        \]
+        and in this case \( \int_a^b f = \lim_{n \to \infty} U(f, P_n) = \lim_{n \to \infty} L(f, P_n) \).
+
+        \item For each \( n \), let \( P_n \) be the partition of \( [0, 1] \) into \( n \) equal subintervals. Find formulas for \( U(f, P_n) \) and \( L(f, P_n) \) if \( f(x) = x \). The formula \( 1 + 2 + 3 + \cdots + n = n(n+1)/2 \) will be useful.
+
+        \item Use the sequential criterion for integrability from (a) to show directly that \( f(x) = x \) is integrable on \( [0, 1] \) and compute \( \int_0^1 f \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item In light of Theorem 7.2.8, it will suffice to show the equivalence of the following two statements.
+        \begin{enumerate}[label=(\roman*)]
+            \item There exists a sequence of partitions \( (P_n)_{n=1}^{\infty} \) satisfying
+            \[
+                \lim_{n \to \infty} [U(f, P_n) - L(f, P_n)] = 0.
+            \]
+            
+            \item For every \( \epsilon > 0 \) there exists a partition \( P_{\epsilon} \) of \( [a, b] \) such that
+            \[
+                U(f, P_{\epsilon}) - L(f, P_{\epsilon}) < \epsilon.
+            \]
+        \end{enumerate}
+        This equivalence is clear. Now suppose that such a sequence of partitions exists, so that \( f \) is integrable on \( [a, b] \). For each \( n \in \N \), the inequalities \( L(f, P_n) \leq L(f), U(f) \leq U(f, P_n), \) and \( L(f, P_n) \leq U(f, P_n) \) imply that
+        \[
+            L(f, P_n) - U(f, P_n) \leq L(f) - U(f, P_n) = U(f) - U(f, P_n) \leq U(f, P_n) - L(f, P_n)
+        \]
+        and the squeeze theorem then implies that \( \lim_{n \to \infty} U(f, P_n) = U(f) = \int_a^b f \). A similar argument shows that \( \lim_{n \to \infty} L(f, P_n) = L(f) = \int_a^b f \).
+
+        \item For each \( 0 \leq k \leq n - 1 \), let \( x_k = \tfrac{k}{n-1} \), and let \( P_n = \{ x_0, x_1, \ldots, x_{n-1} \} \). Since \( f \) is strictly increasing on \( [0, 1] \), we then have
+        \begin{gather*}
+            m_k = \inf \{ f(x) : x \in [x_{k-1}, x_k] \} = x_{k-1} = \frac{k - 1}{n - 1}, \\[2mm]
+            M_k = \sup \{ f(x) : x \in [x_{k-1}, x_k] \} = x_k = \frac{k}{n - 1}
+        \end{gather*}
+        for each \( 1 \leq k \leq n - 1 \). It follows that
+        \begin{gather*}
+            U(f, P_n) = \sum_{k=1}^{n-1} M_k (x_k - x_{k-1}) = \sum_{k=1}^{n-1} \frac{k}{(n - 1)^2} = \frac{n}{2 (n - 1)}, \\[2mm]
+            L(f, P_n) = \sum_{k=1}^{n-1} m_k (x_k - x_{k-1}) = \sum_{k=1}^{n-1} \frac{k - 1}{(n - 1)^2} = \frac{n}{2 (n - 1)} - \frac{1}{n - 1}.
+        \end{gather*}
+
+        \item From part (b) we have
+        \[
+            U(f, P_n) - L(f, P_n) = \frac{1}{n - 1} \to 0.
+        \]
+        It then follows from part (a) that \( f \) is integrable on \( [0, 1] \) and that
+        \[
+            \int_0^1 f = \lim_{n \to \infty} U(f, P_n) = \lim_{n \to \infty} \frac{n}{2 (n - 1)} = \frac{1}{2}.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Let \( g \) be bounded on \( [a, b] \) and assume there exists a partition \( P \) with \( L(g, P) = U(g, P) \). Describe \( g \). Is it integrable? If so, what is the value of \( \int_a^b g \)?
+\end{exercise}
+
+\begin{solution}
+    Suppose \( P = \{ x_0, x_1, \ldots, x_n \} \) is such that \( L(g, P) = U(g, P) \). Given that \( m_k \leq M_k \) for all \( 1 \leq k \leq n \), we have the implication
+    \[
+        m_k < M_k \text{ for some } k \in \{ 1, \ldots, n \} \quimplies L(g, P) < U(g, P).
+    \]
+    Since \( L(g, P) \leq U(g, P) \), the contrapositive of the above result is
+    \[
+        L(g, P) = U(g, P) \quimplies m_k = M_k \text{ for all } k \in \{ 1, \ldots, n \}.
+    \]
+
+    Consider a subinterval \( [x_{k-1}, x_k] \) for some \( k \in \{ 1, \ldots, n \} \). Since \( m_k = M_k \), it must be the case that \( g \) is constant on this subinterval, say \( g(x) = c_k \) for all \( x \in [x_{k-1}, x_k] \). In fact, since \( g(x_k) = c_k = c_{k+1} \), we see that \( c_1 = \cdots = c_n \). Denoting this common value by \( c \), we then have \( g(x) = c \) for all \( x \in [a, b] \).
+    
+    Since \( U(g, P) - L(g, P) = 0 \), Theorem 7.2.8 implies that \( g \) is integrable. Let \( S = U(g, P) = L(g, P) \). On one hand, \( S = L(g, P) \) is a lower bound of the set \( \{ U(g, Q) : Q \in \poly \} \), as we noted in \Cref{ex:1}. On the other hand, \( S = U(g, P) \) belongs to the set \( \{ U(g, Q) : Q \in \poly \} \) and hence must be the minimum of this set. Since the minimum and the infimum of a set necessarily coincide when they both exist, we see that
+    \[
+        \int_a^b g = U(g) = U(g, P) = \sum_{k=1}^n M_k (x_k - x_{k-1}) = c \sum_{k=1}^n (x_k - x_{k-1}) = c (x_n - x_0) = c (b - a).
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Assume that, for each \( n, f_n \) is an integrable function on \( [a, b] \). If \( (f_n) \to f \) uniformly on \( [a, b] \), prove that \( f \) is also integrable on this set. (We will see that this conclusion does not necessarily follow if the convergence is pointwise.)
+\end{exercise}
+
+\begin{solution}
+    Let \( \epsilon > 0 \) be given. Because \( f_n \to f \) uniformly on \( [a, b] \), there exists an \( N \in \N \) such that
+    \[
+        n \geq N \text{ and } x \in [a, b] \quimplies \abs{f_n(x) - f(x)} < \frac{\epsilon}{3 (b - a)}. \tag{1}
+    \]
+    By hypothesis the function \( f_N \) is integrable on \( [a, b] \) and thus by Theorem 7.2.8 there exists a partition \( P = \{ x_0, \ldots, x_m \} \) of \( [a, b] \) such that \( U(f_N, P) - L(f_N, P) < \tfrac{\epsilon}{3} \). Consider a subinterval \( [x_{k-1}, x_k] \) for some \( k \in \{ 1, \ldots, m \} \), and let
+    \[
+        M_k^N = \sup \{ f_N(x) : x \in [x_{k-1}, x_k] \} \quand M_k = \sup \{ f(x) : x \in [x_{k-1}, x_k] \}.
+    \]
+    Inequality (1) implies that
+    \[
+        \abs{M_k^N - M_k} \leq \frac{\epsilon}{3 (b - a)},
+    \]
+    which gives us
+    \[
+        \abs{U(f_N, P) - U(f, P)} \leq \sum_{k=1}^m \abs{M_k^N - M_k} (x_{k-1} - x_k) \leq \frac{\epsilon}{3 (b - a)} \sum_{k=1}^m (x_{k-1} - x_k) = \frac{\epsilon}{3}.
+    \]
+    Similarly, we can show that \( \abs{L(f_N, P) - L(f, P)} \leq \tfrac{\epsilon}{3} \). It follows that
+    \begin{multline*}
+        U(f, P) - L(f, P) \leq \abs{U(f_N, P) - U(f, P)} + \abs{L(f_N, P) - L(f, P)} \\[1mm]
+        + \abs{U(f_N, P) - L(f_N, P)} < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon,
+    \end{multline*}
+    and an appeal to Theorem 7.2.8 allows us to conclude that \( f \) is integrable on \( [a, b] \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    A \textit{tagged partition} \( \paren{ P, \{ c_k \} } \) is one where in addition to a partition \( P \) we choose a sampling point \( c_k \) in each of the subintervals \( [x_{k-1}, x_k] \). The corresponding \textit{Riemann sum},
+    \[
+        R(f, P) = \sum_{k=1}^n f(c_k) \Delta x_k,
+    \]
+    is discussed in Section 7.1, where the following definition is alluded to.
+
+    \noindent \textbf{Riemann's Original Definition of the Integral}: A bounded function \( f \) is \textit{integrable} on \( [a, b] \) with \( \int_a^b f = A \) if for all \( \epsilon > 0 \) there exists a \( \delta > 0 \) such that for any tagged partition \( \paren{ P, \{ c_k \} } \) satisfying \( \Delta x_k < \delta \) for all \( k \), it follows that
+    \[
+        \abs{ R(f, P) - A } < \epsilon.
+    \]
+    Show that if \( f \) satisfies Riemann's definition above, then \( f \) is integrable in the sense of Definition 7.2.7. (The full equivalence of these two characterizations of integrability is proved in Section 8.1.)
+\end{exercise}
+
+\begin{solution}
+    Let \( \epsilon > 0 \) be given. Since \( f \) satisfies Riemann's definition of integrability, there exists a \( \delta > 0 \) such that for any tagged partition \( \paren{ P, \{ c_k \} } \) satisfying \( \Delta x_k < \delta \) for all \( k \), it follows that
+    \[
+        \abs{ R(f, P) - A } < \frac{\epsilon}{2}.
+    \]
+    Let \( N \in \N \) be such that \( \tfrac{b - a}{N} < \delta \), for each \( k \in \{ 0, \ldots, N \} \) set \( y_k = a + k \tfrac{b - a}{N} \), and let \( Q_1 \) be the partition \( \{ y_0, \ldots, y_N \} \) of \( [a, b] \); note that \( \Delta y_k = \tfrac{b - a}{N} < \delta \). Since \( U(f) \) is the infimum of the set \( \{ U(f, Q) : Q \in \poly \} \), there exists a partition \( Q_2 \) of \( [a, b] \) such that \( U(f) \leq U(f, Q_2)  < U(f) + \tfrac{\epsilon}{4} \). Let \( P \) be the common refinement of \( Q_1 \) and \( Q_2 \), say
+    \[
+        P = Q_1 \cup Q_2 = \{ x_0, \ldots, x_n \}.
+    \]
+    Note that \( \Delta x_k \leq \Delta y_k = \tfrac{b - a}{N} < \delta \), so that for any choice of sampling points we have
+    \[
+        \abs{R(f, P) - A} < \frac{\epsilon}{2}. \tag{1}
+    \]
+    Note further that since \( Q_2 \subseteq P \), Lemma 7.2.3 gives us
+    \[
+        U(f) \leq U(f, P) \leq U(f, Q_2) < U(f) + \frac{\epsilon}{4}. \tag{2}
+    \]
+    For each \( k \in \{ 1, \ldots, n \} \), since \( M_k = \sup \{ f(x) : x \in [x_{k-1}, x_k] \} \), there exists some \( c_k \in [x_{k-1}, x_k] \) such that
+    \[
+        M_k - \frac{\epsilon}{4 (b - a)} < f(c_k) \leq M_k.
+    \]
+    Take the collection \( \{ c_k \} \) as the sampling points for the partition \( P \). It follows that
+    \[
+        0 \leq U(f, P) - R(f, P) = \sum_{k=1}^n (M_k - f(c_k)) \Delta x_k < \frac{\epsilon}{4 (b - a)} \sum_{k=1}^n \Delta x_k = \frac{\epsilon}{4}. \tag{3}
+    \]
+    Now observe that by (1), (2), and (3), we have
+    \begin{multline*}
+        \abs{U(f) - A} \leq \abs{U(f) - R(f, P)} + \abs{R(f, P) - A} \\[2mm]
+        \leq \abs{U(f) - U(f, P)} + \abs{U(f, P) - R(f, P)} + \abs{R(f, P) - A} < \frac{\epsilon}{4} + \frac{\epsilon}{4} + \frac{\epsilon}{2} = \epsilon.
+    \end{multline*}
+    Since \( \epsilon > 0 \) was arbitrary, we see that \( U(f) = A \). An analogous argument shows that \( L(f) = A \) and thus \( U(f) = L(f) \), i.e.\ \( f \) is integrable in the sense of Definition 7.2.7.
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Let \( f : [a, b] \to \R \) be increasing on the set \( [a, b] \) (i.e., \( f(x) \leq f(y) \) whenever \( x < y \)). Show that \( f \) is integrable on \( [a, b] \).
+\end{exercise}
+
+\begin{solution}
+    Let \( \epsilon > 0 \) be given and let \( n \in \N \) be such that
+    \[
+        \frac{(b - a)(f(b) - f(a))}{n} < \epsilon.
+    \]
+    For \( k \in \{ 0, \ldots, n \} \) let \( x_k = a + k \tfrac{b - a}{n} \) and let \( P \) be the partition \( \{ x_0, \ldots, x_n \} \) of \( [a, b] \). Note that, since \( f \) is increasing on \( [a, b] \), we have
+    \[
+        m_k = \inf \{ f(x) : x \in [x_{k-1}, x_k] \} = f(x_{k-1}) \quand M_k = \sup \{ f(x) : x \in [x_{k-1}, x_k] \} = f(x_k)
+    \]
+    for each \( k \in \{ 1, \ldots, n \} \). Hence
+    \begin{multline*}
+        U(f, P) - L(f, P) = \sum_{k=1}^n (M_k - m_k) (x_k - x_{k-1}) \\
+        = \frac{b - a}{n} \sum_{k=1}^n (f(x_k) - f(x_{k-1})) = \frac{(b - a)(f(b) - f(a))}{n} < \epsilon
+    \end{multline*}
+    and it follows from Theorem 7.2.8 that \( f \) is integrable on \( [a, b] \).
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2\ts{nd} edition.}
+
+\end{document}
