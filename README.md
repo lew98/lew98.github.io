@@ -78,3 +78,5 @@
     - [Section 7.B Exercises](https://lew98.github.io/Mathematics/LADR_Section_7_B_Exercises.pdf)
     - [Section 7.C Exercises](https://lew98.github.io/Mathematics/LADR_Section_7_C_Exercises.pdf)
     - [Section 7.D Exercises](https://lew98.github.io/Mathematics/LADR_Section_7_D_Exercises.pdf)
+  - *Chapter 8*
+    - [Section 8.A Exercises](https://lew98.github.io/Mathematics/LADR_Section_8_A_Exercises.pdf)

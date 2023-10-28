@@ -1,0 +1,559 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{tabularray}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{lipsum}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 8.A Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 8.A.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 8.A.#1#3}
+
+\newcommand{\upd}{\,\text{d}}
+\newcommand{\re}{\text{Re}\,}
+\newcommand{\im}{\text{Im}\,}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\lmap}{\mathcal{L}}
+\newcommand{\mat}{\mathcal{M}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\Span}{\text{span}}
+\newcommand{\Null}{\text{null\,}}
+\newcommand{\Range}{\text{range\,}}
+\newcommand{\Rank}{\text{rank\,}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\quimplies}{\quad \implies \quad}
+\newcommand{\quiff}{\quad \iff \quad}
+\newcommand{\ipanon}{\langle \cdot, \cdot \rangle}
+\newcommand{\normanon}{\lVert \, \cdot \, \rVert}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\tpose}[1]{#1^{\text{t}}}
+\newcommand{\ocomp}[1]{#1^{\perp}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\makeatletter
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\Set{\{}{\}}
+\makeatletter
+\let\oldSet\Set
+\def\Set{\@ifstar{\oldSet}{\oldSet*}}
+\makeatother
+
+\DeclarePairedDelimiter\ip{\langle}{\rangle}
+\makeatletter
+\let\oldip\ip
+\def\set{\@ifstar{\oldip}{\oldip*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 8.A Exercises}
+
+Exercises with solutions from Section 8.A of \hyperlink{ladr}{[LADR]}.
+
+\begin{exercise}
+\label{ex:1}
+    Define \( T \in \lmap(\C^2) \) by
+    \[
+        T(w, z) = (z, 0).
+    \]
+    Find all generalized eigenvectors of \( T \).
+\end{exercise}
+
+\begin{solution}
+    The matrix of \( T \) with respect to the standard basis of \( \C^2 \) is
+    \[
+        \begin{pmatrix}
+            0 & 1 \\
+            0 & 0
+        \end{pmatrix},
+    \]
+    from which we see that the only eigenvalue of \( T \) is 0. Note that, by 8.11,
+    \[
+        G(0, T) = \Null T^2 = \C^2;
+    \]
+    thus every non-zero \( v \in \C^2 \) is a generalized eigenvector of \( T \) corresponding to the eigenvalue 0.
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Define \( T \in \lmap(\C^2) \) by
+    \[
+        T(w, z) = (-z, w).
+    \]
+    Find the generalized eigenspaces corresponding to the distinct eigenvalues of \( T \).
+\end{exercise}
+
+\begin{solution}
+    Some routine calculations reveal that the eigenvalues of \( T \) are \( \pm i \), and furthermore that
+    \[
+        E(-i, T) = \Null (T + iI) = \Span ((1, i)) \quand E(i, T) = \Null (T - iI) = \Span((1, -i)).
+    \]
+    Thus \( \C^2 = E(-i, T) \oplus E(i, T) \). It follows that \( G(-i, T) = E(-i, T) \); if this were not the case, then we would obtain at least two linearly independent generalized eigenvectors corresponding to the eigenvalue \( -i \). Together with the eigenvector \( (1, -i) \) corresponding to the eigenvalue \( i \), which by 8.13 must be linearly independent from the generalized eigenvectors corresponding to the eigenvalue \( -i \), we would obtain at least three linearly independent vectors in \( \C^2 \), which is of course impossible since \( \dim \C^2 = 2 \). Thus \( G(-i, T) = E(-i, T) \) and similarly we see that \( G(i, T) = E(i, T) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Suppose \( T \in \lmap(V) \) is invertible. Prove that \( G(\lambda, T) = G \paren{ \tfrac{1}{\lambda}, T^{-1} } \) for every \( \lambda \in \F \) with \( \lambda \neq 0 \).
+\end{exercise}
+
+\begin{solution}
+    Let \( n = \dim V \) and suppose \( v \in G(\lambda, T) \), so that \( (T - \lambda I)^n v = 0 \) (8.11). Using the binomial theorem (which holds here because \( T \) and \( I \) commute), this is equivalent to
+    \[
+        \sum_{k=0}^n \binom{n}{k} (-1)^k \lambda^k T^{n - k} v = 0.
+    \]
+    Now apply \( T^{-1} \) to both sides of this equation \( n \) times, multiply through by \( (-1)^n \lambda^{-n} \), and use that \( (-1)^k = (-1)^{-k} \) to obtain
+    \[
+        \sum_{k=0}^n \binom{n}{k} (-1)^{n - k} \paren{\lambda^{-1}}^{n - k} \paren{T^{-1}}^k v = 0.
+    \]
+    Using the binomial theorem again, the above expression is equivalent to
+    \[
+        \paren{ -\lambda^{-1} I + T^{-1} }^n v = 0,
+    \]
+    so that \( v \in \Null (T^{-1} - \lambda^{-1} I)^n = G(\lambda^{-1}, T^{-1}) \). Thus \( G(\lambda, T) \subseteq G(\lambda^{-1}, T^{-1}) \). Replacing \( T \) with \( T^{-1} \) and \( \lambda \) with \( \lambda^{-1} \) in the above argument and using that \( \paren{T^{-1}}^{-1} = T \) and \( \paren{\lambda^{-1}}^{-1} = \lambda \) gives us the reverse inclusion and we may conclude that \( G(\lambda, T) = G(\lambda^{-1}, T^{-1}) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Suppose \( T \in \lmap(V) \) and \( \alpha, \beta \in \F \) with \( \alpha \neq \beta \). Prove that
+    \[
+        G(\alpha, T) \cap G(\beta, T) = \{ 0 \}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    If \( \alpha \) is not an eigenvalue of \( T \), then \( G(\alpha, T) = \{ 0 \} \) and thus \( G(\alpha, T) \cap G(\beta, T) = \{ 0 \} \); a similar argument holds if \( \beta \) is not an eigenvalue of \( T \). Suppose therefore that \( \alpha \) and \( \beta \) are eigenvalues of \( T \) and assume for the sake of contradiction that there exists a non-zero \( v \in G(\alpha, T) \cap G(\beta, T) \). Then \( v \) is a generalized eigenvector of \( T \) corresponding to \( \alpha \) and also a generalized eigenvector of \( T \) corresponding to \( \beta \). It follows from 8.13 that the list \( v, v \) is linearly independent, which is clearly not true. Thus \( G(\alpha, T) \cap G(\beta, T) = \{ 0 \} \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Suppose \( T \in \lmap(V), m \) is a positive integer, and \( v \in V \) is such that \( T^{m-1} v \neq 0 \) but \( T^m v = 0 \). Prove that
+    \[
+        v, Tv, T^2 v, \ldots, T^{m-1} v
+    \]
+    is linearly independent.
+\end{exercise}
+
+\begin{solution}
+    Note that the given hypothesis implies that
+    \[
+        T^k v = 0 \quiff k \geq m. \tag{1}
+    \]
+    Suppose that \( a_0, \ldots, a_{m-1} \) are scalars such that
+    \[
+        a_0 v + a_1 T v + a_2 T^2 v + \cdots + a_{m-1} T^{m-1} v = 0.
+    \]
+    Apply \( T \) to both sides of this equation \( m - 1 \) times to obtain
+    \[
+        a_0 T^{m-1} v + a_1 T^m v + a_2 T^{m+1} v + \cdots + a_{m-1} T^{2m-2} v = a_0 T^{m-1} v = 0,
+    \]
+    where we have used (1) for the first equality. Again by (1) we have \( T^{m-1} v \neq 0 \) and thus \( a_0 = 0 \), which leaves us with the equality
+    \[
+        a_1 T v + a_2 T^2 v + \cdots + a_{m-1} T^{m-1} v = 0.
+    \]
+    Apply \( T \) to both sides of this equation \( m - 2 \) times and, as before, obtain \( a_1 = 0 \). Continuing in this manner, we see that \( a_0 = \cdots = a_{m-1} = 0 \) and the linear independence of the list
+    \[
+        v, Tv, T^2 v, \ldots, T^{m-1} v
+    \]
+    follows.
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Suppose \( T \in \lmap(\C^3) \) is defined by \( T(z_1, z_2, z_3) = (z_2, z_3, 0) \). Prove that \( T \) has no square root. More precisely, prove that there does not exist \( S \in \lmap(\C^3) \) such that \( S^2 = T \).
+\end{exercise}
+
+\begin{solution}
+    Suppose such an operator \( S \) exists and observe that \( T^3 = S^6 = 0 \). Thus \( S \) is nilpotent and it follows from 8.18 that \( S^4 = 0 \); but \( S^4 = T^2 \) is the operator
+    \[
+        (z_1, z_2, z_3) \mapsto (z_3, 0, 0),  
+    \]
+    which is non-zero.
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Suppose \( N \in \lmap(V) \) is nilpotent. Prove that 0 is the only eigenvalue of \( N \).
+\end{exercise}
+
+\begin{solution}
+    This is immediate from 8.19 and 5.32.
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Prove or give a counterexample: The set of nilpotent operators on \( V \) is a subspace of \( \lmap(V) \).
+\end{exercise}
+
+\begin{solution}
+    Let \( \mathcal{N} = \{ N \in \lmap(V) : N \text{ is nilpotent} \} \). If \( \dim V = 1 \), then 8.18 implies that \( \mathcal{N} = \{ 0 \} \), which is a subspace of \( V \). Suppose that \( \dim V = n \geq 2 \) and let \( v_1, v_2, \ldots, v_n \) be a basis of \( V \). Let \( N \) and \( M \) be the operators on \( V \) defined by
+    \[
+        N v_j = \begin{cases}
+            v_1 & \text{if } j = 2, \\
+            0 & \text{otherwise}
+        \end{cases}
+        \quad
+        \quand
+        \quad
+        M v_j = \begin{cases}
+            v_2 & \text{if } j = 1, \\
+            0 & \text{otherwise}.
+        \end{cases}
+    \]
+    Then \( N^2 = M^2 = 0 \) and thus \( N, M \in \mathcal{N} \). However, note that
+    \[
+        (N + M)(v_1 + v_2) = v_1 + v_2.
+    \]
+    Note further that \( v_1 + v_2 \neq 0 \) since \( v_1, v_2 \) is linearly independent. It follows that 1 is an eigenvalue of \( N + M \) with a corresponding eigenvector \( v_1 + v_2 \) and hence by \Cref{ex:7} we have \( N + M \not\in \mathcal{N} \). Thus \( \mathcal{N} \) is not closed under addition and hence is not a subspace of \( V \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Suppose \( S, T \in \lmap(V) \) and \( ST \) is nilpotent. Prove that \( TS \) is nilpotent.
+\end{exercise}
+
+\begin{solution}
+    Let \( n = \dim V \), so that \( (ST)^n = 0 \) (8.18). That is,
+    \[
+        0 = ST ST \cdots ST.
+    \]
+    This implies that
+    \[
+        0 = T (ST ST \cdots ST) S = (TS)^{n+1}
+    \]
+    and thus \( TS \) is nilpotent.
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Suppose that \( T \in \lmap(V) \) is not nilpotent. Let \( n = \dim V \). Show that \( V = \Null T^{n-1} \oplus \Range T^{n-1} \).
+\end{exercise}
+
+\begin{solution}
+    Since \( T \) is not nilpotent, it must be the case that \( \Null T^n \neq V \) and thus \( \dim \Null T^n \leq n - 1 \). Using the same logic as in 8.4, it follows that
+    \[
+        \Null T^{n-1} = \Null T^n = \Null T^{n+1} = \cdots \, .  
+    \]
+    Since \( \dim \Null T^{n-1} = \dim \Null T^n \), 3.22 implies that
+    \begin{multline*}
+        n = \dim \Null T^n + \dim \Range T^n = \dim \Null T^{n-1} + \dim \Range T^{n-1} \\[2mm]
+        \implies \quad \dim \Range T^n = \dim \Range T^{n-1}.
+    \end{multline*}
+    Combining this with the fact that \( \Range T^n \) is a subspace of \( \Range T^{n-1} \), we see that \( \Range T^{n-1} = \Range T^n \) and hence by 8.5
+    \[
+        V = \Null T^n \oplus \Range T^n = \Null T^{n-1} \oplus \Range T^{n-1}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Prove or give a counterexample: If \( V \) is a complex vector space and \( \dim V = n \) and \( T \in \lmap(V) \), then \( T^n \) is diagonalizable.
+\end{exercise}
+
+\begin{solution}
+    This is false. For a counterexample, consider the operator \( T : \C^2 \to \C^2 \) given by \( T(w, z) = (w + z, z) \), which satisfies \( T^2 (w, z) = (w + 2z, z) \). With respect to the standard basis, \( T^2 \) has the upper-triangular matrix
+    \[
+        \begin{pmatrix}
+            1 & 2 \\
+            0 & 1
+        \end{pmatrix},
+    \]
+    from which we see that the only eigenvalue of \( T \) is 1. It is straightforward to verify that \( E(1, T) = \Span((1, 0)) \), which is one-dimensional and so cannot possibly equal \( \C^2 \). Hence \( T \) is not diagonalizable (5.41).
+\end{solution}
+
+\begin{exercise}
+\label{ex:12}
+    Suppose \( N \in \lmap(V) \) and there exists a basis of \( V \) with respect to which \( N \) has an upper-triangular matrix with only 0's on the diagonal. Prove that \( N \) is nilpotent.
+\end{exercise}
+
+\begin{solution}
+    Suppose that the basis in question is \( v_1, \ldots, v_n \) and the matrix in question has entries \( A_{i,j} \) satisfying \( A_{i,j} = 0 \) for \( i \geq j \). Then \( N v_1 = 0 \), which gives \( N^n v_1 = 0 \), and
+    \[
+        N v_2 = A_{1,2} v_1 \quimplies N^2 v_2 = 0 \quimplies N^n v_2 = 0.
+    \]
+    Similarly,
+    \[
+        N v_3 = A_{1,3} v_1 + A_{2,3} v_2 \quimplies N^2 v_3 = A_{1,2} A_{2,3} v_1 \quimplies N^3 v_3 = 0 \quimplies N^n v_3 = 0.
+    \]
+    We can continue in this manner to see that \( N^n v_i = 0 \) for each \( 1 \leq i \leq n \), demonstrating that \( N^n = 0 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:13}
+    Suppose \( V \) is an inner product space and \( N \in \lmap(V) \) is normal and nilpotent. Prove that \( N = 0 \).
+\end{exercise}
+
+\begin{solution}
+    By 8.19, there is a basis \( v_1, \ldots, v_n \) of \( V \) such that the matrix of \( N \) with respect to this basis is upper-triangular with only 0's on the diagonal. By applying the Gram-Schmidt procedure to the basis \( v_1, \ldots, v_n \), we obtain an orthonormal basis \( e_1, \ldots, e_n \) of \( V \) such that the matrix of \( N \) with respect to this basis is upper-triangular with only 0's on the diagonal (see 6.37). As the proof of the Complex Spectral Theorem (7.24) shows, the fact that \( N \) is normal implies that this upper-triangular matrix is actually diagonal. Since all the diagonal entries are 0, we see that the matrix of \( N \) with respect to \( e_1, \ldots, e_n \) is the zero matrix and it follows that \( N \) is the zero operator.
+\end{solution}
+
+\begin{exercise}
+\label{ex:14}
+    Suppose \( V \) is an inner product space and \( N \in \lmap(V) \) is nilpotent. Prove that there exists an orthonormal basis of \( V \) with respect to which \( N \) has an upper-triangular matrix.
+    \noindent [\textit{If \( \F = \C \) then the result above follows from Schur's Theorem (6.38) without the hypothesis that \( N \) is nilpotent. Thus the exercise above needs to be proved only when \( \F = \R \).}]
+\end{exercise}
+
+\begin{solution}
+    See \Cref{ex:13}.
+\end{solution}
+
+\begin{exercise}
+\label{ex:15}
+    Suppose \( N \in \lmap(V) \) is such that \( \Null N^{\dim V - 1} \neq \Null N^{\dim V} \). Prove that \( N \) is nilpotent and that
+    \[
+        \dim \Null N^j = j
+    \]
+    for every integer \( j \) with \( 0 \leq j \leq \dim V \).
+\end{exercise}
+
+\begin{solution}
+    Let \( n = \dim V \). By 8.2 and 8.3, it must be the case that
+    \[
+        \{ 0 \} = \Null N^0 \subsetneq \Null N^1 \subsetneq \Null N^2 \subsetneq \cdots \subsetneq \Null N^{n-1} \subsetneq \Null N^n.
+    \]
+    Combining this chain of strict inclusions with the fact that \( \dim \Null N^0 = \dim \{ 0 \} = 0 \) and the fact that \( \dim \Null N^n \leq n \), we see that both of the inequalities
+    \[
+        \dim \Null N^j \geq j \quand \dim \Null N^j \leq j
+    \]
+    hold for each \( 0 \leq j \leq n \), which is the case if and only if \( \dim \Null N^j = j \). In particular we have
+    \[
+        \dim \Null N^n = n \quiff \Null N^n = V \quiff N^n = 0.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:16}
+    Suppose \( T \in \lmap(V) \). Show that
+    \[
+        V = \Range T^0 \supset \Range T^1 \supset \cdots \supset \Range T^k \supset \Range T^{k+1} \supset \cdots \, .
+    \]
+\end{exercise}
+
+\begin{solution}[1]
+    Suppose \( k \) is a non-negative integer and \( v \in \Range T^{k+1} \), so that \( v = T^{k+1} w \) for some \( w \in V \). Then \( v = T^k (T w) \), so that \( v \in \Range T^k \) also. Thus \( \Range T^{k+1} \subseteq \Range T^k \).
+\end{solution}
+
+\begin{solution}[2]
+    Here is another solution for the special case where \( V \) is an inner product space. By 8.2 we have
+    \[
+        \{ 0 \} = \Null (T^*)^0 \subseteq \Null (T^*)^1 \subseteq \Null (T^*)^2 \subseteq \cdots \subseteq \Null (T^*)^k \subseteq \Null (T^*)^{k+1} \subseteq \cdots \, .
+    \]
+    By 7.6 (e), this is equivalent to
+    \[
+        \{ 0 \} = \Null \paren{ T^0 }^* \subseteq \Null \paren{ T^1 }^* \subseteq \Null \paren{ T^2 }^* \subseteq \cdots \subseteq \Null \paren{ T^k }^* \subseteq \Null \paren{ T^{k+1} }^* \subseteq \cdots \, ,
+    \]
+    which, by 7.7 (a), is equivalent to
+    \[
+        \ocomp{ \{ 0 \} } = \ocomp{ \paren{ \Range T^0 } } \subseteq \ocomp{ \paren{ \Range T^1 } } \subseteq \ocomp{ \paren{ \Range T^2 } } \subseteq \cdots \subseteq \ocomp{ \paren{ \Range T^k } } \subseteq \ocomp{ \paren{ \Range T^{k+1} } } \subseteq \cdots \, .
+    \]
+    6.46 (c) and (e) now imply that
+    \begin{multline*}
+        V = \ocomp{ \paren{ \ocomp{ \paren{ \Range T^0 } } } } \supseteq \ocomp{ \paren{ \ocomp{ \paren{ \Range T^1 } } } } \supseteq \ocomp{ \paren{ \ocomp{ \paren{ \Range T^2 } } } } \\[2mm]
+        \supseteq \cdots \supseteq \ocomp{ \paren{ \ocomp{ \paren{ \Range T^k } } } } \supseteq \ocomp{ \paren{ \ocomp{ \paren{ \Range T^{k+1} } } } } \supseteq \cdots \, .
+    \end{multline*}
+    Finally, 6.51 shows that this is equivalent to
+    \[
+        V = \Range T^0 \supseteq \Range T^1 \supseteq \Range T^2 \supseteq \cdots \supseteq \Range T^k \supseteq \Range T^{k+1} \supseteq \cdots \, .
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:17}
+    Suppose \( T \in \lmap(V) \) and \( m \) is a non-negative integer such that
+    \[
+        \Range T^m = \Range T^{m+1}.
+    \]
+    Prove that \( \Range T^k = \Range T^m \) for all \( k > m \).
+\end{exercise}
+
+\begin{solution}[1]
+    It will suffice to show that \( \Range T^{m + n} = \Range T^{m+1} \) for all positive integers \( n \). The inclusion \( \Range T^{m + n} \subseteq \Range T^{m+1} \) follows from \Cref{ex:16}. We will prove the reverse inclusion by induction on \( n \). The base case \( n = 1 \) is clear, so suppose that the inclusion holds for some positive integer \( n \) and let \( v \in \Range T^{m + 1} \) be given. The induction hypothesis then implies that \( v \in \Range T^{m + n} \), so that \( v = T^{m + n} w \) for some \( w \in V \). By assumption we have \( \Range T^m = \Range T^{m+1} \), so we must have \( T^m w = T^{m+1} u \) for some \( u \in V \). This implies that \( v = T^{m + n + 1} u \) and thus \( v \in \Range T^{m + n + 1} \). Hence \( \Range T^{m+1} \subseteq \Range T^{m+n+1} \); this completes the induction step and the proof.
+\end{solution}
+
+\begin{solution}[2]
+    Here is another solution for the special case where \( V \) is an inner product space. Observe that
+    \begin{align*}
+        \Range T^m = \Range T^{m+1} &\implies \ocomp{ \paren{ \Range T^m } } = \ocomp{ \paren{ \Range T^{m+1} } } \\[2mm]
+        &\implies \Null \paren{ T^m }^* = \Null \paren{ T^{m+1} }^* \tag{7.7 (a)} \\[2mm]
+        &\implies \Null (T^*)^m = \Null (T^*)^{m+1} \tag{7.6 (e)} \\[2mm]
+        &\implies \Null (T^*)^m = \Null (T^*)^k \quad \text{for all } k > m \tag{8.3} \\[2mm]
+        &\implies \Null \paren{ T^m }^* = \Null \paren{ T^k }^* \quad \text{for all } k > m \tag{7.6 (e)} \\[2mm]
+        &\implies \ocomp{ \paren{ \Range T^m } } = \ocomp{ \paren{ \Range T^k } } \quad \text{for all } k > m \tag{7.7 (a)} \\[2mm]
+        &\implies \Range T^m = \Range T^k \quad \text{for all } k > m. \tag{6.51}
+    \end{align*}
+\end{solution}
+
+\begin{exercise}
+\label{ex:18}
+    Suppose \( T \in \lmap(V) \). Let \( n = \dim V \). Prove that
+    \[
+        \Range T^n = \Range T^{n+1} = \Range T^{n+2} = \cdots \, .
+    \]
+\end{exercise}
+
+\begin{solution}[1]
+    By \Cref{ex:17}, it will suffice to show that \( \Range T^n = \Range T^{n+1} \). Seeking a contradiction, suppose that this is not the case. It then follows from \Cref{ex:16} and \Cref{ex:17} that
+    \[
+        \Range T^{n+1} \subsetneq \Range T^n \subsetneq \cdots \subsetneq \Range T^2 \subsetneq \Range T^1 \subsetneq \Range T^0 = V.
+    \]
+    This implies that \( \dim \Range T^1 \leq n - 1, \dim \Range T^2 \leq n - 2, \ldots, \dim \Range T^n \leq 0, \) and hence that \( \dim \Range T^{n+1} \leq -1 \), which is a contradiction.
+\end{solution}
+
+\begin{solution}[2]
+    Here is another solution for the special case where \( V \) is an inner product space. By 8.4 we have
+    \[
+        \Null (T^*)^n = \Null (T^*)^{n+1} = \Null (T^*)^{n+2} = \cdots \, .
+    \]
+    By 7.6 (e), this is equivalent to
+    \[
+        \Null \paren{ T^n }^* = \Null \paren{ T^{n+1} }^* = \Null \paren{ T^{n+2} }^* = \cdots \, ,
+    \]
+    which, by 7.7 (a), is equivalent to
+    \[
+        \ocomp{ \paren{ \Range T^n } } = \ocomp{ \paren{ \Range T^{n+1} } } = \ocomp{ \paren{ \Range T^{n+2} } } = \cdots \, .
+    \]
+    Finally, 6.51 shows that this is equivalent to
+    \[
+        \Range T^n = \Range T^{n+1} = \Range T^{n+2} = \cdots \, .
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:19}
+    Suppose \( T \in \lmap(V) \) and \( m \) is a nonnegative integer. Prove that
+    \[
+        \Null T^m = \Null T^{m+1} \quad \text{if and only if} \quad \Range T^m = \Range T^{m+1}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( \Null T^m = \Null T^{m+1} \), so that \( \dim \Null T^m = \dim \Null T^{m+1} \). By 3.22, this implies that \( \dim \Range T^m = \dim \Range T^{m+1} \). Combining this with the fact that \( \Range T^{m+1} \subseteq \Range T^m \), shown in \Cref{ex:16}, we see that \( \Range T^m = \Range T^{m+1} \). A similar argument gives the reverse implication.
+\end{solution}
+
+\begin{exercise}
+\label{ex:20}
+    Suppose \( T \in \lmap(\C^5) \) is such that \( \Range T^4 \neq \Range T^5 \). Prove that \( T \) is nilpotent.
+\end{exercise}
+
+\begin{solution}
+    By \Cref{ex:19}, it must be the case that \( \Null T^4 \neq \Null T^5 \). Since \( \dim \C^5 = 5 \), it follows from \Cref{ex:15} that \( T \) is nilpotent.
+\end{solution}
+
+\begin{exercise}
+\label{ex:21}
+    Find a vector space \( W \) and \( T \in \lmap(W) \) such that \( \Null T^k \subsetneq \Null T^{k+1} \) and \( \Range T^k \supsetneq \Range T^{k+1} \) for every positive integer \( k \).
+\end{exercise}
+
+\begin{solution}
+    Let \( L : \C^{\infty} \to \C^{\infty} \) and \( R : \C^{\infty} \to \C^{\infty} \) be the left- and right-shift operators respectively, i.e.\
+    \[
+        L(z_1, z_2, z_3, \ldots) = (z_2, z_3, z_4, \ldots) \quand R(z_1, z_2, z_3, \ldots) = (0, z_1, z_2, \ldots).
+    \]
+    It is then straightforward to verify that
+    \[
+        \Null L^k \subsetneq \Null L^{k+1}, \quad \Range L^k = \C^{\infty}, \quad \Null R^k = \{ 0 \}, \quand \Range R^k \supsetneq R^{k+1}
+    \]
+    for every positive integer \( k \). Define \( T : \C^{\infty} \times \C^{\infty} \to \C^{\infty} \times \C^{\infty} \) by
+    \[
+        T(z, w) = (Lz, Rw).
+    \]
+    It follows from the previous discussion that
+    \[
+        \Null T^k \subsetneq \Null T^{k+1} \quand \Range T^k \supsetneq \Range T^{k+1}
+    \]
+    for every positive integer \( k \).
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ladr}{\textcolor{blue}{[LADR]} Axler, S. (2015) \textit{Linear Algebra Done Right.} 3\ts{rd} edition.}
+
+\end{document}
