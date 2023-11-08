@@ -1,0 +1,575 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{graphicx}
+\usepackage{systeme}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix, patterns, decorations.pathreplacing, calligraphy}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 7.3 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 7.3.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 7.3.#1#3}
+
+\newcommand{\interior}[1]{%
+  {\kern0pt#1}^{\mathrm{o}}%
+}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\quimplies}{\quad \implies \quad}
+\newcommand{\quiff}{\quad \iff \quad}
+\newcommand{\upd}{\,\text{d}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\set{\{}{\}}
+\makeatletter
+\let\oldset\set
+\def\set{\@ifstar{\oldset}{\oldset*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 7.3 Exercises}
+
+Exercises with solutions from Section 7.3 of \hyperlink{ua}{[UA]}.
+
+\begin{exercise}
+\label{ex:1}
+    Consider the function
+    \[
+        h(x) = \begin{cases}
+            1 & \text{for } 0 \leq x < 1 \\
+            2 & \text{for } x = 1
+        \end{cases}
+    \]
+    over the interval \( [0, 1] \).
+    \begin{enumerate}
+        \item Show that \( L(f, P) = 1 \) for every partition \( P \) of \( [0, 1] \).
+
+        \item Construct a partition \( P \) for which \( U(f, P) < 1 + 1/10 \).
+
+        \item Given \( \epsilon > 0 \), construct a partition \( P_{\epsilon} \) for which \( U(f, P_{\epsilon}) < 1 + \epsilon \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( P = \{ x_0, x_1, \ldots, x_n \} \) be a partition of \( [0, 1] \). For any \( 1 \leq k \leq n \),
+        \[
+            m_k = \inf \{ f(x) : x \in [x_{k-1}, x_k] \} = 1
+        \]
+        and thus
+        \[
+            L(f, P) = \sum_{k=1}^n m_k \Delta x_k = \sum_{k=1}^n \Delta x_k = 1 - 0 = 1.
+        \]
+
+        \item Set \( x_0 = 0, x_1 = \tfrac{19}{20}, x_2 = 1 \), and let \( P \) be the partition \( \{ x_0, x_1, x_2 \} \) of \( [0, 1] \). Since
+        \[
+            M_1 = \sup \{ f(x) : x \in [x_0, x_1] \} = 1 \quand M_2 = \sup \{ f(x) : x \in [x_1, x_2] \} = 2,
+        \]
+        we have
+        \[
+            U(f, P) = M_1 (x_1 - x_0) + M_2 (x_2 - x_1) = 2 - x_1 = 2 - \frac{19}{20} = \frac{21}{20} = 1 + \frac{1}{20} < 1 + \frac{1}{10}.
+        \]
+
+        \item Set \( x_0 = 0, x_1 = \max \set{ \tfrac{1}{2}, 1 - \tfrac{\epsilon}{2} }, x_2 = 1 \), and let \( P \) be the partition \( \{ x_0, x_1, x_2 \} \) of \( [0, 1] \). Since
+        \[
+            M_1 = \sup \{ f(x) : x \in [x_0, x_1] \} = 1 \quand M_2 = \sup \{ f(x) : x \in [x_1, x_2] \} = 2,
+        \]
+        we have
+        \[
+            U(f, P) = M_1 (x_1 - x_0) + M_2 (x_2 - x_1) = 2 - x_1 \leq 1 + \frac{\epsilon}{2} < 1 + \epsilon.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Recall that Thomae's function
+    \[
+        t(x) = \begin{cases}
+            1 & \text{if } x = 0 \\
+            1/n & \text{if } x = m/n \in \Q \setminus \{ 0 \} \text{ is in lowest terms with } n > 0 \\
+            0 & \text{if } x \not\in \Q
+        \end{cases}
+    \]
+    has a countable set of discontinuities occurring at precisely every rational number. Follow these steps to prove \( t(x) \) is integrable on \( [0, 1] \) with \( \int_0^1 t = 0 \).
+    \begin{enumerate}
+        \item First argue that \( L(t, P) = 0 \) for any partition \( P \) of \( [0, 1] \).
+        
+        \item Let \( \epsilon > 0 \), and consider the set of points \( D_{\epsilon/2} = \{ x \in [0, 1] : t(x) \geq \epsilon/2 \} \). How big is \( D_{\epsilon/2} \)?
+
+        \item To complete the argument, explain how to construct a partition \( P_{\epsilon} \) of \( [0, 1] \) so that \( U(t, P_{\epsilon}) < \epsilon \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( P = \{ x_0, x_1, \ldots x_n \} \) be an arbitrary partition of \( [0, 1] \). The irrationals are dense in \( \R \), so any subinterval \( [x_{k-1}, x_k] \) contains an irrational number \( y \). Since \( t(y) = 0 \) and \( t(x) \geq 0 \) for all \( x \in [0, 1] \), it follows that \( m_k = 0 \), from which we see that \( L(t, P) = 0 \).
+
+        \item Since \( 0 \leq t(x) \leq 1 \) for all \( x \in [0, 1] \), if \( \tfrac{\epsilon}{2} > 1 \) then \( D_{\epsilon/2} \) is empty. Suppose therefore that \( 0 < \tfrac{\epsilon}{2} \leq 1 \) and let \( N \) be the smallest positive integer such that \( \tfrac{1}{N} < \tfrac{\epsilon}{2} \). It follows that \( D_{\epsilon/2} \) consists precisely of those rational numbers \( \tfrac{m}{n} \in [0, 1] \) (in lowest terms with \( n > 0 \)) with \( 1 \leq n \leq N \), of which there are only finitely many. Thus \( D_{\epsilon/2} \) is finite for any \( \epsilon > 0 \).
+
+        \item Let \( \epsilon > 0 \) be given. If \( D_{\epsilon/2} \) is empty, i.e.\ if \( 0 \leq t(x) < \tfrac{\epsilon}{2} \) for all \( x \in [0, 1] \), then let \( P_{\epsilon} \) be the partition \( \{ 0, 1 \} \) of \( [0, 1] \). For this partition we have
+        \[
+            U(t, P_{\epsilon}) = \sup \{ t(x) : x \in [0, 1] \} \leq \frac{\epsilon}{2} < \epsilon.
+        \]
+
+        Now suppose that \( D_{\epsilon/2} \) is not empty; by part (b) it must be the case that \( D_{\epsilon/2} = \{ y_1, \ldots, y_m \} \) for some \( m \in \N \) and some \( y_1, \ldots, y_m \in [0, 1] \). Let \( P_{\epsilon} = \{ x_0, \ldots, x_n \} \) be the evenly spaced partition of \( [0, 1] \) such that \( \Delta x_k < \tfrac{\epsilon}{2(m+1)} \) for each \( k \in \{ 1, \ldots, n \} \). Decompose the set \( \{ 1, \ldots, n \} \) into the disjoint union \( A \cup \setcomp{A} \), where
+        \[
+            A = \{ k \in \{ 1, \ldots, n \} : \text{there exists } j \in \{ 1, \ldots, m \} \text{ such that } y_j \in [x_{k-1}, x_k] \},
+        \]
+        so that
+        \[
+            U(t, P_{\epsilon}) = \sum_{k=1}^n M_k \Delta x_k = \sum_{k \in A} M_k \Delta x_k + \sum_{k \not\in A} M_k \Delta x_k. \tag{1}
+        \]
+        Note that \( A \) can contain at most \( m + 1 \) elements and also that \( M_k \leq 1 \) for any \( k \in \{ 1, \ldots, n \} \). It follows that
+        \[
+            \sum_{k \in A} M_k \Delta x_k < \sum_{k \in A} \frac{\epsilon}{2(m + 1)} \leq (m + 1) \frac{\epsilon}{2(m + 1)} = \frac{\epsilon}{2}. \tag{2}
+        \]
+        Now suppose that \( k \in \{ 1, \ldots, n \} \) is such that \( k \not\in A \), so that \( f(x) < \tfrac{\epsilon}{2} \) for all \( x \in [x_{k-1}, x_k] \). Then \( M_k \leq \tfrac{\epsilon}{2} \) and it follows that
+        \[
+            \sum_{k \not\in A} M_k \Delta x_k \leq \frac{\epsilon}{2} \sum_{k \not\in A} \Delta x_k \leq \frac{\epsilon}{2} \sum_{k=1}^n \Delta x_k = \frac{\epsilon}{2}. \tag{3}
+        \]
+        Combining (1), (2), and (3), we see that \( U(t, P_{\epsilon}) < \tfrac{\epsilon}{2} + \tfrac{\epsilon}{2} = \epsilon \). 
+
+        We have now shown that for any \( \epsilon > 0 \) there exists a partition \( P_{\epsilon} \) of \( [0, 1] \) such that \( U(t, P_{\epsilon}) < \epsilon \). From part (a) we have \( L(t, P_{\epsilon}) = 0 \) and hence \( U(t, P_{\epsilon}) - L(t, P_{\epsilon}) < \epsilon \); it follows that \( t \) is integrable on \( [0, 1] \). Part (a) also shows that
+        \[
+            \int_0^1 t = L(t) = 0.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Let
+    \[
+        f(x) = \begin{cases}
+            1 & \text{if } x = 1/n \text{ for some } n \in \N \\
+            0 & \text{otherwise}. 
+        \end{cases}
+    \]
+    Show that \( f \) is integrable on \( [0, 1] \) and compute \( \int_0^1 f \).
+\end{exercise}
+
+\begin{solution}
+    Let \( P = \{ x_0, \ldots, x_n \} \) be an arbitrary partition of \( [0, 1] \). The irrationals are dense in \( \R \), so any subinterval \( [x_{k-1}, x_k] \) contains an irrational number \( y \). Since \( f(y) = 0 \) and \( f(x) \geq 0 \) for all \( x \in [0, 1] \), it follows that \( m_k = 0 \), from which we see that \( L(f, P) = 0 \). Because \( P \) was an arbitrary partition of \( [0, 1] \), we have also shown that \( L(f) = 0 \); once we show that \( f \) is integrable on \( [0, 1] \) it will follow that \( \int_0^1 f = 0 \).
+
+    Let \( \epsilon > 0 \) be given. If \( \tfrac{\epsilon}{2} > 1 \), then \( f(x) \leq \tfrac{\epsilon}{2} \) for all \( x \in [0, 1] \). Take the partition \( P_{\epsilon} = \{ 0, 1 \} \) of \( [0, 1] \), so that
+    \[
+        U(f, P_{\epsilon}) = \sup \{ f(x) : x \in [0, 1] \} \leq \frac{\epsilon}{2} < \epsilon.
+    \]
+    As noted above, we have \( L(f, P_{\epsilon}) = 0 \) and thus \( U(f, P_{\epsilon}) - L(f, P_{\epsilon}) < \epsilon \).
+    
+    Now suppose that \( \tfrac{\epsilon}{2} \leq 1 \). Our argument here is similar to the one we gave in \Cref{ex:2} (c). Choose \( N \in \N \) such that \( \tfrac{1}{N} < \tfrac{\epsilon}{2} \); note that \( N \geq 2 \). Let \( P_{\epsilon} = \{ x_0, x_1, \ldots, x_n \} \) be the partition of \( [0, 1] \) where \( x_0 = 0, x_1 = \tfrac{1}{N}, x_n = 1 \), and \( x_2, \ldots, x_{n-1} \) are chosen to be evenly spaced between \( \tfrac{1}{N} \) and 1, such that \( \Delta x_k < \tfrac{\epsilon}{2N} \) for \( k \geq 2 \). Then
+    \[
+        U(f, P_{\epsilon}) = \sum_{k=1}^n M_k \Delta x_k = M_1 \Delta x_1 + \sum_{k=2}^n M_k \Delta x_k = \frac{1}{N} + \sum_{k=2}^n M_k \Delta x_k < \frac{\epsilon}{2} + \sum_{k=2}^n M_k \Delta x_k. \tag{1}
+    \]
+    Decompose the set \( \{ 2, \ldots, n \} \) into the disjoint union \( A \cup \setcomp{A} \), where
+    \[
+        A = \set{ k \in \{ 2, \ldots, n \} : \text{there exists } j \in \{ 1, \ldots, N - 1 \} \text{ such that } \tfrac{1}{j} \in [x_{k-1}, x_k] },
+    \]
+    so that
+    \[
+        \sum_{k=2}^n M_k \Delta x_k = \sum_{k \in A} M_k \Delta x_k + \sum_{k \not\in A} M_k \Delta x_k. \tag{2}
+    \]
+    Note that \( A \) can contain at most \( N \) elements and also that \( M_k \leq 1 \) for any \( k \in \{ 2, \ldots, n \} \). It follows that
+    \[
+        \sum_{k \in A} M_k \Delta x_k < \sum_{k \in A} \frac{\epsilon}{2N} \leq N \frac{\epsilon}{2N} = \frac{\epsilon}{2}. \tag{3}
+    \]
+    Now suppose that \( k \in \{ 2, \ldots, n \} \) is such that \( k \not\in A \), so that \( f(x) = 0 \) for all \( x \in [x_{k-1}, x_k] \). Thus \( M_k = 0 \) and it follows that
+    \[
+        \sum_{k \not\in A} M_k \Delta x_k = 0. \tag{4}
+    \]
+    Combining (1), (2), (3), and (4), we see that \( U(f, P_{\epsilon}) < \epsilon \). As noted above, we have \( L(f, P_{\epsilon}) = 0 \) and thus \( U(f, P_{\epsilon}) - L(f, P_{\epsilon}) < \epsilon \).
+
+    We have now shown that for any \( \epsilon > 0 \) there exists a partition \( P_{\epsilon} \) of \( [0, 1] \) such that \( U(f, P_{\epsilon}) - L(f, P_{\epsilon}) < \epsilon \). We may conclude that \( f \) is integrable on \( [0, 1] \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Let \( f \) and \( g \) be functions defined on (possibly different) closed intervals, and assume the range of \( f \) is contained in the domain of \( g \) so that the composition \( g \circ f \) is properly defined.
+    \begin{enumerate}
+        \item Show, by example, that it is not the case that if \( f \) and \( g \) are integrable, then \( g \circ f \) is integrable.
+
+        Now decide on the validity of each of the following conjectures, supplying a proof or counterexample as appropriate.
+
+        \item If \( f \) is increasing and \( g \) is integrable, then \( g \circ f \) is integrable.
+
+        \item If \( f \) is integrable and \( g \) is increasing, then \( g \circ f \) is integrable.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( f : [0, 1] \to \R \) be Thomae's function as defined in \Cref{ex:2}; as we showed there, \( f \) is integrable. Let \( g : [0, 1] \to \R \) be given by
+        \[
+            g(x) = \begin{cases}
+                0 & \text{if } x = 0, \\
+                1 & \text{if } 0 < x \leq 1.
+            \end{cases}
+        \]
+        Theorem 7.3.2 shows that \( g \) is also integrable. However, note that since \( f(x) = 0 \) for irrational \( x \) and \( 0 < f(x) \leq 1 \) for rational \( x \), the composition \( g \circ f : [0, 1] \to \R \) is nothing but Dirichlet's function, which was shown to be non-integrable in Example 7.3.3.
+
+        \item This is actually false, however the only \href{https://math.stackexchange.com/questions/1833028/if-g-is-riemann-integrable-in-a-closed-interval-and-f-is-a-increasing-functi/1834357#1834357}{counterexample} I know of is quite involved and uses material from Section 7.6.
+
+        \item See part (a) for a counterexample.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Provide an example or give a reason why the request is impossible.
+    \begin{enumerate}
+        \item A sequence \( (f_n) \to f \) pointwise, where each \( f_n \) has at most a finite number of discontinuities but \( f \) is not integrable.
+
+        \item A sequence \( (g_n) \to g \) uniformly where each \( g_n \) has at most a finite number of discontinuities and \( g \) is not integrable.
+
+        \item A sequence \( (h_n) \to h \) uniformly where each \( h_n \) is not integrable but \( h \) is integrable.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item For each \( n \in \N \) define \( f_n : [0, 1] \to \R \) by
+        \[
+            f_n(x) = \begin{cases}
+                \tfrac{1}{x} & \text{if } x \in \bkt{ \tfrac{1}{n}, 1 }, \\
+                0 & \text{if } x \in \left[ 0, \tfrac{1}{n} \right),
+            \end{cases}
+        \]
+        and define \( f : [0, 1] \to \R \) by
+        \[
+            f(x) = \begin{cases}
+                \tfrac{1}{x} & \text{if } x \in \left( 0, 1 \right], \\
+                0 & \text{if } x = 0.
+            \end{cases}
+        \]
+        Then \( (f_n) \to f \) pointwise, each \( f_n \) has exactly one discontinuity at \( x = \tfrac{1}{n} \), but \( f \) is not bounded and hence is not integrable.
+
+        \item This is impossible. As discussed after Theorem 7.3.2, each \( g_n \) must be integrable. \href{https://lew98.github.io/Mathematics/UA_Section_7_2_Exercises.pdf}{Exercise 7.2.5} then implies that \( g \) is integrable.
+
+        \item For each \( n \in \N \) define \( h_n : [0, 1] \to \R \) by
+        \[
+            h_n(x) = \begin{cases}
+                \tfrac{1}{n} & \text{if } x \in \Q, \\
+                0 & \text{if } x \not\in \Q,
+            \end{cases}
+        \]
+        and let \( h : [0, 1] \to \R \) be identically zero. Then \( h \) is certainly integrable and a small modification of the argument given in Example 7.3.3 shows that each \( h_n \) is not integrable. Furthermore, since
+        \[
+            \sup \{ \abs{h_n(x) - h(x)} : x \in [0, 1] \} = \frac{1}{n} \to 0,
+        \]
+        we have uniform convergence \( (h_n) \to h \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Let \( \{ r_1, r_2, r_3, \ldots \} \) be an enumeration of all the rationals in \( [0, 1] \), and define
+    \[
+        g_n(x) = \begin{cases}
+            1 & \text{if } x = r_n \\
+            0 & \text{otherwise}.
+        \end{cases}
+    \]
+    \begin{enumerate}
+        \item Is \( G(x) = \sum_{n=1}^{\infty} g_n(x) \) integrable on \( [0, 1] \)?
+
+        \item Is \( F(x) = \sum_{n=1}^{\infty} g_n(x) / n \) integrable on \( [0, 1] \)?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item For irrational \( x \in [0, 1] \), we have \( g_n(x) = 0 \) for all \( n \in \N \) and thus \( G(x) = 0 \). If \( x \in [0, 1] \) is rational, then \( x = r_N \) for some \( N \in \N \). Since \( g_N(r_N) = 1 \) and \( g_n(r_N) = 0 \) for \( n \neq N \), we then have \( G(r_N) = 1 \). Hence \( G \) is in fact Dirichlet's function, which is not integrable (Example 7.3.3).
+
+        \item We claim that \( F \) is integrable on \( [0, 1] \); notice that
+        \[
+            F(x) = \begin{cases}
+                \tfrac{1}{n} & \text{if } x = r_n \in \Q, \\
+                0 & \text{if } x \not\in \Q.
+            \end{cases}
+        \]
+        The density of the irrationals in \( \R \) implies that \( L(F, P) = 0 \) for any partition \( P \) of \( [0, 1] \). Let \( \epsilon > 0 \) be given and set
+        \[
+            D_{\epsilon/2} = \set{ x \in [0, 1] : F(x) \geq \tfrac{\epsilon}{2} }.
+        \]
+        If \( \tfrac{\epsilon}{2} > 1 \) then \( D_{\epsilon/2} \) is empty, since \( 0 \leq F(x) \leq 1 \) for all \( x \in [0, 1] \). If \( \tfrac{\epsilon}{2} \leq 1 \) then let \( N \) be the smallest positive integer such that \( \tfrac{1}{N} < \tfrac{\epsilon}{2} \); note that \( N \geq 2 \). It follows that
+        \[
+            D_{\epsilon/2} = \{ r_1, \ldots, r_{N-1} \},
+        \]
+        so that \( D_{\epsilon/2} \) is finite. We may now argue as in \Cref{ex:2} (c) to obtain a partition \( P_{\epsilon} \) of \( [0, 1] \) such that \( U(F, P_{\epsilon}) < \epsilon \). Since \( L(F, P_{\epsilon}) = 0 \) we then have
+        \[
+            U(F, P_{\epsilon}) - L(F, P_{\epsilon}) < \epsilon
+        \]
+        and thus \( F \) is integrable on \( [0, 1] \). Furthermore, \( \int_0^1 F = L(F) = 0 \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Assume \( f : [a, b] \to \R \) is integrable.
+    \begin{enumerate}
+        \item Show that if \( g \) satisfies \( g(x) = f(x) \) for all but a finite number of points in \( [a, b] \), then \( g \) is integrable as well.
+
+        \item Find an example to show that \( g \) may fail to be integrable if it differs from \( f \) at a countable number of points.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( D = \{ x \in [a, b] : f(x) \neq g(x) \} \). If \( D \) is empty then it is clear that \( g \) is integrable, so suppose that \( D = \{ c_1, \ldots, c_d \} \) for some \( d \in \N \) and \( c_1, \ldots, c_d \in [a, b] \). Let \( \epsilon > 0 \) be given. Because \( f \) is integrable, there exists a partition \( Q_{\epsilon} \) of \( [a, b] \) such that \( U(f, Q_{\epsilon}) - L(f, Q_{\epsilon}) < \tfrac{\epsilon}{2} \). The integrability of \( f \) also implies that \( f \) is bounded; since \( g \) differs from \( f \) at only finitely many points, \( g \) must also be bounded, say by \( R > 0 \). Let \( Q'_{\epsilon} = \{ y_0, \ldots, y_l \} \) be the evenly spaced partition of \( [a, b] \) such that
+        \[
+            \Delta y_k < \frac{\epsilon}{4 R (d + 1)}
+        \]
+        for each \( k \in \{ 1, \ldots, l \} \), and let \( P_{\epsilon} = Q_{\epsilon} \cup Q'_{\epsilon} = \{ x_0, \ldots, x_n \} \) be the common refinement of \( Q_{\epsilon} \) and \( Q'_{\epsilon} \), so that
+        \[
+            \Delta x_k < \frac{\epsilon}{4 R (d + 1)}
+        \]
+        for each \( k \in \{ 1, \ldots, n \} \). Let
+        \[
+            M^g_k = \sup \{ g(x) : x \in [x_{k-1}, x_k] \} \quand m^g_k = \inf \{ g(x) : x \in [x_{k-1}, x_k] \}
+        \]
+        for each \( k \in \{ 1, \ldots, n \} \), and define \( M^f_k \) and \( m^f_k \) similarly. Decompose the set \( \{ 1, \ldots, n \} \) into the disjoint union \( A \cup \setcomp{A} \), where
+        \[
+            A = \{ k \in \{ 1, \ldots, n \} : \text{there exists } j \in \{ 1, \ldots, d \} \text{ such that } c_j \in [x_{k-1}, x_k] \},
+        \]
+        so that
+        \[
+            U(g, P_{\epsilon}) - L(g, P_{\epsilon}) = \sum_{k=1}^n (M^g_k - m^g_k) \Delta x_k = \sum_{k \in A} (M^g_k - m^g_k) \Delta x_k + \sum_{k \not\in A} (M^g_k - m^g_k) \Delta x_k. \tag{1}
+        \]
+        Note that \( A \) can contain at most \( d + 1 \) elements and also that \( M^g_k - m^g_k \leq 2R \) for any \( k \in \{ 1, \ldots, n \} \). It follows that
+        \[
+            \sum_{k \in A} (M^g_k - m^g_k) \Delta x_k < \sum_{k \in A} 2R \frac{\epsilon}{4 R (d + 1)} \leq (d + 1) \frac{\epsilon}{2(d + 1)} = \frac{\epsilon}{2}. \tag{2}
+        \]
+        Now suppose that \( k \in \{ 1, \ldots, n \} \) is such that \( k \not\in A \), so that \( f(x) = g(x) \) for all \( x \in [x_{k-1}, x_k] \). It follows that \( M^g_k - m^g_k = M^f_k - m^f_k \) and thus
+        \begin{multline*}
+            \sum_{k \not\in A} (M^g_k - m^g_k) \Delta x_k = \sum_{k \not\in A} (M^f_k - m^f_k) \Delta x_k \leq \sum_{k=1}^n (M^f_k - m^f_k) \Delta x_k \\
+            = U(f, P_{\epsilon}) - L(f, P_{\epsilon}) \leq U(f, Q_{\epsilon}) - L(f, Q_{\epsilon}) < \frac{\epsilon}{2}. \tag{3}
+        \end{multline*}
+        Combining (1), (2), and (3), we see that \( U(g, P_{\epsilon}) - L(g, P_{\epsilon}) < \epsilon \). Because \( \epsilon > 0 \) was arbitrary, it follows that \( g \) is integrable on \( [a, b] \).
+
+        \item Let \( f : [0, 1] \to \R \) be identically zero, so that \( f \) is certainly integrable, and let \( g : [0, 1] \to \R \) be Dirichlet's function. Then \( g \) differs from \( f \) precisely on the countable set \( \Q \cap [0, 1] \) and yet \( g \) is not integrable.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    As in \Cref{ex:6}, let \( \{ r_1, r_2, r_3, \ldots \} \) be an enumeration of the rationals in \( [0, 1] \), but this time define
+    \[
+        h_n(x) = \begin{cases}
+            1 & \text{if } r_n < x \leq 1 \\
+            0 & \text{if } 0 \leq x \leq r_n.
+        \end{cases}
+    \]
+    Show \( H(x) = \sum_{n=1}^{\infty} h_n(x) / 2^n \) is integrable on \( [0, 1] \) even though it has discontinuities at every rational point.
+\end{exercise}
+
+\begin{solution}
+    For a given \( N \in \N \) let \( H_N(x) = \sum_{n=1}^N h_n(x) / 2^n \) and order the rationals \( \{ r_1, \ldots, r_N \} \) as \( 0 \leq r_{i_1} < \cdots < r_{i_N} \leq 1 \). Then
+    \[
+        H_N(x) = \begin{cases}
+            0 & \text{if } x \in [0, r_{i_1}], \\
+            \tfrac{1}{2} & \text{if } x \in (r_{i_1}, r_{i_2}], \\
+            \tfrac{3}{4} & \text{if } x \in (r_{i_2}, r_{i_3}], \\
+            \, \vdots & \qquad \vdots \\
+            1 - \tfrac{1}{2^N} & \text{if } x \in (r_{i_N}, 1].
+        \end{cases}
+    \]
+    Thus \( H_N \) is piecewise-constant on \( [0, 1] \). It is straightforward to argue that such functions are integrable (this is implied by Theorem 7.4.1). Now observe that
+    \[
+        \abs{ \frac{h_n(x)}{2^n} } \leq \frac{1}{2^n}
+    \]
+    for each \( n \in \N \). Since the series \( \sum_{n=1}^{\infty} 2^{-n} \) is a convergent geometric series, the Weierstrass M-Test (Corollary 6.4.5) implies that \( H_N \) converges uniformly to \( H \); it follows from \href{https://lew98.github.io/Mathematics/UA_Section_7_2_Exercises.pdf}{Exercise 7.2.5} that \( H \) is integrable on \( [0, 1] \).
+\end{solution}
+
+\begin{exercise}[Content Zero]
+\label{ex:9}
+    A set \( A \subseteq [a, b] \) has \textit{content zero} if for every \( \epsilon > 0 \) there exists a finite collection of open intervals \( \{ O_1, O_2, \ldots, O_N \} \) that contain \( A \) in their union and whose lengths sum to \( \epsilon \) or less. Using \( \abs{O_n} \) to refer to the length of each interval, we have
+    \[
+        A \subseteq \bigcup_{n=1}^N O_n \quand \sum_{n=1}^N \abs{O_n} \leq \epsilon.
+    \]
+    \begin{enumerate}
+        \item Let \( f \) be bounded on \( [a, b] \). Show that if the set of discontinuous points of \( f \) has content zero, then \( f \) is integrable.
+        
+        \item Show that any finite set has content zero.
+
+        \item Content zero sets do not have to be finite. They do not have to be countable. Show that the Cantor set \( C \) defined in Section 3.1 has content zero.
+
+        \item Prove that
+        \[
+            h(x) = \begin{cases}
+                1 & \text{if } x \in C \\
+                0 & \text{if } x \not\in C,
+            \end{cases}
+        \]
+        is integrable, and find the value of the integral.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Suppose \( f \) is bounded by \( R > 0 \) on \( [a, b] \) and let \( \epsilon > 0 \) be given. Because the set of discontinuous points of \( f \) has content zero, we can choose a partition \( Q \) of \( [a, b] \) such that the discontinuities of \( f \) are contained in the interiors of subintervals whose total length is strictly less than \( \tfrac{\epsilon}{4R} \). Letting \( K \) be the union of the remaining subintervals, we see that \( f \) is continuous on \( K \) and also that \( K \) is compact, being a finite union of closed and bounded intervals. Thus \( f \) is uniformly continuous on \( K \) and, as in the proof of Theorem 7.2.9, we may refine the partition \( Q \), subdividing \( K \) as necessary, to obtain a partition \( P = \{ x_0, \ldots, x_n \} \) of \( [a, b] \) such that the indices \( \{ 1, \ldots, n \} \) can be expressed as the disjoint union \( A \cup B \), where:
+        \begin{enumerate}[label=(\roman*)]
+            \item \( f \) is continuous on \( \bigcup_{k \in A} [x_{k-1}, x_k] \) and \( M_k - m_k < \tfrac{\epsilon}{2 (b - a)} \) for \( k \in A \);
+
+            \item the discontinuities of \( f \) are contained inside \( \bigcup_{k \in B} (x_{k-1}, x_k) \) and \( \sum_{k \in B} \Delta x_k < \tfrac{\epsilon}{4R} \).
+        \end{enumerate}
+        It follows that
+        \begin{align*}
+            U(f, P) - L(f, P) &= \sum_{k=1}^n (M_k - m_k) \Delta x_k \\
+            &= \sum_{k \in A} (M_k - m_k) \Delta x_k + \sum_{k \in B} (M_k - m_k) \Delta x_k \\
+            &< \frac{\epsilon}{2 (b - a)} \sum_{k \in A} \Delta x_k + 2R \sum_{k \in B} \Delta x_k \\
+            &< \frac{\epsilon}{2} + \frac{\epsilon}{2} \\
+            &= \epsilon.
+        \end{align*}
+        Thus \( f \) is integrable on \( [a, b] \).
+
+        \item Let \( A \subseteq \R \) be finite and let \( \epsilon > 0 \) be given. If \( A \) is empty then the open interval \( \paren{ -\tfrac{\epsilon}{2}, \tfrac{\epsilon}{2} } \) suffices to show that \( A \) has content zero. Suppose therefore that \( A \) is not empty, say \( A = \{ x_1, \ldots, x_N \} \). For each \( 1 \leq n \leq N \), let
+        \[
+            O_n = \paren{ x_n - \frac{\epsilon}{2N}, x_n + \frac{\epsilon}{2N} }.
+        \]
+        Then \( A \subseteq \bigcup_{n=1}^N O_n \) and
+        \[
+            \sum_{n=1}^N \abs{O_n} = \sum_{n=1}^N \frac{\epsilon}{N} = \epsilon.
+        \]
+        Thus \( A \) has content zero.
+
+        \item Recall from Section 3.1 that the Cantor set \( C \) is defined as the intersection \( C = \bigcap_{n=0}^{\infty} C_n \), where each \( C_n \) consists of \( 2^n \) closed intervals each of length \( 3^{-n} \) and such that
+        \[
+            \cdots \subseteq C_2 \subseteq C_1 \subseteq C_0 = [0, 1].
+        \]
+        Let \( \epsilon > 0 \) be given and choose \( N \in \N \) such that
+        \[
+            \paren{ \frac{2}{3} }^N + \paren{ \frac{1}{10} }^N < \epsilon.
+        \]
+        The set \( C_N \) consists of \( 2^N \) closed intervals each of length \( 3^{-N} \); suppose these intervals are \( [x_k, y_k] \) for \( 1 \leq k \leq 2^N \), so that \( y_k - x_k = 3^{-N} \). For each \( 1 \leq k \leq 2^N \), let
+        \[
+            O_k = \paren{ x_k - \frac{1}{2^{N+1} 10^N}, y_k + \frac{1}{2^{N+1} 10^N} },
+        \]
+        so that \( [x_k, y_k] \subseteq O_k \) and
+        \[
+            \abs{O_k} = \frac{1}{3^N} + \frac{1}{2^N 10^N}.
+        \]
+        Then
+        \begin{multline*}
+            C = \bigcap_{n=0}^{\infty} C_n \subseteq C_N = \bigcup_{k=1}^{2^N} [x_k, y_k] \subseteq \bigcup_{k=1}^{2^N} O_k \\
+            \text{and} \quad \sum_{k=1}^{2^N} \abs{O_k} = \sum_{k=1}^{2^N} \paren{ \frac{1}{3^N} + \frac{1}{2^N 10^N} } = \paren{ \frac{2}{3} }^N + \paren{ \frac{1}{10} }^N < \epsilon.
+        \end{multline*}
+        Thus \( C \) has content zero.
+
+        \item Let
+        \[
+            D_h = \{ x \in \R : h \text{ is not continuous at } x \}.
+        \]
+        We claim that \( D_h = C \). First, suppose that \( x \not\in C \). Since \( C \) is closed, the complement of \( C \) is open and so there exists some \( \delta > 0 \) such that \( (x - \delta, x + \delta) \subseteq \setcomp{C} \). Thus \( h \) is constant on the proper interval \( (x - \delta, x + \delta) \); it follows that \( h \) is continuous at \( x \). Now suppose that \( x \in C \). To show that \( h \) is not continuous at \( x \), it will suffice to show that for any \( \delta > 0 \) there exists some \( y \in (x - \delta, x + \delta) \) such that \( y \not\in C \). The existence of some \( \delta \) such that this does not hold implies that \( C \) contains a proper interval. However, \( C \) cannot contain any proper intervals since it is totally disconnected (\href{https://lew98.github.io/Mathematics/UA_Section_3_4_Exercises.pdf}{Exercise 3.4.8}). Thus \( h \) is not continuous at \( x \) and our claim follows.
+
+        Abbott does not specify an interval to integrate \( h \) over, but in fact \( h \) is integrable over any interval \( [a, b] \) for \( a < b \). Let \( g : [a, b] \to \R \) be the restriction of \( h \) to \( [a, b] \). Then
+        \[
+            D_g = \{ x \in [a, b] : g \text{ is not continuous at } x \} = D_h \cap [a, b] = C \cap [a, b].
+        \]
+        It is straightforward to verify that if a set has content zero, then the intersection of that set with any other set also has content zero. Thus, by part (c), \( D_g \) has content zero and it follows from part (a) that \( g \) is integrable. To calculate the integral of \( g \), let \( P \) be any partition of \( [a, b] \). As we noted before, \( C \) does not contain any proper intervals. It follows that any subinterval \( [x_{k-1}, x_k] \) of the partition \( P \) contains some \( x \not\in C \), whence \( g(x) = 0 \). Thus \( L(g, P) = 0 \) and, because \( P \) was an arbitrary partition of \( [a, b] \), it follows that
+        \[
+            \int_a^b g = L(g) = 0.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2\ts{nd} edition.}
+
+\end{document}
