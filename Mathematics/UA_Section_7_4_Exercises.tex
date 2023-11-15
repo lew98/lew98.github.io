@@ -1,0 +1,657 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{graphicx}
+\usepackage{systeme}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix, patterns, decorations.pathreplacing, calligraphy}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 7.4 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 7.4.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 7.4.#1#3}
+
+\newcommand{\interior}[1]{%
+  {\kern0pt#1}^{\mathrm{o}}%
+}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\quimplies}{\quad \implies \quad}
+\newcommand{\quiff}{\quad \iff \quad}
+\newcommand{\dx}{\, dx}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\set{\{}{\}}
+\makeatletter
+\let\oldset\set
+\def\set{\@ifstar{\oldset}{\oldset*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 7.4 Exercises}
+
+Exercises with solutions from Section 7.4 of \hyperlink{ua}{[UA]}.
+
+\begin{exercise}
+\label{ex:1}
+    Let \( f \) be a bounded function on a set \( A \), and set
+    \begin{gather*}
+        M = \sup \{ f(x) : x \in A \}, \quad m = \inf \{ f(x) : x \in A \}, \\[2mm]
+        M' = \sup \{ \abs{f(x)} : x \in A \}, \quand m' = \inf \{ \abs{f(x)} : x \in A \}
+    \end{gather*}
+    \begin{enumerate}
+        \item Show that \( M - m \geq M' - m' \).
+
+        \item Show that if \( f \) is integrable on the interval \( [a, b] \), then \( \abs{f} \) is also integrable on this interval.
+
+        \item Provide the details for the argument that in this case we have \( \abs{\int_a^b f} \leq \int_a^b \abs{f} \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( \epsilon > 0 \) be given. By Lemma 1.3.8 and \href{https://lew98.github.io/Mathematics/UA_Section_1_3_Exercises.pdf}{Exercise 1.3.1 (b)}, there exist \( x, y \in A \) such that
+        \[
+            M' - \frac{\epsilon}{2} < \abs{f(x)} \quand \abs{f(y)} < m' + \frac{\epsilon}{2}.
+        \]
+        It follows that
+        \[
+            M' - m' - \epsilon < \abs{f(x)} - \abs{f(y)} \leq \abs{\abs{f(x)} - \abs{f(y)}} \leq \abs{f(x) - f(y)} \leq M - m;
+        \]
+        we have used the reverse triangle inequality (\href{https://lew98.github.io/Mathematics/UA_Section_1_2_Exercises.pdf}{Exercise 1.2.6 (d)}) for the third inequality. We have now shown that for all \( \epsilon > 0 \) the inequality
+        \[
+            M' - m' \leq M - m + \epsilon
+        \]
+        holds and hence, by \href{https://lew98.github.io/Mathematics/UA_Section_1_2_Exercises.pdf}{Exercise 1.2.10 (c)}, we may conclude that \( M' - m' \leq M - m \).
+
+        \item Let \( \epsilon > 0 \) be given. Because \( f \) is integrable on \( [a, b] \), there exists a partition \( P \) of \( [a, b] \) such that \( U(f, P) - L(f, P) < \epsilon \). By part (a), we then have
+        \[
+            U(\abs{f}, P) - L(\abs{f}, P) \leq U(f, P) - L(f, P) < \epsilon.
+        \]
+        It follows that \( \abs{f} \) is integrable on \( [a, b] \).
+
+        \item Since \( f(x) \leq \abs{f(x)} \) for all \( x \in [a, b] \), Theorem 7.4.2 (iv) implies that
+        \[
+            \int_a^b f \leq \int_a^b \abs{f}. \tag{1}
+        \]
+        Similarly, since \( -f(x) \leq \abs{f(x)} \) for all \( x \in [a, b] \), we have \( \int_a^b -f \leq \int_a^b \abs{f} \) and it follows from Theorem 7.4.2 (ii) that
+        \[
+            -\int_a^b f \leq \int_a^b \abs{f}. \tag{2}
+        \]
+        Combining (1) and (2), we see that \( \abs{\int_a^b f} \leq \int_a^b \abs{f} \). 
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    \begin{enumerate}
+        \item Let \( g(x) = x^3 \), and classify each of the following as positive, negative, or zero.
+        \[
+            \text{(i) } \int_0^{-1} g + \int_0^1 g \qquad \text{(ii) } \int_1^0 g + \int_0^1 g \qquad \text{(iii) } \int_1^{-2} g + \int_0^1 g.
+        \]
+
+        \item Show that if \( b \leq a \leq c \) and \( f \) is integrable on the interval \( [b, c] \), then it is still the case that \( \int_a^b f = \int_a^c f + \int_c^b f \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item
+        \begin{enumerate}[label=(\roman*)]
+            \item We have, by Definition 7.4.3,
+            \[
+                \int_0^{-1} g + \int_0^1 g = -\int_{-1}^0 g + \int_0^1 g.
+            \]
+            By Theorem 7.4.1:
+            \[
+                \int_0^1 g = \int_0^{1/2} g + \int_{1/2}^1 g.
+            \]
+            As \( g(x) \geq 0 \) for all \( x \in [0, 1/2] \), Theorem 7.4.2 (iv) implies that \( \int_0^{1/2} g \geq 0 \). Similarly, since \( g(x) \geq 1/8 \) for all \( x \in [1/2, 1] \), we have by Theorem 7.4.2 (iv):
+            \[
+                \int_{1/2}^1 g \geq \frac{1}{8} \paren{ 1 - \frac{1}{2} } = \frac{1}{16} > 0.
+            \]
+            It follows that \( \int_0^1 g > 0 \). By splitting the integral \( \int_{-1}^0 g \) into \( \int_{-1}^{-1/2} g + \int_{-1/2}^0 g \), we can similarly show that \( \int_{-1}^0 g < 0 \). We may conclude that
+            \[
+                \int_0^{-1} g + \int_0^1 g = -\int_{-1}^0 g + \int_0^1 g > 0.
+            \]
+
+            \item We have, by Definition 7.4.3,
+            \[
+                \int_1^0 g + \int_0^1 g = - \int_0^1 g + \int_0^1 g = 0.
+            \]
+
+            \item We have, by Definition 7.4.3 and Theorem 7.4.1,
+            \begin{multline*}
+                \int_1^{-2} g + \int_0^1 g = - \int_{-2}^1 g + \int_0^1 g = - \paren{ \int_{-2}^0 g + \int_0^1 g } + \int_0^1 g \\[2mm]
+                = - \int_{-2}^0 g = - \paren{ \int_{-2}^{-1} g + \int_{-1}^0 g }
+            \end{multline*}
+            Because \( g(x) \leq 0 \) for all \( x \in [-1, 0] \), Theorem 7.4.2 (iv) implies that \( \int_{-1}^0 g \leq 0 \). Similarly, since \( g(x) \leq -1 \) for all \( x \in [-2, -1] \), Theorem 7.4.2 (iv) gives us \( \int_{-2}^{-1} g \leq -1 \). It follows that
+            \[
+                \int_1^{-2} g + \int_0^1 g = - \paren{ \int_{-2}^{-1} g + \int_{-1}^0 g } \geq 1 > 0.
+            \]
+        \end{enumerate}
+
+        \item By Theorem 7.4.1 we have
+        \[
+            \int_b^c f = \int_b^a f + \int_a^c f.
+        \]
+        By Definition 7.4.3 this is equivalent to
+        \[
+            -\int_c^b f = -\int_a^b f + \int_a^c f,
+        \]
+        which gives us
+        \[
+            \int_a^b f = \int_a^c f + \int_c^b f.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Decide which of the following conjectures is true and supply a short proof. For those that are not true, give a counterexample.
+    \begin{enumerate}
+        \item If \( \abs{f} \) is integrable on \( [a, b] \), then \( f \) is also integrable on this set.
+
+        \item Assume \( g \) is integrable and \( g(x) \geq 0 \) on \( [a, b] \). If \( g(x) > 0 \) for an infinite number of points \( x \in [a, b] \), then \( \int_a^b g > 0 \).
+
+        \item If \( g \) is continuous on \( [a, b] \) and \( g(x) \geq 0 \) with \( g(y_0) > 0 \) for at least one point \( y_0 \in [a, b] \), then \( \int_a^b g > 0 \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item This is false. For a counterexample, let \( f : [0, 1] \to \R \) be given by
+        \[
+            f(x) = \begin{cases}
+                1 & \text{if } x \in \Q, \\
+                -1 & \text{if } x \not\in \Q.
+            \end{cases}
+        \]
+        Then \( \abs{f(x)} = 1 \) for all \( x \in [0, 1] \), so that \( \abs{f} \) is integrable on \( [0, 1] \), but a small modification of the argument given in Example 7.3.3 shows that \( f \) is not integrable.
+
+        \item This is false. For a counterexample, see \href{https://lew98.github.io/Mathematics/UA_Section_7_3_Exercises.pdf}{Exercise 7.3.3}.
+
+        \item This is true. Since \( g \) is continuous at \( y_0 \), there exists a \( \delta > 0 \) such that \( g(x) \in (g(y_0) - \epsilon, g(y_0) + \epsilon) \) for all \( x \in I \), where \( \epsilon = \tfrac{g(y_0)}{2} > 0 \) and \( I = [a, b] \cap (y_0 - \delta, y_0 + \delta) \). In particular,
+        \[
+            g(x) > g(y_0) - \epsilon = \epsilon > 0 \quad \text{for all } x \in I.
+        \]
+        Let \( c = \inf I, d = \sup I, \) and note that
+        \[
+            0 < 2 \delta \leq d - c \leq b - a.
+        \]
+        By Theorem 7.4.1 we have
+        \[
+            \int_a^b g = \int_a^c g + \int_c^d g + \int_d^b g.
+        \]
+        Because \( g \) is non-negative, Theorem 7.4.2 (iv) implies that \( \int_a^c g \geq 0 \) and \( \int_d^b g \geq 0 \). Furthermore, Theorem 7.4.2 (iii) gives us
+        \[
+            \int_c^d g \geq \epsilon (d - c) > 0.
+        \]
+        We may conclude that \( \int_a^b g = \int_a^c g + \int_c^d g + \int_d^b g > 0 \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Show that if \( f(x) > 0 \) for all \( x \in [a, b] \) and \( f \) is integrable, then \( \int_a^b f > 0 \).
+\end{exercise}
+
+\begin{solution}
+    Let us first prove the following lemma.
+
+    \vspace{2mm}
+
+    \noindent \textbf{Lemma 1.} Suppose \( f : [a, b] \to \R \) is integrable and satisfies \( \int_a^b f = 0 \). Then for every \( \epsilon > 0 \) there exists a closed and bounded interval \( I \subseteq [a, b] \) such that \( f(x) < \epsilon \) for all \( x \in I \).
+
+    \vspace{2mm}
+    
+    \noindent \textit{Proof.} Because \( \int_a^b f = U(f) = 0 \), there exists a partition \( P = \{ x_0, \ldots, x_n \} \) of \( [a, b] \) such that \( 0 \leq U(f, P) < \epsilon (b - a) \). If \( M_k \geq \epsilon \) for all \( k \in \{ 1, \ldots, n \} \), then
+    \[
+        U(f, P) = \sum_{k=1}^n M_k \Delta x_k \geq \epsilon \sum_{k=1}^n \Delta x_k = \epsilon (b - a).
+    \]
+    Given that \( U(f, P) < \epsilon (b - a) \), it must be the case that there is some \( k \in \{ 1, \ldots, n \} \) such that \( M_k < \epsilon \). The desired interval is then \( I = [x_{k-1}, x_k] \). \qed
+
+    \vspace{2mm}
+
+    Now let us return to the exercise. It is immediate from Theorem 7.4.2 (iv) that \( \int_a^b f \geq 0 \). Suppose that \( \int_a^b f = 0 \); we will show that this leads to a contradiction. By Lemma 1, there exists a closed and bounded interval \( I_1 \subseteq [a, b] \) such that \( f(x) < 1 \) for all \( x \in I_1 \). Theorem 7.4.1 shows that \( f \) is integrable on \( I_1 \); furthermore, since \( f \) is positive and \( \int_a^b f = 0 \), the integral of \( f \) over \( I_1 \) must also be zero. Lemma 1 then implies that there is some closed and bounded interval \( I_2 \subseteq I_1 \) such that \( f(x) < \tfrac{1}{2} \) for all \( x \in I_2 \). Continuing in this manner, we obtain a nested sequence of closed and bounded intervals
+    \[
+        \cdots \subseteq I_3 \subseteq I_2 \subseteq I_1 \subseteq [a, b]
+    \]
+    such that if \( x \in I_n \) then \( f(x) < \tfrac{1}{n} \). The Nested Interval Property (Theorem 1.4.1) implies that the intersection \( \bigcap_{n=1}^{\infty} I_n \) is non-empty, so that there exists some \( x_0 \in I_n \) for all \( n \in \N \), which implies that \( f(x_0) < \tfrac{1}{n} \) for all \( n \in \N \). It follows that \( f(x_0) \leq 0 \), contradicting the positivity of \( f \). We may conclude that \( \int_a^b f > 0 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Let \( f \) and \( g \) be integrable functions on \( [a, b] \).
+    \begin{enumerate}
+        \item Show that if \( P \) is any partition of \( [a, b] \), then
+        \[
+            U(f + g, P) \leq U(f, P) + U(g, P).
+        \]
+        Provide a specific example where the inequality is strict. What does the corresponding inequality for lower sums look like?
+
+        \item Review the proof of Theorem 7.4.2 (ii), and provide an argument for part (i) of this theorem.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( P = \{ x_0, \ldots, x_n \} \) be a partition of \( [a, b] \) and, for each \( k \in \{ 1, \ldots, n \} \), let
+        \[
+            M_k^f = \sup \{ f(x) : x \in [x_{k-1}, x_k] \};
+        \]
+        define \( M_k^g \) and \( M_k^{f + g} \) similarly. Let \( k \in \{ 1, \ldots, n \} \) be given. For any \( \epsilon > 0 \), Lemma 1.3.8 implies that there is some \( x \in [x_{k-1}, x_k] \) such that
+        \[
+            M_k^{f + g} - \epsilon < f(x) + g(x) \leq M_k^f + M_k^g.
+        \]
+        So for any \( \epsilon > 0 \) we have \( M_k^{f + g} \leq M_k^f + M_k^g + \epsilon \); \href{https://lew98.github.io/Mathematics/UA_Section_1_2_Exercises.pdf}{Exercise 1.2.10 (c)} allows us to conclude that \( M_k^{f + g} \leq M_k^f + M_k^g \). It now follows that
+        \[
+            U(f + g, P) \leq U(f, P) + U(g, P).
+        \]
+
+        For an example where this inequality is strict, let \( f, g : [0, 1] \to \R \) be given by
+        \[
+            f(x) = \begin{cases}
+                0 & \text{if } x = 0, \\
+                2 & \text{if } 0 < x < 1, \\
+                3 & \text{If } x = 1,
+            \end{cases}
+            \quand
+            g(x) = \begin{cases}
+                3 & \text{if } x = 0, \\
+                2 & \text{if } 0 < x < 1, \\
+                0 & \text{If } x = 1,
+            \end{cases}
+        \]
+        so that
+        \[
+            f(x) + g(x) = \begin{cases}
+                3 & \text{if } x = 0 \text{ or } x = 1, \\
+                4 & \text{if } 0 < x < 1.
+            \end{cases}
+        \]
+        For the partition \( P = \{ 0, 1 \} \) of \( [0, 1] \), we then have
+        \begin{gather*}
+            U(f + g, P) = \sup \{ f(x) + g(x) : x \in [0, 1] \} = 4, \\[2mm]
+            U(f, P) = \sup \{ f(x) : x \in [0, 1] \} = 3, \quand U(g, P) = \sup \{ g(x) : x \in [0, 1] \} = 3.
+        \end{gather*}
+        Thus \( U(f + g, P) = 4 < 6 = U(f, P) + U(g, P) \).
+        
+        The corresponding inequality for lower sums is
+        \[
+            L(f, P) + L(g, P) \leq L(f + g, P),
+        \]
+        which can be proved similarly; we can also find an analogous example showing that this inequality can be strict.
+
+        \item Because \( f \) and \( g \) are integrable on \( [a, b] \), \href{https://lew98.github.io/Mathematics/UA_Section_7_2_Exercises.pdf}{Exercise 7.2.3} implies that there are sequences \( (Q_n) \) and \( (R_n) \) of partitions of \( [a, b] \) such that
+        \[
+            \lim_{n \to \infty} [U(f, Q_n) - L(f, Q_n)] = \lim_{n \to \infty} [U(g, R_n) - L(g, R_n)] = 0.
+        \]
+        For each \( n \in \N \) let \( P_n = Q_n \cup R_n \) be the common refinement of \( Q_n \) and \( R_n \). Lemma 7.2.3 then gives us the inequalities
+        \begin{multline*}
+            0 \leq U(f, P_n) - L(f, P_n) \leq U(f, Q_n) - L(f, Q_n) \\[2mm]
+            \text{and} \quad 0 \leq U(g, P_n) - L(g, P_n) \leq U(g, R_n) - L(g, R_n);
+        \end{multline*}
+        together with the Squeeze Theorem (\href{https://lew98.github.io/Mathematics/UA_Section_2_3_Exercises.pdf}{Exercise 2.3.3}), these imply that
+        \[
+            \lim_{n \to \infty} [U(f, P_n) - L(f, P_n)] = \lim_{n \to \infty} [U(g, P_n) - L(g, P_n)] = 0.
+        \]
+        By part (a) we have the inequality
+        \[
+            0 \leq U(f + g, P_n) - L(f + g, P_n) \leq U(f, P_n) - L(f, P_n) + U(g, P_n) - L(g, P_n)
+        \]
+        and so another application of the Squeeze Theorem gives us
+        \[
+            \lim_{n \to \infty} [U(f + g, P_n) - L(f + g, P_n)] = 0.
+        \]
+        \href{https://lew98.github.io/Mathematics/UA_Section_7_2_Exercises.pdf}{Exercise 7.2.3} then implies that \( f + g \) is integrable on \( [a, b] \) and also that
+        \[
+            \int_a^b (f + g) = \lim_{n \to \infty} U(f + g, P_n) = \lim_{n \to \infty} L(f + g, P_n).
+        \]
+        Again by part (a) and \href{https://lew98.github.io/Mathematics/UA_Section_7_2_Exercises.pdf}{Exercise 7.2.3} we have
+        \[
+            \int_a^b (f + g) = \lim_{n \to \infty} U(f + g, P_n) \leq \lim_{n \to \infty} [U(f, P_n) + U(g, P_n)] = \int_a^b f + \int_a^b g.
+        \]
+        Similarly,
+        \[
+            \int_a^b f + \int_a^b g = \lim_{n \to \infty} [L(f, P_n) + L(g, P_n)] \leq \lim_{n \to \infty} L(f + g, P_n) = \int_a^b (f + g).
+        \]
+        We may conclude that
+        \[
+            \int_a^b (f + g) = \int_a^b f + \int_a^b g.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    Although not part of Theorem 7.4.2, it is true that the product of integrable functions in integrable. Provide the details for each step in the following proof of this fact:
+    \begin{enumerate}
+        \item If \( f \) satisfies \( \abs{f(x)} \leq M \) on \( [a, b] \), show
+        \[
+            \abs{(f(x))^2 - (f(y))^2} \leq 2M \abs{f(x) - f(y)}.
+        \]
+
+        \item Prove that if \( f \) is integrable on \( [a, b] \), then so is \( f^2 \).
+
+        \item Now show that if \( f \) and \( g \) are integrable, then \( fg \) is integrable. (Consider \( (f + g)^2 \)).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item For any \( x, y \in [a, b] \), we have
+        \begin{multline*}
+            \abs{(f(x))^2 - (f(y))^2} = \abs{f(x) + f(y)} \abs{f(x) - f(y)} \\[2mm]
+            \leq \paren{ \abs{f(x)} + \abs{f(y)} } \abs{f(x) - f(y)} \leq 2M \abs{f(x) - f(y)}.
+        \end{multline*}
+
+        \item Because \( f \) is integrable on \( [a, b] \), it is bounded on \( [a, b] \), say by \( R > 0 \). Suppose \( P = \{ x_0, \ldots, x_n \} \) is an arbitrary partition of \( [a, b] \). For \( k \in \{ 1, \ldots, n \} \), define
+        \[
+            M_k^f = \sup \{ f(x) : x \in [x_{k-1}, x_k] \} \quand m_k^f = \inf \{ f(x) : x \in [x_{k-1}, x_k] \};
+        \]
+        define \( M_k^{f^2} \) and \( m_k^{f^2} \) similarly. Let \( k \in \{ 1, \ldots, n \} \) and \( \delta > 0 \) be given. By Lemma 1.3.8 and \href{https://lew98.github.io/Mathematics/UA_Section_1_3_Exercises.pdf}{Exercise 1.3.1 (b)}, there exist \( x, y \in [x_{k-1}, x_k] \) such that
+        \[
+            M_k^{f^2} - \frac{\delta}{2} < (f(x))^2 \quand (f(y))^2 < m_k^{f^2} + \frac{\delta}{2}.
+        \]
+        Together with part (a), these inequalities give us
+        \begin{multline*}
+            M_k^{f^2} - m_k^{f^2} - \delta < (f(x))^2 - (f(y))^2 \leq \abs{(f(x))^2 - (f(y))^2} \\
+            \leq 2R \abs{f(x) - f(y)} \leq 2R \paren{ M_k^f - m_k^f }.
+        \end{multline*}
+        We have now shown that \( M_k^{f^2} - m_k^{f^2} \leq 2R \paren{ M_k^f - m_k^f } + \delta \) for all \( \delta > 0 \); \href{https://lew98.github.io/Mathematics/UA_Section_1_2_Exercises.pdf}{Exercise 1.2.10 (c)} then implies that \( M_k^{f^2} - m_k^{f^2} \leq 2R \paren{ M_k^f - m_k^f } \).
+
+        Now let \( \epsilon > 0 \) be given. Since \( f \) is integrable on \( [a, b] \), there exists a partition \( P \) of \( [a, b] \) such that
+        \[
+            U(f, P) - L(f, P) < \frac{\epsilon}{2R}.
+        \]
+        By our previous discussion, it follows that
+        \[
+            U \paren{ f^2, P } - L \paren{ f^2, P } \leq 2R (U(f, P) - L(f, P)) < \epsilon.
+        \]
+        Since \( \epsilon > 0 \) was arbitrary, we may conclude that \( f^2 \) is integrable on \( [a, b] \).
+
+        \item Since \( fg = \tfrac{1}{2} \bkt{ (f + g)^2 - f^2 - g^2 } \), it follows from part (b), Theorem 7.4.2 (i), and Theorem 7.4.2 (ii) that \( fg \) is integrable on \( [a, b] \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Review the discussion immediately preceding Theorem 7.4.4.
+    \begin{enumerate}
+        \item Produce an example of a sequence \( f_n \to 0 \) pointwise on \( [0, 1] \) where \( \lim_{n \to \infty} \int_0^1 f_n \) does not exist.
+
+        \item Produce an example of a sequence \( g_n \) with \( \int_0^1 g_n \to 0 \) but \( g_n(x) \) does not converge to zero for any \( x \in [0, 1] \). To make it more interesting, let's insist that \( g_n(x) \geq 0 \) for all \( x \) and \( n \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( (f_n) \) be the sequence given by
+        \[
+            f_n(x) = \begin{cases}
+                (-1)^n n & \text{if } 0 < x < \tfrac{1}{n}, \\
+                0 & \text{if } x = 0 \text{ or } \tfrac{1}{n} \leq x \leq 1.
+            \end{cases}
+        \]
+        Then \( f_n \to 0 \) pointwise on \( [0, 1] \), but
+        \[
+            \lim_{n \to \infty} \int_0^1 f_n = \lim_{n \to \infty} (-1)^n
+        \]
+        does not exist.
+
+        \item For subsets \( A \subseteq B \subseteq \R \), denote by \( \chi_A : B \to \R \) the \href{https://en.wikipedia.org/wiki/Indicator_function}{indicator/characteristic function} of \( A \), i.e.\
+        \[
+            \chi_A(x) = \begin{cases}
+                1 & \text{if } x \in A, \\
+                0 & \text{if } x \not\in A.
+            \end{cases}
+        \]
+        Define a sequence of functions \( (g_n : [0, 1] \to \R) \) by
+        \begin{align*}
+            & g_1 = \chi_{\bkt{0, 1}}, \\
+            & g_2 = \chi_{\bkt{0, \tfrac{1}{2}}}, g_3 = \chi_{\bkt{\tfrac{1}{2}, 1}}, \\
+            & g_4 = \chi_{\bkt{0, \tfrac{1}{3}}}, g_5 = \chi_{\bkt{\tfrac{1}{3}, \tfrac{2}{3}}}, g_6 = \chi_{\bkt{\tfrac{2}{3}, 1}},
+        \end{align*}
+        and so on; this sequence is sometimes called the typewriter sequence. Then
+        \[
+            \int_0^1 g_1 = 1, \qquad \int_0^1 g_2 = \int_0^1 g_3 = \frac{1}{2}, \qquad \int_0^1 g_4 = \int_0^1 g_5 = \int_0^1 g_6 = \frac{1}{3}, \quad \text{ etc},
+        \]
+        so that \( \int_0^1 g_n \to 0 \). However, for any \( x \in [0, 1] \) and \( N \in \N \), there always exists some integer \( n \geq N \) such that \( g_n(x) = 1 \); it follows that \( (g_n(x)) \) does not converge to zero.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    For each \( n \in \N \), let
+    \[
+        h_n(x) = \begin{cases}
+            1/2^n & \text{if } 1/2^n < x \leq 1 \\
+            0 & \text{if } 0 \leq x \leq 1/2^n
+        \end{cases},
+    \]
+    and set \( H(x) = \sum_{n=1}^{\infty} h_n(x) \). Show \( H \) is integrable and compute \( \int_0^1 H \).
+\end{exercise}
+
+\begin{solution}
+    For each \( N \in \N \), let \( H_N : [0, 1] \to \R \) be the \( N \)\ts{th} partial sum of \( H \), i.e.\ \( H_N(x) = \sum_{n=1}^N h_n(x) \). Observe that
+    \[
+        H_N(x) = \begin{dcases}
+            0 & \text{if } x \in \bkt{0, \frac{1}{2^N}}, \\[2mm]
+            \frac{2^k - 1}{2^N} & \text{if } x \in \left( \frac{1}{2^{N - k + 1}}, \frac{1}{2^{N - k}} \right], 1 \leq k \leq N.
+        \end{dcases}
+    \]
+    Thus each \( H_N \) is piecewise-constant; Theorem 7.4.1 then implies that each \( H_N \) is integrable and furthermore that
+    \[
+        \int_0^1 H_N = \sum_{k=1}^N \int_{2^{-(N - k + 1)}}^{2^{-(N - k)}} H_N = \sum_{k=1}^N \paren{ \frac{2^k - 1}{2^N} } \paren{ \frac{1}{2^{N - k}} - \frac{1}{2^{N - k + 1}} }.
+    \]
+    Some calculations reveal that
+    \[
+        \int_0^1 H_N = \frac{2}{3} - \frac{1}{6 \cdot 4^{N - 1}} - \frac{1}{4^N} + \frac{1}{2^{N + 1}},
+    \]
+    so that \( \lim_{N \to \infty} \int_0^1 H_N = \tfrac{2}{3} \). The Weierstrass M-Test implies that \( H_N \) converges uniformly to \( H \) on \( [0, 1] \); it then follows from Theorem 7.4.4 that \( H \) is integrable on \( [0, 1] \) and also that
+    \[
+        \int_0^1 H = \lim_{N \to \infty} \int_0^1 H_N = \frac{2}{3}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Let \( g_n \) and \( g \) be uniformly bounded on \( [0, 1] \), meaning that there exists a single \( M > 0 \) satisfying \( \abs{g(x)} \leq M \) and \( \abs{g_n(x)} \leq M \) for all \( n \in \N \) and \( x \in [0, 1] \). Assume \( g_n \to g \) pointwise on \( [0, 1] \) and uniformly on any set of the form \( [0, \alpha] \), where \( 0 < \alpha < 1 \).
+
+    If all the functions are integrable, show that \( \lim_{n \to \infty} \int_0^1 g_n = \int_0^1 g \).
+\end{exercise}
+
+\begin{solution}
+    Let \( \epsilon > 0 \) be given and set \( \alpha = \max \set{ \tfrac{1}{2}, 1 - \tfrac{\epsilon}{4M} } \). Because \( g_n \to g \) uniformly on \( [0, \alpha] \), there exists an \( N \in \N \) such that
+    \[
+        x \in [0, \alpha] \text{ and } n \geq N \quimplies \abs{g_n(x) - g(x)} < \frac{\epsilon}{2 \alpha}.
+    \]
+    Then, provided \( n \geq N \), we have
+    \begin{align*}
+        \abs{ \int_0^1 g_n(x) \dx - \int_0^1 g(x) \dx } &= \abs{ \int_0^1 g_n(x) - g(x) \dx } \tag{Theorem 7.4.2 (i)} \\[2mm]
+        &\leq \int_0^1 \abs{g_n(x) - g(x)} \dx \tag{Theorem 7.4.2 (v)} \\[2mm]
+        &= \int_0^{\alpha} \abs{g_n(x) - g(x)} \dx + \int_{\alpha}^1 \abs{g_n(x) - g(x)} \dx \tag{Theorem 7.4.1} \\[2mm]
+        &\leq \frac{\epsilon}{2} + 2M (1 - \alpha) \tag{Theorem 7.4.2 (iii)} \\[2mm]
+        &\leq \epsilon.
+    \end{align*}
+    It follows that \( \lim_{n \to \infty} \int_0^1 g_n = \int_0^1 g \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Assume \( g \) is integrable on \( [0, 1] \) and continuous at 0. Show
+    \[
+        \lim_{n \to \infty} \int_0^1 g \paren{ x^n } \dx = g(0).
+    \]
+\end{exercise}
+
+\begin{solution}
+    Since \( g \) is integrable on \( [0, 1] \), it is bounded on \( [0, 1] \), say by \( M > 0 \). Let \( \epsilon > 0 \) be given and set \( \alpha = \max \set{ \tfrac{1}{2}, 1 - \tfrac{\epsilon}{4M} } \). Because \( g \) is continuous at 0, there exists a \( \delta > 0 \) such that
+    \[
+        x \in [0, \delta) \cap [0, 1] \quimplies \abs{g(x) - g(0)} < \frac{\epsilon}{2 \alpha}.
+    \]
+    Since \( \tfrac{1}{2} \leq \alpha < 1 \), we have \( \lim_{n \to \infty} \alpha^n = 0 \). Thus there exists an \( N \in \N \) such that
+    \[
+        n \geq N \quimplies 0 \leq \alpha^n < \delta.
+    \]
+    Suppose \( n \geq N \) and \( x \in [0, \alpha] \). Then by the previous discussion we have
+    \[
+        0 \leq x^n \leq \alpha^n < \delta \quimplies \abs{ g \paren{ x^n } - g(0) } < \frac{\epsilon}{2 \alpha}.
+    \]
+    It follows that for \( n \geq N \) we have
+    \begin{align*}
+        \abs{ \int_0^1 g \paren{ x^n } \dx - g(0) } &= \abs{ \int_0^1 g \paren{ x^n } \dx - \int_0^1 g(0) \dx } \\[2mm]
+        &= \abs{ \int_0^1 g \paren{ x^n } - g(0) \dx } \tag{Theorem 7.4.2 (i)} \\[2mm]
+        &\leq \int_0^1 \abs{g \paren{ x^n } - g(0)} \dx \tag{Theorem 7.4.2 (v)} \\[2mm]
+        &= \int_0^{\alpha} \abs{g \paren{ x^n } - g(0)} \dx + \int_{\alpha}^1 \abs{g \paren{ x^n } - g(0)} \dx \tag{Theorem 7.4.1} \\[2mm]
+        &\leq \frac{\epsilon}{2} + 2M (1 - \alpha) \tag{Theorem 7.4.2 (iii)} \\[2mm]
+        &\leq \epsilon.
+    \end{align*}
+    Thus \( \lim_{n \to \infty} \int_0^1 g \paren{ x^n } \dx = g(0) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Review the original definition of integrability in Section 7.2, and in particular the definition of the upper integral \( U(f) \). One reasonable suggestion might be to bypass the complications introduced in Definition 7.2.7 and simply define the integral to be the value of \( U(f) \). Then \textit{every} bounded function is integrable! Although tempting, proceeding in this way has some significant drawbacks. Show by example that several of the properties in Theorem 7.4.2 no longer hold if we replace our current definition of integrability with the proposal that \( \int_a^b f = U(f) \) for every bounded function \( f \).
+\end{exercise}
+
+\begin{solution}
+    We will consider each of the properties in Theorem 7.4.2 in turn.
+    \begin{enumerate}[label=(\roman*)]
+        \item This property no longer holds. For example, consider \( f, g : [0, 1] \to \R \) given by
+        \[
+            f(x) = \begin{cases}
+                1 & \text{if } x \in \Q, \\
+                0 & \text{if } x \not\in \Q,
+            \end{cases}
+            \qquad \text{and} \qquad
+            g(x) = \begin{cases}
+                0 & \text{if } x \in \Q, \\
+                1 & \text{if } x \not\in \Q,
+            \end{cases}
+        \]
+        so that \( (f + g)(x) = 1 \) for all \( x \in [0, 1] \). In this case, we have \( U(f) = U(g) = U(f + g) = 1 \) and thus \( U(f + g) \neq U(f) + U(g) \).
+
+        \item This property no longer holds. For example, take \( f \) to be Dirichlet's function on \( [0, 1] \). Then \( U(-f) = 0 \neq -1 = -U(f) \).
+
+        \item This property still holds, and follows as in the textbook, i.e.\ by observing that
+        \[
+            L(f, P) \leq U(f) \leq U(f, P)
+        \]
+        for any partition \( P \) and then taking \( P \) to be the partition \( \{ a, b \} \).
+
+        \item This property still holds. Let \( P = \{ x_0, \ldots, x_n \} \) be a partition of \( [a, b] \) and note that the inequality \( f(x) \leq g(x) \) for all \( x \in [a, b] \) implies that
+        \[
+            \sup \{ f(x) : x \in [x_{k-1}, x_k] \} \leq \sup \{ g(x) : x \in [x_{k-1}, x_k] \}
+        \]
+        for any \( k \in \{ 1, \ldots, n \} \). It follows that \( U(f, P) \leq U(g, P) \); since \( P \) was an arbitrary partition, we may conclude that \( U(f) \leq U(g) \).
+
+        \item This property still holds. Since \( f \) is bounded if and only if \( \abs{f} \) is bounded, \( \abs{f} \) is ``integrable'' (in the sense of this exercise). The inequality \( -\abs{f(x)} \leq f(x) \leq \abs{f(x)} \) for all \( x \in [a, b] \), combined with property (iv), gives us the inequalities \( U(f) \leq U(\abs{f}) \) and \( U(-f) \leq U(\abs{f}) \). Now, for any \( \epsilon > 0 \), there exists a partition \( P \) such that
+        \begin{multline*}
+            U(-f) \leq U(-f, P) < U(-f) + \epsilon \\[2mm]
+            \implies \quad -U(-f) - \epsilon < -U(-f, P) = L(f, P) \leq L(f) \leq U(f).
+        \end{multline*}
+        It follows that \( -U(-f) \leq U(f) \), which gives us \( -U(f) \leq U(-f) \) and hence, by our previous discussion, \( -U(f) \leq U(\abs{f}) \). This inequality, together with the inequality \( U(f) \leq U(\abs{f}) \), allows us to conclude that \( \abs{U(f)} \leq U(\abs{f}) \).
+    \end{enumerate}
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2\ts{nd} edition.}
+
+\end{document}
