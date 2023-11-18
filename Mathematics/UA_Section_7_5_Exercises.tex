@@ -1,0 +1,491 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{graphicx}
+\usepackage{systeme}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix, patterns, decorations.pathreplacing, calligraphy}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 7.5 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 7.5.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 7.5.#1#3}
+
+\newcommand{\interior}[1]{%
+  {\kern0pt#1}^{\mathrm{o}}%
+}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\quimplies}{\quad \implies \quad}
+\newcommand{\quiff}{\quad \iff \quad}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\set{\{}{\}}
+\makeatletter
+\let\oldset\set
+\def\set{\@ifstar{\oldset}{\oldset*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 7.5 Exercises}
+
+Exercises with solutions from Section 7.5 of \hyperlink{ua}{[UA]}.
+
+\begin{exercise}
+\label{ex:1}
+    \begin{enumerate}
+        \item Let \( f(x) = \abs{x} \) and define \( F(x) = \int_{-1}^x f \). Find a piecewise algebraic formula for \( F(x) \) for all \( x \). Where is \( F \) continuous? Where is \( F \) differentiable? Where does \( F'(x) = f(x) \)?
+
+        \item Repeat part (a) for the function
+        \[
+            f(x) = \begin{cases}
+                1 & \text{if } x < 0 \\
+                2 & \text{if } x \geq 0.
+            \end{cases}
+        \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Some calculations reveal that \( F : [-1, \infty) \to \R \) is given by
+        \[
+            F(x) = \begin{cases}
+                \tfrac{1}{2} (1 - x^2) & \text{if } -1 \leq x \leq 0, \\
+                \tfrac{1}{2} (1 + x^2) & \text{if } x > 0.
+            \end{cases}
+        \]
+        It is straightforward to manually check that \( F \) is differentiable (and hence continuous) on its domain, with derivative given by \( F'(x) = f(x) \). However, note that the Fundamental Theorem of Calculus part (ii) (FToC, Theorem 7.5.1 (ii)) immediately implies that \( F \) is continuous on any interval of the form \( [-1, b] \) for \( b \in \R \) (in fact, Lipschitz on such intervals) and hence is continuous on its domain. Furthermore, as \( f \) is continuous everywhere, the FToC also implies that \( F \) is differentiable on its domain with derivative given by \( F'(x) = f(x) \).
+
+        \item In this case, the function \( F : [-1, \infty) \to \R \) is given by
+        \[
+            F(x) = \begin{cases}
+                1 + x & \text{if } -1 \leq x \leq 0, \\
+                1 + 2x & \text{if } x > 0.
+            \end{cases}
+        \]
+        As in part (a), the FToC part (ii) implies that \( F \) is continuous on its domain. Furthermore, since \( f \) is continuous on \( A = [-1, 0) \cup (0, \infty) \), the FToC implies that \( F \) is differentiable on \( A \) with derivative given by \( F'(x) = f(x) \). However, because \( f \) is not continuous at 0 the FToC does not allow us to conclude that \( F \) is differentiable at 0. Indeed, \( F \) fails to be differentiable here:
+        \[
+            \lim_{x \to 0^-} \frac{F(x) - F(0)}{x} = 1 \neq 2 = \lim_{x \to 0^+} \frac{F(x) - F(0)}{x}.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Decide whether each statement is true or false, providing a short justification for each conclusion.
+    \begin{enumerate}
+        \item If \( g = h' \) for some \( h \) on \( [a, b] \), then \( g \) is continuous on \( [a, b] \).
+
+        \item If \( g \) is continuous on \( [a, b] \), then \( g = h' \) for some \( h \) on \( [a, b] \).
+
+        \item If \( H(x) = \int_a^x h \) is differentiable at \( c \in [a, b] \), then \( h \) is continuous at \( c \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item This is false. For a counterexample, consider the function \( h : [-1, 1] \to \R \) given by
+        \[
+            h(x) = \begin{cases}
+                x^{5/3} \sin \paren{ \tfrac{1}{x} } & \text{if } x \neq 0, \\
+                0 & \text{if } x = 0.
+            \end{cases}
+        \]
+        Then, as we showed in \href{https://lew98.github.io/Mathematics/UA_Section_5_2_Exercises.pdf}{Exercise 5.2.7 (a)}, \( h \) is differentiable but \( h' \) is not continuous at 0.
+
+        \item This is true. Theorem 7.2.9 implies that \( g \) is integrable on \( [a, b] \) and so we are justified in defining \( h : [a, b] \to \R \) by \( h(x) = \int_a^x g \); the continuity of \( g \) on \( [a, b] \) then allows us to use the FToC part (ii) to conclude that \( g = h' \).
+
+        \item This is false. For a counterexample, consider \( h : [-1, 1] \to \R \) given by
+        \[
+            h(x) = \begin{cases}
+                0 & \text{if } x \neq 0, \\
+                1 & \text{if } x = 0.
+            \end{cases}
+        \]
+        Then \( H : [-1, 1] \to \R \) defined by \( H(x) = \int_{-1}^x h(t) \, dt \) is identically zero and hence differentiable at 0, but \( h \) is not continuous at 0.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    The hypothesis in Theorem 7.5.1 (i) that \( F'(x) = f(x) \) for all \( x \in [a, b] \) is slightly stronger than it needs to be. Carefully read the proof and state exactly what needs to be assumed with regard to the relationship between \( f \) and \( F \) for the proof to be valid.
+\end{exercise}
+
+\begin{solution}
+    In light of Theorem 7.4.1, it would suffice for \( F'(x) = f(x) \) to hold for all but finitely many \( x \in [a, b] \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Show that if \( f : [a, b] \to \R \) is continuous and \( \int_a^x f = 0 \) for all \( x \in [a, b] \), then \( f(x) = 0 \) everywhere on \( [a, b] \). Provide an example to show that this conclusion does not follow if \( f \) is not continuous.
+\end{exercise}
+
+\begin{solution}
+    Define \( F : [a, b] \to \R \) by \( F(x) = \int_a^x f \). On one hand, since by assumption \( F \) is identically zero on \( [a, b] \), we have that \( F \) is differentiable on \( [a, b] \) and satisfies \( F'(x) = 0 \) for all \( x \in [a, b] \). On the other hand, because \( f \) is continuous on \( [a, b] \), the FToC part (ii) implies that \( F'(x) = f(x) \) for all \( x \in [a, b] \). Thus \( f \) is identically zero on \( [a, b] \).
+
+    For an example demonstrating that this conclusion does not follow if \( f \) is not continuous, consider \( f : [0, 1] \to \R \) defined by
+    \[
+        f(x) = \begin{cases}
+            1 & \text{if } x = 0, \\
+            0 & \text{if } 0 < x \leq 1.
+        \end{cases}
+    \]
+    Then \( \int_0^x f = 0 \) for all \( x \in [0, 1] \), but \( f \) is not identically zero.
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    The Fundamental Theorem of Calculus can be used to supply a shorter argument for Theorem 6.3.1 under the additional assumption that the sequence of derivatives is continuous.
+
+    Assume \( f_n \to f \) pointwise and \( f_n' \to g \) uniformly on \( [a, b] \). Assuming each \( f_n' \) is continuous, we can apply Theorem 7.5.1 (i) to get
+    \[
+        \int_a^x f_n' = f_n(x) - f_n(a)
+    \]
+    for all \( x \in [a, b] \). Show that \( g(x) = f'(x) \).
+\end{exercise}
+
+\begin{solution}
+    Let \( x \in [a, b] \) be given. Because \( f_n' \to g \) uniformly on \( [a, x] \), Theorem 7.4.4 shows that
+    \[
+        \lim_{n \to \infty} \int_a^x f_n' = \int_a^x g.
+    \]
+    We can then take the limit as \( n \to \infty \) on both sides of the equation \( \int_a^x f_n' = f_n(x) - f_n(a) \) and use the pointwise convergence \( f_n \to f \) to see that
+    \[
+        f(x) = f(a) + \int_a^x g
+    \]
+    for all \( x \in [a, b] \). Since \( g \) is the uniform limit of a sequence of continuous functions it is itself continuous (Theorem 6.2.6) and so we may invoke the FToC part (ii) to conclude that \( f'(x) = g(x) \) for all \( x \in [a, b] \).
+\end{solution}
+
+\begin{exercise}[Integration-by-parts]
+\label{ex:6}
+    \begin{enumerate}
+        \item Assume \( h(x) \) and \( k(x) \) have continuous derivatives on \( [a, b] \) and derive the familiar integration-by-parts formula
+        \[
+            \int_a^b h(t) k'(t) \, dt = h(b) k(b) - h(a) k(a) - \int_a^b h'(t) k(t) \, dt.
+        \]
+
+        \item Explain how the result in \href{https://lew98.github.io/Mathematics/UA_Section_7_4_Exercises.pdf}{Exercise 7.4.6} can be used to slightly weaken the hypothesis in part (a).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item By assumption the functions \( h, h', k, \) and \( k' \) are continuous on \( [a, b] \); it follows that \( (hk)' = h k' + h' k \) is continuous on \( [a, b] \). Theorem 7.2.9 then implies that \( (hk)' \) is integrable on \( [a, b] \) and so we may use the FToC part (i) to see that
+        \[
+            \int_a^b h(t) k'(t) + h'(t) k(t) \, dt = \int_a^b (h(t) k(t))' \, dt = h(b) k(b) - h(a) k(a).
+        \]
+
+        \item In light of \href{https://lew98.github.io/Mathematics/UA_Section_7_4_Exercises.pdf}{Exercise 7.4.6}, we need only assume that \( h' \) and \( k' \) are integrable on \( [a, b] \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    Use part (ii) of Theorem 7.5.1 to construct another proof of part (i) of Theorem 7.5.1 under the stronger hypothesis that \( f \) is continuous. (To get started, set \( G(x) = \int_a^x f \).)
+\end{exercise}
+
+\begin{solution}
+    It will suffice to show that \( G(b) = F(b) - F(a) \). Because \( f \) is continuous on \( [a, b] \), the FToC part (ii) implies that \( G'(x) = f(x) = F'(x) \) for all \( x \in [a, b] \); it follows from Corollary 5.3.4 that \( G(x) = F(x) + k \) for some constant \( k \). Substituting \( x = a \), we see that \( k = -F(a) \) and thus \( G(b) = F(b) - F(a) \), as desired.
+\end{solution}
+
+\begin{exercise}[Natural Logarithm and Euler's Constant]
+\label{ex:8}
+    Let
+    \[
+        L(x) = \int_1^x \frac{1}{t} \, dt,
+    \]
+    where we consider only \( x > 0 \).
+    \begin{enumerate}
+        \item What is \( L(1) \)? Explain why \( L \) is differentiable and find \( L'(x) \).
+
+        \item Show that \( L(xy) = L(x) + L(y) \). (Think of \( y \) as a constant and differentiate \( g(x) = L(xy) \).)
+
+        \item Show \( L(x/y) = L(x) - L(y) \).
+
+        \item Let
+        \[
+            \gamma_n = \paren{ 1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n} } - L(n).
+        \]
+        Prove that \( (\gamma_n) \) converges. The constant \( \gamma = \lim \gamma_n \) is called Euler's constant.
+
+        \item Show how consideration of the sequence \( \gamma_{2n} - \gamma_n \) leads to the interesting identity
+        \[
+            L(2) = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \cdots \, .
+        \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item We have \( L(1) = 0 \). Because \( t^{-1} \) is continuous on \( (0, \infty) \), the FToC part (ii) shows that \( L \) is differentiable on \( (0, \infty) \) and satisfies \( L'(x) = x^{-1} \).
+
+        \item Note that, by part (a),
+        \[
+            \frac{d}{dx} L(xy) = y L'(xy) = \frac{y}{xy} = \frac{1}{x} = L'(x).
+        \]
+        Corollary 5.3.4 then implies that \( L(xy) = L(x) + k \) for some constant \( k \). Substituting \( x = 1 \), we see that \( k = L(y) \) and thus \( L(xy) = L(x) + L(y) \), as desired.
+
+        \item Observe that, by parts (a) and (b),
+        \[
+            0 = L(1) = L \paren{ \frac{y}{y} } = L(y) + L \paren{ \frac{1}{y} },
+        \]
+        so that \( L \paren{ \tfrac{1}{y} } = -L(y) \) for any \( y > 0 \). Combining this with part (b) shows that \( L \paren{ \tfrac{x}{y} } = L(x) - L(y) \).
+
+        \item Let \( n \geq 2 \) be given and consider the partition \( P = \{ 1, \ldots, n \} \) of \( [1, n] \). Then
+        \[
+            1 + \frac{1}{2} + \cdots + \frac{1}{n} > 1 + \frac{1}{2} + \cdots + \frac{1}{n - 1} = U \paren{ \frac{1}{t}, P } \geq U \paren{ \frac{1}{t} } = L(n).
+        \]
+        Thus \( \gamma_n \geq 0 \) for each \( n \in \N \), so that \( (\gamma_n) \) is bounded below.
+
+        Again, let \( n \in \N \) be given and observe that
+        \[
+            \gamma_n - \gamma_{n+1} = L \paren{ 1 + \frac{1}{n} } - \frac{1}{n + 1}.
+        \]
+        Since \( \tfrac{1}{t} \geq \tfrac{n}{n + 1} \) on \( \bkt{ 1, 1 + \tfrac{1}{n} } \), Theorem 7.4.2 (iii) shows that
+        \[
+            L \paren{ 1 + \frac{1}{n} } \geq \frac{1}{n + 1}
+        \]
+        and hence \( \gamma_n \geq \gamma_{n+1} \) for each \( n \in \N \), so that \( (\gamma_n) \) is decreasing; we can now appeal to the Monotone Convergence Theorem (Theorem 2.4.2) to conclude that \( (\gamma_n) \) converges.
+
+        \item For \( n \in \N \), observe that
+        \begin{align*}
+            \gamma_{2n} - \gamma_n &= \paren{ 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \cdots + \frac{1}{2n} } - \paren{ 1 + \frac{1}{2} + \cdots + \frac{1}{n} } - L(2n) + L(n) \\[2mm]
+            &= \paren{ 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \cdots + \frac{1}{2n} } - \paren{ \frac{2}{2} + \frac{2}{4} + \cdots + \frac{2}{2n} } - L(2) - L(n) + L(n) \\[2mm]
+            &= \paren{ 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \cdots - \frac{1}{2n} } - L(2).
+        \end{align*}
+        Taking the limit as \( n \to \infty \) on both sides gives the desired equality.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Given a function \( f \) on \( [a, b] \), define the \textit{total variation} of \( f \) to be
+    \[
+        V f = \sup \set{ \sum_{k=1}^n \abs{f(x_k) - f(x_{k-1})} },
+    \]
+    where the supremum is taken over all partitions \( P \) of \( [a, b] \).
+    \begin{enumerate}
+        \item If \( f \) is continuously differentiable (\( f' \) exists as a continuous function), use the Fundamental Theorem of Calculus to show \( V f \leq \int_a^b \abs{f'} \).
+
+        \item Use the Mean Value Theorem to establish the reverse inequality and conclude that \( V f = \int_a^b \abs{f'} \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( P = \{ x_0, \ldots, x_n \} \) be an arbitrary partition of \( [a, b] \). Because \( f' \) is continuous on \( [a, b] \), it is integrable on \( [a, b] \) and so we may use the FToC part (i) and Theorem 7.4.2 (v) to see that
+        \[
+            \sum_{k=1}^n \abs{f(x_k) - f(x_{k-1})} = \sum_{k=1}^n \abs{\int_{x_{k-1}}^{x_k} f' \,} \leq \sum_{k=1}^n \int_{x_{k-1}}^{x_k} \abs{f'} = \int_a^b \abs{f'}.
+        \]
+        As \( P \) was arbitrary, it follows that \( V f \leq \int_a^b \abs{f'} \).
+
+        \item For any \( \epsilon > 0 \), there exists a partition \( P = \{ x_0, \ldots, x_n \} \) of \( [a, b] \) such that
+        \[
+            \paren{ \int_a^b \abs{f'} } - \epsilon = L(\abs{f'}) - \epsilon < L(\abs{f'}, P).
+        \]
+        For \( k \in \{ 1, \ldots, n \} \), apply the Mean Value Theorem on the interval \( [x_{k-1}, x_k] \) to obtain some \( t_k \in (x_{k-1}, x_k) \) such that
+        \[
+            \abs{f'(t_k)} (x_k - x_{k-1}) = \abs{f(x_k) - f(x_{k-1})}.
+        \]
+        It follows that
+        \begin{align*}
+            L(\abs{f'}, P) &= \sum_{k=1}^n \inf \{ \abs{f'(t)} : t \in [x_{k-1}, x_k] \} (x_k - x_{k-1}) \\[2mm]
+            &\leq \sum_{k=1}^n \abs{f'(t_k)} (x_k - x_{k-1}) \\[2mm]
+            &= \sum_{k=1}^n \abs{f(x_k) - f(x_{k-1})} \\[2mm]
+            &\leq V f.
+        \end{align*}
+        We have now shown that for every \( \epsilon > 0 \) it holds that
+        \[
+            \int_a^b \abs{f'} \leq V f + \epsilon
+        \]
+        and thus we obtain the inequality \( \int_a^b \abs{f'} \leq V f \). Given part (a), we may conclude that \( V f = \int_a^b \abs{f'} \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}[Change-of-variable Formula]
+\label{ex:10}
+    Let \( g : [a, b] \to \R \) be differentiable and assume \( g' \) is continuous. Let \( f : [c, d] \to \R \) be continuous, and assume that the range of \( g \) is contained in \( [c, d] \) so that the composition \( f \circ g \) is properly defined.
+    \begin{enumerate}
+        \item Why are we sure \( f \) is the derivative of some function? How about \( (f \circ g) g' \)?
+
+        \item Prove the change-of-variable formula
+        \[
+            \int_a^b f(g(x)) g'(x) \, dx = \int_{g(a)}^{g(b)} f(t) \, dt.
+        \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item \( f \) is integrable on \( [c, d] \) because it is continuous on \( [c, d] \) and so if we let \( F(x) = \int_c^x f \) then the FToC part (ii) implies that \( F'(x) = f(x) \) for each \( x \in [c, d] \). Similarly, note that \( f \circ g \) is continuous on \( [a, b] \), being a composition of continuous functions, and hence is integrable on \( [a, b] \). By assumption \( g' \) is continuous on \( [a, b] \) and so is also integrable on \( [a, b] \). We can now use \href{https://lew98.github.io/Mathematics/UA_Section_7_4_Exercises.pdf}{Exercise 7.4.6} to see that \( (f \circ g) g' \) is integrable on \( [a, b] \), so that we can define \( G(x) = \int_a^x (f \circ g) g' \) and use the FToC part (ii) to see that \( G'(x) = f(g(x)) g'(x) \) for each \( x \in [a, b] \).
+
+        \item Define \( F : [c, d] \to \R \) and \( G : [a, b] \to \R \) by
+        \[
+            F(t) = \int_{g(a)}^t f(x) \, dx \quand G(t) = \int_a^t f(g(x)) g'(x) \, dx.
+        \]
+        Then \( F'(t) = f(t) \), so that \( [F(g(t))]' = f(g(t)) g'(t) \), and \( G'(t) = f(g(t)) g'(t) \). It follows that \( F(g(t)) = G(t) + k \) on \( [a, b] \) for some constant \( k \). Substituting \( t = a \), we see that \( k = 0 \) and thus \( F(g(b)) = G(b) \), i.e.\
+        \[
+            \int_{g(a)}^{g(b)} f(x) \, dx = \int_a^b f(g(x)) g'(x) \, dx.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Assume \( f \) is integrable on \( [a, b] \) and has a ``jump discontinuity'' at \( c \in (a, b) \). This means that both one-sided limits exist as \( x \) approaches \( c \) from the left and from the right, but that
+    \[
+        \lim_{x \to c^-} f(x) \neq \lim_{x \to c^+} f(x).
+    \]
+    (This phenomenon is discussed in more detail in Section 4.6.)
+    \begin{enumerate}
+        \item Show that, in this case, \( F(x) = \int_a^x f \) is not differentiable at \( x = c \).
+
+        \item The discussion in Section 5.5 mentions the existence of a continuous monotone function that fails to be differentiable on a dense subset of \( \R \). Combine the results of part (a) with \href{https://lew98.github.io/Mathematics/UA_Section_6_4_Exercises.pdf}{Exercise 6.4.10} to show how to construct such a function.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( A = \lim_{x \to c^-} f(x) \) and \( B = \lim_{x \to c^+} f(x) \). A small modification of the proof of the FToC part (ii) shows that
+        \[
+            \lim_{x \to c^-} \frac{F(x) - F(c)}{x - c} = A \quand \lim_{x \to c^+} \frac{F(x) - F(c)}{x - c} = B.
+        \]
+        Since \( A \neq B \), we see that \( \lim_{x \to c} \tfrac{F(x) - F(c)}{x- c} \) does not exist, i.e.\ \( F \) is not differentiable at \( c \).
+
+        \item As in \href{https://lew98.github.io/Mathematics/UA_Section_6_4_Exercises.pdf}{Exercise 6.4.10}, let \( \{ r_1, r_2, r_3, \ldots \} \) be an enumeration of the rationals and for each \( n \in \N \) define \( u_n : \R \to \R \) by
+        \[
+            u_n(x) = \begin{cases}
+                2^{-n} & \text{if } r_n < x, \\
+                0 & \text{if } x \leq r_n.
+            \end{cases}
+        \]
+        Now define \( h : \R \to \R \) by \( h(x) = \sum_{n=1}^{\infty} u_n(x) \). Let \( [a, b] \) be a given interval and note that for each \( N \in \N \) the partial sum function \( h_N(x) = \sum_{n=1}^N u_n(x) \) has at most \( N \) jump discontinuities on \( [a, b] \); it follows from Theorem 7.4.1 that \( h_N \) is integrable on \( [a, b] \). In \href{https://lew98.github.io/Mathematics/UA_Section_6_4_Exercises.pdf}{Exercise 6.4.10} we showed that \( h_N \to h \) uniformly on \( \R \) and hence by Theorem 7.4.4 we see that \( h \) is integrable on \( [a, b] \). We can now define \( H : \R \to \R \) by \( H(x) = \int_0^x h \). The FToC part (ii) shows that \( H \) is continuous, and we can use Theorem 7.4.1 and the fact that \( h \) is non-negative to see that \( H \) is monotone increasing.
+
+        Now we will prove that \( h \) has a jump discontinuity at each rational number. Let \( r_m \in \Q \) be given; we have two claims.
+        \begin{enumerate}[label=(\roman*)]
+            \item Our first claim is that \( \lim_{x \to r_m^-} h(x) = h(r_m) \). To see this, let \( \epsilon > 0 \) be given and choose \( N \in \N \) such that \( 2^{-N} < \epsilon \). Because the set \( \{ r_1, \ldots, r_N \} \) is finite, we can choose a \( \delta > 0 \) such that the intersection \( (r_m - \delta, r_m) \cap \{ r_1, \ldots, r_N \} \) is empty, i.e.\ if \( r_n \in (r_m - \delta, r_m) \), then \( n > N \).
+            
+            Now suppose that \( x \in (r_m - \delta, r_m) \) and enumerate the rationals in \( [x, r_m) \) as a subsequence \( \{ r_{n_1}, r_{n_2}, r_{n_3}, \ldots \} \) of the sequence \( \{ r_1, r_2, r_3, \ldots \} \); by our previous discussion, we must have \( n_k > N \) for each \( k \in \N \). As we showed in \href{https://lew98.github.io/Mathematics/UA_Section_6_4_Exercises.pdf}{Exercise 6.4.10}, \( h \) is strictly increasing and \( h(r_m) - h(x) = \sum_{k=1}^{\infty} 2^{-n_k} \). Thus
+            \[
+                \abs{h(r_m) - h(x)} = 2^{-N} \sum_{k=1}^{\infty} 2^{-n_k + N} \leq 2^{-N} \sum_{n=1}^{\infty} 2^{-n} = 2^{-N} < \epsilon
+            \]
+            and our claim follows.
+
+            \item Our second claim is that \( \lim_{x \to r_m^+} h(x) = h(r_m) + 2^{-m} \). Again, let \( \epsilon > 0 \) be given and choose \( N \in \N \) such that \( 2^{-N} < \epsilon \). Similarly to before, we can choose a \( \delta > 0 \) such that if \( r_n \in (r_m, r_m + \delta) \) then \( n > N \). For \( x \in (r_m, r_m + \delta) \), enumerate the rationals in \( (r_m, x) \) as a subsequence \( \{ r_{n_1}, r_{n_2}, r_{n_3}, \ldots \} \) of the sequence \( \{ r_1, r_2, r_3, \ldots \} \), so that
+            \[
+                [r_m, x) = \{ r_m, r_{n_1}, r_{n_2}, r_{n_3}, \ldots \};
+            \]
+            by our previous discussion, we must have \( n_k > N \) for each \( k \in \N \). Thus \( h(x) - h(r_m) = 2^{-m} + \sum_{k=1}^{\infty} 2^{-n_k} \) and, arguing as in our first claim, it follows that
+            \[
+                \abs{h(x) - h(r_m) - 2^{-m}} = \sum_{k=1}^{\infty} 2^{-n_k} \leq 2^{-N} < \epsilon.
+            \]
+            This proves our second claim.
+        \end{enumerate}
+        We have now shown that if \( r_m \in \Q \), then
+        \[
+            \lim_{x \to r_m^-} h(x) = h(r_m) < h(r_m) + 2^{-m} = \lim_{x \to r_m^+} h(x),
+        \]
+        so that \( h \) has a jump discontinuity at each rational number; it follows from part (a) that \( H \) fails to be differentiable at each rational number.
+    \end{enumerate}
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2\ts{nd} edition.}
+
+\end{document}

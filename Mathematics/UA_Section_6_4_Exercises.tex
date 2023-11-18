@@ -442,11 +442,23 @@ Exercises with solutions from Section 6.4 of \hyperlink{ua}{[UA]}.
 \end{exercise}
 
 \begin{solution}
-    Observe that \( \abs{u_n(x)} \leq 2^{-n} \) for all \( x \in \R \). Since \( \sum_{n=1}^{\infty} 2^{-n} \) is a convergent geometric series, the Weierstrass M-Test implies that \( h \) converges uniformly on \( \R \). To see that \( h \) is strictly increasing, let \( x < y \) be given real numbers. There are a countable infinity of rational numbers contained in \( (x, y] \), which we can enumerate as a subsequence \( \{ r_{n_1}, r_{n_2}, r_{n_3}, \ldots \} \) of the sequence \( \{ r_1, r_2, r_3, \ldots \} \). It follows that
+    Observe that \( \abs{u_n(x)} \leq 2^{-n} \) for all \( x \in \R \). Since \( \sum_{n=1}^{\infty} 2^{-n} \) is a convergent geometric series, the Weierstrass M-Test implies that \( h \) converges uniformly on \( \R \). To see that \( h \) is strictly increasing, let \( x < y \) be given real numbers. There are a countable infinity of rational numbers contained in \( [x, y) \), which we can enumerate as a subsequence \( \{ r_{n_1}, r_{n_2}, r_{n_3}, \ldots \} \) of the sequence \( \{ r_1, r_2, r_3, \ldots \} \). Now,
     \[
-        h(y) = h(x) + \sum_{k=1}^{\infty} 2^{-n_k} > h(x).
+        h(y) - h(x) = \sum_{n=1}^{\infty} \paren{ u_n(y) - u_n(x) }.
     \]
-    To see that \( h \) is continuous at every irrational point, let us first show that each \( u_n \) is continuous at every irrational point. Fix \( n \in \N, y \in \I \) (recall that \( \I \) is the set of irrational numbers), and set \( \delta := \abs{y - r_n} \); \( \delta \) must be positive since \( y \) is not rational. There are two cases:
+    Let \( n \in \N \) be given and consider the following three cases.
+    \begin{description}
+        \item[Case 1.] If \( r_n < x < y \), then \( u_n(y) = u_n(x) = 2^{-n} \) and thus \( u_n(y) - u_n(x) = 0 \).
+
+        \item[Case 2.] If \( x < y \leq r_n \), then \( u_n(y) = u_n(x) = 0 \) and thus \( u_n(y) - u_n(x) = 0 \).
+
+        \item[Case 3.] If \( x \leq r_n < y \), then \( r_n \in \{ r_{n_1}, r_{n_2}, r_{n_3}, \ldots \} \). Thus \( n = n_k \) for some unique \( k \in \N \), so that \( u_n(y) = 2^{-n_k} \) and \( u_n(x) = 0 \), which gives us \( u_n(y) - u_n(x) = 2^{-n_k} \).
+    \end{description}
+    It follows that
+    \[
+        h(y) - h(x) = \sum_{k=1}^{\infty} 2^{-n_k} > 0.
+    \]
+    To see that \( h \) is continuous at every irrational point, let us first show that each \( u_n \) is continuous at every irrational point. Fix \( n \in \N, y \in \I \) (where \( \I \) is the set of irrational numbers), and set \( \delta := \abs{y - r_n} \); \( \delta \) must be positive since \( y \) is not rational. There are two cases:
     \begin{description}
         \item[Case 1.] If \( y < r_n \), then \( u_n(x) = 0 \) for all \( x \in (y - \delta, y + \delta) \) and hence \( u_n \) is continuous at \( y \).
 
