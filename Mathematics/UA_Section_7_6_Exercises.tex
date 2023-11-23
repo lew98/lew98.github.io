@@ -1,0 +1,578 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{mathtools}
+\usepackage{changepage}
+\usepackage{graphicx}
+\usepackage{systeme}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{matrix, patterns, decorations.pathreplacing, calligraphy}
+\usepackage{tikz-cd}
+\usepackage[nameinlink]{cleveref}
+\geometry{
+headheight=15pt,
+left=60pt,
+right=60pt
+}
+\setlength{\emergencystretch}{20pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\chead{Section 7.6 Exercises}
+\rhead{\thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{exercise}
+    {}
+    {}
+    {}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise 7.6.}
+
+\newtheoremstyle{solution}
+    {}
+    {}
+    {}
+    {}
+    {\itshape\color{magenta}}
+    {.}
+    { }
+    {\thmname{#1}\thmnote{ #3}}
+\theoremstyle{solution}
+\newtheorem*{solution}{Solution}
+
+\Crefformat{exercise}{#2Exercise 7.6.#1#3}
+
+\newcommand{\interior}[1]{%
+  {\kern0pt#1}^{\mathrm{o}}%
+}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\setcomp}[1]{#1^{\mathsf{c}}}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\quand}{\quad \text{and} \quad}
+\newcommand{\quimplies}{\quad \implies \quad}
+\newcommand{\quiff}{\quad \iff \quad}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\DeclarePairedDelimiter\paren{(}{)}
+\makeatletter
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\makeatother
+
+\DeclarePairedDelimiter\bkt{[}{]}
+\makeatletter
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+\DeclarePairedDelimiter\set{\{}{\}}
+\makeatletter
+\let\oldset\set
+\def\set{\@ifstar{\oldset}{\oldset*}}
+\makeatother
+
+\setlist[enumerate,1]{label={(\alph*)}}
+
+\begin{document}
+
+\section{Section 7.6 Exercises}
+
+Exercises with solutions from Section 7.6 of \hyperlink{ua}{[UA]}.
+
+\begin{exercise}
+\label{ex:1}
+    \begin{enumerate}
+        \item First, argue that \( L(t, P) = 0 \) for any partition \( P \) of \( [0, 1] \).
+
+        \item Consider the set of points \( D_{\epsilon/2} = \{ x : t(x) \geq \epsilon/2 \} \). How big is \( D_{\epsilon/2} \)?
+
+        \item To complete the argument, explain how to construct a partition \( P_{\epsilon} \) of \( [0, 1] \) so that \( U(t, P_{\epsilon}) < \epsilon \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    See \href{https://lew98.github.io/Mathematics/UA_Section_7_3_Exercises.pdf}{Exercise 7.3.2}.
+\end{solution}
+
+\begin{exercise}
+\label{ex:2}
+    Define
+    \[
+        h(x) = \begin{cases}
+            1 & \text{if } x \in C \\
+            0 & \text{if } x \not\in C
+        \end{cases} \quad .
+    \]
+    \begin{enumerate}
+        \item Show \( h \) has discontinuities at each point of \( C \) and is continuous at every point of the complement of \( C \). Thus, \( h \) is not continuous on an uncountably infinite set.
+
+        \item Now prove that \( h \) is integrable on \( [0, 1] \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    See \href{https://lew98.github.io/Mathematics/UA_Section_7_3_Exercises.pdf}{Exercise 7.3.9}.
+\end{solution}
+
+\begin{exercise}
+\label{ex:3}
+    Show that any countable set has measure zero.
+\end{exercise}
+
+\begin{solution}
+    Let \( A \subseteq \R \) be a countable set, i.e.\ \( A = \{ a_1, a_2, a_3, \ldots \} \), and let \( \epsilon > 0 \) be given. Choose \( N \in \N \) such that \( 2^{-N} < \epsilon \). For each \( n \in \N \), let
+    \[
+        O_n = \paren{ a_n - \frac{\epsilon}{2^{N + n + 1}}, a_n + \frac{\epsilon}{2^{N + n + 1}} }.
+    \]
+    Then \( A \subseteq \bigcup_{n=1}^{\infty} O_n \) and \( \abs{O_n} = 2^{-N - n} \), so that
+    \[
+        \sum_{n=1}^{\infty} \abs{O_n} = \sum_{n=1}^{\infty} 2^{-N - n} = 2^{-N} \sum_{n=1}^{\infty} 2^{-n} = 2^{-N} < \epsilon.
+    \]
+    Thus \( A \) has measure zero.
+\end{solution}
+
+\begin{exercise}
+\label{ex:4}
+    Prove that the Cantor set has measure zero.
+\end{exercise}
+
+\begin{solution}
+    See \href{https://lew98.github.io/Mathematics/UA_Section_7_3_Exercises.pdf}{Exercise 7.3.9}.
+\end{solution}
+
+\begin{exercise}
+\label{ex:5}
+    Show that if two sets \( A \) and \( B \) each have measure zero, then \( A \cup B \) has measure zero as well. In addition, discuss the proof of the stronger statement that the countable union of sets of measure zero also has measure zero. (This second statement is true, but a completely rigorous proof requires a result about double summations discussed in Section 2.8.)
+\end{exercise}
+
+\begin{solution}
+    Let \( \epsilon > 0 \) be given. Because \( A \) and \( B \) have measure zero, there are countable collections \( \{ O_1, O_2, O_3, \ldots \} \) and \( \{ U_1, U_2, U_3, \ldots \} \) of open intervals such that
+    \[
+        A \subseteq \bigcup_{n=1}^{\infty} O_n, \quad \sum_{n=1}^{\infty} \abs{O_n} \leq \frac{\epsilon}{2}, \quad B \subseteq \bigcup_{n=1}^{\infty} U_n, \quand \sum_{n=1}^{\infty} \abs{U_n} \leq \frac{\epsilon}{2}.
+    \]
+    By Theorem 1.5.8 (i), the union \( \{ O_1, O_2, O_3, \ldots \} \cup \{ U_1, U_2, U_3, \ldots \} \) is a countable collection of open intervals, say
+    \[
+        \{ O_1, O_2, O_3, \ldots \} \cup \{ U_1, U_2, U_3, \ldots \} = \{ V_1, V_2, V_3, \ldots \}.
+    \]
+    It is then immediate that
+    \[
+        A \cup B \subseteq \paren{ \bigcup_{n=1}^{\infty} O_n } \cup \paren{ \bigcup_{n=1}^{\infty} U_n } = \bigcup_{n=1}^{\infty} V_n.
+    \]
+    Now, for any \( N \in \N \), we can express the set \( \{ V_1, \ldots, V_N \} \) as a disjoint union \( \mathbf{O} \cup \mathbf{U} \), where
+    \[
+        \mathbf{O} \subsetneq \{ O_1, O_2, O_3, \ldots \} \quand \mathbf{U} \subsetneq \{ U_1, U_2, U_3, \ldots \};
+    \]
+    \( \mathbf{O} \) and \( \mathbf{U} \) are both finite and at most one (but not both) of them can be empty. The decomposition \( \{ V_1, \ldots, V_N \} = \mathbf{O} \cup \mathbf{U} \) implies that
+    \[
+        \sum_{n=1}^N \abs{V_n} = \sum_{O \in \mathbf{O}} \abs{O} + \sum_{U \in \mathbf{U}} \abs{U} \leq \sum_{n=1}^{\infty} \abs{O_n} + \sum_{n=1}^{\infty} \abs{U_n} \leq \epsilon.
+    \]
+    Since \( N \) was arbitrary, we see that the sum \( \sum_{n=1}^{\infty} \abs{V_n} \) is convergent and satisfies \( \sum_{n=1}^{\infty} \abs{V_n} \leq \epsilon \); it follows that \( A \cup B \) has measure zero.
+
+    Now suppose that \( \{ A_m : m \in \N \} \) is a countable collection of sets of measure zero; we will show that \( \bigcup_{m=1}^{\infty} A_m \) also has measure zero. Let \( \epsilon > 0 \) and \( m \in \N \) be given. Because \( A_m \) has measure zero, there is a countable collection \( \{ O_{m,1}, O_{m,2}, O_{m,3}, \ldots \} \) of open intervals such that
+    \[
+        A_m \subseteq \bigcup_{n=1}^{\infty} O_{m,n} \quand \sum_{n=1}^{\infty} \abs{O_{m,n}} \leq 2^{-m} \epsilon.
+    \]
+    By Theorem 1.5.8 (ii), the union \( \bigcup_{m=1}^{\infty} \{ O_{m,1}, O_{m,2}, O_{m,3}, \ldots \} \) is a countable collection of open intervals, say
+    \[
+        \bigcup_{m=1}^{\infty} \{ O_{m,1}, O_{m,2}, O_{m,3}, \ldots \} = \{ U_1, U_2, U_3, \ldots \}.
+    \]
+    Is it straightforward to verify that
+    \[
+        \bigcup_{m=1}^{\infty} A_m \subseteq \bigcup_{m=1}^{\infty} \bigcup_{n=1}^{\infty} O_{m,n} = \bigcup_{m=1}^{\infty} U_m.
+    \]
+    Now let \( M \in \N \) be given and consider the collection \( \{ U_1, \ldots, U_M \} \). Each \( U_k \) in this collection is equal to \( O_{m,n} \) for some positive integers \( m \) and \( n \). If we let \( K \) be the maximum of these positive integers \( m \) and \( n \), then because each \( \abs{O_{m,n}} \) is non-negative, we have the inequality
+    \[
+        \sum_{m=1}^M \abs{U_m} \leq \sum_{m=1}^K \sum_{n=1}^K \abs{O_{m,n}}. \tag{1}
+    \]
+    Now, keeping in mind that all terms \( \abs{O_{m,n}} \) are non-negative, by assumption the sum \( \sum_{n=1}^{\infty} \abs{O_{m,n}} \) is convergent for each fixed \( m \in \N \) and satisfies \( \sum_{n=1}^{\infty} \abs{O_{m,n}} \leq 2^{-m} \epsilon \); by comparison we then see that the iterated sum \( \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \abs{O_{m,n}} \) converges and satisfies
+    \[
+        \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \abs{O_{m,n}} \leq \sum_{m=1}^{\infty} 2^{-m} \epsilon = \epsilon. \tag{2}
+    \]
+    We can now use (1), (2), and Theorem 2.8.1 to see that
+    \[
+        \sum_{m=1}^M \abs{U_m} \leq \sum_{m=1}^K \sum_{n=1}^K \abs{O_{m,n}} \leq \lim_{N \to \infty} \sum_{m=1}^N \sum_{n=1}^N \abs{O_{m,n}} = \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \abs{O_{m,n}} \leq \epsilon.
+    \]
+    Because \( M \) was arbitrary, we see that the sum \( \sum_{m=1}^{\infty} \abs{U_m} \) is convergent and does not exceed \( \epsilon \); we may conclude that \( \bigcup_{m=1}^{\infty} A_m \) has measure zero.
+\end{solution}
+
+\begin{exercise}
+\label{ex:6}
+    If \( \alpha < \alpha' \), show that \( D^{\alpha'} \subseteq D^{\alpha} \).
+\end{exercise}
+
+\begin{solution}
+    See \href{https://lew98.github.io/Mathematics/UA_Section_4_6_Exercises.pdf}{Exercise 4.6.9}.
+\end{solution}
+
+\begin{exercise}
+\label{ex:7}
+    \begin{enumerate}
+        \item Let \( \alpha > 0 \) be given. Show that if \( f \) is continuous at \( x \in [a, b] \), then it is \( \alpha \)-continuous at \( x \) as well. Explain how it follows that \( D^{\alpha} \subseteq D \).
+
+        \item Show that if \( f \) is not continuous at \( x \), then \( f \) is not \( \alpha \)-continuous for some \( \alpha > 0 \). Now, explain why this guarantees that
+        \[
+            D = \bigcup_{n=1}^{\infty} D^{\alpha_n} \quad \text{where } \alpha_n = 1/n.
+        \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item See \href{https://lew98.github.io/Mathematics/UA_Section_4_6_Exercises.pdf}{Exercise 4.6.10}.
+
+        \item See \href{https://lew98.github.io/Mathematics/UA_Section_4_6_Exercises.pdf}{Exercise 4.6.11}.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:8}
+    Prove that for a fixed \( \alpha > 0 \), the set \( D^{\alpha} \) is closed.
+\end{exercise}
+
+\begin{solution}
+    See \href{https://lew98.github.io/Mathematics/UA_Section_4_6_Exercises.pdf}{Exercise 4.6.8}.
+\end{solution}
+
+\begin{exercise}
+\label{ex:9}
+    Show that there exists a \textit{finite} collection of disjoint open intervals
+    \[
+        \{ G_1, G_2, \ldots, G_N \}
+    \]
+    whose union contains \( D^{\alpha} \) and that satisfies
+    \[
+        \sum_{n=1}^N \abs{G_n} < \frac{\epsilon}{4M}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    Because \( D \) has measure zero, there exists a countable collection \( \{ U_n : n \in \N \} \) of open intervals such that
+    \[
+        D \subseteq \bigcup_{n=1}^{\infty} U_n \quand \sum_{n=1}^{\infty} \abs{U_n} < \frac{\epsilon}{4M}.
+    \]
+    Observe that:
+    \begin{enumerate}[label=(\roman*)]
+        \item \( D^{\alpha} \) is closed by \Cref{ex:8};
+
+        \item \( D^{\alpha} \) is bounded since \( D^{\alpha} \subseteq [a, b] \);
+
+        \item \( D^{\alpha} \subseteq D \subseteq \bigcup_{n=1}^{\infty} U_n \) by \Cref{ex:7} (a).
+    \end{enumerate}
+    It follows from Theorem 7.6.4 that there is a finite subcollection \( \{ G_1, \ldots, G_N \} \) of \( \{ U_n : n \in \N \} \) such that \( D^{\alpha} \subseteq \bigcup_{n=1}^N G_n \). Note that, for \( 1 \leq i < j \leq N \), if the intersection \( G_i \cap G_j \) is non-empty, then the union \( G_i \cup G_j \) is also an open interval. Thus, by replacing \( G_i \) and \( G_j \) with their union if necessary, we can assume that the collection \( \{ G_1, \ldots, G_N \} \) is pairwise-disjoint (although it may no longer be a subset of \( \{ U_n : n \in \N \} \) after this replacement process; this is not important for the proof). Because each \( G_i \) originally came from the collection \( \{ U_n : n \in \N \} \), and the replacement process described previously will not increase the total length of the intervals (since \( \abs{G_i \cup G_j} \leq \abs{G_i} + \abs{G_j} \)), we must have the inequality
+    \[
+        \sum_{n=1}^N \abs{G_n} \leq \sum_{n=1}^{\infty} \abs{U_n} < \frac{\epsilon}{4M}.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:10}
+    Let \( K \) be what remains of the interval \( [a, b] \) after the open intervals \( G_n \) are all removed; that is, \( K = [a, b] \setminus \bigcup_{n=1}^N G_n \). Argue that \( f \) is uniformly \( \alpha \)-continuous on \( K \).
+\end{exercise}
+
+\begin{solution}
+    Since \( D^{\alpha} \) is contained in the union \( \bigcup_{n=1}^N G_n \), it must be the case that \( f \) is \( \alpha \)-continuous on \( K \), and since \( K \) is compact (being closed and bounded), it follows (from the discussion after \Cref{ex:8} in the textbook) that \( f \) is uniformly \( \alpha \)-continuous on \( K \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:11}
+    Finish the proof in this direction by explaining how to construct a partition \( P_{\epsilon} \) of \( [a, b] \) such that \( U(f, P_{\epsilon}) - L(f, P_{\epsilon}) \leq \epsilon \). It will be helpful to break the sum
+    \[
+        U(f, P_{\epsilon}) - L(f, P_{\epsilon}) = \sum_{k=1}^n (M_k - m_k) \Delta x_k
+    \]
+    into two parts---one over those subintervals that contain points of \( D^{\alpha} \) and the other over subintervals that do not.
+\end{exercise}
+
+\begin{solution}
+    Since \( f \) is uniformly \( \alpha \)-continuous on \( K \) (\Cref{ex:10}), there exists a \( \delta > 0 \) such that
+    \[
+        x, y \in K \text{ and } \abs{x - y} < \delta \quimplies \abs{f(x) - f(y)} < \alpha. \tag{1}
+    \]
+    Notice that \( K \) is a finite union of closed and bounded intervals; we can subdivide these intervals to obtain a partition \( \{ t_0, \ldots, t_m \} \) of \( K \) such that \( \Delta t_k < \delta \). Suppose that \( G_j = (y_j, z_j) \) and define the following partition of \( [a, b] \):
+    \[
+        P_{\epsilon} = \{ t_0, \ldots, t_m, y_1, z_1, y_2, z_2, \ldots, y_N, z_N \} = \{ x_0, x_1, \ldots, x_n \};
+    \]
+    here we are relabeling so that the set \( \{ x_0, x_1, \ldots, x_n \} \) is ordered, i.e.\ \( x_0 < x_1 < \cdots < x_n \).
+    
+    Now decompose the indices \( \{ 1, \ldots, n \} \) into the disjoint union \( A \cup \setcomp{A} \), where
+    \[
+        A = \set{ k \in \{ 1, \ldots, n \} : [x_{k-1}, x_k] \cap D^{\alpha} \neq \emptyset },
+    \]
+    i.e.\ \( A \) consists of those indices \( k \) such that the interval \( [x_{k-1}, x_k] \) contains points of \( D^{\alpha} \). In other words, from the construction of \( P_{\epsilon} \), we have \( (x_{k-1}, x_k) = G_j \) for some \( j \); it follows from \Cref{ex:9} that \( \sum_{k \in A} \Delta x_k < \tfrac{\epsilon}{4M} \). Because \( f \) is bounded by \( M \) on \( [a, b] \), we then have
+    \[
+        \sum_{k \in A} (M_k - m_k) \Delta x_k \leq 2M \sum_{k \in A} \Delta x_k < \frac{\epsilon}{2}. \tag{2}
+    \]
+    Now observe that the union \( \bigcup_{k \not\in A} [x_{k-1}, x_k] \) is nothing but the set \( K \) from \Cref{ex:10}, so that for \( k \not\in A \) we have \( \Delta x_k = \Delta t_j < \delta \) for some \( j \). It follows from (1) that \( M_k - m_k \leq \alpha \) and thus
+    \[
+        \sum_{k \not\in A} (M_k - m_k) \Delta x_k \leq \alpha \sum_{k \not\in A} \Delta x_k \leq \alpha \sum_{k=1}^n \Delta x_k = \frac{\epsilon}{2(b - a)} (b - a) = \frac{\epsilon}{2}. \tag{3}
+    \]
+    Combining (2) and (3), we see that
+    \[
+        U(f, P_{\epsilon}) - L(f, P_{\epsilon}) = \sum_{k=1}^n (M_k - m_k) \Delta x_k = \sum_{k \in A} (M_k - m_k) \Delta x_k + \sum_{k \not\in A} (M_k - m_k) \Delta x_k < \epsilon.
+    \]
+\end{solution}
+
+\begin{exercise}
+\label{ex:12}
+    \begin{enumerate}
+        \item Prove that \( D^{\alpha} \) has measure zero. Point out that it is possible to choose a cover for \( D^{\alpha} \) that consists of a finite number of open intervals.
+
+        \item Show how this implies that \( D \) has measure zero.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item If \( D^{\alpha} \) is finite then we are done. Otherwise, suppose \( P_{\epsilon} = \{ x_0, \ldots, x_n \} \) and let
+        \[
+            A = \{ k \in \{ 1, \ldots, n \} : (x_{k-1}, x_k) \cap D^{\alpha} \neq \emptyset \};
+        \]
+        note that \( A \) must be non-empty since \( D^{\alpha} \) is not finite. For \( k \in A \), there exists some \( x \in (x_{k-1}, x_k) \) such that \( f \) is not \( \alpha \)-continuous at \( x \). It follows that there exist points \( y \) and \( z \) in \( (x_{k-1}, x_k) \) such that \( \abs{f(y) - f(z)} \geq \alpha \), which implies that \( M_k - m_k \geq \alpha \). Given this, it must be the case that \( \sum_{k \in A} \Delta x_k < \epsilon \). Indeed, if this were not the case then
+        \[
+            U(f, P_{\epsilon}) - L(f, P_{\epsilon}) = \sum_{k=1}^n (M_k - m_k) \Delta x_k \geq \sum_{k \in A} (M_k - m_k) \Delta x_k \geq \alpha \epsilon.
+        \]
+        Thus \( \{ (x_{k-1}, x_k) : k \in A \} \) is a finite collection of open intervals whose total length is strictly less than \( \epsilon \).
+        
+        Now observe that the union \( \bigcup_{k \in A} (x_{k-1}, x_k) \) covers all but finitely many of the points of \( D^{\alpha} \); it may fail to cover the endpoints of the subintervals of the partition \( P_{\epsilon} \), if any of these belong to \( D^{\alpha} \). Letting \( E = P_{\epsilon} \cap D^{\alpha} \), we then have
+        \[
+            D^{\alpha} \subseteq E \cup \bigcup_{k \in A} (x_{k-1}, x_k).
+        \]
+        If \( E \) is empty then we are done, since \( \{ (x_{k-1}, x_k) : k \in A \} \) is finite,
+        \[
+            D^{\alpha} \subseteq \bigcup_{k \in A} (x_{k-1}, x_k), \quand \sum_{k \in A} \Delta x_k < \epsilon.
+        \]
+        
+        Otherwise, suppose \( E = \{ x_{k_1}, \ldots, x_{k_m} \} \). Define
+        \[
+            r = \frac{\epsilon - \sum_{k \in A} \Delta x_k}{2m} > 0 \quand U_j = \paren{ x_{k_j} - \frac{r}{2}, x_{k_j} + \frac{r}{2} }.
+        \]
+        Then
+        \[
+            \sum_{j=1}^m \abs{U_j} = \sum_{j=1}^m r = \frac{\epsilon - \sum_{k \in A} \Delta x_k}{2} \quimplies \sum_{k \in A} \Delta x_k + \sum_{j=1}^m \abs{U_j} = \frac{\epsilon + \sum_{k \in A} \Delta x_k}{2} < \epsilon.
+        \]
+        Thus \( \{ (x_{k-1}, x_k) : k \in A \} \cup \{ U_1, \ldots, U_m \} \) is a finite collection of open intervals whose union contains \( D^{\alpha} \) and whose total length is strictly less than \( \epsilon \). We may conclude that \( D^{\alpha} \) has measure zero.
+
+        \item By \Cref{ex:7} (b), we may express \( D \) as the countable union
+        \[
+            D = \bigcup_{n=1}^{\infty} D^{1/n};
+        \]
+        by part (a) each \( D^{1/n} \) has measure zero and so we may use \Cref{ex:5} to conclude that \( D \) has measure zero.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:13}
+    \begin{enumerate}
+        \item Show that if \( f \) and \( g \) are integrable on \( [a, b] \), then so is the product \( fg \). (This result was requested in \href{https://lew98.github.io/Mathematics/UA_Section_7_4_Exercises.pdf}{Exercise 7.4.6}, but notice how much easier the argument is now.)
+
+        \item Show that if \( g \) is integrable on \( [a, b] \) and \( f \) is continuous on the range of \( g \), then the composition \( f \circ g \) is integrable on \( [a, b] \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( D_f \) be the set of discontinuities of \( f \); define \( D_g \) and \( D_{fg} \) similarly. The contrapositive of Theorem 4.3.4 (iii) shows that \( D_{fg} \subseteq D_f \cup D_g \). Because \( f \) and \( g \) are integrable on \( [a, b] \), Lebesgue's Theorem (Theorem 7.6.5) shows that \( D_f \) and \( D_g \) have measure zero and it then follows from \Cref{ex:5} that \( D_f \cup D_g \) has measure zero. It is straightforward to verify that any subset of a measure zero set also has measure zero and so we see that \( D_{fg} \) has measure zero. Lebesgue's Theorem allows us to conclude that \( fg \) is integrable on \( [a, b] \).
+
+        \item Let \( D_g \) be the set of discontinuities of \( g \) and define \( D_{f \circ g} \) similarly. Given that \( f \) is continuous on the range of \( g \), the contrapositive of Theorem 4.3.9 shows that \( D_{f \circ g} \subseteq D_g \). Because \( g \) is integrable on \( [a, b] \), Lebesgue's Theorem (Theorem 7.6.5) shows that \( D_g \) has measure zero and it follows that \( D_{f \circ g} \) has measure zero; Lebesgue's Theorem allows us to conclude that \( f \circ g \) is integrable on \( [a, b] \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:14}
+    \begin{enumerate}
+        \item Find \( g'(0) \).
+
+        \item Use the standard rules of differentiation to compute \( g'(x) \) for \( x \neq 0 \).
+
+        \item Explain why, for every \( \delta > 0, g'(x) \) attains every value between 1 and \( -1 \) as \( x \) ranges over the set \( (-\delta, \delta) \). Conclude that \( g' \) is not continuous at \( x = 0 \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item The Squeeze Theorem shows that
+        \[
+            g'(0) = \lim_{x \to 0} \frac{g(x) - g(0)}{x} = \lim_{x \to 0} x \sin \paren{ \frac{1}{x} } = 0.
+        \]
+
+        \item The standard rules of differentiation give us
+        \[
+            g'(x) = 2x \sin \paren{ \frac{1}{x} } - \cos \paren{ \frac{1}{x} }
+        \]
+        for \( x \neq 0 \).
+
+        \item For \( n \in \N \) define
+        \[
+            x_n = \frac{1}{2 \pi n + \pi} \quand y_n = \frac{1}{2 \pi n}.
+        \]
+        Notice that:
+        \begin{enumerate}[label=(\roman*)]
+            \item \( \lim_{n \to \infty} y_n = 0 \);
+
+            \item \( 0 < x_n < y_n \);
+
+            \item \( g'(x_n) = 1 \);
+
+            \item \( g'(y_n) = -1 \).
+        \end{enumerate}
+        Let \( \delta > 0 \) be given. By (i), there exists an \( N \in \N \) such that \( y_N < \delta \); combined with (ii), we see that \( x_N, y_N \in (-\delta, \delta) \). It now follows from (iii), (iv), and Darboux's Theorem (Theorem 5.2.7) that \( g' \) attains every value in \( [-1, 1] \) on the interval \( [x_N, y_N] \subseteq (-\delta, \delta) \). Because \( \delta > 0 \) was arbitrary, we see that \( g' \) cannot be continuous at 0.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:15}
+    \begin{enumerate}
+        \item If \( c \in C \), what is \( \lim_{n \to \infty} f_n(c) \)?
+
+        \item Why does \( \lim_{n \to \infty} f_n(x) \) exist for \( x \not\in C \)?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Since \( f_n \) vanishes on \( C_n \), and hence on \( C \), for each \( n \in \N \), we see that \( \lim_{n \to \infty} f_n(c) = 0 \).
+
+        \item If \( x \not\in C \), then \( x \in \setcomp{C_N} \) for some \( N \in \N \). The sequence \( (f_n) \) is constructed so that
+        \[
+            f_N(y) = f_{N+1}(y) = f_{N+2}(y) = \cdots
+        \]
+        for all \( y \) in \( \setcomp{C_N} \). Thus the sequence \( (f_n(x)) \) is eventually constant and hence convergent.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:16}
+    \begin{enumerate}
+        \item Explain why \( f'(x) \) exists for all \( x \not\in C \).
+
+        \item If \( c \in C \), argue that \( \abs{f(x)} \leq (x - c)^2 \) for all \( x \in [0, 1] \). Show how this implies \( f'(c) = 0 \).
+
+        \item Give a careful argument for why \( f'(x) \) fails to be continuous on \( C \). Remember that \( C \) contains many points besides the endpoints of the intervals that make up \( C_1, C_2, C_3, \ldots \, \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item If \( x \not\in C \), then \( x \in \setcomp{C_N} \) for some \( N \in \N \). The sequence \( (f_n) \) is constructed so that
+        \[
+            f_N(y) = f_{N+1}(y) = f_{N+2}(y) = \cdots
+        \]
+        for all \( y \) in \( \setcomp{C_N} \). Because \( f \) is the pointwise limit of \( (f_n) \), we see that \( f(y) = f_N(y) \) for all \( y \in \setcomp{C_N} \). Since \( \setcomp{C_N} \) is open, there exists some open interval \( U \) containing \( x \) and contained inside \( \setcomp{C_N} \), so that \( f \) and \( f_N \) agree on \( U \); the differentiablity of \( f_N \) on \( U \) then implies that \( f'(x) = f_N'(x) \).
+
+        \item As we showed in \href{https://lew98.github.io/Mathematics/UA_Section_3_4_Exercises.pdf}{Exercise 3.4.3}, there is a sequence \( (x_n) \), where each \( x_n \) is an endpoint of one of the intervals making up \( C_n \), such that \( \lim_{n \to \infty} x_n = c \). Let \( x \in [0, 1] \) be given. The sequence \( (f_n) \) is constructed so that
+        \[
+            \abs{f_n(x)} \leq (x - x_n)^2.
+        \]
+        Taking the limit as \( n \to \infty \) on both sides of this inequality gives us \( \abs{f(x)} \leq (x - c)^2 \).
+
+        Now observe that, since \( f(c) = 0 \) (\Cref{ex:15} (a)),
+        \[
+            \abs{\frac{f(x) - f(c)}{x - c}} = \frac{\abs{f(x)}}{\abs{x - c}} \leq \abs{x - c}.
+        \]
+        It follows from the Squeeze Theorem that \( \lim_{x \to c} \abs{\frac{f(x) - f(c)}{x - c}} = 0 \), which implies that \( f'(c) = 0 \).
+
+        \item Suppose \( x \in [0, 1] \) is an endpoint of one of the intervals making up some \( C_n \). We constructed \( f \) so that its behaviour near \( x \) is the same as the behaviour of \( g \) near 0; thus, by a similar argument to the one given in \Cref{ex:14} (c), for each \( \delta > 0 \) the derivative \( f' \) attains every value between 1 and \( -1 \) on the interval \( (x - \delta, x + \delta) \).
+
+        Now, as we showed in \href{https://lew98.github.io/Mathematics/UA_Section_3_4_Exercises.pdf}{Exercise 3.4.3}, there is a sequence \( (x_n) \), where each \( x_n \) is an endpoint of one of the intervals making up \( C_n \), such that \( \lim_{n \to \infty} x_n = c \). Let \( \delta > 0 \) be given. There is an \( N \in \N \) such that \( x_N \in \paren{ c - \tfrac{\delta}{2}, c + \tfrac{\delta}{2} } \), which implies that \( \paren{ x_N - \tfrac{\delta}{2}, x_N + \tfrac{\delta}{2} } \subseteq (c - \delta, c + \delta) \). As we noted in the previous paragraph, \( f' \) must attain every value between 1 and \( -1 \) on the interval \( \paren{ x_N - \tfrac{\delta}{2}, x_N + \tfrac{\delta}{2} } \) and hence on the interval \( (c - \delta, c + \delta) \). As \( \delta > 0 \) was arbitrary, we see that \( f' \) is not continuous at \( c \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:17}
+    Why is \( f'(x) \) Riemann-integrable on \( [0, 1] \)? 
+\end{exercise}
+
+\begin{solution}
+    Suppose \( x \not\in C \). As we showed in \Cref{ex:16} (a), there exists some open interval \( U \) containing \( x \) and some \( N \in \N \) such that \( f \) and \( f_N \) agree on \( U \). Since \( f_N \) is continuously differentiable on \( U \), it follows that \( f' \) is continuous at \( x \). Combined with \Cref{ex:16} (c), this shows that the set of discontinuities of \( f' \) is precisely \( C \), which has measure zero (\Cref{ex:4}). Lebesgue's Theorem now implies that \( f' \) is integrable on \( [0, 1] \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:18}
+    Show that, under these circumstances, the sum of the lengths of the intervals making up each \( C_n \) no longer tends to zero as \( n \to \infty \). What is this limit?
+\end{exercise}
+
+\begin{solution}
+    The sum of the lengths of the intervals being removed is now
+    \[
+        \sum_{n=1}^{\infty} 2^{n-1} \paren{ \frac{1}{3^{n+1}} } = \frac{1}{3}
+    \]
+    and hence the sum of the lengths of the intervals making up each \( C_n \) now tends to \( \tfrac{2}{3} \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:19}
+    As a final gesture, provide the example advertised in \Cref{ex:13} of an integrable function \( f \) and a continuous function \( g \) where the composition \( f \circ g \) is properly defined but not integrable. \href{https://lew98.github.io/Mathematics/UA_Section_4_3_Exercises.pdf}{Exercise 4.3.12} may be useful.
+\end{exercise}
+
+\begin{solution}
+    Let \( F \subseteq [0, 1] \) be the non-zero measure Cantor-type set defined in the text (such sets are sometimes called \href{https://en.wikipedia.org/wiki/Smith%E2%80%93Volterra%E2%80%93Cantor_set}{Smith-Volterra-Cantor sets, or fat Cantor sets}). Define \( f : \R \to \R \) by
+    \[
+        f(x) = \begin{cases}
+            1 & \text{if } x = 0, \\
+            0 & \text{if } x \neq 0,
+        \end{cases}
+    \]
+    and note that \( f \) is integrable on any interval \( [a, b] \). Define \( g : [0, 1] \to \R \) by
+    \[
+        g(x) = \inf \{ \abs{x - a} : a \in F \}.
+    \]
+    \href{https://lew98.github.io/Mathematics/UA_Section_4_3_Exercises.pdf}{Exercise 4.3.12} shows that \( g \) is continuous and, because \( F \) is closed, satisfies \( g(x) = 0 \) if \( x \in F \) and \( g(x) \neq 0 \) if \( x \not\in F \). It follows that \( f \circ g : [0, 1] \to \R \) is given by
+    \[
+        f(g(x)) = \begin{cases}
+            1 & \text{if } x \in F, \\
+            0 & \text{if } x \not\in F.
+        \end{cases}
+    \]
+    Using that \( F \) is closed and does not contain any intervals, we can argue as we did in \href{https://lew98.github.io/Mathematics/UA_Section_7_3_Exercises.pdf}{Exercise 7.3.9 (d)} to show that the set of discontinuities of \( f \circ g \) is precisely \( F \). As \( F \) does not have measure zero, Lebesgue's Theorem allows us to conclude that \( f \circ g \) is not integrable on \( [0, 1] \).
+\end{solution}
+
+\noindent \hrulefill
+
+\noindent \hypertarget{ua}{\textcolor{blue}{[UA]} Abbott, S. (2015) \textit{Understanding Analysis.} 2\ts{nd} edition.}
+
+\end{document}
