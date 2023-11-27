@@ -51,6 +51,8 @@
     - [Section 7.4 Exercises](https://lew98.github.io/Mathematics/UA_Section_7_4_Exercises.pdf)
     - [Section 7.5 Exercises](https://lew98.github.io/Mathematics/UA_Section_7_5_Exercises.pdf)
     - [Section 7.6 Exercises](https://lew98.github.io/Mathematics/UA_Section_7_6_Exercises.pdf)
+  - *Chapter 8*
+    - [Section 8.1 Exercises](https://lew98.github.io/Mathematics/UA_Section_8_1_Exercises.pdf)
 - [**Linear Algebra Done Right (Axler)**](https://linear.axler.net)
   - *Chapter 1*
     - [Section 1.A Exercises](https://lew98.github.io/Mathematics/LADR_Section_1_A_Exercises.pdf)
