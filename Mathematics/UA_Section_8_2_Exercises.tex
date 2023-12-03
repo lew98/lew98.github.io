@@ -19,6 +19,7 @@
 \usepackage{systeme}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{tcolorbox}
 \usepackage[linguistics]{forest}
 \usepackage{tikz}
 \usetikzlibrary{matrix, patterns, decorations.pathreplacing, calligraphy}
@@ -70,6 +71,8 @@ right=60pt
 \newtheorem*{solution}{Solution}
 
 \Crefformat{exercise}{#2Exercise 8.2.#1#3}
+
+\tcbset{colback=blue!5!white}
 
 \newcommand{\interior}[1]{%
   {\kern0pt#1}^{\mathrm{o}}%
@@ -302,9 +305,11 @@ Exercises with solutions from Section 8.2 of \hyperlink{ua}{[UA]}.
 
         \item Let \( d \) be the metric from \Cref{ex:2} (a). Here is a useful lemma, the proof of which is essentially immediate from the definitions.
 
-        \noindent \textbf{Lemma 1.} Suppose \( (f_n) \) is a sequence of functions in \( C[a, b] \) and \( f \in C[a, b] \). Then \( (f_n) \) converges to \( f \) in the metric space \( (C[a, b], d) \) (in the sense of Definition 8.2.2) if and only if \( (f_n) \) converges to \( f \) uniformly (in the sense of Definition 6.2.3).        
+        \begin{tcolorbox}
+            \textbf{Lemma 1.} Suppose \( (f_n) \) is a sequence of functions in \( C[a, b] \) and \( f \in C[a, b] \). Then \( (f_n) \) converges to \( f \) in the metric space \( (C[a, b], d) \) (in the sense of Definition 8.2.2) if and only if \( (f_n) \) converges to \( f \) uniformly (in the sense of Definition 6.2.3).
+        \end{tcolorbox}
         
-        Suppose that \( (f_n) \) is a Cauchy sequence in \( (C[0, 1], d) \) and let \( \epsilon > 0 \) be given. There exists an \( N \in \N \) such that \( d(f_m, f_n) < \epsilon \) whenever \( m, n \geq N \). Thus, for any \( m, n \geq N \) and \( x \in [0, 1] \), we have
+        Now suppose that \( (f_n) \) is a Cauchy sequence in \( (C[0, 1], d) \) and let \( \epsilon > 0 \) be given. There exists an \( N \in \N \) such that \( d(f_m, f_n) < \epsilon \) whenever \( m, n \geq N \). Thus, for any \( m, n \geq N \) and \( x \in [0, 1] \), we have
         \[
             \abs{f_m(x) - f_n(x)} \leq d(f_m, f_n) < \epsilon.
         \]
@@ -587,7 +592,7 @@ Exercises with solutions from Section 8.2 of \hyperlink{ua}{[UA]}.
         \]
         so that \( f_{\epsilon} \in V_{\epsilon}(0) \). However, \( f_{\epsilon} \not\in T \) and so \( V_{\epsilon}(0) \not\subseteq T \). As \( \epsilon > 0 \) was arbitrary, we may conclude that \( T \) is not open.
 
-        \( T \) is closed. To see this, suppose that \( g \in C[0, 1] \) is a limit point of \( T \) and let \( \epsilon > 0 \) be given. There exists some \( f \in V_{\epsilon}(g) \cap T \) such that \( f \neq g \). It follows that
+        \( T \) is closed. To see this, suppose that \( g \in C[0, 1] \) is a limit point of \( T \) and let \( \epsilon > 0 \) be given. There exists some \( f \in V_{\epsilon}(g) \cap T \) such that \( f \neq g \) and it follows that
         \[
             \abs{g(0)} = \abs{g(0) - f(0)} \leq d(g, f) < \epsilon.
         \]
@@ -610,9 +615,17 @@ Exercises with solutions from Section 8.2 of \hyperlink{ua}{[UA]}.
     \begin{enumerate}
         \item A subset \( E \subseteq X \) is bounded if there exists some \( y \in X \) and \( M > 0 \) such that \( d(x, y) \leq M \) for all \( x \in E \), i.e.\ \( E \subseteq C_M(y) \).
 
-        \item We will prove the contrapositive statement. First, suppose that \( K \) is not closed. Then there exists some \( y \not\in K \) such that \( y \) is a limit point of \( K \). Thus, for each \( n \in \N \), there exists some \( x_n \in V_{n^{-1}}(y) \cap K \), i.e.\ there is some \( x_n \in K \) such that \( d(x_n, y) < \tfrac{1}{n} \). Given this, it is clear that \( (x_n) \) converges to \( y \). It is straightforward to prove the analogous statement to Theorem 2.5.2 for metric spaces (the proof is almost identical) and hence any subsequence of \( (x_n) \) must also converge to \( y \), which does not belong to \( K \). Thus \( K \) is not compact.
+        \item We will prove the contrapositive statement. First, suppose that \( K \) is not closed. Then there exists some \( y \not\in K \) such that \( y \) is a limit point of \( K \). Thus, for each \( n \in \N \), there exists some \( x_n \in V_{n^{-1}}(y) \cap K \), i.e.\ there is some \( x_n \in K \) such that \( d(x_n, y) < \tfrac{1}{n} \). Given this, it is clear that \( (x_n) \) converges to \( y \). It is straightforward to prove the analogous statement to Theorem 2.5.2 for metric spaces:
+        
+        \begin{tcolorbox}[colback=blue!5!white]
+            Let \( (X, d) \) be a metric space and suppose that \( (x_n) \) is a sequence in \( X \) which converges to some \( x \in X \). If \( \paren{ x_{n_k} } \) is a subsequence of \( (x_n) \), then \( \paren{ x_{n_k} } \) also converges to \( x \).
+            \tcblower
+            \textit{Proof.} Let \( \epsilon > 0 \) be given. As \( \lim_{n \to \infty} x_n = x \), there is an \( N \in \N \) such that \( d(x_n, x) < \epsilon \) for all \( n \geq N \). Because \( \paren{ x_{n_k} } \) is a subsequence of \( (x_n) \), there must exist some \( K \in \N \) such that \( n_k \geq N \) for all \( k \geq K \); for such \( k \), we then have \( d \paren{ x_{n_k}, x } < \epsilon \). It follows that \( \lim_{k \to \infty} x_{n_k} = x \). \qed
+        \end{tcolorbox}
+        
+        Hence any subsequence of \( (x_n) \) must also converge to \( y \), which does not belong to \( K \); it follows that \( K \) is not compact.
 
-        Next, suppose that \( K \) is not bounded and fix some \( y \in X \). For each \( n \in \N \), there exists some \( x_n \in K \) such that \( d(x_n, y) > n \), so that any subsequence \( \paren{ x_{n_k} } \) must be unbounded (that is, the set \( \set{ x_{n_k} : k \in \N } \) must be unbounded). It is straightforward to prove the analogous statement to Theorem 2.3.2 for metric spaces and hence any subsequence of \( (x_n) \) must be divergent. Thus \( K \) is not compact.
+        Next, suppose that \( K \) is not bounded and pick some \( x_1 \in K \). Because \( K \) is not bounded, it must be the case that \( K \) is not contained in \( C_1(x_1) \), so that there exists some \( x_2 \in K \) satisfying \( d(x_1, x_2) > 1 \). Similarly, it must be the case that \( K \) is not contained in \( C_1(x_1) \cup C_1(x_2) \), so that there exists some \( x_3 \in K \) satisfying \( d(x_1, x_3) > 1 \) and \( d(x_2, x_3) > 1 \). If we continue in this manner, we obtain a sequence \( (x_n) \) in \( K \) such that \( d(x_m, x_n) > 1 \) for all \( n > m \). Suppose that \( \paren{ x_{n_k} } \) is a subsequence of \( (x_n) \) and observe that for any \( K \in \N \) we have \( d \paren{ x_{n_K}, x_{n_{K+1}} } > 1 \). It follows that \( \paren{ x_{n_k} } \) is not Cauchy and hence not convergent (\Cref{ex:4}). As \( \paren{ x_{n_k} } \) was an arbitrary subsequence, we see that \( K \) is not compact.
 
         \item We showed in \Cref{ex:9} (a) that \( Y \) is closed, and it is clearly bounded. To see that \( Y \) is not compact, consider the sequence of functions \( (f_n) \) given by \( f_n(x) = x^n \), each of which is continuous on \( [0, 1] \), satisfies \( \norm{f_n}_{\infty} = 1 \), and hence belongs to \( Y \). We will argue by contradiction to show that \( (f_n) \) has no convergent subsequence. If \( \paren{ f_{n_k} } \) is a subsequence converging to some \( f \in C[0, 1] \), then in particular \( f \) is the pointwise limit of \( \paren{ f_{n_k} } \) on \( [0, 1] \). However, we can see directly that the pointwise limit of \( \paren{ f_{n_k} } \) is the function
         \[
@@ -701,9 +714,16 @@ Exercises with solutions from Section 8.2 of \hyperlink{ua}{[UA]}.
     \begin{enumerate}
         \item Note that \( x_1 \) must be a limit point of \( O_2 \) as \( O_2 \) is dense in \( X \) and thus there exists some \( x_2 \in V_{\epsilon_1}(x_1) \cap O_2 \). Since \( O_2 \) is open, there exists some \( \delta > 0 \) such that \( V_{\delta}(x_2) \subseteq O_2 \). If we let
         \[
-            \epsilon_2 = \min \set{ \delta, \frac{\epsilon_1}{4}, \frac{\epsilon_1 - d(x_1, x_2)}{2} },
+            \epsilon_2 = \min \set{ \delta, \frac{\epsilon_1}{4}, r := \frac{\epsilon_1 - d(x_1, x_2)}{2} },
         \]
-        then \( V_{\epsilon_2}(x_2) \subseteq O_2, \epsilon_2 < \tfrac{\epsilon_1}{2} \), and \( \overline{V_{\epsilon_2}(x_2)} \subseteq V_{\epsilon_1}(x_1) \).
+        then:
+        \begin{itemize}
+            \item \( V_{\epsilon_2}(x_2) \subseteq V_{\delta}(x_2) \subseteq O_2 \);
+
+            \item \( \epsilon_2 < \tfrac{\epsilon_1}{2} \);
+
+            \item \( \overline{V_{\epsilon_2}(x_2)} \subseteq \overline{V_r(x_2)} \subseteq C_r(x_2) \subseteq V_{\epsilon_1}(x_1) \), where we have used \Cref{ex:12} (a) for the second inclusion.
+        \end{itemize}
 
         \item By continuing this process, we obtain a sequence \( (x_n) \) of points in \( X \) and a sequence \( (\epsilon_n) \) of real numbers such that:
         \begin{enumerate}[label=(\roman*)]
@@ -763,7 +783,7 @@ Exercises with solutions from Section 8.2 of \hyperlink{ua}{[UA]}.
     \]
     Let \( m \in \N \) be such that \( \tfrac{1}{m} < \delta \) and let \( n \in \N \) be such that \( 1 + \abs{f'(x)} \leq n \). Then:
     \[
-        0 < \abs{x - t} < \frac{1}{m} < \delta \quimplies \abs{\frac{f(x) - f(t)}{x - t}} \leq \abs{\frac{f(x) - f(t)}{x - t} - f'(x)} + \abs{f'(x)} < 1 + \abs{f'(x)} \leq n.
+        0 < \abs{x - t} < \frac{1}{m} < \delta \implies \abs{\frac{f(x) - f(t)}{x - t}} \leq \abs{\frac{f(x) - f(t)}{x - t} - f'(x)} + \abs{f'(x)} < 1 + \abs{f'(x)} \leq n.
     \]
     Thus \( f \in A_{m,n} \).
 \end{solution}
@@ -886,7 +906,23 @@ Exercises with solutions from Section 8.2 of \hyperlink{ua}{[UA]}.
         \[
             \bigcup_{m=1}^{\infty} \bigcup_{n=1}^{\infty} A_{m,n}
         \]
-        is a set of first category; as we proved in \Cref{ex:16}, this union contains \( D \) and thus \( D \) is also a set of first category.
+        is a set of first category. We showed in \Cref{ex:16} that this union contains \( D \). Now, any subset of a set of first category is again a set of first category:
+
+        \begin{tcolorbox}
+            Let \( (X, d) \) be a metric space and suppose \( A \subseteq X \) is a set of first category, i.e.\ there is a countable collection \( \{ E_n : n \in \N \} \) of nowhere-dense sets such that \( A = \bigcup_{n=1}^{\infty} E_n \). If \( B \) is a subset of \( A \), then \( B \) is also a set of first category.
+            \tcblower
+            \textit{Proof.} For each \( n \in \N \), note that
+            \[
+                B \cap E_n \subseteq E_n \implies \overline{B \cap E_n} \subseteq \overline{E_n} \implies \interior{\paren{\overline{B \cap E_n}}} \subseteq \interior{\paren{\overline{E_n}}} = \emptyset.
+            \]
+            Thus \( \interior{\paren{\overline{B \cap E_n}}} = \emptyset \), so that each \( B \cap E_n \) is nowhere-dense in \( X \). Now observe that
+            \[
+                B = B \cap A = B \cap \bigcup_{n=1}^{\infty} E_n = \bigcup_{n=1}^{\infty} \paren{B \cap E_n}.
+            \]
+            This shows that \( B \) can be expressed as a countable union of nowhere-dense sets; it follows that \( B \) is a set of first category. \qed
+        \end{tcolorbox}
+
+        We may conclude that \( D \) is a set of first category.
     \end{enumerate}
 \end{solution}
 
