@@ -1,7 +1,7 @@
 body {
-    background-image: url('antarctica.jpg');
+    background: linear-gradient(rgb(205, 231, 241), rgb(225, 211, 228));
     background-repeat: no-repeat;
-    background-position: 50% 20%;
+    background-attachment: fixed;
     overflow: hidden;
 }
 
