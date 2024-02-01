@@ -8,24 +8,19 @@ rcParams['text.usetex'] = True
 fig = plt.figure(figsize=(9,3))
 ax = fig.add_subplot()
 
-def f(n):
-    if n == 1:
-        return 2
-    else:
-        return (n - 2)/(n - 1)
-
-n = np.arange(2, 33)
-a_n = np.array([f(j) for j in n])
+n = np.arange(0, 33)
+a_n = [2.0]
+for j in range(1, 33):
+    a_n.append(a_n[-1] * (1.0 + 2.0 ** (-j)))
 
 ax.grid()
 ax.set_axisbelow(True)
-ax.scatter(n, a_n, color='black', marker='x')
-ax.scatter([1], [2], color='red', marker='s')
+ax.plot(n, a_n, color='black', linewidth=1, marker='s')
 
-ax.set_xlim(0, 31)
-ax.set_ylim(-0.35, 2.35)
-ax.set_xticks(ticks=[1, 5, 10, 15, 20, 25, 30])
-ax.set_yticks(ticks=[0, 1, 2])
+ax.set_xlim(-1, 31)
+ax.set_ylim(1.6, 5.4)
+ax.set_xticks(ticks=[0, 5, 10, 15, 20, 25, 30])
+ax.set_yticks(ticks=[2, 3, 4, 5])
 
 plt.tight_layout()
 

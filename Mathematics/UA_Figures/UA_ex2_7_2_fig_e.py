@@ -8,24 +8,22 @@ rcParams['text.usetex'] = True
 fig = plt.figure(figsize=(9,3))
 ax = fig.add_subplot()
 
-def f(n):
-    if n == 1:
-        return 3
-    elif n == 2:
-        return 2
-    else:
-        return (n - 3)/(n - 2)
-
-n = np.arange(3, 33)
-a_n = np.array([f(j) for j in n])
+n = np.arange(1, 33)
+a_n = [3/4]
+b_n = [1/2]
+for j in range(2, 33):
+    a_n.append(a_n[-1] + (1/(2*j-1) - 1/(2*j)**2))
+    b_n.append(b_n[-1] + 1 / (2*j))
 
 ax.grid()
 ax.set_axisbelow(True)
-ax.scatter(n, a_n, color='black', marker='x')
-ax.scatter([1, 2], [3, 2], color='red', marker='s')
+ax.scatter(n, a_n, color='black', marker='x', label='$s_{2n}$')
+ax.scatter(n, b_n, color='red', marker='s', label=r'$\frac{1}{2} \sum_{k=1}^n \frac{1}{k}$')
+
+ax.legend(loc = 'lower right', fontsize=16, framealpha=1, edgecolor='black', fancybox=False)
 
 ax.set_xlim(0, 31)
-ax.set_ylim(-0.5, 3.5)
+ax.set_ylim(-0.2, 3.2)
 ax.set_xticks(ticks=[1, 5, 10, 15, 20, 25, 30])
 ax.set_yticks(ticks=[0, 1, 2, 3])
 
