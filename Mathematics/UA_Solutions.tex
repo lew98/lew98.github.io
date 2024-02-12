@@ -4513,23 +4513,9 @@ If \( f \) is both injective and surjective, then I will refer to \( f \) as bij
     \begin{enumerate}
         \item Since \( \abs{a_{ij}} \geq 0 \) for all positive integers \( i \) and \( j \), the sequence \( (t_{nn}) \) is increasing and bounded above by the real number \( \sum_{i=1}^{\infty} \sum_{j=1}^{\infty} \abs{a_{ij}} \). Thus \( (t_{nn}) \) converges by the Monotone Convergence Theorem (Theorem 2.4.2).
 
-        \item Suppose \( n > m \) are positive integers. By examining the array
+        \item Suppose \( n > m \) are positive integers. By examining the following array, which has the special case \( n = 6 \) and \( m = 3 \),
         \begin{center}
-            \begin{tikzpicture}
-                \fill[fill=red, fill opacity=0.1] (-0.2, 0.05) rectangle (4, 2.4);
-                \fill[fill=blue, fill opacity=0.1] (-4, -2.4) rectangle (4, 0.05);
-                \matrix (arr) [matrix of math nodes]
-                {
-                    a_{11} & \cdots & a_{1m} & a_{1,m+1} & \cdots & a_{1n} \\
-                    \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\[2mm]
-                    a_{m1} & \cdots & a_{mm} & a_{m,m+1} & \cdots & a_{mn} \\[2mm]
-                    a_{m+1,1} & \cdots & a_{m+1,m} & a_{m+1,m+1} & \cdots & a_{m+1,n} \\
-                    \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\[2mm]
-                    a_{n1} & \cdots & a_{nm} & a_{n,m+1} & \cdots & a_{nn} \\
-                };
-                \draw[line width=1.5] (-4, 0.05) -- (4, 0.05);
-                \draw[line width=1.5] (-0.2, 0.05) -- (-0.2, 2.4);
-            \end{tikzpicture}
+            \includegraphics[width=0.4\textwidth]{UA_Figures/UA_ex2_8_3_fig.pdf}
         \end{center}
         we see that
         \[
@@ -4816,15 +4802,15 @@ If \( f \) is both injective and surjective, then I will refer to \( f \) as bij
         It follows from Theorem 3.2.5 that \( -1 \) and \( 1 \) are limit points of \( A \), i.e., \( \{ -1, 1 \} \subseteq L_A \).
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.9\textwidth]{UA_Figures/UA_ex3_2_2_fig.pdf}
+            \includegraphics[width=0.85\textwidth]{UA_Figures/UA_ex3_2_2_fig_1.pdf}
             \caption{\( x_{2n} \) and \( x_{2n-1} \); \( A \) is the union of the red circles and the black squares}
-            \label{fig:ex3.2.2}
+            \label{fig:ex3.2.2_1}
         \end{figure}
         \noindent Now suppose that \( x \in \R \) is such that \( x \not\in \{ -1, 1 \} \); we claim that \( x \) is not a limit point of \( A \). First note that the distance from \( x \) to each of \( -1 \) and 1 is strictly positive, so that
         \[
             \epsilon := \min \{ \abs{x + 1}, \abs{x - 1} \} > 0.
         \]
-        Since \( \lim x_{2n-1} = -1 \) and \( \lim x_{2n} = 1 \), the terms of \( (x_n) \), i.e., the elements of \( A \), must eventually be contained inside
+        Since \( \lim x_{2n-1} = -1 \) and \( \lim x_{2n} = 1 \), the terms of \( (x_n) \) (i.e., the elements of \( A \)) must eventually be contained inside
         \[
             V_{\epsilon/2}(-1) \cup V_{\epsilon/2}(1) = \paren{ -1 - \frac{\epsilon}{2}, -1 + \frac{\epsilon}{2} } \cup \paren{ 1 - \frac{\epsilon}{2}, 1 + \frac{\epsilon}{2} }.
         \]
@@ -4832,33 +4818,17 @@ If \( f \) is both injective and surjective, then I will refer to \( f \) as bij
         \[
             \bkt{ V_{\epsilon/2}(-1) \cup V_{\epsilon/2}(1) } \cap V_{\epsilon/2}(x) = \emptyset.
         \]
-        \begin{center}
-            \begin{tikzpicture}
-                \draw[<->] (-5,0) -- (5,0);
-
-                \fill (-3,0) circle [radius=0.07] node [anchor=south] {$-1$};
-                \fill (3,0) circle [radius=0.07] node [anchor=south] {$1$};
-                \fill (1,0) circle [radius=0.07] node [anchor=south] {$x$};
-
-                \node at (-4,0) {(};
-                \node at (-2,0) {)};
-                \node at (0,0) {(};
-                \node at (1.97,0) {)};
-                \node at (2.03,0) {(};
-                \node at (4,0) {)};
-
-                \draw[decorate, decoration = {brace, raise = 6, amplitude = 4}] (-2,0) -- (-4,0) node [pos = 0.5, below = 9] {\( \epsilon \)};
-                \draw[decorate, decoration = {brace, raise = 6, amplitude = 4}] (2,0) -- (0,0) node [pos = 0.5, below = 9] {\( \epsilon \)};
-                \draw[decorate, decoration = {brace, raise = 6, amplitude = 4}] (4,0) -- (2,0) node [pos = 0.5, below = 9] {\( \epsilon \)};
-
-                \draw[decorate, decoration = {brace, raise = 14, amplitude = 4}] (1,0) -- (3,0) node [pos = 0.5, above = 17] {\( \epsilon \)};
-            \end{tikzpicture}
-        \end{center}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.85\textwidth]{UA_Figures/UA_ex3_2_2_fig_2.pdf}
+            \caption{Special case where \( x \) is closer to 1 than to \( -1 \)}
+            \label{fig:ex3.2.2_2}
+        \end{figure}
         \noindent Thus there can be only finitely many elements of \( A \) in \( V_{\epsilon/2}(x) \); it follows that \( x \) cannot possibly be the limit of any sequence of elements of \( A \) distinct from \( x \), which by Theorem 3.2.5 is to say that \( x \) cannot be a limit point of \( A \). We may conclude that \( L_A = \{ -1, 1 \} \).
 
-        \item \( A \) is not open. To see this, consider the point \( 2 \in A \). We claim that for any \( \epsilon > 0 \), the neighbourhood \( V_{\epsilon}(2) \) contains some \( x \not\in A \), so that \( V_{\epsilon}(2) \not\subseteq A \). It is straightforward to verify that every element \( a \in A \) satisfies \( a \leq 2 \) (see \Cref{fig:ex3.2.2}). Given this, if we let \( x = 2 + \tfrac{\epsilon}{2} \) then \( x \in V_{\epsilon}(2) \) and \( x \not\in A \).
+        \item \( A \) is not open. To see this, consider the point \( 2 \in A \). We claim that for any \( \epsilon > 0 \), the neighbourhood \( V_{\epsilon}(2) \) contains some \( x \not\in A \), so that \( V_{\epsilon}(2) \not\subseteq A \). It is straightforward to verify that every element \( a \in A \) satisfies \( a \leq 2 \) (see \Cref{fig:ex3.2.2_1}). Given this, if we let \( x = 2 + \tfrac{\epsilon}{2} \) then \( x \in V_{\epsilon}(2) \) and \( x \not\in A \).
 
-        \( A \) is not closed either since it does not contain the limit point \( -1 \): for any \( n \in \N \) we have \( (-1)^n + \tfrac{2}{n} > -1 \) (see \Cref{fig:ex3.2.2}).
+        \( A \) is not closed either since it does not contain the limit point \( -1 \): for any \( n \in \N \) we have \( (-1)^n + \tfrac{2}{n} > -1 \) (see \Cref{fig:ex3.2.2_1}).
 
         \item Since \( L_A = \{ -1, 1 \}, 1 \in A \) and \( -1 \not\in A \), every point of \( A \) other than \( 1 \) is an isolated point of \( A \).
 
@@ -4922,29 +4892,7 @@ If \( f \) is both injective and surjective, then I will refer to \( f \) as bij
         \]
         so that \( L \neq \sum_{j=1}^n \tfrac{1}{j^2} \) for any \( n \in \N \). This implies that \( L \) is a limit point of \( E \) (Theorem 3.2.5), and also that \( L \not\in E \); it follows that \( E \) is not closed.
 
-        \item Let \( E \) be the set in question. As in part (d), we have \( V_{\epsilon}(1) \not\subseteq E \) for any \( \epsilon > 0 \) and thus \( E \) is not open. Unlike part (d), we claim that \( E \) is closed. Let \( s_n = \sum_{j=1}^n \tfrac{1}{n} \), so that \( E = \{ s_n : n \in \N \} \), and let \( x \in \R \) be given; we will show that \( x \) cannot be a limit point of \( E \). First suppose that \( x \not\in E \). From Example 2.4.5, we know that \( (s_n) \) is strictly increasing and unbounded. Given this, there exists an \( N \geq 2 \) such that
-        \[
-            n \geq N \implies s_n > x + 1.
-        \]
-        Let \( \epsilon := \min \{ \abs{x - s_1}, \ldots, \abs{x - s_{N-1}}, 1 \} > 0 \). Notice that
-        \[
-            n \geq N \implies \abs{x - s_n} > 1 \geq \epsilon \hspaceand n < N \implies \abs{x - s_n} \geq \epsilon.
-        \]
-        It follows that \( V_{\epsilon}(x) \) does not intersect \( E \) and hence that \( x \) is not a limit point of \( E \). Now suppose that \( x \in E \), so that \( x = s_n \) for some \( n \in \N \). If \( x = s_1 = 1 \), then
-        \[
-            \frac{5}{4} < \frac{3}{2} = s_2 < s_3 < s_4 < \cdots \implies V_{1/4}(x) \cap E = \paren{ \frac{3}{4}, \frac{5}{4} } \cap E = \{ x \}
-        \]
-        and thus \( x \) is not a limit point of \( E \). Otherwise, \( x = s_n \) for some \( n \geq 2 \); let
-        \[
-            \epsilon := s_{n+1} - s_n = \frac{1}{n+1} < \frac{1}{n} = s_n - s_{n-1},
-        \]
-        i.e., \( \epsilon = \min \{ \abs{s_n - s_{n+1}}, \abs{s_n - s_{n-1}} \} \). Since
-        \[
-            s_1 < \cdots < s_{n-1} < x = s_n < s_{n+1} < \cdots,
-        \]
-        we see that \( V_{\epsilon}(x) \cap E = \{ x \} \) and it follows that \( x \) is not a limit point of \( E \).
-
-        We have now shown that \( E \) has no limit points and so we may conclude that \( E \) is closed.
+        \item Let \( E \) be the set in question. As in part (d), we have \( V_{\epsilon}(1) \not\subseteq E \) for any \( \epsilon > 0 \) and thus \( E \) is not open. Unlike part (d), we claim that \( E \) is closed. Let \( s_n = \sum_{j=1}^n \tfrac{1}{n} \), so that \( E = \{ s_n : n \in \N \} \), and notice that if \( E \) had a limit point then the sequence \( (s_n) \) would contain a convergent subsequence (Theorem 3.2.5). However, from Example 2.4.5 we know that \( (s_n) \) is strictly increasing and unbounded. Since such sequences have no convergent subsequences (\Cref{lem:ex2.6.2}), we see that \( E \) has no limit points and hence is closed.
     \end{enumerate}
 \end{solution}
 
@@ -4999,18 +4947,22 @@ If \( f \) is both injective and surjective, then I will refer to \( f \) as bij
     \begin{enumerate}
         \item This is false. Consider the set \( \R \setminus \set{ \sqrt{2} } = \paren{ -\infty, \sqrt{2} } \cup \paren{ \sqrt{2}, \infty } \). This contains every rational number since \( \sqrt{2} \) is irrational and is an open set since it is the union of two open sets (Theorem 3.2.3 (i)).
         
-        \item This is false. For a counterexample, consider the closed sets \( [n, \infty) \) for \( n \in \N \). These sets are nested, however
+        \item This is false. For a counterexample, consider the closed sets \( [n, \infty) \) for \( n \in \N \). These sets are nested, however the Archimedean Property (Theorem 1.4.2) shows that
         \[
             \bigcap_{n=1}^{\infty} [n, \infty) = \emptyset.
         \]
 
-        \item This is true. Suppose that \( A \) is open and non-empty, so that there exists some \( x \in A \) and some \( \epsilon > 0 \) such that \( V_{\epsilon}(x) \subseteq A \). By the density of \( \Q \) in \( \R \), there are infinitely many rational numbers contained in \( V_{\epsilon}(x) \) and hence in \( A \).
+        \item This is true. Suppose that \( A \) is open and non-empty, so that there exists some \( x \in A \) and some \( \epsilon > 0 \) such that \( V_{\epsilon}(x) \subseteq A \). By the density of \( \Q \) in \( \R \) (Theorem 1.4.3), there are infinitely many rational numbers contained in \( V_{\epsilon}(x) \) and hence in \( A \).
 
         \item This is false. Consider the set
         \[
             E = \set{ \sqrt{2} } \cup \set{ \sqrt{2} + \frac{\sqrt{2}}{n} : n \in \N }.
         \]
-        This is a bounded infinite set which contains only irrational numbers. An argument similar to the one given in \Cref{ex:3.2.2} (a) shows that \( \sqrt{2} \) is the only limit point of \( E \) and thus \( E \) is closed.
+        This is a bounded infinite set which contains only irrational numbers (notice that
+        \[
+            \sqrt{2} + \frac{\sqrt{2}}{n} = \sqrt{2} \paren{ \frac{n+1}{n} } \in \Q \implies \sqrt{2} \in \Q,
+        \]
+        which contradicts Theorem 1.1.1). An argument similar to the one given in \Cref{ex:3.2.2} (a) shows that \( \sqrt{2} \) is the only limit point of \( E \) and thus \( E \) is closed.
 
         \item This is true. Because each \( C_n \) is the union of \( 2^n \) closed intervals, Theorem 3.2.14 (i) implies that each \( C_n \) is closed. It follows that \( C = \bigcap_{n=1}^{\infty} C_n \) is an intersection of closed sets and hence is itself closed (Theorem 3.2.14 (ii)).
     \end{enumerate}
@@ -5203,16 +5155,17 @@ If \( f \) is both injective and surjective, then I will refer to \( f \) as bij
 
 \begin{solution}
     Define the sets
-    \[
-        B_1 = \{ x \in \R : (-\infty, x) \cap A \text{ is uncountable} \} \text{ and } B_2 = \{ x \in \R : (x, \infty) \cap A \text{ is uncountable} \}.
-    \]
+    \begin{multline*}
+        B_1 = \{ x \in \R : (-\infty, x) \cap A \text{ is uncountable} \} \\
+        \text{and} \quad B_2 = \{ x \in \R : (x, \infty) \cap A \text{ is uncountable} \}.
+    \end{multline*}
     We claim that \( B_1 \) is non-empty. To see this, suppose that \( B_1 = \emptyset \), i.e., for all \( x \in \R \) the intersection \( (-\infty, x) \cap A \) is either countable or finite, and observe that
     \[
         A = \R \cap A = \paren{ \bigcup_{n=1}^{\infty} (-\infty, n) } \cap A = \bigcup_{n=1}^{\infty} \big( (-\infty, n) \cap A \big).
     \]
     So we have expressed \( A \) as a countable union of countable or finite sets; it follows from Theorem 1.5.8 that \( A \) is countable or finite. Given that \( A \) is uncountable, it must be the case that \( B_1 \) is non-empty.
 
-    Next we claim that \( B_1 \) is open. Let \( x \in B_1 \) be given, so that \( (-\infty, x) \cap A \) is uncountable. Note that for any \( y \in \R \) with \( y > x \), we must have \( y \in B_1 \) also, since
+    Next we claim that \( B_1 \) is open. Let \( x \in B_1 \) be given, so that \( (-\infty, x) \cap A \) is uncountable. Note that for any \( y \in \R \) with \( y > x \) we must have \( y \in B_1 \) also, since
     \[
         \big( (-\infty, x) \cap A \big) \subseteq \big( (-\infty, y) \cap A \big).
     \]
@@ -5323,6 +5276,890 @@ If \( f \) is both injective and surjective, then I will refer to \( f \) as bij
             \Q = \bigcup_{r \in \Q} \{ r \}.
         \]
         Since \( \Q \) is countable, this demonstrates that \( \Q \) is an \( F_{\sigma} \) set. De Morgan's Laws (\Cref{ex:3.2.9}) imply that the complement of an \( F_{\sigma} \) set is a \( G_{\delta} \) set (and vice versa), so we have also shown that \( \I \) is a \( G_{\delta} \) set.
+    \end{enumerate}
+\end{solution}
+
+\section{Compact Sets}
+\label{sec:3.3}
+
+\begin{exercise}
+\label{ex:3.3.1}
+    Show that if \( K \) is compact and nonempty, then \( \sup K \) and \( \inf K \) both exist and are elements of \( K \).
+\end{exercise}
+
+\begin{solution}
+    \( K \) is given as non-empty and must be bounded by Theorem 3.3.8, so the Axiom of Completeness guarantees that \( \sup K \) and \( \inf K \) both exist. Suppose that \( \sup K \not\in K \). By Lemma 1.3.8, for each \( n \in \N \) there exists an \( x_n \in K \) satisfying
+    \[
+        \sup K - \frac{1}{n} < x_n < \sup K;
+    \]
+    the last inequality is strict as \( \sup K \not\in K \). The Squeeze Theorem (\Cref{ex:2.3.3}) and Theorem 3.2.5 now imply that \( \sup K \) is a limit point of \( K \); since \( \sup K \not\in K \), it follows that \( K \) is not closed, which contradicts Theorem 3.3.8. Thus \( \sup K \in K \), and a similar argument with the infimum and \Cref{ex:1.3.1} (b) shows that \( \inf K \in K \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.3.2}
+    Decide which of the following sets are compact. For those that are not compact, show how Definition 3.3.1 breaks down. In other words, give an example of a sequence contained in the given set that does not possess a subsequence converging to a limit in the set.
+    \begin{enumerate}
+        \item \( \N \).
+
+        \item \( \Q \cap [0, 1] \).
+
+        \item The Cantor set.
+
+        \item \( \{ 1 + 1/2^2 + 1/3^2 + \cdots + 1/n^2 : n \in \N \} \).
+
+        \item \( \{ 1, 1/2, 2/3, 3/4, 4/5, \ldots \} \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item \( \N \) is not compact. Consider the sequence \( (1, 2, 3, \ldots) \), which is increasing and unbounded. As shown in \Cref{lem:ex2.6.2}, such sequences do not have convergent subsequences.
+
+        \item \( \Q \cap [0, 1] \) is not compact. Let \( x = \tfrac{\sqrt{2}}{2} \in (0, 1) \). By Theorem 3.2.10, there is a sequence of rational numbers \( (x_n) \) converging to \( x \). Since \( 0 < x < 1 \), this sequence must eventually be contained in \( (0, 1) \). By removing a finite number of terms from the sequence if necessary, which will not affect convergence, we may assume that the sequence is entirely contained in \( \Q \cap [0, 1] \). It follows from Theorem 2.5.2 that every subsequence of \( (x_n) \) also converges to \( x \), which does not belong to \( \Q \cap [0, 1] \).
+
+        \item The Cantor set \( C \) is compact by Theorem 3.3.8: \( C \) is closed by \Cref{ex:3.2.6} (e) and bounded as \( C \subseteq [0, 1] \).
+
+        \item Let \( E \) be the set in question and let \( s_n = \sum_{j=1}^n \tfrac{1}{j^2} \). Certainly \( (s_n) \) is contained in \( E \) and from Example 2.4.4 we know that \( \lim s_n = L \) for some \( L \in \R \). As shown in \Cref{ex:3.2.3} (d), \( L \) does not belong to \( E \), and since all subsequences of \( s_n \) also converge to \( L \) (Theorem 2.5.2), we see that \( E \) is not compact.
+
+        \item Let \( E \) be the set in question, i.e.,
+        \[
+            E = \{ 1 \} \cup \set{ 1 - \tfrac{1}{n} : n \in \N }.
+        \]
+        Using a similar argument to the one given in \Cref{ex:3.2.2}, we see that 1 is the only limit point of \( E \). It follows that \( E \) is closed and bounded, and hence compact (Theorem 3.3.8).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.3.3}
+    Prove the converse of Theorem 3.3.4 by showing that if a set \( K \subseteq \R \) is closed and bounded, then it is compact.
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( K \subseteq \R \) is closed and bounded. If \( (x_n) \) is an arbitrary sequence contained in \( K \), then \( (x_n) \) must be bounded and so the Bolzano-Weierstrass Theorem (Theorem 2.5.5) implies that there exists a subsequence \( (x_{n_k}) \) such that \( \lim_{k \to \infty} x_{n_k} = x \) for some \( x \in \R \); our aim is to show that \( x \in K \).
+    
+    If \( x \not\in K \) then \( x_{n_k} \neq x \) for each \( k \in \N \). It follows from Theorem 3.2.5 that \( x \) is a limit point of \( K \) which does not belong to \( K \), so that \( K \) is not closed. Thus
+    \[
+        x \not\in K \implies K \text{ not closed}.
+    \]
+    The contrapositive of this implication and the hypothesis that \( K \) is closed gives us \( x \in K \), as desired.
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.3.4}
+    Assume \( K \) is compact and \( F \) is closed. Decide if the following sets are definitely compact, definitely closed, both, or neither.
+    \begin{enumerate}
+        \item \( K \cap F \)
+
+        \item \( \overline{\setcomp{F} \cup \setcomp{K}} \)
+
+        \item \( K \setminus F = \{ x \in K : x \not\in F \} \)
+
+        \item \( \overline{K \cap \setcomp{F}} \)
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    Throughout this exercise, we will repeatedly use that a subset of \( \R \) is compact if and only if it is closed and bounded (Theorem 3.3.8).
+    \begin{enumerate}
+        \item \( K \) is closed since it is compact, so \( K \cap F \) is the intersection of two closed sets and hence is definitely closed (Theorem 3.2.14 (ii)). Certainly the intersection of a bounded set with any other set is again bounded, so since \( K \) is bounded by virtue of being compact, we see that \( K \cap F \) is bounded as well as closed. It follows that \( K \cap F \) is definitely compact .
+
+        \item The closure of any set is closed (Theorem 3.2.12), so \( \overline{\setcomp{F} \cup \setcomp{K}} \) is definitely closed. However, \( \overline{\setcomp{F} \cup \setcomp{K}} \) cannot be compact since it is unbounded. To see this, let us first show that if \( E \subseteq \R \) is bounded, then \( \setcomp{E} \) is unbounded. Since \( E \) is bounded, there exists an \( M > 0 \) such that \( E \subseteq [-M, M] \). It follows that \( ((-\infty, M) \cup (M, \infty)) \subseteq \setcomp{E} \), whence \( \setcomp{E} \) is unbounded. Returning to the set \( \overline{\setcomp{F} \cup \setcomp{K}} \), we have that \( K \) is bounded since it is compact and thus \( \setcomp{K} \) is unbounded. Since
+        \[
+            \setcomp{K} \subseteq \setcomp{F} \cup \setcomp{K} \subseteq \overline{\setcomp{F} \cup \setcomp{K}},
+        \]
+        we see that \( \overline{\setcomp{F} \cup \setcomp{K}} \) must also be unbounded. It follows that \( \overline{\setcomp{F} \cup \setcomp{K}} \) cannot be compact.
+
+        \item Since \( K \) is bounded, \( K \setminus F \) must also be bounded, and hence \( K \setminus F \) is compact if and only if it is closed. \( K \setminus F \) could be compact/closed: for example, taking \( F = \emptyset \). \( K \setminus F \) could also fail to be compact/closed. For example, if we take \( K = [-2, 2] \) and \( F = [-1, 1] \), then \( K \setminus F = [-2, 1) \cup (1, 2] \), which is not compact/closed.
+
+        \item First, notice that if \( E \subseteq \R \) is bounded by some \( M > 0 \), i.e., \( E \subseteq [-M, M] \), then since \( [-M, M] \) is closed it follows from Theorem 3.2.12 that \( \overline{E} \subseteq [-M, M] \) also, i.e., \( \overline{E} \) is also bounded by \( M \).
+
+        Returning to the question, note that since \( K \) is bounded, \( K \cap \setcomp{F} \) must also be bounded. By the previous paragraph, it follows that \( \overline{K \cap \setcomp{F}} \) is bounded. Thus \( \overline{K \cap \setcomp{F}} \) is compact since it is closed and bounded.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.3.5}
+    Decide whether the following propositions are true or false. If the claim is valid, supply a short proof, and if the claim is false, provide a counterexample.
+    \begin{enumerate}
+        \item The arbitrary intersection of compact sets is compact.
+
+        \item The arbitrary union of compact sets is compact.
+
+        \item Let \( A \) be arbitrary, and let \( K \) be compact. Then, the intersection \( A \cap K \) is compact.
+
+        \item If \( F_1 \supseteq F_2 \supseteq F_3 \supseteq F_4 \supseteq \cdots \) is a nested sequence of nonempty closed sets, then the intersection \( \bigcap_{n=1}^{\infty} F_n \neq \emptyset \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    Throughout this exercise, we will repeatedly use that a subset of \( \R \) is compact if and only if it is closed and bounded (Theorem 3.3.8).
+    \begin{enumerate}
+        \item This is true. Suppose we have some collection \( \{ K_a : a \in A \} \) of compact sets. Each \( K_a \) must be closed and bounded and so the intersection \( K := \bigcap_{a \in A} K_a \) is also closed (Theorem 3.2.14 (ii)) and bounded. Thus \( K \) is compact.
+
+        \item This is false. For each \( n \in \N \), let \( K_n = [0, n] \); each \( K_n \) is closed and bounded and hence compact. However, \( \bigcup_{n=1}^{\infty} K_n = [0, \infty) \), which is unbounded and hence not compact.
+
+        \item This is false. If we let \( A = (0, 1) \) and \( K = [0, 1] \), then \( K \) is compact since it is closed and bounded but \( A \cap K = (0, 1) \), which is not closed and hence not compact.
+
+        \item This is false; see \Cref{ex:3.2.6} (b) for a counterexample.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.3.6}
+    This exercise is meant to illustrate the point made in the opening paragraph to Section 3.3. Verify that the following three statements are true if every blank is filled in with the word ``finite.'' Which are true if every blank is filled in with the word ``compact''? Which are true if every blank is filled in with the word ``closed''?
+    \begin{enumerate}
+        \item Every \rule{1cm}{0.15mm} set has a maximum.
+
+        \item If \( A \) and \( B \) are \rule{1cm}{0.15mm}, then \( A + B = \{ a + b : a \in A, b \in B \} \) is also \rule{1cm}{0.15mm}.
+
+        \item If \( \{ A_n : n \in \N \} \) is a collection of \rule{1cm}{0.15mm} sets with the property that every finite subcollection has a nonempty intersection, then \( \bigcap_{n=1}^{\infty} A_n \) is nonempty as well.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Every non-empty finite set has a maximum by \Cref{lem:ex1.3.2}, and every non-empty compact set has a maximum by \Cref{ex:3.3.1}. However, not every closed set has a maximum: \( \R \) is closed but has no maximum element.
+
+        \item If \( A \) is finite with \( m \) elements and \( B \) is finite with \( n \) elements, then \( A + B \) can have at most \( mn \) elements since the map \( A \times B \to A + B; \, (a, b) \mapsto a + b \) is a surjection. Thus \( A + B \) is also finite.
+
+        If \( A \) and \( B \) are compact, then so is \( A + B \). To see this, let \( (x_n) \) be a sequence contained in \( A + B \), so that there are sequences \( (a_n) \) contained in \( A \) and \( (b_n) \) contained in \( B \) such that \( x_n = a_n + b_n \) for each \( n \in \N \). Since \( A \) is compact, the sequence \( (a_n) \) has a subsequence \( (a_{n_k}) \) such that \( \lim_{k \to \infty} a_{n_k} = a \) for some \( a \in A \). Since \( B \) is compact, the sequence \( (b_{n_k}) \) has a subsequence \( \paren{ b_{n_{k_{\ell}}} } \) such that \( \lim_{\ell \to \infty} b_{n_{k_{\ell}}} = b \) for some \( b \in B \). Observe that
+        \[
+            \lim_{\ell \to \infty} x_{n_{k_{\ell}}} = \lim_{\ell \to \infty} \paren{ a_{n_{k_{\ell}}} + b_{n_{k_{\ell}}} } = \lim_{\ell \to \infty} a_{n_{k_{\ell}}} + \lim_{\ell \to \infty} b_{n_{k_{\ell}}} = a + b \in A + B.
+        \]
+        It follows that \( A + B \) is compact.
+
+        It is not necessarily the case that \( A + B \) is closed for closed sets \( A \) and \( B \). For a counterexample, let \( A = \N \) and let \( B = \set{ -n + \tfrac{1}{n} : n \in \N } \). For each \( n \in \N \), we have \( n + \paren{ -n + \tfrac{1}{n} } = \tfrac{1}{n} \in A + B \); it follows from Theorem 3.2.5 that 0 is a limit point of \( A + B \).
+        
+        Notice that, for \( n, k \in \Z \),
+        \[
+            n - k + \frac{1}{k} = 0 \iff k = 1 \text{ and } n = 0.
+        \]
+        Since any element of \( A + B \) is of the form \( n - k + \tfrac{1}{k} \) for some positive integers \( n, k \), we see that the limit point 0 fails to belong to \( A + B \). Thus \( A + B \) is not closed.
+
+        \item Suppose \( \{ A_n : n \in \N \} \) is a collection of finite sets with the property that every finite subcollection has a non-empty intersection. For each \( k \in \N \), let \( m_k \) be the number of elements in \( \bigcap_{n=1}^k A_n \). By assumption, \( m_k \geq 1 \) for all \( k \in \N \). It is also clear that
+        \[
+            m_1 \geq m_2 \geq m_3 \geq \cdots \geq m_k \geq \cdots.
+        \]
+        By \Cref{lem:ex1.2.3}, this sequence must eventually be constant, i.e., there exists a positive integer \( K \) such that
+        \[
+            k \geq K \implies m_k = m_K \iff \bigcap_{n=1}^k A_n = \bigcap_{n=1}^K A_n.
+        \]
+        Since \( m_K \geq 1 \) there exists some \( x \in \bigcap_{n=1}^K A_n \), and since \( x \in \bigcap_{n=1}^k A_n \) for all \( k \geq K \) we then have \( x \in \bigcap_{n=1}^{\infty} A_n \).
+
+        Suppose \( \{ A_n : n \in \N \} \) is a collection of compact sets with the property that every finite subcollection has a non-empty intersection. For \( m \in \N \) define \( K_m = \bigcap_{n=1}^m A_n \) and observe that each \( K_m \) is non-empty by assumption, each \( K_m \) is compact by \Cref{ex:3.3.5} (a), and the sequence \( (K_m) \) satisfies
+        \[
+            K_1 \supseteq K_2 \supseteq K_3 \supseteq \cdots \supseteq K_m \supseteq \cdots.
+        \]
+        It then follows from Theorem 3.3.5 that the intersection \( \bigcap_{m=1}^{\infty} K_m = \bigcap_{n=1}^{\infty} A_n \) is non-empty.
+
+        For each \( n \in \N \), let \( A_n \) be the closed set \( [n, \infty) \). For a finite subcollection \( \{ A_{n_1}, \ldots, A_{n_m} \} \), we have
+        \[
+            \bigcap_{i=1}^m A_{n_i} = [N, \infty) \neq \emptyset,
+        \]
+        where \( N = \max_{1 \leq i \leq m} n_i \). However, \( \bigcap_{n=1}^{\infty} A_n = \emptyset \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.3.7}
+    As some more evidence of the surprising nature of the Cantor set, follow these steps to show that the sum \( C + C = \{ x + y : x, y \in C \} \) is equal to the closed interval \( [0, 2] \). (Keep in mind that \( C \) has zero length and contains no intervals.)
+
+    Because \( C \subseteq [0, 1], C + C \subseteq [0, 2], \) so we only need to prove the reverse inclusion \( [0, 2] \subseteq \{ x + y : x, y \in C \} \). Thus, given \( s \in [0, 2] \), we must find two elements \( x, y \in C \) satisfying \( x + y = s \).
+    \begin{enumerate}
+        \item Show that there exist \( x_1, y_1 \in C_1 \) for which \( x_1 + y_1 = s \). Show in general that, for an arbitrary \( n \in \N \), we can always find \( x_n, y_n \in C_n \) for which \( x_n + y_n = s \).
+
+        \item Keeping in mind that the sequences \( (x_n) \) and \( (y_n) \) do not necessarily converge, show how they can nevertheless be used to produce the desired \( x \) and \( y \) in \( C \) satisfying \( x + y = s \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item If \( \tfrac{s}{2} \in C_1 = \bkt{ 0, \tfrac{1}{3} } \cup \bkt{ \tfrac{2}{3}, 1 } \) then take \( x_1 = y_1 = \tfrac{s}{2} \), and if \( \tfrac{s}{2} \in \paren{ \tfrac{1}{3}, \tfrac{2}{3} } \) then take \( x_1 = \tfrac{s}{2} - \tfrac{1}{3} \) and \( y_1 = \tfrac{s}{2} + \tfrac{1}{3} \). In either case, we have \( x_1, y_1 \in C_1 \) and \( x_1 + y_1 = s \). Geometrically, we have shown that for any \( s \in [0, 2] \), the line given by \( x + y = s \) must intersect the set \( C_1 \times C_1 \subseteq C_0 \times C_0 = [0, 1]^2 \); see \Cref{fig:ex3.3.7_1}, which shows the set \( C_1 \times C_1 \) as well as the lines \( x + y = s \) for several values of \( s \).
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.6\textwidth]{UA_Figures/UA_ex3_3_7_fig_1.pdf}
+            \caption{\( \textcolor{red}{C_1 \times C_1} \) and \( \textcolor{blue}{x + y = s} \) for various values of \( s \in [0, 2] \)}
+            \label{fig:ex3.3.7_1}
+        \end{figure}
+
+        Let us argue inductively that for any \( n \in \N \) we can find \( x_n, y_n \in C_n \) such that \( x_n + y_n = s \). The base case \( n = 1 \) was handled above, so suppose that for some \( n \in \N \) we have \( x_n, y_n \in C_n \) such that \( x_n + y_n = s \). Since \( C_n \) consists of \( 2^n \) closed intervals each of length \( 3^{-n} \), the set \( C_n \times C_n \) consists of \( (2^n)^2 \) closed squares each with side length \( 3^{-n} \). Geometrically, the induction hypothesis guarantees that the line \( x + y = s \) intersects the set \( C_n \times C_n \) and thus must intersect one of the \( (2^n)^2 \) closed squares. Moving from \( C_n \) to \( C_{n+1} \), the middle third of each of the \( 2^n \) intervals is removed. This has the effect of splitting each of the \( (2^n)^2 \) squares of \( C_n \times C_n \) into four subsquares; see \Cref{fig:ex3.3.7_2}. \( C_{n+1} \times C_{n+1} \) then consists of the collection of these subsquares.
+        
+        Now we make the observation that this situation is essentially the same as in the base case: given that the line \( x + y = s \) intersects one of the squares of \( C_n \times C_n \), it must intersect at least one of the four subsquares after we remove the middle third of the sides of the square; see \Cref{fig:ex3.3.7_2} again. We are then guaranteed the existence of some \( x_{n+1}, y_{n+1} \in C_{n+1} \) such that \( x_{n+1} + y_{n+1} = s \). This completes the induction step.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.8\textwidth]{UA_Figures/UA_ex3_3_7_fig_2.pdf}
+            \caption{Subsquares of \( \textcolor{red}{C_n \times C_n} \) and \( \textcolor{red}{C_{n+1} \times C_{n+1}} \) intersecting the line \( \textcolor{blue}{x + y = s} \)}
+            \label{fig:ex3.3.7_2}
+        \end{figure}
+
+        \item The sequence \( (x_n) \) is certainly bounded, so by the Bolzano-Weierstrass Theorem (Theorem 2.5.5) it has a convergent subsequence \( (x_{n_k}) \to x \) for some \( x \in \R \). Similarly, the sequence \( (y_{n_k}) \) is bounded and hence has a convergent subsequence \( \paren{ y_{n_{k_{\ell}}} } \to y \) for some \( y \in \R \). Since the sequence \( (C_n) \) is nested, we have \( x_{n_{k_{\ell}}} \in C_1 \) for all \( \ell \in \N \); it follows that \( x \in C_1 \) since \( C_1 \) is closed. The terms \( x_{n_{k_{\ell}}} \) belong to \( C_2 \) provided \( n_{k_{\ell}} \geq 2 \), i.e., all but a finite number of terms of \( \paren{ x_{n_{k_{\ell}}} } \) belong to \( C_2 \). Since \( C_2 \) is closed, it must then be the case that \( x \in C_2 \). Continuing in this fashion, we see that \( x \in C_n \) for all \( n \in \N \), i.e., \( x \in C \). Similarly, we obtain \( y \in C \). Now observe that on one hand,
+        \[
+            \lim_{\ell \to \infty} \paren{ x_{n_{k_{\ell}}} + y_{n_{k_{\ell}}} } = x + y.
+        \]
+        On the other hand,
+        \[
+            \lim_{\ell \to \infty} \paren{ x_{n_{k_{\ell}}} + y_{n_{k_{\ell}}} } = \lim_{\ell \to \infty} s = s.
+        \]
+        Since limits are unique (Theorem 2.2.7), we may conclude that \( x + y = s \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.3.8}
+    Let \( K \) and \( L \) be nonempty compact sets, and define
+    \[
+        d = \inf \{ \abs{x - y} : x \in K \text{ and } y \in L \}.
+    \]
+    This turns out to be a reasonable definition for the \textit{distance} between \( K \) and \( L \).
+    \begin{enumerate}
+        \item If \( K \) and \( L \) are disjoint, show \( d > 0 \) and that \( d = \abs{x_0 - y_0} \) for some \( x_0 \in K \) and \( y_0 \in L \).
+
+        \item Show that it's possible to have \( d = 0 \) if we assume only that the disjoint sets \( K \) and \( L \) are closed.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( E = \{ \abs{x - y} : x \in K \text{ and } y \in L \} \) and notice that \( E \) is non-empty (since \( K \) and \( L \) are non-empty) and bounded below by 0; it follows that \( d = \inf E \) exists. By \Cref{ex:1.3.1} (b), for each \( n \in \N \) there exist elements \( x_n \in K \) and \( y_n \in L \) such that
+        \[
+            d \leq \abs{x_n - y_n} < d + \frac{1}{n}. \tag{1}
+        \]
+        Since \( (x_n) \) is entirely contained in the compact set \( K \), we are guaranteed the existence of a convergent subsequence \( (x_{n_k}) \to x_0 \) for some \( x_0 \in K \). Similarly, since the sequence \( (y_{n_k}) \) is entirely contained in the compact set \( L \), we are guaranteed the existence of a convergent subsequence \( \paren{ y_{n_{k_{\ell}}} } \to y_0 \) for some \( y_0 \in L \). We then have, by Theorem 2.5.2,
+        \[
+            \lim_{\ell \to \infty} \abs{x_{n_{k_{\ell}}} - y_{n_{k_{\ell}}}} = \abs{x_0 - y_0}.
+        \]
+        However, inequality (1) and the Squeeze Theorem (\Cref{ex:2.3.3}) imply that
+        \[
+            \lim_{\ell \to \infty} \abs{x_{n_{k_{\ell}}} - y_{n_{k_{\ell}}}} = d.    
+        \]
+        It follows from the uniqueness of limits (Theorem 2.2.7) that \( \abs{x_0 - y_0} = d \). Since \( K \) and \( L \) are disjoint, it must be the case that \( x_0 \neq y_0 \) and hence \( d > 0 \).
+
+        \item Let \( K = \N \) and \( L = \set{ n + \tfrac{1}{n} : n \geq 2 } \) and observe that \( K \) and \( L \) are non-empty and disjoint. Furthermore, since
+        \[
+            \setcomp{K} = (-\infty, 1) \cup \bigcup_{n=1}^{\infty} (n, n + 1) \hspaceand \setcomp{L} = \paren{ -\infty, \frac{5}{2} } \cup \bigcup_{n=2}^{\infty} \paren{ n + \frac{1}{n}, n + 1 + \frac{1}{n + 1} },
+        \]
+        we see that \( \setcomp{K} \) and \( \setcomp{L} \) are both open (Theorem 3.2.3 (i)) and hence that \( K \) and \( L \) are both closed (Theorem 3.2.13). Letting \( E = \{ \abs{x - y} : x \in K \text{ and } y \in L \} \) again, note that for each \( n \geq 2 \), by taking \( n \in K \) and \( n + \tfrac{1}{n} \in L \), we have \( \tfrac{1}{n} \in E \). It follows that \( d = \inf E = 0 \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.3.9}
+    Follow these steps to prove the final implication in Theorem 3.3.8.
+
+    Assume \( K \) satisfies (i) and (ii), and let \( \{ O_{\lambda} : \lambda \in \Lambda \} \) be an open cover for \( K \). For contradiction, let's assume that no finite subcover exists. Let \( I_0 \) be a closed interval containing \( K \).
+    \begin{enumerate}
+        \item Show that there exists a nested sequence of closed intervals \( I_0 \supseteq I_1 \supseteq I_2 \supseteq \cdots \) with the property that, for each \( n \), \( I_n \cap K \) cannot be finitely covered and \( \lim \abs{I_n} = 0 \).
+
+        \item Argue that there exists an \( x \in K \) such that \( x \in I_n \) for all \( n \).
+
+        \item Because \( x \in K \), there must exist an open set \( O_{\lambda_0} \) from the original collection that contains \( x \) as an element. Explain how this leads to the desired contradiction.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let us proceed by induction. For the base case, \( I_0 \cap K = K \) cannot be covered by any finite subcollection of \( \{ O_{\lambda} : \lambda \in \Lambda \} \) and we have \( \abs{I_0} = 2^0 \abs{I_0} \).
+        
+        Suppose that after \( n \) steps we have chosen nested closed intervals \( I_0 \supseteq I_1 \supseteq I_2 \supseteq \cdots \supseteq I_{n-1} \) such that, for each \( 0 \leq m \leq n - 1 \), \( I_m \cap K \) cannot be covered by any finite subcollection of \( \{ O_{\lambda} : \lambda \in \Lambda \} \) and \( \abs{I_m} = 2^{-m} \abs{I_0} \). Suppose that \( I_{n-1} = [a, c] \) and let \( b = \tfrac{a + c}{2} \). Note that if both of the sets \( [a, b] \cap K \) and \( [b, c] \cap K \) could be covered by a finite subcollection of \( \{ O_{\lambda} : \lambda \in \Lambda \} \), then \( I_{n-1} \cap K \) could also be finitely covered. By assumption this is not the case, so at least one of the intervals \( [a, b] \) or \( [b, c] \) must have the property that its intersection with \( K \) cannot be finitely covered. Let \( I_n \) be this interval and note that \( I_n \subseteq I_{n-1} \). Furthermore, since \( \abs{I_{n-1}} = 2^{-n + 1} \abs{I_0} \), we have \( \abs{I_n} = 2^{-n} \abs{I_0} \). This completes the induction step and we obtain the desired sequence of nested closed intervals.
+
+        \item For each \( n \in \N, I_n \cap K \) is the intersection of two compact sets and hence is itself compact (\Cref{ex:3.3.5} (a)). Furthermore, since the sequence \( (I_n) \) is nested, the sequence \( (I_n \cap K) \) is also nested. It follows from Theorem 3.3.5 that there exists some \( x \in \bigcap_{n=1}^{\infty} (I_n \cap K) = K \cap \bigcap_{n=1}^{\infty} I_n \).
+
+        \item Because \( x \) belongs to the open set \( O_{\lambda_0} \), there exists an \( \epsilon > 0 \) such that \( V_{\epsilon}(x) \subseteq O_{\lambda_0} \), and since \( \lim \abs{I_n} = 0 \) there exists an \( N \in \N \) such that \( \abs{I_N} < \tfrac{\epsilon}{2} \). Thus, since \( x \in I_N \), we must have \( I_N \subseteq V_{\epsilon}(x) \) and hence \( \paren{ I_N \cap K } \subseteq V_{\epsilon}(x) \). This implies that \( I_N \cap K \subseteq O_{\lambda_0} \), contradicting the fact that \( I_N \cap K \) cannot be covered by any finite subcollection of \( \{ O_{\lambda} : \lambda \in \Lambda \} \).
+        \begin{center}
+            \includegraphics[width=0.69\textwidth]{UA_Figures/UA_ex3_3_9_fig.pdf}
+        \end{center}
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.3.10}
+    Here is an alternate proof to the one given in \Cref{ex:3.3.9} for the final implication in the Heine-Borel Theorem.
+
+    Consider the special case where \( K \) is a closed interval. Let \( \{ O_{\lambda} : \lambda \in \Lambda \} \) be an open cover for \( [a, b] \) and define \( S \) to be the set of all \( x \in [a, b] \) such that \( [a, x] \) has a finite subcover from \( \{ O_{\lambda} : \lambda \in \Lambda \} \).
+    \begin{enumerate}
+        \item Argue that \( S \) is nonempty and bounded, and thus \( s = \sup S \) exists.
+
+        \item Now show \( s = b \), which implies \( [a, b] \) has a finite subcover.
+
+        \item Finally, prove the theorem for an arbitrary closed and bounded set \( K \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Since \( a \in [a, b] \) there must be some \( O_{\lambda_0} \) such that \( a \in O_{\lambda_0} \), so that \( [a, a] \) is finitely covered; it follows that \( a \in S \). Evidently, \( S \) is bounded above by \( b \). Thus \( s = \sup S \) exists.
+
+        \item Seeking a contradiction, suppose that \( s < b \), so that \( \epsilon_1 := \tfrac{b - s}{2} > 0 \). Since \( s \in [a, b] \), there exists some \( O_{\lambda_0} \) such that \( s \in O_{\lambda_0} \) and thus there is an \( \epsilon_2 > 0 \) such that \( V_{\epsilon_2}(s) \subseteq O_{\lambda_0} \). Let \( \epsilon := \min \{ \epsilon_1, \epsilon_2 \} > 0 \). By Lemma 1.3.8 there exists an \( x \in S \) such that \( s - \epsilon < x \leq s \), so that \( x \in V_{\epsilon}(s) \) and
+        \[
+            [a, x] \subseteq O_{\lambda_1} \cup \cdots \cup O_{\lambda_n}
+        \]
+        for some finite subcollection \( \{ O_{\lambda_1}, \ldots, O_{\lambda_n} \} \). Observe that \( s + \tfrac{\epsilon}{2} \leq s + \tfrac{\epsilon_1}{2} = \tfrac{s + b}{2} \in [a, b] \) and
+        \[
+            \bkt{ a, s + \tfrac{\epsilon}{2} } \subseteq V_{\epsilon}(s) \cup [a, x] \subseteq V_{\epsilon_2}(s) \cup [a, x] \subseteq O_{\lambda_0} \cup O_{\lambda_1} \cup \cdots \cup O_{\lambda_n}.
+        \]
+        It follows that \( s + \tfrac{\epsilon}{2} \in S \), contradicting the fact that \( s \) is the supremum of \( S \). Hence it must be the case that \( s = b \).
+
+        This implies that \( [a, b] \) has a finite subcover: since \( b \in [a, b] \) there must be some \( O_{\lambda_0} \) such that \( b \in O_{\lambda_0} \) and hence some \( \epsilon > 0 \) such that \( V_{\epsilon}(b) \subseteq O_{\lambda_0} \), and since \( \sup S = b \) there is some \( x \in S \) such that \( b - \epsilon < x \leq b \) and
+        \[
+            [a, x] \subseteq O_{\lambda_1} \cup \cdots \cup O_{\lambda_n}
+        \]
+        for some finite subcollection \( \{ O_{\lambda_1}, \ldots, O_{\lambda_n} \} \). It follows that
+        \[
+            [a, b] \subseteq V_{\epsilon}(b) \cup [a, x] \subseteq O_{\lambda_0} \cup O_{\lambda_1} \cup \cdots \cup O_{\lambda_n}.
+        \]
+
+        \item Let \( \{ O_{\lambda} : \lambda \in \Lambda \} \) be an arbitrary open cover of \( K \). Since \( K \) is bounded, it is contained in some closed interval \( [a, b] \). Note that since \( K \) is closed, the collection \( \{ \setcomp{K} \} \cup \{ O_{\lambda} : \lambda \in \Lambda \} \) is an open cover of \( \R \) and hence of \( [a, b] \); by part (b), there then exists a finite subcover of \( [a, b] \). Since \( K \) is contained in \( [a, b] \), this finite subcover must also cover \( K \), and since \( \setcomp{K} \) evidently does not cover \( K \), this finite subcover must contain some sets \( O_{\lambda_1}, \ldots, O_{\lambda_n} \). It follows that \( K \) is covered by the finite collection \( O_{\lambda_1}, \ldots, O_{\lambda_n} \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.3.11}
+    Consider each of the sets listed in \Cref{ex:3.3.2}. For each one that is not compact, find an open cover for which there is no finite subcover.
+\end{exercise}
+
+\begin{solution}
+    The sets from \Cref{ex:3.3.2} which are not compact are \( \N, \Q \cap [0, 1], \) and
+    \[
+        E = \set{ 1 + \frac{1}{2^2} + \frac{1}{3^2} + \cdots + \frac{1}{k^2} : k \in \N }.
+    \]
+    Let us consider \( \N \) first. For each \( n \in \N \), let \( O_n = \paren{ n - 1, n + 1 } \), so that the collection \( \{ O_n : n \in \N \} \) covers \( \N \). Since each \( n \in \N \) belongs to exactly the set \( O_n \) and no others, there are in fact no proper subcovers, finite or otherwise.
+
+    Next, let us consider \( \Q \cap [0, 1] \). Let \( y \) be the irrational number \( \tfrac{\sqrt{2}}{2} \in (0, 1) \). For each \( n \in \N \), define
+    \[
+        O_n = \paren{ -\infty, y - \frac{1}{n} } \cup \paren{ y + \frac{1}{n}, \infty }
+    \]
+    and notice that \( \bigcup_{n=1}^{\infty} O_n = \R \setminus \{ y \} \); it follows that the collection \( \{ O_n : n \in \N \} \) covers \( \Q \cap [0, 1] \) since \( y \) is irrational. We claim that there can be no finite subcover. If \( \{ O_{n_1}, \ldots, O_{n_m} \} \) is some finite subcollection, then let \( N = \max \{ n_1, \ldots, n_m \} \) and observe that
+    \[
+        \bigcup_{i=1}^m O_{n_i} = \paren{ -\infty, y - \frac{1}{N} } \cup \paren{ y + \frac{1}{N}, \infty }.
+    \]
+    Since
+    \[
+        \bkt{ y - \frac{1}{N}, y + \frac{1}{N} } \cap [0, 1] = \bkt{ \max \set{ 0, y - \tfrac{1}{N} }, \min \set{ 1, y + \tfrac{1}{N} } },
+    \]
+    which is a proper interval, we are guaranteed by the density of \( \Q \) in \( \R \) (Theorem 1.4.3) the existence of a rational number \( p \in \bkt{ y - \tfrac{1}{N}, y + \tfrac{1}{N} } \cap [0, 1] \). It follows that \( \Q \cap [0, 1] \not\subseteq \bigcup_{i=1}^m O_{n_i} \).
+
+    Now let us consider the set \( E = \{ s_k : k \in \N \} \), where \( s_k = \sum_{j=1}^k \tfrac{1}{j^2} \). We know by the Monotone Convergence Theorem (Theorem 2.4.2) that \( L := \lim s_k \) is the supremum of \( E \). Furthermore, as noted in \Cref{ex:3.2.2}, \( L \) does not belong to \( E \). For each \( n \in \N \), let \( O_n = \paren{ -\infty, L - \tfrac{1}{n} } \) and note that
+    \[
+        \bigcup_{n=1}^{\infty} O_n = (-\infty, L),
+    \]
+    which must cover \( E \) since \( L \) is the supremum of \( E \) but does not belong to \( E \). We claim that there cannot exist a finite subcover. If \( \{ O_{n_1}, \ldots, O_{n_m} \} \) is some finite subcollection, then let \( N = \max \{ n_1, \ldots, n_m \} \) and observe that
+    \[
+        \bigcup_{i=1}^m O_{n_i} = \paren{ -\infty, L - \tfrac{1}{N} }.
+    \]
+    Since \( \lim s_k = L \), the sequence \( (s_k) \) must eventually be contained in the interval \( \paren{ L - \tfrac{1}{N}, L + \tfrac{1}{N} } \) and it follows that \( \{ O_{n_1}, \ldots, O_{n_m} \} \) cannot cover \( E \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.3.12}
+    Using the concept of open covers (and explicitly avoiding the Bolzano-Weierstrass Theorem), prove that every bounded infinite set has a limit point.
+\end{exercise}
+
+\begin{solution}
+    We will prove the contrapositive statement. That is, if \( E \subseteq \R \) is bounded, then
+    \[
+        E \text{ has no limit points} \implies E \text{ is finite}.
+    \]
+    If \( E \) is empty, we are done. Otherwise, each \( x \in E \) must be an isolated point, i.e., there exists some \( \epsilon_x > 0 \) such that \( V_{\epsilon_x}(x) \cap E = \{ x \} \). Notice that the collection \( \{ V_{\epsilon_x}(x) : x \in E \} \) is an open cover of \( E \). Since \( E \) has no limit points, \( E \) must be closed; the Heine-Borel Theorem (Theorem 3.3.8) then implies that there exist finitely many points \( \{ x_1, \ldots, x_n \} \) such that
+    \[
+        E \subseteq V_{\epsilon_{x_1}}(x_1) \cup \cdots \cup V_{\epsilon_{x_n}}(x_n).
+    \]
+    This implies that
+    \begin{multline*}
+        E = E \cap (V_{\epsilon_{x_1}}(x_1) \cup \cdots \cup V_{\epsilon_{x_n}}(x_n)) = (V_{\epsilon_{x_1}}(x_1) \cap E) \cup \cdots \cup (V_{\epsilon_{x_n}}(x_n) \cap E) \\[2mm]
+        = \{ x_1 \} \cup \cdots \cup \{ x_n \} = \{ x_1, \ldots, x_n \}.
+    \end{multline*}
+    Thus \( E \) is finite.
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.3.13}
+    Let's call a set \textit{clompact} if it has the property that every \textit{closed} cover (i.e., a cover consisting of closed sets) admits a finite subcover. Describe all of the clompact subsets of \( \R \).
+\end{exercise}
+
+\begin{solution}
+    Let \( E \) be a subset of \( \R \). Suppose that \( E \) is finite. If \( E \) is empty then certainly \( E \) is clompact, so suppose that \( E = \{ x_1, \ldots, x_n \} \) and let \( \{ F_{\lambda} : \lambda \in \Lambda \} \) be a closed cover of \( E \). For each \( x_i \in E \), there is some \( F_{\lambda_i} \) such that \( x_i \in F_{\lambda_i} \); it follows that \( \{ F_{\lambda_1}, \ldots, F_{\lambda_n} \} \) is a finite subcover of \( E \) and hence that \( E \) is clompact.
+
+    Now suppose that \( E \) is infinite and consider the closed cover \( \{ \{ x \} : x \in E \} \) of \( E \). Since \( E \) is infinite, finitely many singletons cannot possibly cover \( E \). So we have found a closed cover of \( E \) which cannot have a finite subcover and hence \( E \) is not clompact.
+
+    To conclude, the clompact subsets of \( \R \) are precisely the finite subsets of \( \R \).
+\end{solution}
+
+\section{Perfect Sets and Connected Sets}
+\label{sec:3.4}
+
+\begin{exercise}
+\label{ex:3.4.1}
+    If \( P \) is a perfect set and \( K \) is compact, is the intersection \( P \cap K \) always compact? Always perfect?
+\end{exercise}
+
+\begin{solution}
+    \( P \) is closed, so \( P \cap K \) must be compact (\Cref{ex:3.3.4} (a)). However, \( P \cap K \) need not be perfect. For a counterexample, consider \( P = [0, 1] \) and \( K = \{ 0 \} \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.4.2}
+    Does there exist a perfect set consisting of only rational numbers?
+\end{exercise}
+
+\begin{solution}
+    No. By Theorem 3.4.3, a non-empty perfect set must be uncountable, but any subset of \( \Q \) is either finite or countably infinite (Theorem 1.5.6 (i) and Theorem 1.5.7). (Strictly speaking, the empty set is both perfect and a subset of the rationals; I suspect this is not what Abbott had in mind.)
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.4.3}
+    Review the portion of the proof given in Example 3.4.2 and follow these steps to complete the argument.
+    \begin{enumerate}
+        \item Because \( x \in C_1 \), argue that there exists an \( x_1 \in C \cap C_1 \) with \( x_1 \neq x \) satisfying \( \abs{x - x_1} \leq 1/3 \).
+
+        \item Finish the proof by showing that for each \( n \in \N \), there exists \( x_n \in C \cap C_n \), different from \( x \) satisfying \( \abs{x - x_n} \leq 1/3^n \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item We have \( C_1 = \bkt{ 0, \tfrac{1}{3} } \cup \bkt{ \tfrac{2}{3}, 1 } \). The endpoints of these intervals are never removed at any subsequent stage of the construction of the Cantor set, so they belong to \( C \). Since \( x \in C_1 \), it must belong to one of these intervals, say the interval \( \bkt{ 0, \tfrac{1}{3} } \). If \( 0 \leq x < \tfrac{1}{3} \), then take \( x_1 = \tfrac{1}{3} \), and if \( x = \tfrac{1}{3} \), then take \( x_1 = 0 \). We can make similar choices if \( x \in \bkt{ \tfrac{2}{3}, 1 } \). In any case, we have chosen an \( x_1 \in C \cap C_1 \) with \( x_1 \neq x \) satisfying \( \abs{x - x_1} \leq \tfrac{1}{3} \).
+
+        \item Let \( n \in \N \) be given. The set \( C_n \) consists of \( 2^n \) disjoint closed intervals each of length \( \tfrac{1}{3^n} \). The endpoints of these intervals are never removed at any subsequent stage of the construction of the Cantor set, so they belong to \( C \). Since \( x \in C \), we have \( x \in C_n \) and hence \( x \) must belong to one of the disjoint closed intervals, say \( I = [a, b] \) where \( b - a = \tfrac{1}{3^n} \). If \( a \leq x < b \), then let \( x_n = b \), and if \( x = b \) then let \( x_n = a \). In either case, we have chosen an \( x_n \in C \cap C_n \) such that \( x \neq x_n \) and \( \abs{x - x_n} \leq b - a = \tfrac{1}{3^n} \).
+
+        Thus, by the Squeeze Theorem (\Cref{ex:2.3.3}), \( x \) is the limit of a sequence \( (x_n) \) contained in \( C \) such that \( x_n \neq x \) for all \( n \in \N \). It follows from Theorem 3.2.5 that \( x \) is a limit point of \( C \) and hence that \( C \) contains no isolated points.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.4.4}
+    Repeat the Cantor construction from Section 3.1 starting with the interval \( [0, 1] \). This time, however, remove the open middle \textit{fourth} from each component.
+    \begin{enumerate}
+        \item Is the resulting set compact? Perfect?
+
+        \item Using the algorithms from Section 3.1, compute the length and dimension of this Cantor-like set.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    We begin with \( B_0 := [0, 1] \) and remove the open middle fourth to obtain \( B_1 = \bkt{ 0, \tfrac{3}{8} } \cup \bkt{ \tfrac{5}{8}, 1 } \). Notice that each interval has length \( \tfrac{3}{8} \). Next we remove the open middle fourth from each of the two intervals of \( B_1 \) to obtain
+    \[
+        B_2 = \paren{ \bkt{ 0, \frac{9}{64} } \cup \bkt{ \frac{15}{64}, \frac{24}{64} } } \cup \paren{ \bkt{ \frac{40}{64}, \frac{49}{64} } \cup \bkt{ \frac{55}{64}, 1 } }.
+    \]
+    Notice that each interval has length \( \paren{ \tfrac{3}{8} }^2 \). We continue in this fashion, obtaining sets \( B_n \) consisting of \( 2^n \) disjoint closed intervals each of length \( \paren{ \tfrac{3}{8} }^n \), and define our Cantor-like set \( B := \bigcap_{n=0}^{\infty} B_n \).
+    \begin{enumerate}
+        \item The set \( B \) is compact and perfect; the arguments used for the Cantor set work equally well for \( B \). Each \( B_n \) is closed, being a finite union of closed intervals, and thus \( B \) is an intersection of closed sets and hence is itself closed. Certainly \( B \) is bounded and so it follows from the Heine-Borel Theorem (Theorem 3.3.8) that \( B \) is compact.
+        
+        As in \Cref{ex:3.4.3}, given any \( x \in B \) we can find a sequence of endpoints \( (x_n) \) such that \( x_n \in B, x_n \neq x, \) and \( \abs{x - x_n} \leq \paren{ \tfrac{3}{8} }^n \) for each \( n \in \N \). It follows from the Squeeze Theorem (\Cref{ex:2.3.3}) and Theorem 3.2.5 that \( x \) is a limit point of \( B \) and hence that \( B \) has no isolated points. Since \( B \) is also closed, we see that \( B \) is a perfect set.
+
+        \item At the first stage, we remove an interval of length \( \tfrac{1}{4} \). At the \( n \)\ts{th} stage (\( n = 2, 3, 4 \ldots \)), we remove \( 2^{n-1} \) intervals each of length \( \tfrac{1}{4} \paren{ \tfrac{3}{8} }^{n-1} \). Thus the length of \( B \) is
+        \begin{multline*}
+            1 - \paren{ \frac{1}{4} + 2 \cdot \frac{1}{4} \cdot \frac{3}{8} + 2^2 \cdot \frac{1}{4} \cdot \paren{ \frac{3}{8} }^2 + \cdots } \\[2mm]
+            = 1 - \frac{1}{4} \paren{ 1 + \frac{3}{4} + \paren{ \frac{3}{4} }^2 + \cdots } = 1 - \frac{\tfrac{1}{4}}{1 - \tfrac{3}{4}} = 0.
+        \end{multline*}
+        To calculate the dimension of \( B \), we magnify the set by a factor of \( \tfrac{8}{3} \), so that \( B_0 \) becomes the closed interval \( \bkt{ 0, \tfrac{8}{3} } \). When we remove the open middle fourth of this interval, we are left with two intervals of length 1:
+        \[
+            B_1 = [0, 1] \cup \bkt{ \frac{5}{3}, \frac{8}{3} }.
+        \]
+        Thus we will obtain two copies of \( B \). The dimension \( x \) of \( B \) is then given by solving \( 2 = \paren{ \tfrac{8}{3} }^x \), which gives
+        \[
+            x = \frac{\log(2)}{\log(8) - \log(3)} \approx 0.7067.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.4.5}
+    Let \( A \) and \( B \) be nonempty subsets of \( \R \). Show that if there exist disjoint open sets \( U \) and \( V \) with \( A \subseteq U \) and \( B \subseteq V \), then \( A \) and \( B \) are separated.
+\end{exercise}
+
+\begin{solution}
+    Observe that \( \setcomp{V} \) is a closed set which contains \( A \) (since \( U \cap V = \emptyset \) implies that \( A \cap V = \emptyset \)). Since \( \overline{A} \) is the smallest closed set containing \( A \) (Theorem 3.2.12), we must have \( \overline{A} \subseteq \setcomp{V} \), which gives
+    \[
+        \overline{A} \subseteq \setcomp{V} \implies \overline{A} \cap V = \emptyset \implies \overline{A} \cap B = \emptyset.
+    \]
+    Similarly, \( A \cap \overline{B} = \emptyset \). Thus \( A \) and \( B \) are separated.
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.4.6}
+    Prove Theorem 3.4.6.
+\end{exercise}
+
+\begin{solution}
+    Suppose we have non-empty subsets \( A, B \subseteq \R \) such that every convergent sequence contained in one of the subsets has a limit which does not belong to the other subset. Since a limit point of \( A \) is the limit of a sequence contained in \( A \) (Theorem 3.2.5) and an element of \( A \) is the limit of a constant sequence contained in \( A \), and by assumption these limits do not belong to \( B \), we see that \( \overline{A} \cap B = \emptyset \). Similarly, \( A \cap \overline{B} = \emptyset \). Thus \( A \) and \( B \) are separated.
+
+    Conversely, suppose that \( A \) and \( B \) are separated. If \( (x_n) \to x \) is a convergent sequence contained in \( A \), then \( x \in \overline{A} \). It follows that \( x \not\in B \) since \( \overline{A} \cap B = \emptyset \). Similarly, the limit of any convergent sequence contained in \( B \) must not belong to \( A \).
+
+    We have now shown that for non-empty subsets \( A, B \subseteq \R \), \( A \) and \( B \) being separated is equivalent to the condition that every convergent sequence contained in one of the subsets has a limit which does not belong to the other subset.
+
+    Proving Theorem 3.4.6 is equivalent to showing that a subset \( E \subseteq \R \) is disconnected if and only if there exist non-empty subsets \( A, B \subseteq E \) such that \( E = A \cup B \) and every convergent sequence contained in one of the subsets has a limit which does not belong to the other subset. By the previous discussion, such subsets are separated. So the theorem follows by the definition of disconnectedness.
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.4.7}
+    A set \( E \) is \textit{totally disconnected} if, given any two distinct points \( x, y \in E \), there exist separated sets \( A \) and \( B \) with \( x \in A, y \in B \), and \( E = A \cup B \).
+    \begin{enumerate}
+        \item Show that \( \Q \) is totally disconnected.
+        
+        \item Is the set of irrational numbers totally disconnected?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Suppose that \( p < q \) are rational numbers. By the density of \( \I \) in \( \R \), there exists an irrational number \( y \) such that \( p < y < q \). Define the sets
+        \[
+            A = (-\infty, y) \cap \Q \hspaceand B = (y, \infty) \cap \Q.
+        \]
+        Notice that \( p \in A, q \in B \), and since \( y \not\in \Q \), we have \( A \cup B = \Q \). By the density of \( \Q \) in \( \R \), we have \( \overline{A} = (-\infty, y] \) and \( \overline{B} = [y, \infty) \). It follows that \( \overline{A} \cap B = A \cap \overline{B} = \emptyset \) and hence that \( A \) and \( B \) are separated. Thus \( \Q \) is totally disconnected.
+
+        \item \( \I \) is also totally disconnected. To see this, reverse the roles of \( \Q \) and \( \I \) in the solution to part (a).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.4.8}
+    Follow these steps to show that the Cantor set is totally disconnected in the sense described in \Cref{ex:3.4.7}.
+
+    Let \( C = \bigcap_{n=0}^{\infty} C_n \), as defined in Section 3.1.
+    \begin{enumerate}
+        \item Given \( x, y \in C \), with \( x < y \), set \( \epsilon = y - x \). For each \( n = 0, 1, 2, \ldots, \) the set \( C_n \) consists of a finite number of closed intervals. Explain why there must exist an \( N \) large enough so that it is impossible for \( x \) and \( y \) both to belong to the same closed interval of \( C_N \).
+
+        \item Show that \( C \) is totally disconnected.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item If \( I \) is an interval of length \( \delta \), then any \( a, b \in I \) must satisfy \( \abs{a - b} \leq \delta \). In the construction of \( C \), each \( C_n \) consists of \( 2^n \) disjoint closed intervals each of length \( 3^{-n} \). Thus we can find an \( N \) large enough so that \( C_N \) consists of closed intervals each of length \( 3^{-N} < \epsilon = y - x \), i.e., whose length is smaller than the distance between \( x \) and \( y \). It follows that \( x \) and \( y \) cannot possibly belong to the same interval of \( C_N \).
+
+        \item Let \( [a, b] \) be the closed interval of \( C_N \) which contains \( x \) and note that the open interval \( \paren{ b, b + \tfrac{1}{3^N} } \) was either removed at the \( N \)\ts{th} stage of construction or is a subset of an open interval which was removed at some previous stage of construction. It follows that \( t := b + \tfrac{1}{2 \cdot 3^N} \not\in C \). Since \( y \not\in [a, b] \) and \( y > x \), we must have \( y > t \). Define
+        \[
+            A = (-\infty, t) \cap C \hspaceand B = (t, \infty) \cap C.  
+        \]
+        Notice that \( x \in A, y \in B \), and since \( t \not\in C \), we have \( A \cup B = C \). If \( (z_n) \to z \) is a convergent sequence contained in \( A \), then the Order Limit Theorem (Theorem 2.3.4) implies that \( z \leq t \) and hence \( z \not\in B \). Similarly, the limit of any convergent sequence contained in \( B \) cannot belong to \( A \). Thus \( A \) and \( B \) are separated by Theorem 3.4.6 (see \Cref{ex:3.4.6}) and it follows that \( C \) is totally disconnected.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{UA_Figures/UA_ex3_4_8_fig.pdf}
+            \caption{Example construction of \( t \); here \( N = 1 \), but notice that any \( N \geq 1 \) would also work}
+            \label{fig:ex3.4.8}
+        \end{figure}
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:3.4.9}
+    Let \( \{ r_1, r_2, r_3, \ldots \} \) be an enumeration of the rational numbers, and for each \( n \in \N \) set \( \epsilon_n = 1/2^n \). Define \( O = \bigcup_{n=1}^{\infty} V_{\epsilon_n}(r_n) \) and let \( F = \setcomp{O} \).
+    \begin{enumerate}
+        \item Argue that \( F \) is a closed, nonempty set consisting only of irrational numbers.
+
+        \item Does \( F \) contain any nonempty open intervals? Is \( F \) totally disconnected? (See \Cref{ex:3.4.7} for the definition.)
+
+        \item Is it possible to know whether \( F \) is perfect? If not, can we modify this construction to produce a nonempty perfect set of irrational numbers?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item \( O \) is an open set since it is a union of open intervals, so \( F = \setcomp{O} \) must be closed. To see that \( F \) is non-empty, suppose otherwise, so that \( O = \R \). It follows that the collection \( \{ V_{\epsilon_n}(r_n) : n \in \N \} \) is an open cover of the compact set \( [0, 10] \). Thus, by Theorem 3.3.8, there exist finitely many indices \( n_1 < \cdots < n_K \) such that
+        \[
+            [0, 10] \subseteq V_{\epsilon_{n_1}}(r_{n_1}) \cup \cdots \cup V_{\epsilon_{n_K}}(r_{n_K}).
+        \]
+        However, the interval \( [0, 10] \) has length 10, whereas the set \( V_{\epsilon_{n_1}}(r_{n_1}) \cup \cdots \cup V_{\epsilon_{n_K}}(r_{n_K}) \) has total length at most
+        \[
+            \sum_{k=1}^K \frac{1}{2^{n_k - 1}} \leq \sum_{n=0}^{\infty} \frac{1}{2^n} = 2,
+        \]
+        since \( \abs{V_{\epsilon_{n_k}}(r_{n_k})} = 2 \epsilon_{n_k} = 2^{-n_k + 1} \). So we have a set of length 10 contained inside a set of length 2, which is a contradiction; it follows that \( F \) is non-empty. Finally, since \( \Q \subseteq O \), we see that \( F = \setcomp{O} \) can contain only irrational numbers.
+
+        \item \( F \) cannot contain any non-empty open intervals, since this would imply that \( F \) contains a rational number (indeed, infinitely many rational numbers), but by part (a) \( F \) contains only irrational numbers.
+
+        To see that \( F \) is totally disconnected, let us prove the following lemma.
+
+        \begin{lemma}
+        \label{lem:ex3.4.9}
+            Suppose \( G \subseteq \R \) is totally disconnected. If \( E \) is a non-empty subset of \( G \), then \( E \) is also totally disconnected.
+        \end{lemma}
+        \begin{proof}
+            Let \( x, y \in E \) be given. Since \( x \) and \( y \) belong to the totally disconnected set \( G \), there exist separated sets \( A \) and \( B \) such that \( x \in A, y \in B, \) and \( G = A \cup B \). Set \( A' = A \cap E \) and \( B' = B \cap E \) and note that \( x \in A' \) and \( y \in B' \). Furthermore, \( A' \subseteq A \) and \( B' \subseteq B \), so
+            \[
+                \overline{A'} \subseteq \overline{A} \implies \paren{ \, \overline{A'} \cap B' \, } \subseteq \paren{ \, \overline{A} \cap B' \, } \subseteq \paren{ \, \overline{A} \cap B \, } = \emptyset.
+            \]
+            Thus \( \overline{A'} \cap B' = \emptyset \), and similarly \( A' \cap \overline{B'} = \emptyset \); it follows that \( A' \) and \( B' \) are separated. Finally,
+            \[
+                E = E \cap G = E \cap (A \cup B) = (A \cap E) \cup (B \cap E) = A' \cup B'.
+            \]
+            Thus \( E \) is totally disconnected.
+        \end{proof}
+        
+        Since \( F \) is a subset of \( \I \), which we showed was totally disconnected in \Cref{ex:3.4.7}, it follows from \Cref{lem:ex3.4.9} that \( F \) is totally disconnected.
+
+        \item There are enumerations of \( \Q \) which, when used in this construction, will result in an \( F \) which is not perfect, i.e., an \( F \) with at least one isolated point. We will construct such an enumeration \( (r_n) \), which gives an \( F \) with \( \sqrt{2} \) as an isolated point, via the following four step process. (Any irrational number would also work in place of \( \sqrt{2} \). \href{https://math.stackexchange.com/questions/2854900/constructing-perfect-set-without-rationals-by-removing-open-neighborhood-around/2857460#2857460}{This construction is due to math.SE user Ingix}, however the exposition given here is my own; what follows is lengthy and involved.)
+        \begin{description}
+            \item[Step 1.] We will first construct a strictly increasing sequence \( (p_n) \) of distinct rational numbers such that:
+            \begin{enumerate}[itemsep=8pt, leftmargin=44pt, label=(1.\arabic*)]
+                \item \( p_1 < p_2 < p_3 < \cdots < \sqrt{2} \);
+
+                \item \( \paren{ \sqrt{2} - \tfrac{1}{16}, \sqrt{2} } \subseteq \bigcup_{n=1}^{\infty} V_{\epsilon_{4n}}(p_n) \);
+
+                \item \( \sqrt{2} \not\in \bigcup_{n=1}^{\infty} V_{\epsilon_{4n}}(p_n) \).
+            \end{enumerate}
+            This sequence will be placed in the final enumeration \( (r_n) \) as \( r_{4n} = p_n \), so that
+            \[
+                r_4 = p_1, r_8 = p_2, r_{12} = p_3, \ldots
+            \]
+
+            \item[Step 2.] Mirroring Step 1, we will construct a strictly decreasing sequence \( (q_n) \) of distinct rational numbers such that:
+            \begin{enumerate}[itemsep=8pt, leftmargin=44pt, label=(2.\arabic*)]
+                \item \( \sqrt{2} < \cdots < q_3 < q_2 < q_1 \);
+
+                \item \( \paren{ \sqrt{2}, \sqrt{2} + \tfrac{1}{16} } \subseteq \bigcup_{n=1}^{\infty} V_{\epsilon_{4n-2}}(q_n) \);
+
+                \item \( \sqrt{2} \not\in \bigcup_{n=1}^{\infty} V_{\epsilon_{4n-2}}(q_n) \).
+            \end{enumerate}
+            This sequence will be placed in the final enumeration \( (r_n) \) as \( r_{4n-2} = q_n \), so that
+            \[
+                r_2 = q_1, r_6 = q_2, r_{10} = q_3, \ldots
+            \]
+
+            \item[Step 3.] There are infinitely many rational numbers which belong to neither of the sequences \( (p_n) \) nor \( (q_n) \) from Steps 1 and 2. We will construct a sequence \( (a_n) \) which enumerates these remaining rational numbers in such a way that \( \sqrt{2} \) will not be excluded from \( F \) in the final construction, i.e., a sequence \( (a_n) \) such that:
+            \begin{enumerate}[itemsep=8pt, leftmargin=44pt, label=(3.\arabic*)]
+                \item \( a_m \neq a_n \) for \( m \neq n \);
+
+                \item for each rational \( r \in \setcomp{(\{ p_1, p_2, \ldots \} \cup \{ q_1, q_2, \ldots \})}, \) there exists an \( n \in \N \) such that \( a_n = r \).
+
+                \item \( \sqrt{2} \not\in \bigcup_{n=1}^{\infty} V_{\epsilon_{2n-1}}(a_n) \).
+            \end{enumerate}
+            This sequence will be placed in the final enumeration \( (r_n) \) as \( r_{2n-1} = a_n \), so that
+            \[
+                r_1 = a_1, r_3 = a_2, r_5 = a_3, \ldots
+            \]
+
+            \item[Step 4.] We will combine the sequences \( (p_n), (q_n), \) and \( (a_n) \) to obtain an enumeration \( (r_n) \) of \( \Q \) given by
+            \[
+                a_1, q_1, a_2, p_1, a_3, q_2, a_4, p_2, \ldots
+            \]
+            Letting \( O = \bigcup_{n=1}^{\infty} V_{\epsilon_n}(r_n) \) and \( F = \setcomp{O} \), we will have
+            \[
+                \paren{ \sqrt{2} - \tfrac{1}{16}, \sqrt{2} } \cup \paren{ \sqrt{2}, \sqrt{2} + \tfrac{1}{16} } \subseteq O \hspaceand \sqrt{2} \not\in O,
+            \]
+            so that \( \paren{ \sqrt{2} - \tfrac{1}{16}, \sqrt{2} + \tfrac{1}{16} } \cap F = \set{ \sqrt{2} } \). Thus \( \sqrt{2} \) will be an isolated point of \( F \).
+        \end{description}
+
+        \noindent \hrulefill
+
+        \noindent {\Large \textbf{Step 1.}}
+
+        \noindent For each \( n \in \N \), let \( p_n \) be a rational number satisfying
+        \[
+            \sqrt{2} - \frac{1}{2^{4n}} - \frac{1}{2^{4n + 4}} < p_n < \sqrt{2} - \frac{1}{2^{4n}} < \sqrt{2};
+        \]
+        the existence of such a rational number is guaranteed by the density of \( \Q \) in \( \R \). From this definition, it is straightforward to verify that the sequence \( (p_n) \) satisfies condition (1.1). Observe that for any \( n \in \N \) we have
+        \[
+            p_n < p_{n+1} < p_n + \frac{1}{2^{4n}} < \sqrt{2};
+        \]
+        it follows that \( \sqrt{2} \not\in V_{\epsilon_{4n}}(p_n) \) for each \( n \in \N \), so that the sequence \( (p_n) \) satisfies condition (1.3). Furthermore, \( p_{n+1} \in \paren{ p_n, p_n + 2^{-4n} } \subseteq V_{\epsilon_{4n}}(p_n) \), i.e., the centre of \( V_{\epsilon_{4n+4}}(p_{n+1}) \) is contained in \( V_{\epsilon_{4n}}(p_n) \). Thus, for any \( N \in \N \), the union \( \bigcup_{n=1}^N V_{\epsilon_{4n}}(p_n) \) must be an open interval:
+        \[
+            \bigcup_{n=1}^N V_{\epsilon_{4n}}(p_n) = \paren{ p_1 - \frac{1}{16}, B },
+        \]
+        where \( B = \max \{ p_n + 2^{-4n} : 1 \leq n \leq N \} \) (the exact value of \( B \) is not important, but note that it must be strictly less than \( \sqrt{2} \)). Since
+        \[
+            \sqrt{2} - \frac{1}{16} \in \paren{ p_1 - \frac{1}{16}, p_1 + \frac{1}{16} } = V_{\epsilon_4}(p_1),
+        \]
+        we have \( \sqrt{2} - \tfrac{1}{16} \in \bigcup_{n=1}^N V_{\epsilon_{4n}}(p_n) \) for any \( N \in \N \). Let \( y \in \R \) be such that \( \sqrt{2} - \tfrac{1}{16} < y < \sqrt{2} \). Because \( (p_n) \) converges to \( \sqrt{2} \) (by the Squeeze Theorem), we can find an \( N \in \N \) such that \( y < p_N < \sqrt{2} \). It follows that \( \sqrt{2} - \tfrac{1}{16} \) and \( p_N \) both belong to the open interval \( \bigcup_{n=1}^N V_{\epsilon_{4n}}(p_n) \); since \( y \) lies between these two values, we must then have \( y \in \bigcup_{n=1}^N V_{\epsilon_{4n}}(p_n) \subseteq \bigcup_{n=1}^{\infty} V_{\epsilon_{4n}}(p_n) \). Thus the sequence \( (p_n) \) satisfies condition (1.2).
+
+        \noindent \hrulefill
+
+        \noindent {\Large \textbf{Step 2.}}
+
+        \noindent The construction of the sequence \( (q_n) \) is analogous to the construction given in Step 1; for each \( n \in \N \), let \( q_n \) be a rational number satisfying
+        \[
+            \sqrt{2} + \frac{1}{2^{4n - 2}} < q_n <  \sqrt{2} + \frac{1}{2^{4n - 2}} + \frac{1}{2^{4n + 2}}.
+        \]
+        Arguing as in Step 1, we see that the sequence \( (q_n) \) satisfies condition (2.1), and furthermore that \( \paren{ \sqrt{2}, \sqrt{2} + \tfrac{1}{4} } \subseteq \bigcup_{n=1}^{\infty} V_{\epsilon_{4n-2}}(q_n) \), which gives us condition (2.2). Condition (2.3) follows since \( \sqrt{2} < q_n - \tfrac{1}{2^{4n - 2}} \) for all \( n \in \N \).
+
+        \noindent \hrulefill
+
+        \noindent {\Large \textbf{Step 3.}}
+
+        \noindent Since the sequences \( (p_n) \) and \( (q_n) \) constructed in Steps 1 and 2 are entirely contained inside the interval \( [p_1, q_1] \), we still have infinitely many rational numbers left to enumerate. That is, letting
+        \[
+            E = \Q \cap \setcomp{(\{ p_1, p_2, \ldots \} \cup \{ q_1, q_2, \ldots \})},
+        \]
+        we have that \( E \) is countably infinite. However, enumerating \( E \) carelessly might exclude \( \sqrt{2}\) from \( F \) in Step 4, since there are rational numbers in \( E \) arbitrarily close to \( \sqrt{2} \); placing one of these rational numbers ``too early'' in the sequence \( (r_n) \) will include \( \sqrt{2} \) in some \( V_{\epsilon_n}(r_n) \). To surmount this problem, we will first partition \( E \) as follows. Let
+        \[
+            A_n = \begin{cases}
+                \set{ x \in \R : \epsilon_1 < \abs{x - \sqrt{2}} } & \text{if } n = 1, \\
+                \set{ x \in \R : \epsilon_{2n - 1} < \abs{x - \sqrt{2}} < \epsilon_{2n - 3} } & \text{if } n \geq 2.
+            \end{cases}
+        \]
+        Equivalently,
+        \[
+            A_n = \begin{cases}
+                \paren{ -\infty, \sqrt{2} - \epsilon_1 } \cup \paren{ \sqrt{2} + \epsilon_1, \infty } & \text{if } n = 1, \\
+                \paren{ \sqrt{2} - \epsilon_{2n - 3}, \sqrt{2} - \epsilon_{2n - 1} } \cup \paren{ \sqrt{2} + \epsilon_{2n - 1}, \sqrt{2} + \epsilon_{2n - 3} } & \text{if } n \geq 2.
+            \end{cases}
+        \]
+        Now set \( E_n = E \cap A_n \) for each \( n \in \N \).
+        \begin{center}
+            \includegraphics[width=0.8\textwidth]{UA_Figures/UA_ex3_4_9_fig_1.pdf}
+        \end{center}
+        
+        We have \( \bigcup_{n=1}^{\infty} E_n = E \) since the only real numbers not contained in \( \bigcup_{n=1}^{\infty} A_n \) are \( \sqrt{2} \) and those of the form \( \sqrt{2} \pm \epsilon_{2n - 1} \) for some \( n \in \N \), none of which are rational, and the collection \( \{ E_n : n \in \N \} \) is evidently pairwise disjoint; it follows that this collection is a partition of \( E \).
+
+        Since \( \lim_{n \to \infty} p_n = \lim_{n \to \infty} q_n = \sqrt{2} \) and \( \sqrt{2} \not\in \overline{A_n} \) for any \( n \in \N \), we see that there can be only finitely many terms of the sequences \( (p_n) \) and \( (q_n) \) contained in each \( A_n \); it follows that each \( E_n \) is countably infinite. We can then enumerate each \( E_n \):
+        \[
+            E_n = \{ e_{1,n}, e_{2,n}, e_{3,n}, \ldots \}.
+        \]
+        These enumerations can be combined to form an enumeration \( (a_n) \) of \( E \) using the same method of the proof that a countable union of countable sets is itself countable (see, for example, \Cref{ex:1.5.3} (c)). To be precise, consider the following ``infinite arrays''.
+        \[
+            \begin{array}{cccccc}
+                E_1 & E_2 & E_3 & E_4 & E_5 & \cdots \\
+                \hline
+                e_{1,1} & e_{1,2} & e_{1,3} & e_{1,4} & e_{1,5} & \cdots \\[2mm]
+                e_{2,1} & e_{2,2} & e_{2,3} & e_{2,4} & e_{2,5} & \cdots \\[2mm]
+                e_{3,1} & e_{3,2} & e_{3,3} & e_{3,4} & e_{3,5} & \cdots \\[2mm]
+                e_{4,1} & e_{4,2} & e_{4,3} & e_{4,4} & e_{4,5} & \cdots \\[2mm]
+                e_{5,1} & e_{5,2} & e_{5,3} & e_{5,4} & e_{5,5} & \cdots \\[2mm]
+                \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+            \end{array}
+            \qquad
+            \begin{array}{cccccc}
+                1 & 2 & 3 & 4 & 5 & \cdots \\
+                \hline
+                a_1 & a_3 & a_6 & a_{10} & a_{15} & \cdots \\[2mm]
+                a_2 & a_5 & a_9 & a_{14} & a_{20} & \cdots \\[2mm]
+                a_4 & a_8 & a_{13} & a_{19} & a_{26} & \cdots \\[2mm]
+                a_7 & a_{12} & a_{18} & a_{25} & a_{33} & \cdots \\[2mm]
+                a_{11} & a_{17} & a_{24} & a_{32} & a_{41} & \cdots \\[2mm]
+                \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+            \end{array}
+        \]
+        The enumeration of \( E_n \) is the \( n \)\ts{th} column of the left-hand array. The enumeration of \( E \) is obtained by letting \( a_N \) in the right-hand array be the element \( e_{m,n} \) in the corresponding position of the left-hand array, so that
+        \[
+            a_1 = e_{1,1}, a_2 = e_{2,1}, a_3 = e_{1,2}, a_4 = e_{3,1}, \ldots
+        \]
+        This mapping is bijective because the collection \( \{ E_n : n \in \N \} \) is a partition of \( E \) and thus the sequence \( (a_n) \) satisfies conditions (3.1) and (3.2).
+
+        To show that the sequence \( (a_n) \) satisfies condition (3.3), we need to show that for all \( n \in \N, \sqrt{2} \not\in V_{\epsilon_{2n - 1}}(a_n) \). Let \( n \in \N \) be given. The element \( a_n \) belongs to some column of the right-hand array above, say the \( N \)\ts{th} column. From the definition of our enumeration \( (a_n) \), we have \( a_n = e_{m,N} \) for some \( m \in \N \). It follows that \( a_n \in E_N \) and hence that \( \abs{a_n - \sqrt{2}} > \epsilon_{2N - 1} \), which gives \( \sqrt{2} \not\in V_{\epsilon_{2N - 1}}(a_n) \).
+        
+        If we examine the right-hand array, we see that the element at the top of the \( N \)\ts{th} column is \( a_{N(N+1)/2} \) (the \( N \)\ts{th} triangular number), and furthermore that \( n \geq N(N+1)/2 \). Thus
+        \[
+            2n - 1 \geq 2N - 1 \implies \epsilon_{2n-1} \leq \epsilon_{2N-1} \implies V_{\epsilon_{2n - 1}}(a_n) \subseteq V_{\epsilon_{2N - 1}}(a_n).
+        \]
+        Combining this with \( \sqrt{2} \not\in V_{\epsilon_{2N - 1}}(a_n) \), we see that \( \sqrt{2} \not\in V_{\epsilon_{2n - 1}}(a_n) \); it follows that the sequence \( (a_n) \) satisfies condition (3.3).
+
+        \noindent \hrulefill
+
+        \noindent {\Large \textbf{Step 4.}}
+
+        \noindent We can now form our final enumeration \( (r_n) \), by letting
+        \[
+            r_{2n-1} = a_n, \quad r_{4n-2} = q_n, \hspaceand r_{4n} = p_n,
+        \]
+        so that \( (r_n) \) is the sequence
+        \[
+            a_1, q_1, a_2, p_1, a_3, q_2, a_4, p_2, \ldots
+        \]
+        Let \( O = \bigcup_{n=1}^{\infty} V_{\epsilon_n}(r_n) \) and \( F = \setcomp{O} \). By condition (1.2), we have
+        \[
+            \paren{ \sqrt{2} - \frac{1}{16}, \sqrt{2} } \subseteq \bigcup_{n=1}^{\infty} V_{\epsilon_{4n}}(p_n) = \bigcup_{n=1}^{\infty} V_{\epsilon_{4n}}(r_{4n}) \subseteq \bigcup_{n=1}^{\infty} V_{\epsilon_n}(r_n) = O,
+        \]
+        and by condition (2.2), we have
+        \[
+            \paren{ \sqrt{2}, \sqrt{2} + \frac{1}{16} } \subseteq \bigcup_{n=1}^{\infty} V_{\epsilon_{4n-2}}(q_n) = \bigcup_{n=1}^{\infty} V_{\epsilon_{4n-2}}(r_{4n-2}) \subseteq \bigcup_{n=1}^{\infty} V_{\epsilon_n}(r_n) = O.
+        \]
+        Thus \( \paren{ \sqrt{2} - \tfrac{1}{16}, \sqrt{2} } \cup \paren{ \sqrt{2}, \sqrt{2} + \tfrac{1}{16} } \subseteq O \). Furthermore, since
+        \begin{align*}
+            O &= \bigcup_{n=1}^{\infty} V_{\epsilon_n}(r_n) \\[2mm]
+            &= \bigcup_{n=1}^{\infty} V_{\epsilon_{4n}}(r_{4n}) \cup \bigcup_{n=1}^{\infty} V_{\epsilon_{4n-2}}(r_{4n-2}) \cup \bigcup_{n=1}^{\infty} V_{\epsilon_{2n-1}}(r_{2n-1}) \\[2mm]
+            &= \bigcup_{n=1}^{\infty} V_{\epsilon_{4n}}(p_n) \cup \bigcup_{n=1}^{\infty} V_{\epsilon_{4n-2}}(q_n) \cup \bigcup_{n=1}^{\infty} V_{\epsilon_{2n-1}}(a_n),
+        \end{align*}
+        conditions (1.3), (2.3), and (3.3) imply that \( \sqrt{2} \not\in O \). It follows that
+        \[
+            \paren{ \sqrt{2} - \frac{1}{16}, \sqrt{2} + \frac{1}{16} } \cap F = \set{ \sqrt{2} },
+        \]
+        so that \( \sqrt{2} \) is an isolated point of \( F \). We may conclude that \( F \) is not a perfect set.
+
+        \noindent \hrulefill
+
+        \noindent Regarding the second half of the question, it is possible to modify the construction to produce a non-empty perfect set consisting of only irrational numbers. To do this, we start with any enumeration \( (r_n) \) of \( \Q \) and recursively define a sequence of non-negative real numbers \( (\epsilon_n) \) in such a way that if we set
+        \[
+            O = \bigcup_{n=1}^{\infty} V_{\epsilon_n}(r_n) \hspaceand F = \setcomp{O},
+        \]
+        then \( F \) will be a non-empty perfect of irrational numbers. Intuitively, we will recursively construct \( O \) as a union of disjoint open intervals, with no pair of these intervals sharing an endpoint. (In what follows, we adopt the convention that \( V_{\epsilon}(x) = \emptyset \) if \( \epsilon = 0 \).)
+
+        Suppose that after \( N \) steps we have chosen \( \epsilon_1, \ldots, \epsilon_N \) such that:
+        \begin{enumerate}[leftmargin=40pt, label=(IH\arabic*)]
+            \item \( \{ r_1, \ldots, r_N \} \subseteq \bigcup_{n=1}^{N} V_{\epsilon_n}(r_n) \);
+
+            \item for all \( 1 \leq n \leq N \), either \( \epsilon_n = 0 \) or \( \epsilon_n \) is positive, irrational, and satisfies \( \epsilon_n \leq \tfrac{\sqrt{2}}{2^n} \);
+
+            \item \( \overline{V_{\epsilon_m}(r_m)} \cap \overline{V_{\epsilon_n}(r_n)} = \emptyset \) for all \( m, n \in \N \) with \( 1 \leq m < n \leq N \).
+        \end{enumerate}
+        
+        Let \( U = \bigcup_{n=1}^N V_{\epsilon_n}(r_n) \). There are two cases.
+        \begin{description}
+            \item[Case 1.] This is the easier case. If \( r_{N+1} \in U \), then let \( \epsilon_{N+1} = 0 \), so that \( V_{\epsilon_{N+1}}(r_{N+1}) = \emptyset \). (IH1) combined with \( r_{N+1} \in U \) gives us
+            \[
+                \{ r_1, \ldots, r_N, r_{N+1} \} \subseteq U = \bigcup_{n=1}^N V_{\epsilon_n}(r_n) = \bigcup_{n=1}^{N+1} V_{\epsilon_n}(r_n),
+            \]
+            where the last equality follows because \( V_{\epsilon_{N+1}}(r_{N+1}) = \emptyset \).
+            
+            Combining (IH2) with \( \epsilon_{N+1} = 0 \), we see that for all \( 1 \leq n \leq N + 1 \), either \( \epsilon_n = 0 \) or \( \epsilon_n \) is positive, irrational, and satisfies \( \epsilon_n \leq \tfrac{\sqrt{2}}{2^n} \).
+
+            Similarly, combining (IH3) with \( V_{\epsilon_{N+1}}(r_{N+1}) = \emptyset \), we have \( \overline{V_{\epsilon_m}(r_m)} \cap \overline{V_{\epsilon_n}(r_n)} = \emptyset \) for all \( m, n \in \N \) with \( 1 \leq m < n \leq N + 1 \).
+
+            \item[Case 2.] This is the harder case. If \( r_{N+1} \not\in U \) then let \( \epsilon_{n_1}, \ldots, \epsilon_{n_J} \) be those \( \epsilon \)'s from \( \epsilon_1, \ldots, \epsilon_N \) which are non-zero; there must be at least one such \( \epsilon_{n_j} \) by (IH1) and each \( \epsilon_{n_j} \) must be positive and irrational by (IH2). Observe that
+            \[
+                U = \bigcup_{n=1}^N V_{\epsilon_n}(r_n) = \bigcup_{j=1}^J V_{\epsilon_{n_j}}(r_{n_j}),
+            \]
+            where each \( V_{\epsilon_{n_j}}(r_{n_j}) \) is a proper open interval. For each \( 1 \leq j \leq J \), note that since \( r_{N+1} \not\in U \), we must have \( r_{N+1} \not\in V_{\epsilon_{n_j}}(r_{n_j}) \). Both of the endpoints of \( V_{\epsilon_{n_j}}(r_{n_j}) \) are the sum of a rational number and an irrational number and hence are irrational; since \( r_{N+1} \) is rational, we see that \( r_{N+1} \not\in [r_{n_j} - \epsilon_{n_j}, r_{n_j} + \epsilon_{n_j}] \). Given this, if we let \( d \) be the minimum of the distances from \( r_{N+1} \) to the endpoints of each \( V_{\epsilon_{n_j}} \), i.e.,
+            \[
+                d = \min \set{ \abs{r_{n_j} - \epsilon_{n_j} - r_{N+1}}, \abs{r_{n_j} + \epsilon_{n_j} - r_{N+1}} : 1 \leq j \leq J },
+            \]
+            then \( d \) must be positive. Furthermore, \( d \) must be irrational since it is the sum of a rational number and an irrational number, and for each \( 1 \leq j \leq J \), we have
+            \[
+                \bkt{ r_{N+1} - \tfrac{d}{2}, r_{N+1} + \tfrac{d}{2} } \cap [r_{n_j} - \epsilon_{n_j}, r_{n_j} + \epsilon_{n_j}] = \emptyset. \tag{\dag}
+            \]
+
+            Let \( \epsilon_{N+1} = \min \set{ \tfrac{\sqrt{2}}{2^{N+1}}, \tfrac{d}{2} } \) and note that \( \epsilon_{N+1} \) is positive, so that \( r_{N+1} \in V_{\epsilon_{N+1}}(r_{N+1}) \). Combining this with (IH1) gives us
+            \[
+                \{ r_1, \ldots, r_N, r_{N+1} \} \subseteq \bigcup_{n=1}^{N+1} V_{\epsilon_n}(r_n).
+            \]
+            As noted before, \( d \) is positive and irrational, so \( \epsilon_{N+1} \) is positive, irrational, and satisfies \( \epsilon_{N+1} \leq \tfrac{\sqrt{2}}{2^{N+1}} \); combining this with (IH2) shows that for all \( 1 \leq n \leq N + 1 \), either \( \epsilon_n = 0 \) or \( \epsilon_n \) is positive, irrational, and satisfies \( \epsilon_n \leq \tfrac{\sqrt{2}}{2^n} \).
+
+            Let \( 1 \leq n \leq N \) be given. If \( \epsilon_n = 0 \), then the identity \( \overline{V_{\epsilon_n}(r_n)} \cap \overline{V_{\epsilon_{N+1}}(r_{N+1})} = \emptyset \) is clear, since \( V_{\epsilon_n}(r_n) = \emptyset \). If \( \epsilon_n \neq 0 \), then \( n = n_j \) for some \( 1 \leq j \leq J \). In this case, we have
+            \begin{multline*}
+                \overline{V_{\epsilon_n}(r_n)} = \overline{V_{\epsilon_{n_j}}(r_{n_j})} = [r_{n_j} - \epsilon_{n_j}, r_{n_j} + \epsilon_{n_j}] \quad \text{and} \\[2mm]
+                \overline{V_{\epsilon_{N+1}}(r_{N+1})} = [r_{N+1} - \epsilon_{N+1}, r_{N+1} + \epsilon_{N+1}] \subseteq \bkt{ r_{N+1} - \tfrac{d}{2}, r_{N+1} + \tfrac{d}{2} }.
+            \end{multline*}
+            By equation \( (\dag) \), we see that \( \overline{V_{\epsilon_n}(r_n)} \cap \overline{V_{\epsilon_{N+1}}(r_{N+1})} = \emptyset \). Combining this with (IH3), we see that \( \overline{V_{\epsilon_m}(r_m)} \cap \overline{V_{\epsilon_n}(r_n)} = \emptyset \) for all \( m, n \in \N \) with \( 1 \leq m < n \leq N + 1 \).
+        \end{description}
+        This completes the recursive step; for the base case, simply let \( \epsilon_1 = \tfrac{\sqrt{2}}{2} \). Thus we obtain a sequence \( (\epsilon_n) \) which satisfies (IH1), (IH2), and (IH3) for all \( N \in \N \). In other words, the sequence \( (\epsilon_n) \) has the following properties:
+        \begin{enumerate}[itemsep=8pt, leftmargin=44pt, label=(A\arabic*)]
+            \item \( \Q \subseteq \bigcup_{n=1}^{\infty} V_{\epsilon_n}(r_n) \);
+
+            \item for all \( n \in \N \), either \( \epsilon_n = 0 \) or \( \epsilon_n \) is positive, irrational, and satisfies \( \epsilon_n \leq \tfrac{\sqrt{2}}{2^n} \);
+
+            \item \( \overline{V_{\epsilon_m}(r_m)} \cap \overline{V_{\epsilon_n}(r_n)} = \emptyset \) for all \( m, n \in \N \) with \( m < n \).
+        \end{enumerate}
+        Let \( O = \bigcup_{n=1}^{\infty} V_{\epsilon_n}(r_n) \) and \( F = \setcomp{O} \). As in part (a), \( F \) is closed and, by (A1), consists solely of irrational numbers. By (A2), we have \( \epsilon_n \leq \tfrac{\sqrt{2}}{2^n} \) for each \( n \in \N \); a similar argument as in part (a) shows that \( O \) cannot be the entire real line and thus \( F \) is non-empty.
+        
+        To see that \( F \) is perfect, suppose by way of contradiction that \( x \in F \) is isolated, i.e., there exists a \( \delta > 0 \) such that \( (x - \delta, x + \delta) \cap F = \{ x \} \). This implies that the intervals \( (x - \delta, x) \) and \( (x, x + \delta) \) are contained in \( O \). We claim that if an interval such as \( (x - \delta, x) \) is to be contained in \( O \), then it must be entirely contained inside a single \( V_{\epsilon_n}(r_n) \). To see this, suppose by way of contradiction that \( a, b \in (x - \delta, x) \) are such that \( a < b, a \in V_{\epsilon_m}(r_m), \) and \( b \in V_{\epsilon_n}(r_n) \), with \( m \neq n \). By (A3), it must then be the case that
+        \[
+            a < r_m + \epsilon_m < r_n - \epsilon_n < b.
+        \]
+        \begin{center}
+            \includegraphics[width=0.9\textwidth]{UA_Figures/UA_ex3_4_9_fig_2.pdf}
+        \end{center}
+        So \( r_m + \epsilon_m \in (a, b) \subseteq (x - \delta, x) \subseteq O = \bigcup_{n=1}^{\infty} V_{\epsilon_n}(r_n) \); it follows that there exists a \( k \in \N \) such that \( r_m + \epsilon_m \) belongs to \( V_{\epsilon_k}(r_k) \). If \( k = m \), this says that an open interval contains one of its endpoints, and if \( k \neq m \) then this violates (A3). In either case, we have a contradiction.
+
+        Thus if an interval such as \( (x - \delta, x) \) is to be contained in \( O \), it must be entirely contained inside a single \( V_{\epsilon_n}(r_n) \). Since \( (x - \delta, x) \) and \( (x, x + \delta) \) are disjoint, there exist positive integers \( m \neq n \) such that
+        \[
+            (x - \delta, x) \subseteq V_{\epsilon_m}(r_m) \hspaceand (x, x + \delta) \subseteq V_{\epsilon_n}(r_n).
+        \]
+        This implies that
+        \[
+            [x - \delta, x] \subseteq \overline{V_{\epsilon_m}(r_m)} \hspaceand[8mm] [x, x + \delta] \subseteq \overline{V_{\epsilon_n}(r_n)},
+        \]
+        which in turn gives \( x \in \overline{V_{\epsilon_m}(r_m)} \cap \overline{V_{\epsilon_n}(r_n)} \), contradicting (A3). We may conclude that \( F \) is a perfect set.
     \end{enumerate}
 \end{solution}
 
