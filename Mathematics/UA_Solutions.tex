@@ -6772,4 +6772,954 @@ If \( f \) is both injective and surjective, then I will refer to \( f \) as bij
     Suppose \( (x_n) \) is a sequence contained in \( A \) satisfying \( x_n \neq c \) and \( \lim_{n \to \infty} x_n = c \). By assumption, we have \( f(x_n) \leq g(x_n) \leq h(x_n) \) for all \( n \in \N \), and Theorem 4.2.3 guarantees that \( \lim_{n \to \infty} f(x_n) = \lim_{n \to \infty} h(x_n) = L \). We may now apply the Squeeze Theorem for sequences (\Cref{ex:2.3.3}) to see that \( \lim_{n \to \infty} g(x_n) = L \), and Theorem 4.2.3 then allows us to conclude that \( \lim_{x \to c} g(x) = L \).
 \end{solution}
 
+\section{Continuous Functions}
+\label{sec:4.3}
+
+\begin{exercise}
+\label{ex:4.3.1}
+    Let \( g(x) = \sqrt[3]{x} \).
+    \begin{enumerate}
+        \item Prove that \( g \) is continuous at \( c = 0 \).
+
+        \item Prove that \( g \) is continuous at a point \( c \neq 0 \). (The identity \( a^3 - b^3 = (a - b)(a^2 + ab + b^2) \) will be helpful.)
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( \epsilon > 0 \) be given and let \( \delta = \epsilon^3 \). If we take \( x \in \R \) such that \( \abs{x} < \delta \), then we will have
+        \[
+            \abs{\sqrt[3]{x}} = \sqrt[3]{\abs{x}} < \sqrt[3]{\delta} = \epsilon.
+        \]
+        Thus \( g \) is continuous at \( c = 0 \).
+
+        \item Taking \( a = x^{1/3} \) and \( b = c^{1/3} \) in the identity \( a^3 - b^3 = (a - b)(a^2 + ab + b^2) \) gives
+        \begin{align*}
+            x - c &= \paren{ x^{1/3} - c^{1/3} } \paren{ x^{2/3} + (xc)^{1/3} + c^{2/3} } \\[2mm]
+            \implies \abs{x - c} &= \abs{x^{1/3} - c^{1/3}} \abs{x^{2/3} + (xc)^{1/3} + c^{2/3}}.
+        \end{align*}
+        If we take \( x \) close enough to \( c \) so that \( x \) and \( c \) have the same sign, i.e., take \( x \) such that \( \abs{x - c} < \abs{c} \), then \( xc > 0 \) and so
+        \[
+            \abs{x^{2/3} + (xc)^{1/3} + c^{2/3}} = x^{2/3} + (xc)^{1/3} + c^{2/3} \geq c^{2/3}.
+        \]
+        Let \( \delta = \min \{ \abs{c}, c^{2/3} \epsilon \} \) and suppose \( x \in \R \) is such that \( \abs{x - c} < \delta \). By the previous discussion, we then have
+        \[
+            \abs{x^{1/3} - c^{1/3}} \leq \frac{\abs{x - c}}{c^{2/3}} < \frac{\delta}{c^{2/3}} < \epsilon.
+        \]
+        Thus \( g \) is continuous at \( c \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.3.2}
+    To gain a deeper understanding of the relationship between \( \epsilon \) and \( \delta \) in the definition of continuity, let's explore some modest variations of Definition 4.3.1. In all of these, let \( f \) be a function defined on all of \( \R \).
+    \begin{enumerate}
+        \item Let's say \( f \) is \textit{onetinuous} at \( c \) if for all \( \epsilon > 0 \) we can choose \( \delta = 1 \) and it follows that \( \abs{f(x) - f(c)} < \epsilon \) whenever \( \abs{x - c} < \delta \). Find an example of a function that is onetinuous on all of \( \R \).
+
+        \item Let's say \( f \) is \textit{equaltinuous} at \( c \) if for all \( \epsilon > 0 \) we can choose \( \delta = \epsilon \) and it follows that \( \abs{f(x) - f(c)} < \epsilon \) whenever \( \abs{x - c} < \delta \). Find an example of a function that is equaltinuous on \( \R \) that is nowhere onetinuous, or explain why there is no such function.
+        
+        \item Let's say \( f \) is \textit{lesstinuous} at \( c \) if for all \( \epsilon > 0 \) we can choose \( 0 < \delta < \epsilon \) and it follows that \( \abs{f(x) - f(c)} < \epsilon \) whenever \( \abs{x - c} < \delta \). Find an example of a function that is lesstinuous on \( \R \) that is nowhere equaltinuous, or explain why there is no such function.
+
+        \item Is every lesstinuous function continuous? Is every continuous function lesstinuous? Explain.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( f \) be given by \( f(x) = 0 \) for all \( x \in \R \). Fix \( c \in \R \) and let \( \epsilon > 0 \) be given. If \( x \in \R \) is such that \( \abs{x - c} < 1 \), then
+        \[
+            \abs{f(x) - f(c)} = \abs{0 - 0} = 0 < \epsilon.
+        \]
+        Thus \( f \) is onetinuous on \( \R \).
+
+        \item Let \( f \) be given by \( f(x) = x \) for all \( x \in \R \). Fix \( c \in \R \) and let \( \epsilon > 0 \) be given. If \( x \in \R \) is such that \( \abs{x - c} < \epsilon \), then
+        \[
+            \abs{f(x) - f(c)} = \abs{x - c} < \epsilon.
+        \]
+        Thus \( f \) is equaltinuous on \( \R \). However, \( f \) is nowhere onetinuous. Fix \( c \in \R \) again and consider \( \epsilon = \tfrac{1}{4} \). Note that \( x = c + \tfrac{1}{2} \) satisfies \( \abs{x - c} = \abs{c + \tfrac{1}{2} - c} = \tfrac{1}{2} < 1 \), however
+        \[
+            \abs{f(x) - f(c)} = \abs{x - c} = \frac{1}{2} > \frac{1}{4} = \epsilon.
+        \]
+        Thus \( f \) is nowhere onetinuous.
+
+        \item Let \( f \) be given by \( f(x) = 2x \) for all \( x \in \R \). Fix \( c \in \R \), let \( \epsilon > 0 \) be given, and let \( \delta = \tfrac{\epsilon}{2} < \epsilon \). If \( x \in \R \) is such that \( \abs{x - c} < \delta \), then
+        \[
+            \abs{f(x) - f(c)} = 2 \abs{x - c} < 2 \delta = \epsilon.
+        \]
+        Thus \( f \) is lesstinuous on \( \R \). However, \( f \) is nowhere equaltinuous. Fix \( c \in \R \) again and let \( \epsilon = 1 \). Note that \( x = c + \tfrac{3}{4} \) satisfies \( \abs{x - c} = \tfrac{3}{4} < \epsilon \), however
+        \[
+            \abs{f(x) - f(c)} = 2 \abs{x - c} = \frac{3}{2} > \epsilon.
+        \]
+        Thus \( f \) is nowhere equaltinuous.
+
+        \item It is clear that every lesstinuous function is continuous. We claim that every continuous function is lesstinuous. To see this, let \( f \) be a continuous function. Fix \( c \in \R \) and \( \epsilon > 0 \). Since \( f \) is continuous at \( c \), there is a \( \delta' > 0 \) such that \( \abs{f(x) - f(c)} < \epsilon \) whenever \( \abs{x - c} < \delta' \). Let \( \delta = \min \{ \delta', \tfrac{\epsilon}{2} \} \), so that \( 0 < \delta < \epsilon \), and observe that if \( x \in \R \) is such that \( \abs{x - c} < \delta \) then \( x \) also satisfies \( \abs{x - c} < \delta' \), whence \( \abs{f(x) - f(c)} < \epsilon \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.3.3}
+    \begin{enumerate}
+        \item Supply a proof for Theorem 4.3.9 using the \( \epsilon \)-\( \delta \) characterization of continuity.
+
+        \item Give another proof of this theorem using the sequential characterization of continuity (from Theorem 4.3.2 (iii)).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( a \in A \) and \( \epsilon > 0 \) be given. By assumption we have \( f(a) \in B \), so \( g \) is continuous at \( f(a) \). There then exists a \( \delta_1 > 0 \) such that
+        \begin{equation}
+            \abs{y - f(a)} < \delta_1 \text{ and } y \in B \implies \abs{g(y) - g(f(a))} < \epsilon.
+        \end{equation}
+        Since \( f \) is continuous at \( a \), there exists a \( \delta_2 > 0 \) such that
+        \begin{equation}
+            \abs{x - a} < \delta_2 \text{ and } x \in A \implies \abs{f(x) - f(a)} < \delta_1.
+        \end{equation}
+        Combining (1) and (2), we have
+        \begin{multline*}
+            \abs{x - a} < \delta_2 \text{ and } x \in A \implies \abs{f(x) - f(a)} < \delta_1 \text{ and } f(x) \in B \\ \implies \abs{g(f(x)) - g(f(a))} < \epsilon.
+        \end{multline*}
+        Thus \( g \circ f \) is continuous at \( a \).
+
+        \item Let \( a \in A \) be given and suppose \( (a_n)_{n=1}^{\infty} \) is contained in \( A \) and satisfies \( \lim_{n \to \infty} a_n = a \). Since \( f \) is continuous at \( a \), Theorem 4.3.2 (iii) gives us \( \lim_{n \to \infty} f(a_n) = f(a) \). By assumption \( g \) is continuous at \( f(a) \in B \) and \( (f(a_n))_{n=1}^{\infty} \) is contained in \( B \), so Theorem 4.3.2 (iii) gives us \( \lim_{n \to \infty} g(f(a_n)) = g(f(a)) \). One more application of Theorem 4.3.2 (iii) allows us to conclude that \( g \circ f \) is continuous at \( a \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.3.4}
+    Assume \( f \) and \( g \) are defined on all of \( \R \) and that \( \lim_{x \to p} f(x) = q \) and \( \lim_{x \to q} g(x) = r \).
+    \begin{enumerate}
+        \item Give an example to show that it may not be true that
+        \[
+            \lim_{x \to p} g(f(x)) = r.
+        \]
+
+        \item Show that the result in (a) does follow if we assume \( f \) and \( g \) are continuous.
+
+        \item Does the result in (a) hold if we only assume \( f \) is continuous? How about if we only assume that \( g \) is continuous?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( f \) be given by \( f(x) = 0 \) for all \( x \in \R \) and let \( g \) be given by
+        \[
+            g(x) = \begin{cases}
+                0 & \text{if } x \neq 0, \\
+                1 & \text{if } x = 0.
+            \end{cases}
+        \]
+        We have \( \lim_{x \to 0} f(x) = \lim_{x \to 0} g(x) = 0 \), however note that \( g(f(x)) = g(0) = 1 \) for all \( x \in \R \). It follows that
+        \[
+            \lim_{x \to 0} g(f(x)) = 1 \neq 0.
+        \]
+
+        \item By Theorem 4.3.9, the composition \( g \circ f \) is continuous. Since \( f \) and \( g \) are defined on all of \( \R \), Theorem 4.3.2 (iv) lets us write
+        \[
+            \lim_{x \to p} g(f(x)) = g(f(p)) = g \paren{ \lim_{x \to p} f(x) } = g(q) = \lim_{x \to q} g(x).
+        \]
+
+        \item As the counterexample in part (a) shows, the result does not hold if we only assume that \( f \) is continuous. However, it does hold if we assume that \( g \) is continuous. To see this, let \( (x_n) \) be some sequence satisfying \( \lim_{n \to \infty} x_n = p \) and \( x_n \neq p \). Theorem 4.2.3 shows that \( \lim f(x_n) = q \), and since \( g \) is continuous the sequential characterization of continuity (Theorem 4.3.2 (iii)) implies that
+        \[
+            \lim g(f(x_n)) = g(q) = r,
+        \]
+        where the last equality also follows from the continuity of \( g \). Theorem 4.2.3 allows us to conclude that
+        \[
+            \lim_{x \to p} g(f(x)) = r.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.3.5}
+    Show using Definition 4.3.1 that if \( c \) is an isolated point of \( A \subseteq \R \), then \( f : A \to \R \) is continuous at \( c \).
+\end{exercise}
+
+\begin{solution}
+    Since \( c \) is an isolated point of \( A \), there exists a \( \delta > 0 \) such that \( (c - \delta, c + \delta) \cap A = \{ c \} \). Let \( \epsilon > 0 \) be given. If \( x \in A \) is such that \( \abs{x - c} < \delta \), then it must be the case that \( x = c \), which gives us
+    \[
+        \abs{f(x) - f(c)} = \abs{f(c) - f(c)} = 0 < \epsilon.
+    \]
+    Thus \( f \) is continuous at \( c \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.3.6}
+    Provide an example of each or explain why the request is impossible.
+    \begin{enumerate}
+        \item Two functions \( f \) and \( g \), neither of which is continuous at 0 such that \( f(x)g(x) \) and \( f(x) + g(x) \) are continuous at 0.
+
+        \item A function \( f(x) \) continuous at 0 and \( g(x) \) not continuous at 0 such that \( f(x) + g(x) \) is continuous at 0.
+
+        \item A function \( f(x) \) continuous at 0 and \( g(x) \) not continuous at 0 such that \( f(x)g(x) \) is continuous at 0.
+
+        \item A function \( f(x) \) not continuous at 0 such that \( f(x) + \tfrac{1}{f(x)} \) is continuous at 0.
+
+        \item A function \( f(x) \) not continuous at 0 such that \( [f(x)]^3 \) is continuous at 0.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( f, g : \R \to \R \) be given by
+        \[
+            f(x) = \begin{cases}
+                0 & \text{if } x \neq 0, \\
+                1 & \text{if } x = 0,
+            \end{cases}
+            \quad\quad\quad
+            g(x) = \begin{cases}
+                1 & \text{if } x \neq 0, \\
+                0 & \text{if } x = 0.
+            \end{cases}
+        \]
+        Neither \( f \) nor \( g \) is continuous at 0, however note that for all \( x \in \R \) we have
+        \[
+            f(x)g(x) = 0 \hspaceand f(x) + g(x) = 1.
+        \]
+        Thus \( fg \) and \( f + g \) are continuous at 0.
+
+        \item This is impossible. If \( f \) and \( f + g \) are continuous at 0 then Theorem 4.3.4 implies that \( g = f + g - f \) is continuous at 0.
+
+        \item If we take \( g \) as in part (a) and let \( f(x) = 0 \) for all \( x \in \R \), then \( g \) is not continuous at 0 but \( f = fg \) is continuous at 0.
+
+        \item Let \( f : \R \to \R \) be given by
+        \[
+            f(x) = \begin{cases}
+                \sqrt{2} - 1 & \text{if } x \neq 0, \\
+                \sqrt{2} + 1 & \text{if } x = 0,
+            \end{cases}
+        \]
+        and note that \( f \) is discontinuous at 0. Note further that \( f(x) + \tfrac{1}{f(x)} = 2 \sqrt{2} \) for all \( x \in \R \); it follows that \( f + \tfrac{1}{f} \) is continuous at 0.
+
+        \item This is impossible. As we showed in \Cref{ex:4.3.1}, the function \( g(x) = \sqrt[3]{x} \) is continuous everywhere. Thus if \( [f(x)]^3 \) is continuous at 0, then by Theorem 4.3.9 the composition
+        \[
+            f(x) = \sqrt[3]{[f(x)]^3}
+        \]
+        must also be continuous at 0.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.3.7}
+    \begin{enumerate}
+        \item Referring to the proper theorems, give a formal argument that Dirichlet's function from Section 4.1 is nowhere-continuous on \( \R \).
+
+        \item Review the definition of Thomae's function in Section 4.1 and demonstrate that it fails to be continuous at every rational point.
+
+        \item Use the characterization of continuity in Theorem 4.3.2 (iii) to show that Thomae's function is continuous at every irrational point in \( \R \). (Given \( \epsilon > 0 \), consider the set of points \( \{ x \in \R : t(x) \geq \epsilon \} \).)
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( g : \R \to \R \) be Dirichlet's function, i.e.,
+        \[
+            g(x) = \begin{cases}
+                1 & \text{if } x \in \Q, \\
+                0 & \text{if } x \not\in \Q.
+            \end{cases}
+        \]
+        Suppose \( c \in \Q \). By the density of \( \I \) in \( \R \), for any \( \delta > 0 \) there is an irrational number \( x \in \I \) such that \( x \in V_{\delta}(c) \); it follows that \( g(x) = 0 \not\in V_1(1) = V_1(g(c)) \). Thus by (the negation of) Theorem 4.3.2 (ii), \( g \) is not continuous at \( c \).
+
+        Similarly, suppose \( c \in \I \). By the density of \( \Q \) in \( \R \), for any \( \delta > 0 \) there is a rational number \( x \in \Q \) such that \( x \in V_{\delta}(c) \); it follows that \( g(x) = 1 \not\in V_1(0) = V_1(g(c)) \). Thus by (the negation of) Theorem 4.3.2 (ii), \( g \) is not continuous at \( c \).
+
+        We have now shown that \( g \) fails to be continuous at each \( c \in \R \), i.e., \( g \) is nowhere-continuous on \( \R \).
+
+        \item Let \( t : \R \to \R \) be Thomae's function, i.e.,
+        \[
+            t(x) = \begin{cases}
+                1 & \text{if } x = 0, \\
+                \tfrac{1}{n} & \text{if } x = \tfrac{m}{n} \in \Q \setminus \{ 0 \} \text{ is in lowest terms with } n > 0, \\
+                0 & \text{if } x \not\in \Q.
+            \end{cases}
+        \]
+        Suppose \( c \in \Q \). The density of \( \I \) in \( \R \) allows us to pick a sequence of irrational numbers \( (x_n) \) such that \( \lim_{n \to \infty} x_n = c \). We then have \( t(x_n) = 0 \) for each \( n \in \N \) and so \( \lim_{n \to \infty} t(x_n) = 0 \). However, \( t(c) \) is strictly positive; it follows that \( \lim_{n \to \infty} t(x_n) \neq t(c) \) and so Corollary 4.3.3 allows us to conclude that \( t \) is not continuous at \( c \in \Q \). Thus \( t \) fails to be continuous on \( \Q \).
+
+        \item Suppose \( c \in \I \) and suppose we have a sequence \( (x_n) \) such that \( \lim_{n \to \infty} x_n = c \). Our aim is to show that \( \lim_{n \to \infty} t(x_n) = t(c) = 0 \). Let \( \epsilon > 0 \) be given and choose \( K \in \N \) such that \( \tfrac{1}{K} < \epsilon \). By \Cref{lem:ex4.2.3}, there exists a \( \delta > 0 \) such that if \( y = \tfrac{a}{b} \) is a rational number contained in \( V_{\delta}(c) \) with \( b > 0 \), then \( b > K \). For such a \( y \), we then have \( t(y) = \tfrac{1}{b} < \tfrac{1}{K} < \epsilon \). Since \( \lim_{n \to \infty} x_n = c \), there is an \( N \in \N \) such that \( x_n \in V_{\delta}(c) \) for all \( n \geq N \). Suppose \( n \in \N \) satisfies \( n \geq N \). There are two cases.
+        \begin{description}
+            \item[Case 1.] If \( x_n \in \I \), then \( \abs{t(x_n)} = 0 < \epsilon \).
+            
+            \item[Case 2.] If \( x_n \in \Q \), then since \( x_n \in V_{\delta}(c) \)  we have \( \abs{t(x_n)} < \tfrac{1}{K} < \epsilon \).
+        \end{description}
+        In either case we have \( \abs{t(x_n)} < \epsilon \) and thus \( \lim_{n \to \infty} t(x_n) = t(c) = 0 \) as desired. Theorem 4.3.2 (iii) allows us to conclude that \( t \) is continuous at \( c \in \I \) and hence that \( t \) is continuous on \( \I \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.3.8}
+    Decide if the following claims are true or false, providing either a short proof or counterexample to justify each conclusion. Assume throughout that \( g \) is defined and continuous on all of \( \R \).
+    \begin{enumerate}
+        \item If \( g(x) \geq 0 \) for all \( x < 1 \), then \( g(1) \geq 0 \) as well.
+
+        \item If \( g(r) = 0 \) for all \( r \in \Q \), then \( g(x) = 0 \) for all \( x \in \R \).
+
+        \item If \( g(x_0) > 0 \) for a single point \( x_0 \in \R \), then \( g(x) \) is in fact strictly positive for uncountably many points.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item This is true. Let \( (x_n) \) be the sequence given by \( x_n = 1 - \tfrac{1}{n} \). Since \( g \) is continuous at 1 and \( \lim_{n \to \infty} x_n = 1 \), Theorem 4.3.2 (iii) implies that \( \lim_{n \to \infty} g(x_n) = g(1) \). Note that \( x_n < 1 \) for each \( n \in \N \), so that \( g(x_n) \geq 0 \) for each \( n \in \N \). The Order Limit Theorem (Theorem 2.3.4) allows us to conclude that \( \lim_{n \to \infty} g(x_n) = g(1) \geq 0 \) also.
+
+        \item This is true. Let \( x \in \R \) be given. By the density of \( \Q \) in \( \R \), there is a sequence \( (r_n) \) of rational numbers such that \( \lim_{n \to \infty} r_n = x \). On the one hand, by the continuity of \( g \) at \( x \), we must have \( \lim_{n \to \infty} g(r_n) = g(x) \) (Theorem 4.3.2 (iii)). On the other hand, \( g(r_n) = 0 \) for all \( n \in \N \) and thus \( \lim_{n \to \infty} g(r_n) = 0 \). Since the limit of a sequence is unique (Theorem 2.2.7), we see that \( g(x) = 0 \).
+        
+        \item This is true. Since \( g \) is continuous at \( x_0 \), for \( \epsilon = g(x_0) > 0 \) there is a \( \delta > 0 \) such that \( g(x) \in V_{\epsilon}(g(x_0)) = (0, 2 g(x_0)) \) whenever \( x \in V_{\delta}(x_0) \). In other words, for each of the uncountably many \( x \in (x_0 - \delta, x_0 + \delta) \), we have \( g(x) > 0 \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.3.9}
+    Assume \( h : \R \to \R \) is continuous on \( \R \) and let \( K = \{ x : h(x) = 0 \} \). Show that \( K \) is a closed set.
+\end{exercise}
+
+\begin{solution}
+    Suppose that \( (x_n) \) is a convergent sequence contained in \( K \) with \( \lim_{n \to \infty} x_n = x \) for some \( x \in \R \); the continuity of \( h \) implies that \( \lim_{n \to \infty} h(x_n) = h(x) \). Since each \( x_n \in K \), we have \( h(x_n) = 0 \) for each \( n \in \N \) and thus \( \lim_{n \to \infty} h(x_n) = 0 \). The uniqueness of the limit of a sequence (Theorem 2.2.7) now implies that \( h(x) = 0 \), i.e., \( x \in K \). Theorem 3.2.8 allows us to conclude that \( K \) is closed.
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.3.10}
+    Observe that if \( a \) and \( b \) are real numbers, then
+    \[
+        \max \{ a, b \} = \frac{1}{2} [(a + b) + \abs{a - b}].
+    \]
+    \begin{enumerate}
+        \item Show that if \( f_1, f_2, \ldots, f_n \) are continuous functions, then
+        \[
+            g(x) = \max \{ f_1(x), f_2(x), \ldots, f_n(x) \}
+        \]
+        is a continuous function.
+
+        \item Let's explore whether the result in (a) extends to the infinite case. For each \( n \in \N \), define \( f_n \) on \( \R \) by
+        \[
+            f_n(x) = \begin{cases}
+                1 & \text{if } \abs{x} \geq 1/n \\
+                n \abs{x} & \text{if } \abs{x} < 1/n.
+            \end{cases}
+        \]
+        Now explicitly compute \( h(x) = \sup \{ f_1(x), f_2(x), f_3(x), \ldots \} \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item First, let us show that the function \( x \mapsto \abs{x} \) is continuous. If \( y \in \R \) and \( \epsilon > 0 \), let \( \delta = \epsilon \) and suppose that \( \abs{x - y} < \delta \). By the reverse triangle inequality (\Cref{ex:1.2.6} (d)), we have
+        \[
+            \abs{\abs{x} - \abs{y}} \leq \abs{x - y} < \delta = \epsilon.
+        \]
+        It follows that \( x \mapsto \abs{x} \) is continuous on \( \R \).
+        
+        Now suppose that \( f_1, f_2 : A \to \R \) are two continuous functions defined on some domain \( A \subseteq \R \). For any \( x \in A \), note that
+        \[
+            g(x) = \max \{ f_1(x), f_2(x) \} = \frac{1}{2}[(f_1(x) + f_2(x)) + \abs{f_1(x) - f_2(x)}].
+        \]
+        Since \( f_1 \) and \( f_2 \) are continuous on \( A \), and we showed that \( x \mapsto \abs{x} \) is continuous everywhere, Theorem 4.3.9 and several applications of Theorem 4.3.4 show that \( g \) is also continuous on \( A \).
+
+        Using the observation that
+        \[
+            \max \{ f_1(x), f_2(x), \ldots, f_n(x) \} = \max \{ \max \{ f_1(x), f_2(x), \ldots, f_{n-1}(x) \}, f_n(x) \},
+        \]
+        a straightforward induction argument on \( n \) (the base case was handled in the previous paragraph) shows that the maximum of \( n \) continuous functions is a continuous function.
+
+        \item If \( x = 0 \), then for each \( n \in \N \) we have \( f_n(0) = 0 \) and thus \( h(0) = 0 \). If \( x \neq 0 \), then choose \( n \in \N \) such that \( \tfrac{1}{n} < \abs{x} \). It follows that \( f_n(x) = 1 \) and thus \( h(x) = 1 \). So \( h \) is the function
+        \[
+            h(x) = \begin{cases}
+                1 & \text{if } x \neq 0, \\
+                0 & \text{if } x = 0,
+            \end{cases}
+        \]
+        which is not continuous at 0.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}[Contraction Mapping Theorem]
+\label{ex:4.3.11}
+    Let \( f \) be a function defined on all of \( \R \), and assume there is a constant \( c \) such that \( 0 < c < 1 \) and
+    \[
+        \abs{f(x) - f(y)} \leq c \abs{x - y}
+    \]
+    for all \( x, y \in \R \).
+    \begin{enumerate}
+        \item Show that \( f \) is continuous on \( \R \).
+
+        \item Pick some point \( y_1 \in \R \) and construct the sequence
+        \[
+            (y_1, f(y_1), f(f(y_1)), \ldots).
+        \]
+        In general, if \( y_{n+1} = f(y_n) \), show that the resulting sequence \( (y_n) \) is a Cauchy sequence. Hence we may let \( y = \lim y_n \).
+
+        \item Prove that \( y \) is a fixed point of \( f \) (i.e., \( f(y) = y \)) and that it is unique in this regard.
+
+        \item Finally, prove that if \( x \) is \textit{any} arbitrary point in \( \R \), then the sequence \( (x, f(x), f(f(x)), \ldots) \) converges to \( y \) defined by (b).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( y \in \R \) and \( \epsilon > 0 \) be given. Let \( \delta = \tfrac{\epsilon}{c} \), suppose that \( x \in \R \) is such that \( \abs{x - y} < \delta \), and observe that
+        \[
+            \abs{f(x) - f(y)} \leq c \abs{x - y} < c \delta = \epsilon.
+        \]
+        Thus \( f \) is continuous at each \( y \in \R \).
+
+        \item Suppose \( n > m \) are positive integers. Repeatedly applying the triangle inequality yields
+        \[
+            \abs{y_n - y_m} \leq \abs{y_n - y_{n-1}} + \cdots + \abs{y_{m+1} - y_m} = \sum_{k=m}^{n-1} \abs{y_{k+1} - y_k}.
+        \]
+        Now we use the hypothesis that \( \abs{f(x) - f(y)} \leq c \abs{x - y} \) for all \( x, y \in \R \) and the definition of the sequence \( y_n = f(y_{n-1}) \) to see that
+        \[
+            \sum_{k=m}^{n-1} \abs{y_{k+1} - y_k} \leq \sum_{k=m}^{n-1} c \abs{y_k - y_{k-1}} \leq \cdots \leq \sum_{k=m}^{n-1} c^{k-1} \abs{y_2 - y_1} = c^{-2} \abs{y_2 - y_1} \sum_{k=m+1}^n c^k.
+        \]
+        If we let \( s_n = \sum_{k=0}^n c^k \), then we have shown that for all positive integers \( n > m \) we have the inequality
+        \[
+            \abs{y_n - y_m} \leq c^{-2} \abs{y_2 - y_1} (s_n - s_m). \tag{1}
+        \]
+        Let \( \epsilon > 0 \) be given. The series \( \sum_{k=0}^{\infty} c^k \) is convergent since \( 0 < c < 1 \), so the sequence \( (s_n) \) is Cauchy. There then exists an \( N \in \N \) such that
+        \[
+            n > m \geq N \implies \abs{s_n - s_m} = s_n - s_m < \frac{c^2}{\abs{y_2 - y_1} + 1} \epsilon. \tag{2}
+        \]
+        Suppose \( n, m \) are positive integers such that \( n > m \geq N \). By (1) and (2) we then have
+        \[
+            \abs{y_n - y_m} \leq c^{-2} \abs{y_2 - y_1} \frac{c^2}{\abs{y_2 - y_1} + 1} \epsilon < \epsilon.
+        \]
+        Thus \( (y_n) \) is a Cauchy sequence.
+
+        \item Since \( f \) is continuous at \( y \) (part (a)), we have \( \lim_{n \to \infty} f(y_n) = f(y) \). It follows that
+        \[
+            y = \lim_{n \to \infty} y_{n+1} = \lim_{n \to \infty} f(y_n) = f(y).
+        \]
+        For uniqueness, observe that for any \( x \in \R \) such that \( x = f(x) \) we have
+        \[
+            \abs{x - y} = \abs{f(x) - f(y)} \leq c \abs{x - y}.
+        \]
+        If \( \abs{x - y} \) were not zero, this would imply that \( c \geq 1 \). Since \( 0 < c < 1 \), it must be the case that \( \abs{x - y} = 0 \), i.e., \( x = y \).
+
+        \item Let \( x_1 = x \) and \( x_{n+1} = f(x_n) \). As we just proved, \( (x_n) \) converges to some \( y' \in \R \) such that \( f(y') = y' \). The uniqueness part of (c) then implies that \( y' = y \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.3.12}
+    Let \( F \subseteq \R \) be a nonempty closed set and define \( g(x) = \inf \{ \abs{x - a} : a \in F \} \). Show that \( g \) is continuous on all of \( \R \) and \( g(x) \neq 0 \) for all \( x \not\in F \).
+\end{exercise}
+
+\begin{solution}
+    If \( A \) and \( B \) are non-empty and bounded below subsets of \( \R \) such that \( a \leq b \) for all \( a \in A \) and \( b \in B \), then it is straightforward to verify that \( \inf A \leq \inf B \).
+    
+    Fix \( c \in \R \) and note that for any \( x \in \R \) and \( a \in F \), we have \( \abs{x - a} \leq \abs{x - c} + \abs{c - a} \). By the previous paragraph, this implies that
+    \[
+        \inf \{ \abs{x - a} : a \in F \} \leq \inf \{ \abs{x - c} + \abs{c - a} : a \in F \}.
+    \]
+    A statement analogous to Example 1.3.7 for infima then gives us
+    \[
+        \inf \{ \abs{x - a} : a \in F \} \leq \abs{x - c} + \inf \{ \abs{c - a} : a \in F \},
+    \]
+    or equivalently \( g(x) - g(c) \leq \abs{x - c} \). We can similarly derive \( g(c) - g(x) \leq \abs{x - c} \) and hence
+    \[
+        \abs{g(x) - g(c)} \leq \abs{x - c}.
+    \]
+    Thus for any \( \epsilon > 0 \) we can take \( \delta = \epsilon \) and obtain
+    \[
+        \abs{x - c} < \delta \implies \abs{g(x) - g(c)} < \epsilon.
+    \]
+    It follows that \( g \) is continuous at each \( c \in \R \).
+
+    Suppose that \( g(x) = 0 \). Using \Cref{ex:1.3.1} (b), we can choose a sequence \( (a_n) \) contained in \( F \) and satisfying \( \lim_{n \to \infty} \abs{x - a_n} = g(x) = 0 \), which is equivalent to \( \lim_{n \to \infty} a_n = x \). Since \( F \) is closed, Theorem 3.2.8 then implies that \( x \in F \). Thus if \( x \not\in F \), it must be the case that \( g(x) \neq 0 \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.3.13}
+    Let \( f \) be a function defined on all of \( \R \) that satisfies the additive condition \( f(x + y) = f(x) + f(y) \) for all \( x, y \in \R \).
+    \begin{enumerate}
+        \item Show that \( f(0) = 0 \) and that \( f(-x) = -f(x) \) for all \( x \in \R \).
+
+        \item Let \( k = f(1) \). Show that \( f(n) = kn \) for all \( n \in \N \), and then prove that \( f(z) = kz \) for all \( z \in \Z \). Now, prove that \( f(r) = kr \) for any rational number \( r \).
+
+        \item Show that if \( f \) is continuous at \( x = 0 \), then \( f \) is continuous at every point in \( \R \) and conclude that \( f(x) = kx \) for all \( x \in \R \). Thus, any additive function that is continuous at \( x = 0 \) must necessarily be a linear function through the origin.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item We have \( f(0) = f(0 + 0) = f(0) + f(0) \) and so \( f(0) = 0 \). Furthermore, for any \( x \in \R \),
+        \[
+            0 = f(0) = f(x - x) = f(x) + f(-x) \implies f(-x) = -f(x).
+        \]
+
+        \item We will show that \( f(n) = kn \) for all \( n \in \N \) by induction on \( n \). The base case is clear, so suppose that \( f(n) = kn \) for some \( n \in \N \) and observe that
+        \[
+            f(n + 1) = f(n) + f(1) = kn + k = k(n + 1).
+        \]
+        This completes the induction step and the proof.
+
+        Combining the identity \( f(n) = kn \) with \( f(-x) = -f(x) \) from part (a), we see that \( f(z) = kz \) for all \( z \in \Z \).
+
+        Now suppose that \( r = \tfrac{m}{n} \) is a rational number. On one hand, using what we just proved,
+        \[
+            f \paren{ n \cdot \frac{m}{n} } = f(m) = km.
+        \]
+        On the other hand, using the additivity of \( f \),
+        \[
+            f \paren{ n \cdot \frac{m}{n} } = f \paren{ \sum_{j=1}^n \frac{m}{n} } = \sum_{j=1}^n f \paren{ \frac{m}{n} } = n f \paren{ \frac{m}{n} }.
+        \]
+        Thus \( n f \paren{ \tfrac{m}{n} } = km \), i.e., \( f(r) = kr \).
+
+        \item Let \( c \in \R \) be given and suppose \( (x_n) \) is a convergent sequence satisfying \( \lim_{n \to \infty} x_n = c \). Since \( \lim_{n \to \infty} (x_n - c) = 0 \) and \( f \) is continuous at 0, we must have \( \lim_{n \to \infty} f(x_n - c) = f(0) = 0 \). By the additivity of \( f \), for each \( n \in \N \) we have \( f(x_n - c) = f(x_n) - f(c) \). It follows that
+        \[
+            0 = \lim_{n \to \infty} f(x_n - c) = \lim_{n \to \infty} (f(x_n) - f(c)) = \paren{ \lim_{n \to \infty} f(x_n) } - f(c),
+        \]
+        which implies that \( \lim_{n \to \infty} f(x_n) = f(c) \). Thus \( f \) is continuous at each \( c \in \R \).
+
+        By Theorem 4.3.4, the function \( f(x) - kx \) is continuous on all of \( \R \) and, by part (b), satisfies \( f(r) - kr = 0 \) for each \( r \in \Q \). \Cref{ex:4.3.8} (b) allows us to conclude that \( f(x) - kx = 0 \), i.e., \( f(x) = kx \), for all \( x \in \R \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.3.14}
+    \begin{enumerate}
+        \item Let \( F \) be a closed set. Construct a function \( f : \R \to \R \) such that the set of points where \( f \) fails to be continuous is precisely \( F \). (The concept of the interior of a set, discussed in \Cref{ex:3.2.14}, may be useful.)
+
+        \item Now consider an open set \( O \). Construct a function \( g : \R \to \R \) whose set of discontinuous points is precisely \( O \). (For this problem, the function in \Cref{ex:4.3.12} may be useful.)
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Define \( f : \R \to \R \) by
+        \[
+            f(x) = \begin{cases}
+                1 & \text{if } x \in \Q \cap F, \\
+                -1 & \text{if } x \in \I \cap F, \\
+                0 & \text{if } x \not\in F.
+            \end{cases}
+        \]
+        If \( x \not\in F \), then \( x \) belongs to the open set \( \setcomp{F} \) and so there exists a \( \delta > 0 \) such that \( (x - \delta, x + \delta) \subseteq \setcomp{F} \). Since \( f \) vanishes on this proper interval, we see that \( f \) is continuous at \( x \).
+
+        Suppose \( x \in \Q \cap F \) and let \( \delta > 0 \) be given. We consider two cases.
+        \begin{description}
+            \item[Case 1.] If \( (x - \delta, x + \delta) \subseteq F \), then we can find an irrational \( y \in (x - \delta, x + \delta) \). It follows that
+            \[
+                f(y) = -1 \not\in (0, 2) = (f(x) - 1, f(x) + 1).
+            \]
+
+            \item[Case 2.] If \( (x - \delta, x + \delta) \not\subseteq F \), then we can find some \( y \in (x - \delta, x + \delta) \) such that \( y \not\in F \). It follows that
+            \[
+                f(y) = 0 \not\in (0, 2) = (f(x) - 1, f(x) + 1).
+            \]
+        \end{description}
+        Thus \( f \) is not continuous at \( x \) and a similar argument shows that \( f \) is not continuous at any \( x \in \I \cap F \) either. We may conclude that the set of points where \( f \) fails to be continuous is precisely \( F \).
+
+        \item Let \( d : \R \to \R \) be Dirichlet's function and let \( h : \R \to \R \) be the function given by
+        \[
+            h(x) = \inf \{ \abs{x - a} : a \in \setcomp{O} \}.
+        \]
+        In \Cref{ex:4.3.12} we showed that \( h \) is continuous everywhere. Furthermore, since \( \setcomp{O} \) is closed, \Cref{ex:4.3.12} also shows that \( h \) satisfies \( h(x) > 0 \) for all \( x \in O \) and \( h(x) = 0 \) for all \( x \not\in O \). Define \( g : \R \to \R \) by \( g(x) = d(x) h(x) \) and suppose that \( x \in O \). Since \( h(x) > 0 \) and \( h \) is continuous at \( x \), by \Cref{ex:4.3.8} (c) there is some \( \delta > 0 \) such that \( h \) is strictly positive on the interval \( I = (x - \delta, x + \delta) \). It follows that for all \( t \in I \) we have \( d(t) = \tfrac{g(t)}{h(t)} \). If \( g \) were continuous at \( x \) then Theorem 4.3.4 would imply that \( d \) is continuous at \( x \); since Dirichlet's function is nowhere-continuous, it must then be the case that \( g \) fails to be continuous at \( x \). Thus \( g \) is discontinuous on \( O \).
+
+        Now suppose that \( x \not\in O \), so that \( h(x) = 0 \) and thus \( g(x) = 0 \). For any \( y \in \R \), we then have
+        \[
+            \abs{g(y) - g(x)} = \abs{g(y)} = \abs{d(y)h(y)} = \abs{d(y)} \abs{h(y)} \leq \abs{h(y)}.
+        \]
+        Since \( h \) is continuous at \( x \) and \( h(x) = 0 \), for any \( \epsilon > 0 \) there exists a \( \delta > 0 \) such that
+        \[
+            \abs{y - x} < \delta \implies \abs{h(y)} < \epsilon.
+        \]
+        It follows that \( \abs{g(y)} < \epsilon \) for such \( y \) and thus \( g \) is continuous at \( x \). We may conclude that the set of points where \( g \) fails to be continuous is precisely \( O \).
+    \end{enumerate}
+\end{solution}
+
+\section{Continuous Functions on Compact Sets}
+\label{sec:4.4}
+
+\begin{exercise}
+\label{ex:4.4.1}
+    \begin{enumerate}
+        \item Show that \( f(x) = x^3 \) is continuous on all of \( \R \).
+
+        \item Argue, using Theorem 4.4.5, that \( f \) is not uniformly continuous on \( \R \).
+
+        \item Show that \( f \) is uniformly continuous on any bounded subset of \( \R \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item As Example 4.3.5 shows, any polynomial is continuous on all of \( \R \).
+
+        \item Define sequences \( (x_n) \) and \( (y_n) \) by \( x_n = n + \tfrac{1}{n} \) and \( y_n = n \), and observe that
+        \[
+            \abs{x_n - y_n} = \frac{1}{n} \to 0 \hspaceand \abs{f(x_n) - f(y_n)} = 3n + \frac{3}{n} + \frac{1}{n^3} > 3.
+        \]
+        Theorem 4.4.5 allows us to conclude that \( f \) is not uniformly continuous on \( \R \).
+
+        \item Suppose that \( A \subseteq \R \) is a bounded subset of \( \R \), so that there is an \( M > 0 \) such that \( A \subseteq [-M, M] \). For any \( x, y \in A \), it follows that
+        \[
+            \abs{x^2 + xy + y^2} \leq \abs{x}^2 + \abs{x} \abs{y} + \abs{y}^2 \leq 3M^2.
+        \]
+        Let \( \epsilon > 0 \) be given and let \( \delta = \tfrac{\epsilon}{3M^2} \). For any \( x, y \in A \) we then have
+        \[
+            \abs{x^3 - y^3} = \abs{x - y} \abs{x^2 + xy + y^2} \leq 3M^2 \delta = \epsilon.
+        \]
+        Thus \( f \) is uniformly continuous on \( A \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.4.2}
+    \begin{enumerate}
+        \item Is \( f(x) = 1 / x \) uniformly continuous on \( (0, 1) \)?
+
+        \item Is \( g(x) = \sqrt{x^2 + 1} \) uniformly continuous on \( (0, 1) \)?
+
+        \item Is \( h(x) = x \sin (1 / x) \) uniformly continuous on \( (0, 1) \)?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Define sequences \( (x_n) \) and \( (y_n) \) by \( x_n = \tfrac{1}{n} \) and \( y_n = \tfrac{1}{n+1} \). Observe that
+        \[
+            \abs{x_n - y_n} = \frac{1}{n} - \frac{1}{n+1} \to 0 \hspaceand \abs{f(x_n) - f(y_n)} = 1.
+        \]
+        Theorem 4.4.5 allows us to conclude that \( f \) is not uniformly continuous on \( \R \).
+
+        \item If a function is uniformly continuous on some \( B \subseteq \R \), then it is also uniformly continuous on any subset \( A \subseteq B \). The function \( g(x) = \sqrt{x^2 + 1} \) is continuous on all of \( \R \), hence uniformly continuous on the compact set \( [0, 1] \) (Theorem 4.4.7), and hence uniformly continuous on the subset \( (0, 1) \).
+
+        \item Define \( h : \R \to \R \) by
+        \[
+            h(x) = \begin{cases}
+                x \sin \paren{ \tfrac{1}{x} } & \text{if } x \neq 0, \\
+                0 & \text{if } x = 0.
+            \end{cases}
+        \]
+        The continuity of \( h \) away from the origin is clear. As shown in Example 4.3.6, \( h \) is also continuous at the origin and thus continuous on all of \( \R \). It follows that \( h \) is uniformly continuous on the compact set \( [0, 1] \) (Theorem 4.4.7) and hence uniformly continuous on the subset \( (0, 1) \).
+        \begin{center}
+            \includegraphics[width=0.85\textwidth]{UA_Figures/UA_ex4_4_2_fig.pdf}
+        \end{center}
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.4.3}
+    Show that \( f(x) = 1/x^2 \) is uniformly continuous on the set \( [1, \infty) \) but not on the set \( (0, 1] \).
+\end{exercise}
+
+\begin{solution}
+    For any \( x, y \in [1, \infty) \), we have
+    \[
+        \abs{\frac{1}{x^2} - \frac{1}{y^2}} = \abs{\frac{y^2 - x^2}{x^2 y^2}} = \frac{x + y}{x^2 y^2} \abs{x - y} = \paren{ \frac{1}{x y^2} + \frac{1}{x^2 y} } \abs{x - y} \leq 2 \abs{x - y}.
+    \]
+    Let \( \epsilon > 0 \) be given and let \( \delta = \tfrac{\epsilon}{2} \). For any \( x, y \in [1, \infty) \) such that \( \abs{x - y} < \delta \), we then have
+    \[
+        \abs{\frac{1}{x^2} - \frac{1}{y^2}} \leq 2 \abs{x - y} < 2 \delta = \epsilon.
+    \]
+    Thus \( f \) is uniformly continuous on \( [1, \infty) \).
+
+    Define the sequences \( (x_n) \) and \( (y_n) \) in \( (0, 1] \) by \( x_n = \tfrac{1}{\sqrt{n}} \) and \( y_n = \tfrac{1}{\sqrt{n+1}} \). Observe that
+    \[
+        \abs{x_n - y_n} = \frac{1}{\sqrt{n}} - \frac{1}{\sqrt{n+1}} \to 0 \hspaceand \abs{f(x_n) - f(y_n)} = 1.
+    \]
+    It follows from Theorem 4.4.5 that \( f \) is not uniformly continuous on \( (0, 1] \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.4.4}
+    Decide whether each of the following statements is true or false, justifying each conclusion.
+    \begin{enumerate}
+        \item If \( f \) is continuous on \( [a, b] \) with \( f(x) > 0 \) for all \( a \leq x \leq b \), then \( 1/f \) is bounded on \( [a, b] \) (meaning \( 1/f \) has bounded range).
+
+        \item If \( f \) is uniformly continuous on a bounded set \( A \), then \( f(A) \) is bounded.
+
+        \item If \( f \) is defined on \( \R \) and \( f(K) \) is compact whenever \( K \) is compact, then \( f \) is continuous on \( \R \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item This is true. Since \( f \) is continuous on the compact set \( [a, b] \), Theorem 4.4.2 implies that there exist \( x_0, x_1 \in [a, b] \) such that \( f(x_0) \leq f(x) \leq f(x_1) \) for all \( x \in [a, b] \). By assumption we have \( f(x_0) > 0 \) and so
+        \[
+            0 < f(x_0) \leq f(x) \leq f(x_1) \iff 0 < \frac{1}{f(x_1)} \leq \frac{1}{f(x)} \leq \frac{1}{f(x_0)}
+        \]
+        for all \( x \in [a, b] \), i.e., \( 1/f \) is bounded on \( [a, b] \).
+
+        \item This is true. Since \( A \) is bounded, there is a \( K > 0 \) such that \( A \subseteq [-K, K] \), and since \( f \) is uniformly continuous on \( A \), there is a \( \delta > 0 \) such that
+        \[
+            x, y \in A \text{ and } \abs{x - y} < \delta \implies \abs{f(x) - f(y)} < 1.
+        \]
+        Let \( N \in \N \) be such that \( \tfrac{2K}{N} < \delta \) and for each \( j \in \{ 1, 2, \ldots, N \} \) define
+        \[
+            I_j = \bkt{ -K + (j - 1) \frac{2K}{N}, -K + j \frac{2K}{N} },
+        \]
+        so that \( I_1 \cup \cdots \cup I_N = [-K, K] \). For \( j \in \{ 1, 2, \ldots, N \} \), if \( I_j \cap A \neq \emptyset \), then there exists some \( a_j \in I_j \cap A \). Let
+        \[
+            M = \max \set{ 1 + \abs{f(a_j)} : j \in \{ 1, 2, \ldots, N \} \text{ and } I_j \cap A \neq \emptyset };
+        \]
+        we are justified by \Cref{lem:ex1.3.2} in taking the maximum of this set as it is finite and must be non-empty, since if \( A \) is non-empty (which we may as well assume) there must be some \( j \) such that \( I_j \cap A \neq \emptyset \).
+
+        Suppose \( x \in A \). Since \( I_1 \cup \cdots \cup I_N = [-K, K] \) and \( A \subseteq [-K, K] \), there must be some \( j \in \{ 1, 2, \ldots, N \} \) such that \( x \in I_j \cap A \). Since \( x, a_j \in I_j \cap A \), we then have \( \abs{x - a_j} \leq \abs{I_j} = \tfrac{2K}{N} < \delta \) and thus
+        \[
+            \abs{f(x) - f(a_j)} < 1 \implies \abs{f(x)} < 1 + \abs{f(a_j)} \leq M.
+        \]
+        It follows that \( f(A) \subseteq [-M, M] \), i.e., \( f(A) \) is bounded.
+
+        \item This is false. Let \( f : \R \to \R \) be Dirichlet's function, i.e.,
+        \[
+            f(x) = \begin{cases}
+                1 & \text{if } x \in \Q, \\
+                0 & \text{if } x \not\in \Q.
+            \end{cases}
+        \]
+        For any subset \( A \subseteq \R \), the only possibilities for \( f(A) \) are \( \emptyset, \{ 0 \}, \{ 1 \}, \) and \( \{ 0, 1 \} \); each of these is compact. However, \( f \) is nowhere-continuous.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.4.5}
+    Assume that \( g \) is defined on an open interval \( (a, c) \) and it is known to be uniformly continuous on \( (a, b] \) and \( [b, c) \), where \( a < b < c \). Prove that \( g \) is uniformly continuous on \( (a, c) \).
+\end{exercise}
+
+\begin{solution}
+    Let \( \epsilon > 0 \) be given. There exist positive reals \( \delta_1 \) and \( \delta_2 \) such that
+    \begin{gather*}
+        x, y \in (a, b] \text{ and } \abs{x - y} < \delta_1 \implies \abs{g(x) - g(y)} < \frac{\epsilon}{2}, \\[2mm]
+        x, y \in [b, c) \text{ and } \abs{x - y} < \delta_2 \implies \abs{g(x) - g(y)} < \frac{\epsilon}{2}.
+    \end{gather*}
+    Let \( \delta = \min \{ \delta_1, \delta_2 \} \) and suppose that \( x, y \in (a, c) \) are such that \( \abs{x - y} < \delta \). There are four cases.
+    \begin{description}
+        \item[Case 1.] If \( x, y \in (a, b] \), then since \( \abs{x - y} < \delta \leq \delta_1 \), we have \( \abs{g(x) - g(y)} < \tfrac{\epsilon}{2} < \epsilon \).
+        
+        \item[Case 2.] If \( x, y \in [b, c) \), then since \( \abs{x - y} < \delta \leq \delta_2 \), we have \( \abs{g(x) - g(y)} < \tfrac{\epsilon}{2} < \epsilon \).
+
+        \item[Case 3.] If \( x \in (a, b] \) and \( y \in [b, c) \), then note that \( \abs{x - b} \leq \abs{x - y} < \delta \leq \delta_1 \) and \( \abs{b - y} \leq \abs{x - y} < \delta \leq \delta_2 \). It follows that \( \abs{g(x) - g(b)} < \tfrac{\epsilon}{2} \) and that \( \abs{g(b) - g(y)} < \tfrac{\epsilon}{2} \), which gives us
+        \[
+            \abs{g(x) - g(y)} \leq \abs{g(x) - g(b)} + \abs{g(b) - g(y)} < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+        \]
+
+        \item[Case 4.] The case where \( x \in [b, c) \) and \( y \in (a, b] \) is handled similarly to Case 3.
+    \end{description}
+    In any case, we have \( \abs{g(x) - g(y)} < \epsilon \). It follows that \( g \) is uniformly continuous on \( (a, c) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.4.6}
+    Give an example of each of the following, or state that such a request is impossible. For any that are impossible, supply a short explanation for why this is the case.
+    \begin{enumerate}
+        \item A continuous function \( f : (0, 1) \to \R \) and a Cauchy sequence \( (x_n) \) such that \( f(x_n) \) is not a Cauchy sequence;
+
+        \item A uniformly continuous function \( f : (0, 1) \to \R \) and a Cauchy sequence \( (x_n) \) such that \( f(x_n) \) is not a Cauchy sequence;
+
+        \item A continuous function \( f : [0, \infty) \to \R \) and a Cauchy sequence \( (x_n) \) such that \( f(x_n) \) is not a Cauchy sequence.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( f : (0, 1) \to \R \) be given by \( f(x) = \tfrac{1}{x} \) and consider the Cauchy sequence \( (x_n) \) given by \( x_n = \tfrac{1}{n+1} \). Notice that \( f(x_n) = n + 1 \), which is not convergent and hence not Cauchy.
+
+        \item This is impossible, as we will show in \Cref{ex:4.4.13} (a).
+
+        \item This is impossible. Let \( f : [0, \infty) \to \R \) be continuous and let \( (x_n) \) be a Cauchy sequence contained in \( [0, \infty) \); by Theorem 2.6.4 we must have \( \lim_{n \to \infty} x_n = x \) for some \( x \in \R \). Since \( [0, \infty) \) is a closed set, we have \( x \in [0, \infty) \), and because \( f \) is continuous at \( x \) it follows that \( \lim_{n \to \infty} f(x_n) = f(x) \). Thus \( (f(x_n)) \) is a Cauchy sequence (Theorem 2.6.4).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.4.7}
+    Prove that \( f(x) = \sqrt{x} \) is uniformly continuous on \( [0, \infty) \).
+\end{exercise}
+
+\begin{solution}
+    \( f \) is continuous on the compact set \( [0, 1] \) and hence is uniformly continuous on \( [0, 1] \) (Theorem 4.4.7). Note that for any \( x, y \in [1, \infty) \) we have
+    \[
+        \abs{\sqrt{x} - \sqrt{y}} = \frac{\abs{x - y}}{\sqrt{x} + \sqrt{y}} \leq \frac{1}{2} \abs{x - y}.
+    \]
+    It is now straightforward to show that \( f \) is uniformly continuous on \( [1, \infty) \) (see \Cref{ex:4.4.9}). By an argument analogous to the one given in \Cref{ex:4.4.5}, we may now conclude that \( f \) is uniformly continuous on \( [0, \infty) \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.4.8}
+    Give an example of each of the following, or provide a short argument for why the request is impossible.
+    \begin{enumerate}
+        \item A continuous function defined on \( [0, 1] \) with range \( (0, 1) \).
+
+        \item A continuous function defined on \( (0, 1) \) with range \( [0, 1] \).
+
+        \item A continuous function defined on \( (0, 1] \) with range \( (0, 1) \).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item This is impossible. If \( f : [0, 1] \to \R \) is continuous, then since \( [0, 1] \) is compact, the image of \( f \) must be compact (Theorem 4.4.1). However, \( (0, 1) \) is not a compact set.
+
+        \item Consider \( f : (0, 1) \to \R \) given by \( f(x) = \tfrac{1}{2} \sin (2 \pi x) + \tfrac{1}{2} \); the image of \( f \) is then \( [0, 1] \).
+
+        \item Consider \( f : (0, 1] \to \R \) given by \( f(x) = \tfrac{1}{2} (1 - x) \sin \paren{ \tfrac{1}{x} } + \tfrac{1}{2} \); the image of \( f \) is then \( (0, 1) \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}[Lipschitz Functions]
+\label{ex:4.4.9}
+    A function \( f : A \to \R \) is called \textit{Lipschitz} if there exists a bound \( M > 0 \) such that
+    \[
+        \abs{\frac{f(x) - f(y)}{x - y}} \leq M
+    \]
+    for all \( x \neq y \in A \). Geometrically speaking, a function \( f \) is Lipschitz if there is a uniform bound on the magnitude of the slopes of lines drawn through any two points on the graph of \( f \).
+    \begin{enumerate}
+        \item Show that if \( f : A \to \R \) is Lipschitz, then it is uniformly continuous on \( A \).
+
+        \item Is the converse statement true? Are all uniformly continuous functions necessarily Lipschitz?
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Since \( f \) is Lipschitz, there is an \( M > 0 \) such that
+        \[
+            \abs{f(x) - f(y)} \leq M \abs{x - y}
+        \]
+        for all \( x, y \in A \). Let \( \epsilon > 0 \) be given and let \( \delta = \tfrac{\epsilon}{M} \). For any \( x, y \in A \) satisfying \( \abs{x - y} < \delta \), we then have
+        \[
+            \abs{f(x) - f(y)} \leq M \abs{x - y} < M \delta = \epsilon.
+        \]
+        It follows that \( f \) is uniformly continuous on \( A \).
+
+        \item The converse statement is not true. Consider \( f : [0, \infty) \to \R \) given by \( f(x) = \sqrt{x} \). As we showed in \Cref{ex:4.4.7}, this function is uniformly continuous on \( [0, \infty) \). However, we claim that \( f \) is not Lipschitz on \( [0, \infty) \). To show this, for each \( M > 0 \) we need to find some \( x \neq y \in [0, \infty) \) such that
+        \[
+            \abs{\frac{f(x) - f(y)}{x - y}} > M.
+        \]
+        So, for \( M > 0 \), let \( x = \tfrac{1}{4M^2} \) and \( y = 0 \), and observe that
+        \[
+            \abs{\frac{f(x) - f(y)}{x - y}} = \abs{\frac{\tfrac{1}{2M}}{\tfrac{1}{4M^2}}} = 2M > M.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.4.10}
+    Assume that \( f \) and \( g \) are uniformly continuous functions defined on a common domain \( A \). Which of the following combinations are necessarily uniformly continuous on \( A \):
+    \[
+        f(x) + g(x), \quad f(x)g(x), \quad \frac{f(x)}{g(x)}, \quad f(g(x)) \, ?
+    \]
+    (Assume that the quotient and the composition are properly defined and thus at least continuous.)
+\end{exercise}
+
+\begin{solution}
+    We claim that \( f + g \) is uniformly continuous on \( A \). To see this, let \( \epsilon > 0 \) be given. There exist \( \delta_1, \delta_2 > 0 \) such that
+    \begin{gather*}
+        x, y \in A \text{ and } \abs{x - y} < \delta_1 \implies \abs{f(x) - f(y)} < \frac{\epsilon}{2}, \\[2mm]
+        x, y \in A \text{ and } \abs{x - y} < \delta_2 \implies \abs{g(x) - g(y)} < \frac{\epsilon}{2}.
+    \end{gather*}
+    Let \( \delta = \min \{ \delta_1, \delta_2 \} \) and observe that for any \( x, y \in A \) satisfying \( \abs{x - y} < \delta \), we then have
+    \[
+        \abs{f(x) + g(x) - f(y) - g(y)} \leq \abs{f(x) - f(y)} + \abs{g(x) - g(y)} < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+    \]
+    Thus \( f + g \) is uniformly continuous on \( A \).
+
+    The product \( fg \) need not be uniformly continuous. For a counterexample, consider \( f, g : \R \to \R \) given by \( f(x) = g(x) = x \). This function is clearly Lipschitz and hence uniformly continuous on all of \( \R \) (\Cref{ex:4.4.9}). However, the product \( f(x)g(x) = x^2 \) is not uniformly continuous on \( \R \); this can be seen using the same sequences as in \Cref{ex:4.4.1} (b) and appealing to Theorem 4.4.5.
+
+    The quotient \( \tfrac{f}{g} \) need not be uniformly continuous. For a counterexample, consider \( f, g : (0, 1] \to \R \) given by \( f(x) = 1 \) and \( g(x) = x \). Both are uniformly continuous, but the quotient \( \tfrac{f(x)}{g(x)} = \tfrac{1}{x} \) is not (\Cref{ex:4.4.2} (a)).
+
+    Suppose that \( g(A) \subseteq A \), so that the composition \( f \circ g : A \to \R \) is well-defined. We claim that this composition is also uniformly continuous. To see this, let \( \epsilon > 0 \) be given. There exists a \( \delta_2 > 0 \) such that
+    \[
+        s, t \in A \text{ and } \abs{s - t} < \delta_2 \implies \abs{f(s) - f(t)} < \epsilon.
+    \]
+    There then exists a \( \delta_1 > 0 \) such that
+    \[
+        x, y \in A \text{ and } \abs{x - y} < \delta_1 \implies \abs{g(x) - g(y)} < \delta_2.
+    \]
+    By assumption, if \( x, y \in A \) then \( g(x), g(y) \in A \). Thus
+    \begin{multline*}
+        x, y \in A \text{ and } \abs{x - y} < \delta_1 \implies g(x), g(y) \in A \text{ and } \abs{g(x) - g(y)} < \delta_2 \\
+        \implies \abs{f(g(x)) - f(g(y))} < \epsilon.
+    \end{multline*}
+    Thus \( f \circ g \) is uniformly continuous on \( A \).
+\end{solution}
+
+\begin{exercise}[Topological Characterization of Continuity]
+\label{ex:4.4.11}
+    Let \( g \) be defined on all of \( \R \). If \( B \) is a subset of \( \R \), define the set \( g^{-1}(B) \) by
+    \[
+        g^{-1}(B) = \{ x \in \R : g(x) \in B \}.
+    \]
+    Show that \( g \) is continuous if and only if \( g^{-1}(O) \) is open whenever \( O \subseteq \R \) is an open set.
+\end{exercise}
+
+\begin{solution}
+    Suppose \( g \) is continuous and \( O \subseteq \R \) is an open set. Fix \( c \in g^{-1}(O) \), so that \( g(c) \in O \). Since \( O \) is open, there exists an \( \epsilon > 0 \) such that \( V_{\epsilon}(g(c)) \subseteq O \), and since \( g \) is continuous at \( c \), there is a \( \delta > 0 \) such that \( x \in V_{\delta}(c) \) implies that \( g(x) \in V_{\epsilon}(g(c)) \subseteq O \) (Theorem 4.3.2 (ii)). In other words, any \( x \in V_{\delta}(c) \) also belongs to \( g^{-1}(O) \), so that \( V_{\delta}(c) \subseteq g^{-1}(O) \). It follows that \( g^{-1}(O) \) is an open set.
+
+    Now suppose that \( g^{-1}(O) \) is open whenever \( O \subseteq \R \) is an open set. Fix \( c \in \R \) and let \( \epsilon > 0 \) be given. The set \( V_{\epsilon}(g(c)) \) is open, so by assumption the set \( g^{-1}[V_{\epsilon}(g(c))] \) is also open. Certainly we have \( c \in g^{-1}[V_{\epsilon}(g(c))] \), so there exists a \( \delta > 0 \) such that \( V_{\delta}(c) \subseteq g^{-1}[V_{\epsilon}(g(c))] \). It follows that if \( x \in V_{\delta}(c) \), then \( g(x) \in V_{\epsilon}(g(c)) \) and so Theorem 4.3.2 (ii) allows us to conclude that \( g \) is continuous at each \( c \in \R \).
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.4.12}
+    Review \Cref{ex:4.4.11}, and then determine which of the following statements is true about a continuous function defined on \( \R \):
+    \begin{enumerate}
+        \item \( f^{-1}(B) \) is finite whenever \( B \) is finite.
+
+        \item \( f^{-1}(K) \) is compact whenever \( K \) is compact.
+
+        \item \( f^{-1}(A) \) is bounded whenever \( A \) is bounded.
+
+        \item \( f^{-1}(F) \) is closed whenever \( F \) is closed.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item This is false. Consider the function \( f : \R \to \R \) given by \( f(x) = 0 \), which satisfies \( f^{-1}(\{ 0 \}) = \R \).
+
+        \item This is false; see part (a) for a counterexample.
+
+        \item This is false; see part (a) for a counterexample.
+
+        \item This is true. If \( F \) is closed, then \( \setcomp{F} \) is open. Since \( f \) is continuous, we have that \( f^{-1}(\setcomp{F}) \) is also open (\Cref{ex:4.4.11}) and it follows that \( \setcomp{(f^{-1}(\setcomp{F}))} \) is closed. This set is nothing but \( f^{-1}(F) \):
+        \[
+            x \in \setcomp{(f^{-1}(\setcomp{F}))} \iff x \not\in f^{-1}(\setcomp{F}) \iff f(x) \not\in \setcomp{F} \iff f(x) \in F \iff x \in f^{-1}(F).
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}[Continuous Extension Theorem]
+\label{ex:4.4.13}
+    \begin{enumerate}
+        \item Show that a uniformly continuous function preserves Cauchy sequences; that is, if \( f : A \to \R \) is uniformly continuous and \( (x_n) \subseteq A \) is a Cauchy sequence, then show \( f(x_n) \) is a Cauchy sequence.
+
+        \item Let \( g \) be a continuous function on the open interval \( (a, b) \). Prove that \( g \) is uniformly continuous on \( (a, b) \) if and only if it is possible to define values \( g(a) \) and \( g(b) \) at the endpoints so that the extended function \( g \) is continuous on \( [a, b] \). (In the forward direction, first produce candidates for \( g(a) \) and \( g(b) \), and then show the extended \( g \) is continuous.)
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Let \( \epsilon > 0 \) be given. Since \( f \) is uniformly continuous, there is a \( \delta > 0 \) such that for any \( x, y \in A \) satisfying \( \abs{x - y} < \delta \), we have \( \abs{f(x) - f(y)} < \epsilon \). Since \( (x_n) \subseteq A \) is a Cauchy sequence, there is an \( N \in \N \) such that for all \( n > m \geq N \), we have \( \abs{x_n - x_m} < \delta \), which implies that \( \abs{f(x_n) - f(x_m)} < \epsilon \). Thus \( (f(x_n)) \) is also a Cauchy sequence.
+
+        \item Suppose that \( g \) is uniformly continuous on \( (a, b) \). Define a sequence \( a_n = a + \tfrac{b - a}{2n} \), so that \( (a_n) \) is contained in \( (a, b) \) and satisfies \( \lim_{n \to \infty} a_n = a \). Because \( (a_n) \) is Cauchy, part (a) implies that the sequence \( (g(a_n)) \) is also Cauchy and hence convergent, say \( \lim_{n \to \infty} g(a_n) = y \in \R \). Define \( g(a) := y \). 
+        
+        We claim that this extended \( g \) is continuous at \( a \). Let \( (x_n) \) be a sequence contained in \( (a, b) \) such that \( \lim_{n \to \infty} x_n = a \) and let \( \epsilon > 0 \) be given. Since \( g \) is uniformly continuous on \( (a, b) \), there is a \( \delta > 0 \) such that for any \( x, y \in (a, b) \) satisfying \( \abs{x - y} < \delta \), we have \( \abs{g(x) - g(y)} < \epsilon \). Note that \( \lim_{n \to \infty} \abs{x_n - a_n} = 0 \) since \( \lim_{n \to \infty} x_n = \lim_{n \to \infty} a_n = a \), so there is an \( N \in \N \) such that \( n \geq N \) implies that \( \abs{x_n - a_n} < \delta \), which gives us \( \abs{g(x_n) - g(a_n)} < \epsilon \). Thus \( \lim_{n \to \infty} \abs{g(x_n) - g(a_n)} = 0 \). Combining this with \( \lim_{n \to \infty} g(a_n) = g(a) \), we see that \( \lim_{n \to \infty} g(x_n) = g(a) \) also and hence \( g \) is continuous at \( a \).
+
+        An analogous argument shows that we can also continuously extend \( g \) to be defined at \( b \) by considering the sequence \( b_n = b - \tfrac{b - a}{2n} \).
+
+        For the converse implication, we apply Theorem 4.4.7 to see that \( g \) is uniformly continuous on the compact set \( [a, b] \) and hence uniformly continuous on the subset \( (a, b) \).
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+\label{ex:4.4.14}
+    Construct an alternate proof of Theorem 4.4.7 using the open cover characterization of compactness from the Heine-Borel Theorem (Theorem 3.3.8 (iii)).
+\end{exercise}
+
+\begin{solution}
+    Suppose \( f : K \to \R \) is continuous, where \( K \) is compact. Let \( \epsilon > 0 \) be given. Since \( f \) is continuous on \( K \), for each \( t \in K \) there exists a \( \delta_t > 0 \) such that
+    \[
+        x \in K \text{ and } \abs{x - t} < \delta_t \implies \abs{f(x) - f(t)} < \frac{\epsilon}{2}.
+    \]
+    Observe that the collection \( \{ V_{\delta_t/2}(t) : t \in K \} \) forms an open cover of \( K \). Since \( K \) is compact, there exists a finite subcover \( \{ V_{\delta_{t_1}/2}(t_1), \ldots, V_{\delta_{t_n}/2}(t_n) \} \). Let \( \delta = \min \{ \delta_{t_1}, \ldots, \delta_{t_n} \} \) and suppose that \( x, y \in K \) are such that \( \abs{x - y} < \frac{\delta}{2} \). There is a \( j \in \{ 1, \ldots, n \} \) such that \( x \in V_{\delta_{t_j}/2}(t_j) \), so that \( \abs{x - t_j} < \frac{\delta_{t_j}}{2} < \delta_{t_j} \) and thus \( \abs{f(x) - f(t_j)} < \tfrac{\epsilon}{2} \). Note that
+    \[
+        \abs{y - t_j} \leq \abs{x - y} + \abs{x - t_j} < \frac{\delta}{2} + \frac{\delta_{t_j}}{2} \leq \frac{\delta_{t_j}}{2} + \frac{\delta_{t_j}}{2} = \delta_{t_j}.
+    \]
+    It follows that \( \abs{f(y) - f(t_j)} < \tfrac{\epsilon}{2} \) and hence that
+    \[
+        \abs{f(x) - f(y)} \leq \abs{f(x) - f(t_j)} + \abs{f(y) - f(t_j)} < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+    \]
+    Thus \( f \) is uniformly continuous on \( K \).
+\end{solution}
+
 \end{document}
